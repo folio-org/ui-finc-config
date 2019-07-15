@@ -1,5 +1,5 @@
 {
-    "meta.title": "Finc Config",
+    "meta.title": "Finc config",
     "source.label": "Source name",
     "source.id": "Source ID",
     "source.status": "Impl. status",
@@ -47,7 +47,7 @@
     "collection.productIsil": "Product ISIL",
     "collection.tickets": "Tickets",
     "collection.contentFiles": "Content files",
-    "collection.solrMegaCollections": "Solr Mega Collections",
+    "collection.solrMegaCollections": "Solr mega collections",
     "source.generalNote": "General note",
     "collection.generalNote": "General note"
 }
