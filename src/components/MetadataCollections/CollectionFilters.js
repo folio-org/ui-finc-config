@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 import {
   Accordion,
   AccordionSet,
+  FilterAccordionHeader,
   Selection,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
@@ -69,15 +71,16 @@ class CollectionFilters extends React.Component {
     return null;
   }
 
-  renderCheckboxFilter = (key, name, props) => {
+  renderCheckboxFilter = (key, props) => {
     const { activeFilters } = this.props;
     const groupFilters = activeFilters[key] || [];
 
     return (
       <Accordion
         displayClearButton={groupFilters.length > 0}
+        header={FilterAccordionHeader}
         id={`filter-accordion-${key}`}
-        label={`${name}`}
+        label={<FormattedMessage id={`ui-finc-config.collection.${key}`} />}
         onClearFilter={() => { this.props.filterHandlers.clearGroup(key); }}
         separator={false}
         {...props}
@@ -92,7 +95,7 @@ class CollectionFilters extends React.Component {
     );
   }
 
-  renderMetadataSourceFilter = () => {
+  renderMetadataSourceFilter = (key) => {
     const mdSources = this.props.filterData.mdSources;
     const dataOptions = mdSources.map(mdSource => ({
       value: mdSource.id,
@@ -105,8 +108,9 @@ class CollectionFilters extends React.Component {
     return (
       <Accordion
         displayClearButton={mdSourceFilters.length > 0}
+        header={FilterAccordionHeader}
         id="filter-accordion-mdSource"
-        label="Metadata source"
+        label={<FormattedMessage id={`ui-finc-config.collection.${key}`} />}
         onClearFilter={() => { this.props.filterHandlers.clearGroup('mdSource'); }}
         separator={false}
       >
