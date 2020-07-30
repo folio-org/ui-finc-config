@@ -5,10 +5,7 @@ import {
   Link,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage,
-  injectIntl,
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import {
   CollapseFilterPaneButton,
@@ -279,7 +276,7 @@ class MetadataSources extends React.Component {
   }
 
   render() {
-    const { intl, queryGetter, querySetter, onNeedMoreData, onSelectRow, selectedRecordId, source } = this.props;
+    const { queryGetter, querySetter, onNeedMoreData, onSelectRow, selectedRecordId, source } = this.props;
     const count = source ? source.totalCount() : 0;
     const query = queryGetter() || {};
     const sortOrder = query.sort || '';
@@ -396,11 +393,11 @@ class MetadataSources extends React.Component {
                     <MultiColumnList
                       autosize
                       columnMapping={{
-                        label: intl.formatMessage({ id: 'ui-finc-config.source.label' }),
-                        sourceId: intl.formatMessage({ id: 'ui-finc-config.source.id' }),
-                        status: intl.formatMessage({ id: 'ui-finc-config.source.status' }),
-                        solrShard: intl.formatMessage({ id: 'ui-finc-config.source.solrShard' }),
-                        lastProcessed: intl.formatMessage({ id: 'ui-finc-config.source.lastProcessed' }),
+                        label: <FormattedMessage id="ui-finc-config.source.label" />,
+                        sourceId: <FormattedMessage id="ui-finc-config.source.id" />,
+                        status: <FormattedMessage id="ui-finc-config.source.status" />,
+                        solrShard: <FormattedMessage id="ui-finc-config.source.solrShard" />,
+                        lastProcessed: <FormattedMessage id="ui-finc-config.source.lastProcessed" />,
                       }}
                       contentData={this.props.contentData}
                       formatter={this.resultsFormatter}
@@ -431,4 +428,4 @@ class MetadataSources extends React.Component {
   }
 }
 
-export default withRouter(injectIntl(MetadataSources));
+export default withRouter(MetadataSources);
