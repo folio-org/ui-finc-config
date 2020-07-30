@@ -95,7 +95,7 @@ class CollectionFilters extends React.Component {
     );
   }
 
-  renderMetadataSourceFilter = (key) => {
+  renderMetadataSourceFilter = () => {
     const mdSources = this.props.filterData.mdSources;
     const dataOptions = mdSources.map(mdSource => ({
       value: mdSource.id,
@@ -110,7 +110,7 @@ class CollectionFilters extends React.Component {
         displayClearButton={mdSourceFilters.length > 0}
         header={FilterAccordionHeader}
         id="filter-accordion-mdSource"
-        label={<FormattedMessage id={`ui-finc-config.collection.${key}`} />}
+        label={<FormattedMessage id="ui-finc-config.collection.mdSource" />}
         onClearFilter={() => { this.props.filterHandlers.clearGroup('mdSource'); }}
         separator={false}
       >
