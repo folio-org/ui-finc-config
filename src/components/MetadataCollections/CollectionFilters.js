@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   Accordion,
   AccordionSet,
-  FilterAccordionHeader,
   Selection,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
@@ -77,7 +76,6 @@ class CollectionFilters extends React.Component {
     return (
       <Accordion
         displayClearButton={groupFilters.length > 0}
-        header={FilterAccordionHeader}
         id={`filter-accordion-${key}`}
         label={`${name}`}
         onClearFilter={() => { this.props.filterHandlers.clearGroup(key); }}
@@ -107,7 +105,6 @@ class CollectionFilters extends React.Component {
     return (
       <Accordion
         displayClearButton={mdSourceFilters.length > 0}
-        header={FilterAccordionHeader}
         id="filter-accordion-mdSource"
         label="Metadata source"
         onClearFilter={() => { this.props.filterHandlers.clearGroup('mdSource'); }}
