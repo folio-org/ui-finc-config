@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   Accordion,
   AccordionSet,
-  FilterAccordionHeader,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
@@ -65,7 +64,6 @@ class SourceFilters extends React.Component {
     return (
       <Accordion
         displayClearButton={groupFilters.length > 0}
-        header={FilterAccordionHeader}
         id={`filter-accordion-${key}`}
         label={`${name}`}
         onClearFilter={() => { this.props.filterHandlers.clearGroup(key); }}
