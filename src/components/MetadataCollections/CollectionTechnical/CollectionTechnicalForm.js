@@ -36,7 +36,7 @@ class CollectionTechnicalForm extends React.Component {
               fullWidth
               id="addcollection_collectionId"
               label={
-                <FormattedMessage id="ui-finc-config.collection.collectionId">
+                <FormattedMessage id="ui-finc-config.collection.id">
                   {(msg) => msg + ' *'}
                 </FormattedMessage>}
               name="collectionId"

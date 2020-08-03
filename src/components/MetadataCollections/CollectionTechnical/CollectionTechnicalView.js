@@ -66,7 +66,7 @@ class CollectionTechnicalView extends React.Component {
         <div id={id}>
           <Row>
             <KeyValue
-              label={<FormattedMessage id="ui-finc-config.collection.collectionId" />}
+              label={<FormattedMessage id="ui-finc-config.collection.id" />}
               value={_.get(metadataCollection, 'collectionId', '-')}
             />
           </Row>
