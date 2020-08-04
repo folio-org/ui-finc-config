@@ -240,7 +240,7 @@ class MetadataCollectionForm extends React.Component {
                 id="delete-collection-confirmation"
                 message={`Do you really want to delete ${initialValues.label}?`}
                 onCancel={() => { this.confirmDelete(false); }}
-                onConfirm={onDelete}
+                onConfirm={() => onDelete()}
                 open={confirmDelete}
               />
             </div>
