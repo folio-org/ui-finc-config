@@ -81,7 +81,7 @@ class MetadataCollectionView extends React.Component {
             buttonRef={this.editButton}
             marginBottom0
           >
-            <FormattedMessage id="ui-finc-config.collection.edit" />
+            <FormattedMessage id="ui-finc-config.edit" />
           </Button>
         </PaneMenu>
       </IfPermission>

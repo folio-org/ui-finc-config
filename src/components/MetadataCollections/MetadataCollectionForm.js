@@ -79,7 +79,7 @@ class MetadataCollectionForm extends React.Component {
   getFirstMenu() {
     return (
       <PaneMenu>
-        <FormattedMessage id="ui-finc-config.collection.form.close">
+        <FormattedMessage id="ui-finc-config.form.close">
           { ariaLabel => (
             <IconButton
               ariaLabel={ariaLabel}
@@ -110,7 +110,7 @@ class MetadataCollectionForm extends React.Component {
               onClick={this.beginDelete}
               title="delete"
             >
-              <FormattedMessage id="ui-finc-config.collection.form.deleteCollection" />
+              <FormattedMessage id="ui-finc-config.form.delete" />
             </Button>
           </IfPermission>
         )}
@@ -137,7 +137,7 @@ class MetadataCollectionForm extends React.Component {
         buttonStyle="default mega"
         onClick={onClose}
       >
-        <FormattedMessage id="ui-finc-config.collection.form.cancel" />
+        <FormattedMessage id="ui-finc-config.form.cancel" />
       </Button>
     );
 
@@ -151,7 +151,7 @@ class MetadataCollectionForm extends React.Component {
         onClick={handleSubmit}
         disabled={disabled}
       >
-        <FormattedMessage id="ui-finc-config.collection.form.saveAndClose" />
+        <FormattedMessage id="ui-finc-config.form.saveAndClose" />
       </Button>
     );
 
@@ -174,7 +174,7 @@ class MetadataCollectionForm extends React.Component {
   render() {
     const { initialValues, isLoading, onDelete, handleSubmit } = this.props;
     const { confirmDelete, sections } = this.state;
-    const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-config.collection.form.createCollection" />;
+    const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-config.form.create" />;
 
     const firstMenu = this.getFirstMenu();
     const lastMenu = this.getLastMenu();
@@ -236,7 +236,7 @@ class MetadataCollectionForm extends React.Component {
                 />
               </AccordionSet>
               <ConfirmationModal
-                heading={<FormattedMessage id="ui-finc-config.collection.form.deleteCollection" />}
+                heading={<FormattedMessage id="ui-finc-config.form.delete" />}
                 id="delete-collection-confirmation"
                 message={`Do you really want to delete ${initialValues.label}?`}
                 onCancel={() => { this.confirmDelete(false); }}

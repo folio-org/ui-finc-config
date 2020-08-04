@@ -51,8 +51,8 @@ class SourceManagementView extends React.Component {
             role: '46%'
           }}
           columnMapping={{
-            name: <FormattedMessage id="ui-finc-config.contact.name" />,
-            role: <FormattedMessage id="ui-finc-config.contact.role" />
+            name: <FormattedMessage id="ui-finc-config.source.contact.name" />,
+            role: <FormattedMessage id="ui-finc-config.source.contact.role" />
           }}
           contentData={_.get(metadataSource.contacts, type, [])}
           interactive={false}

@@ -58,12 +58,12 @@ class SourceManagementForm extends React.Component {
           <Row>
             <Col xs={4}>
               <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.contact.name" />
+                <FormattedMessage id="ui-finc-config.source.contact.name" />
               </Label>
             </Col>
             <Col xs={4}>
               <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.contact.role" />
+                <FormattedMessage id="ui-finc-config.source.contact.role" />
               </Label>
             </Col>
           </Row>
@@ -94,12 +94,12 @@ class SourceManagementForm extends React.Component {
           <Row>
             <Col xs={4}>
               <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.contact.name" />
+                <FormattedMessage id="ui-finc-config.source.contact.name" />
               </Label>
             </Col>
             <Col xs={4}>
               <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.contact.role" />
+                <FormattedMessage id="ui-finc-config.source.contact.role" />
               </Label>
             </Col>
           </Row>

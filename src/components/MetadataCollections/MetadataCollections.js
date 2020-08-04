@@ -175,7 +175,7 @@ class MetadataCollections extends React.Component {
     return (
       <IfPermission perm="finc-config.metadata-collections.item.post">
         <PaneMenu>
-          <FormattedMessage id="ui-finc-config.collection.form.createCollection">
+          <FormattedMessage id="ui-finc-config.form.create">
             {ariaLabel => (
               <Button
                 aria-label={ariaLabel}
@@ -329,7 +329,7 @@ class MetadataCollections extends React.Component {
                       <form onSubmit={onSubmitSearch}>
                         {this.renderNavigation('collection')}
                         <div>
-                          <FormattedMessage id="ui-finc-config.collection.searchInputLabel">
+                          <FormattedMessage id="ui-finc-config.searchInputLabel">
                             {ariaLabel => (
                               <SearchField
                                 ariaLabel={ariaLabel}

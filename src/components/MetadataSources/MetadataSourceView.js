@@ -80,7 +80,7 @@ class MetadataSourceView extends React.Component {
             buttonRef={this.editButton}
             marginBottom0
           >
-            <FormattedMessage id="ui-finc-config.source.edit" />
+            <FormattedMessage id="ui-finc-config.edit" />
           </Button>
         </PaneMenu>
       </IfPermission>

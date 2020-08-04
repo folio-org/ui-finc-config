@@ -77,7 +77,7 @@ class MetadataSourceForm extends React.Component {
   getFirstMenu() {
     return (
       <PaneMenu>
-        <FormattedMessage id="ui-finc-config.source.form.close">
+        <FormattedMessage id="ui-finc-config.form.close">
           { ariaLabel => (
             <IconButton
               ariaLabel={ariaLabel}
@@ -108,7 +108,7 @@ class MetadataSourceForm extends React.Component {
               onClick={this.beginDelete}
               title="delete"
             >
-              <FormattedMessage id="ui-finc-config.source.form.deleteSource" />
+              <FormattedMessage id="ui-finc-config.form.delete" />
             </Button>
           </IfPermission>
         )}
@@ -135,7 +135,7 @@ class MetadataSourceForm extends React.Component {
         buttonStyle="default mega"
         onClick={onClose}
       >
-        <FormattedMessage id="ui-finc-config.source.form.cancel" />
+        <FormattedMessage id="ui-finc-config.form.cancel" />
       </Button>
     );
 
@@ -149,7 +149,7 @@ class MetadataSourceForm extends React.Component {
         onClick={handleSubmit}
         disabled={disabled}
       >
-        <FormattedMessage id="ui-finc-config.source.form.saveAndClose" />
+        <FormattedMessage id="ui-finc-config.form.saveAndClose" />
       </Button>
     );
 
@@ -172,7 +172,7 @@ class MetadataSourceForm extends React.Component {
   render() {
     const { initialValues, isLoading, onDelete } = this.props;
     const { confirmDelete, sections } = this.state;
-    const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-config.source.form.createSource" />;
+    const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-config.form.create" />;
 
     const firstMenu = this.getFirstMenu();
     const lastMenu = this.getLastMenu();
@@ -232,7 +232,7 @@ class MetadataSourceForm extends React.Component {
                 />
               </AccordionSet>
               <ConfirmationModal
-                heading={<FormattedMessage id="ui-finc-config.source.form.deleteSource" />}
+                heading={<FormattedMessage id="ui-finc-config.form.delete" />}
                 id="delete-source-confirmation"
                 message={`Do you really want to delete ${initialValues.label}?`}
                 onCancel={() => { this.confirmDelete(false); }}

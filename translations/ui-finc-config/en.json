@@ -1,8 +1,14 @@
 {
   "meta.title": "Finc config",
+  "searchInputLabel": "Search",
+  "edit": "Edit",
+  "form.saveAndClose": "Save & close",
+  "form.create": "Create",
+  "form.delete": "Delete",
+  "form.cancel": "Cancel",
+  "form.close": "Close edit dialog",
 
   "sources.title": "Metadata sources",
-  "source.searchInputLabel": "Search",
   "source.accessUrl": "Access url",
   "source.contacts.external": "Contacts external",
   "source.contacts.internal": "Contacts internal",
@@ -20,25 +26,16 @@
   "source.solrShard": "Solar shard",
   "source.tickets": "Tickets",
   "source.updateRhythm": "Update rhythm",
-
-  "contact.name": "Name",
-  "contact.role": "Role",
+  "source.contact.name": "Name",
+  "source.contact.role": "Role",
 
   "source.generalAccordion": "General",
   "source.managementAccordion": "Management",
   "source.technicalAccordion": "Technical",
 
-  "source.edit": "Edit",
-  "source.form.saveAndClose": "Save & close",
-  "source.form.createSource": "Create",
-  "source.form.deleteSource": "Delete",
-  "source.form.cancel": "Cancel",
-  "source.form.close": "Close edit dialog",
-
   "source.button.showAllCollections": "Show all collections",
 
   "collections.title": "Metadata collections",
-  "collection.searchInputLabel": "Search",
   "collection.id": "ID",
   "collection.contentFiles": "Content files",
   "collection.description": "Description",
@@ -60,12 +57,6 @@
   "collection.managementAccordion": "Management",
   "collection.technicalAccordion": "Technical",
 
-  "collection.edit": "Edit",
-  "collection.form.saveAndClose": "Save & close",
-  "collection.form.createCollection": "Create",
-  "collection.form.deleteCollection": "Delete",
-  "collection.form.cancel": "Cancel",
-  "collection.form.close": "Close edit dialog",
   "collection.form.selectedUsageRestricted.clearModalHeading": "Clear permitted for?",
   "collection.form.selectedUsageRestricted.confirmClearLabel": "Clear permitted for",
   "collection.form.selectedUsageRestricted.confirmClearMessage": "Do you want to clear permitted for when changing usage restricted?",

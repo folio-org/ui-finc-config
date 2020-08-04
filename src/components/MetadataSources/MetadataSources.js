@@ -172,7 +172,7 @@ class MetadataSources extends React.Component {
     return (
       <IfPermission perm="finc-config.metadata-sources.item.post">
         <PaneMenu>
-          <FormattedMessage id="ui-finc-config.source.form.createSource">
+          <FormattedMessage id="ui-finc-config.form.create">
             {ariaLabel => (
               <Button
                 aria-label={ariaLabel}
@@ -326,7 +326,7 @@ class MetadataSources extends React.Component {
                       <form onSubmit={onSubmitSearch}>
                         {this.renderNavigation('source')}
                         <div>
-                          <FormattedMessage id="ui-finc-config.source.searchInputLabel">
+                          <FormattedMessage id="ui-finc-config.searchInputLabel">
                             {ariaLabel => (
                               <SearchField
                                 ariaLabel={ariaLabel}
