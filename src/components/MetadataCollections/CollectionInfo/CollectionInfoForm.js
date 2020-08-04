@@ -46,12 +46,10 @@ class CollectionInfoForm extends React.Component {
               component={TextField}
               fullWidth
               id="addcollection_label"
-              label={
-                <FormattedMessage id="ui-finc-config.collection.label">
-                  {(msg) => msg + ' *'}
-                </FormattedMessage>}
+              label={<FormattedMessage id="ui-finc-config.collection.label" />}
               name="label"
               placeholder="Enter a name to identify the metadata collection"
+              required
               validate={Required}
             />
           </Col>
@@ -62,10 +60,7 @@ class CollectionInfoForm extends React.Component {
               component={TextField}
               fullWidth
               id="addcollection_description"
-              label={
-                <FormattedMessage id="ui-finc-config.collection.description">
-                  {(msg) => msg}
-                </FormattedMessage>}
+              label={<FormattedMessage id="ui-finc-config.collection.description" />}
               name="description"
               placeholder="Enter a description for the metadata collection"
             />
