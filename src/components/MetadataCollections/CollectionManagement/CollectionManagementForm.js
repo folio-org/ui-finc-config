@@ -33,7 +33,7 @@ class CollectionManagementForm extends React.Component {
     this.state = {
       confirmClear: false,
       selectedUsageRestricted: '',
-      addPermittedForField: '',
+      addPermittedForField: false,
     };
   }
 
