@@ -236,7 +236,7 @@ class MetadataSourceForm extends React.Component {
                 id="delete-source-confirmation"
                 message={`Do you really want to delete ${initialValues.label}?`}
                 onCancel={() => { this.confirmDelete(false); }}
-                onConfirm={onDelete}
+                onConfirm={() => onDelete()}
                 open={confirmDelete}
               />
             </div>
