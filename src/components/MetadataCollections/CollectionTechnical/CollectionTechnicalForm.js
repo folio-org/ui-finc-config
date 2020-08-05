@@ -106,10 +106,8 @@ class CollectionTechnicalForm extends React.Component {
         {/* SOLR MEGA COLLECTION (is repeatable and required) ... */}
         <div className={BasicCss.addMarginBottomAndTop}>
           <Row>
-            <Label className={BasicCss.styleForFormLabel}>
-              <FormattedMessage id="ui-finc-config.collection.solrMegaCollections">
-                {(msg) => msg + ' *'}
-              </FormattedMessage>
+            <Label className={BasicCss.styleForFormLabel} required>
+              <FormattedMessage id="ui-finc-config.collection.solrMegaCollections" />
             </Label>
           </Row>
           <Row>

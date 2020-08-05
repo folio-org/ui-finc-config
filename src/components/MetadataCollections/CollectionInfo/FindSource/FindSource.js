@@ -70,10 +70,8 @@ class FindSource extends React.Component {
     return (
       <React.Fragment>
         <Row>
-          <Label className={BasicCss.styleForFormLabel}>
-            <FormattedMessage id="ui-finc-config.collection.mdSource">
-              {(msg) => msg + ' *'}
-            </FormattedMessage>
+          <Label className={BasicCss.styleForFormLabel} required>
+            <FormattedMessage id="ui-finc-config.collection.mdSource" />
           </Label>
         </Row>
         <Row>

@@ -104,7 +104,7 @@ class CollectionManagementForm extends React.Component {
       permittedIsRequired = false;
     }
 
-    const permittedForLabel = (permittedIsRequired ? <FormattedMessage id="ui-finc-config.collection.permittedFor">{(msg) => msg + ' *'}</FormattedMessage> : <FormattedMessage id="ui-finc-config.collection.permittedFor" />);
+    const permittedForLabel = (permittedIsRequired ? <Label className={BasicCss.styleForFormLabel} required><FormattedMessage id="ui-finc-config.collection.permittedFor" /></Label> : <Label className={BasicCss.styleForFormLabel}><FormattedMessage id="ui-finc-config.collection.permittedFor" /></Label>);
 
     return (
       <Accordion
@@ -147,9 +147,7 @@ class CollectionManagementForm extends React.Component {
         {/* PERMITTED FOR is repeatable */}
         <div className={BasicCss.addMarginBottomAndTop}>
           <Row>
-            <Label className={BasicCss.styleForFormLabel}>
-              {permittedForLabel}
-            </Label>
+            {permittedForLabel}
           </Row>
           <Row>
             <Col xs={12}>
