@@ -120,8 +120,7 @@ class CollectionManagementForm extends React.Component {
               dataOptions={dataOptionsMetadataAvailable}
               fullWidth
               id="addcollection_metadataAvailable"
-              label={
-                <FormattedMessage id="ui-finc-config.collection.metadataAvailable" />}
+              label={<FormattedMessage id="ui-finc-config.collection.metadataAvailable" />}
               name="metadataAvailable"
               placeholder="Select if metadata is available for the metadata collection"
             />
@@ -134,8 +133,7 @@ class CollectionManagementForm extends React.Component {
               dataOptions={dataOptionsUsageRestricted}
               fullWidth
               id="addcollection_usageRestricted"
-              label={
-                <FormattedMessage id="ui-finc-config.collection.usageRestricted" />}
+              label={<FormattedMessage id="ui-finc-config.collection.usageRestricted" />}
               name="usageRestricted"
               onChange={this.changeSelectedUsageRestricted}
               placeholder="Select if usage is restricted for the metadata collection"
@@ -188,8 +186,7 @@ class CollectionManagementForm extends React.Component {
               dataOptions={dataOptionsLodPublication}
               fullWidth
               id="addcollection_lodpublication"
-              label={
-                <FormattedMessage id="ui-finc-config.collection.lod.publication" />}
+              label={<FormattedMessage id="ui-finc-config.collection.lod.publication" />}
               name="lod.publication"
               placeholder="Select the LOD publication for the metadata collection"
             />
@@ -201,8 +198,7 @@ class CollectionManagementForm extends React.Component {
               component={TextField}
               fullWidth
               id="addcollection_lodnote"
-              label={
-                <FormattedMessage id="ui-finc-config.collection.lod.note" />}
+              label={<FormattedMessage id="ui-finc-config.collection.lod.note" />}
               name="lod.note"
               placeholder="Enter a LOD note for the metadata collection"
             />
@@ -214,8 +210,7 @@ class CollectionManagementForm extends React.Component {
               component={TextField}
               fullWidth
               id="addcollection_generalNotes"
-              label={
-                <FormattedMessage id="ui-finc-config.collection.generalNotes" />}
+              label={<FormattedMessage id="ui-finc-config.collection.generalNotes" />}
               name="generalNotes"
               placeholder="Enter a general note for the metadata collection"
             />

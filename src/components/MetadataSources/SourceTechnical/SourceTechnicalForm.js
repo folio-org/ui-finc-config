@@ -70,10 +70,7 @@ class SourceTechnicalForm extends React.Component {
               component={TextField}
               fullWidth
               id="addsource_accessUrl"
-              label={
-                <FormattedMessage id="ui-finc-config.source.accessUrl">
-                  {(msg) => msg}
-                </FormattedMessage>}
+              label={<FormattedMessage id="ui-finc-config.source.accessUrl" />}
               name="accessUrl"
               placeholder="Enter an access url for the metadata source"
               validate={ValidateUrl}
@@ -101,11 +98,7 @@ class SourceTechnicalForm extends React.Component {
               dataOptions={dataOptionsSolrShard}
               fullWidth
               id="addsource_solrShard"
-              label={
-                <FormattedMessage id="ui-finc-config.source.solrShard">
-                  {(msg) => msg}
-                </FormattedMessage>
-              }
+              label={<FormattedMessage id="ui-finc-config.source.solrShard" />}
               name="solrShard"
               placeholder="Select a solr shard for the metadata source"
             />
@@ -165,10 +158,7 @@ class SourceTechnicalForm extends React.Component {
               component={TextField}
               fullWidth
               id="addsource_updateRhythm"
-              label={
-                <FormattedMessage id="ui-finc-config.source.updateRhythm">
-                  {(msg) => msg}
-                </FormattedMessage>}
+              label={<FormattedMessage id="ui-finc-config.source.updateRhythm" />}
               name="updateRhythm"
               placeholder="Enter a update rhythm for the metadata source"
             />
