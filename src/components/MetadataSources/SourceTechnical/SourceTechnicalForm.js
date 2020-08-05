@@ -86,12 +86,10 @@ class SourceTechnicalForm extends React.Component {
               component={TextField}
               fullWidth
               id="addsource_sourceId"
-              label={
-                <FormattedMessage id="ui-finc-config.source.id">
-                  {(msg) => msg + ' *'}
-                </FormattedMessage>}
+              label={<FormattedMessage id="ui-finc-config.source.id" />}
               name="sourceId"
               placeholder="Enter a source id for the metadata source"
+              required
               validate={IntRequired}
             />
           </Col>
