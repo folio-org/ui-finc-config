@@ -126,10 +126,7 @@ class SourceManagementForm extends React.Component {
               component={TextField}
               fullWidth
               id="addsource_indexingLevel"
-              label={
-                <FormattedMessage id="ui-finc-config.source.indexingLevel">
-                  {(msg) => msg}
-                </FormattedMessage>}
+              label={<FormattedMessage id="ui-finc-config.source.indexingLevel" />}
               name="indexingLevel"
               placeholder="Enter a indexing level for the metadata source"
             />
@@ -141,10 +138,7 @@ class SourceManagementForm extends React.Component {
               component={TextField}
               fullWidth
               id="addsource_generalNotes"
-              label={
-                <FormattedMessage id="ui-finc-config.source.generalNotes">
-                  {(msg) => msg}
-                </FormattedMessage>}
+              label={<FormattedMessage id="ui-finc-config.source.generalNotes" />}
               name="generalNotes"
               placeholder="Enter a general note for the metadata source"
             />
