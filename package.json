@@ -76,8 +76,9 @@
     "home": "/finc-config/metadata-sources",
     "queryResource": "query",
     "okapiInterfaces": {
-      "finc-config/metadata-sources": "1.0",
-      "finc-config/metadata-collections": "1.0",
+      "finc-config/metadata-sources": "2.0",
+      "finc-config/metadata-collections": "2.0",
+      "finc-config/isils": "1.0",
       "organizations-storage.organizations": "3.0"
     },
     "permissionSets": [

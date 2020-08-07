@@ -1,9 +1,16 @@
 # Change history for ui-finc-config
 
-## 2.0.0 (IN PROGRESS)
+## [2.0.0](https://github.com/folio-org/ui-finc-config/tree/v2.0.0) (2020-08-07)
 
 * Increment `@folio/stripes` to `v5.0` and `react-router` to `v5.2` (and, bugfix, move it to peer)
 * Replace deprecated `babel-polyfill` with `core-js` and `regenerator-runtime`
+* Add navigation/link from finc-config to organizations app (UIFC-138)
+* Improve accessibility (UIFC-151)
+* Bugfix: Content not displayed for some metadata sources (UIFC-162)
+* Add record last updated information to metadata sources and collections (UIFC-155)
+* Add `selectedBy` to detail view of metadata collections (UIFC-173)
+* Replace deprecated `@bigest/mirage` by `miragejs`
+* Enable field search on description for sources & collections (UIFC-172)
 
 ## [1.5.0](https://github.com/folio-org/ui-finc-config/tree/v1.5.0) (2020-03-13)
 * Add button "show all collections" for finc-config (UIFC-122)
