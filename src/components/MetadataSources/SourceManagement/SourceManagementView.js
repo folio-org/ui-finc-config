@@ -5,10 +5,10 @@ import { FormattedMessage } from 'react-intl';
 
 import {
   Button,
+  Card,
   Col,
   Headline,
   KeyValue,
-  MultiColumnList,
   Row,
 } from '@folio/stripes/components';
 import { Link } from 'react-router-dom';
@@ -38,27 +38,49 @@ class SourceManagementView extends React.Component {
     }).isRequired,
   };
 
-  renderContacts = (type) => {
+  renderContacts = () => {
     const { metadataSource } = this.props;
 
     if (!metadataSource) {
       return 'no values';
     } else {
+      const fields = metadataSource.contacts;
+
       return (
-        <MultiColumnList
-          columnWidths={{
-            name: '46%',
-            role: '46%'
-          }}
-          columnMapping={{
-            name: <FormattedMessage id="ui-finc-config.source.contact.name" />,
-            role: <FormattedMessage id="ui-finc-config.source.contact.role" />
-          }}
-          contentData={_.get(metadataSource.contacts, type, [])}
-          interactive={false}
-          isEmptyMessage={`no ${type} contact`}
-          visibleColumns={['name', 'role']}
-        />
+        <Row>
+          {fields.map((elem, index) => (
+            <Card
+              cardStyle="positive"
+              id={`contact #${parseInt(index + 1, 10)}`}
+              headerStart={<span>{`Contact #${parseInt(index + 1, 10)}`}</span>}
+              roundedBorder
+            >
+              <Row>
+                <Col xs={3}>
+                  <KeyValue label={<FormattedMessage id="ui-finc-config.source.contact.type" />}>
+                    <span data-test-contact-type>
+                      {elem.type}
+                    </span>
+                  </KeyValue>
+                </Col>
+                <Col xs={3}>
+                  <KeyValue label={<FormattedMessage id="ui-finc-config.source.contact.role" />}>
+                    <span data-test-contact-role>
+                      {elem.role}
+                    </span>
+                  </KeyValue>
+                </Col>
+                <Col xs={6}>
+                  <KeyValue label={<FormattedMessage id="ui-finc-config.source.contact.name" />}>
+                    <span data-test-contact-name>
+                      {elem.name}
+                    </span>
+                  </KeyValue>
+                </Col>
+              </Row>
+            </Card>
+          ))}
+        </Row>
       );
     }
   }
@@ -114,18 +136,9 @@ class SourceManagementView extends React.Component {
                 className={BasicCss.styleForViewHeadline}
                 size="medium"
               >
-                <FormattedMessage id="ui-finc-config.source.contacts.internal" />
+                <FormattedMessage id="ui-finc-config.source.contact.title" />
               </Headline>
-              { this.renderContacts('internal') }
-            </Col>
-            <Col xs={6}>
-              <Headline
-                className={BasicCss.styleForViewHeadline}
-                size="medium"
-              >
-                <FormattedMessage id="ui-finc-config.source.contacts.external" />
-              </Headline>
-              { this.renderContacts('external') }
+              { this.renderContacts() }
             </Col>
           </Row>
           <Row>
