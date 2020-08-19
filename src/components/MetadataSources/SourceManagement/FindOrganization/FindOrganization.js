@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
-  Col,
   Label,
   Row,
 } from '@folio/stripes/components';
@@ -19,25 +18,28 @@ class FindOrganization extends React.Component {
 
     const o = props.intialVendor || {};
 
+    // console.log('schnabeltier');
+    // console.log(props.intialVendor);
+
     this.state = {
       vendor: {
-        id: o.id,
+        id: o.externalId,
         name: o.name,
       },
     };
-    this.inputVendorId = o.id;
+    this.inputVendorId = o.externalId;
     this.inputVendorName = o.name;
   }
 
   selectVendor = (o) => {
     this.props.form.mutators.setOrganization({
-      id: o.id,
+      id: o.externalId,
       name: o.name,
     });
 
     this.setState(() => {
       return { vendor: {
-        id: o.id,
+        id: o.externalId,
         name: o.name
       } };
     });
@@ -82,7 +84,7 @@ class FindOrganization extends React.Component {
           });
         }}
         searchButtonStyle="default"
-        searchLabel="Organization look-up"
+        searchLabel="Add Organization"
         selectVendor={this.selectVendor}
         type="find-organization"
         visibleColumns={['name', 'code', 'description']}
@@ -99,12 +101,10 @@ class FindOrganization extends React.Component {
           </Label>
         </Row>
         <Row>
-          <Col xs={4}>
-            { pluggable }
-          </Col>
-          <Col xs={4}>
-            { vendorName }
-          </Col>
+          { pluggable }
+        </Row>
+        <Row>
+          { vendorName }
         </Row>
       </React.Fragment>
     );
