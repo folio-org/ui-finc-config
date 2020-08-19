@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
@@ -14,6 +15,7 @@ import {
 
 import DisplayContact from '../../DisplayUtils/DisplayContact';
 import FindOrganization from './FindOrganization/FindOrganization';
+import ContactFieldArray from '../../DisplayUtils/ContactFieldArray';
 
 import BasicCss from '../../BasicStyle.css';
 
@@ -48,6 +50,14 @@ class SourceManagementForm extends React.Component {
             {...this.props}
           />
         </div>
+
+        <FieldArray
+          component={ContactFieldArray}
+          // add name to the array-field, which should be changed
+          name="contacts"
+          intialContacts={_.get(this.props.initialValues, 'contacts', [])}
+        />
+
         {/* CONTACTS INTERNAL is repeatable */}
         <div className={BasicCss.addMarginBottomAndTop}>
           <Row>
