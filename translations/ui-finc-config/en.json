@@ -28,6 +28,10 @@
   "source.updateRhythm": "Update rhythm",
   "source.contact.name": "Name",
   "source.contact.role": "Role",
+  "source.contact.type": "Type",
+  "source.contact.title": "Contacts",
+  "source.contact.add": "Add contact",
+  "source.contact.remove": "Remove contact",
 
   "source.generalAccordion": "General",
   "source.managementAccordion": "Management",

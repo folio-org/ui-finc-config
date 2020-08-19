@@ -52,7 +52,7 @@ class SourceManagementForm extends React.Component {
         <div className={BasicCss.addMarginBottomAndTop}>
           <Row>
             <Label className={BasicCss.styleForFormLabel}>
-              <FormattedMessage id="ui-finc-config.source.contacts.internal" />
+              <FormattedMessage id="ui-finc-config.source.contact.title" />
             </Label>
           </Row>
           <Row>
@@ -69,50 +69,14 @@ class SourceManagementForm extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <FormattedMessage id="ui-finc-config.source.contacts.internal">
+              <FormattedMessage id="ui-finc-config.source.contacts.title">
                 {ariaLabel => (
                   <FieldArray
                     ariaLabel={ariaLabel}
                     component={DisplayContact}
-                    id="display_contact_internal"
+                    id="display_contact"
                     // add name to the array-field, which should be changed
-                    name="contacts.internal"
-                    {...this.props}
-                  />
-                )}
-              </FormattedMessage>
-            </Col>
-          </Row>
-        </div>
-        {/* CONTACTS EXTERNAL is repeatable */}
-        <div className={BasicCss.addMarginBottomAndTop}>
-          <Row>
-            <Label className={BasicCss.styleForFormLabel}>
-              <FormattedMessage id="ui-finc-config.source.contacts.external" />
-            </Label>
-          </Row>
-          <Row>
-            <Col xs={4}>
-              <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.source.contact.name" />
-              </Label>
-            </Col>
-            <Col xs={4}>
-              <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.source.contact.role" />
-              </Label>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <FormattedMessage id="ui-finc-config.source.contacts.external">
-                {ariaLabel => (
-                  <FieldArray
-                    ariaLabel={ariaLabel}
-                    component={DisplayContact}
-                    id="display_contact_external"
-                    // add name to the array-field, which should be changed
-                    name="contacts.external"
+                    name="contacts"
                     {...this.props}
                   />
                 )}
