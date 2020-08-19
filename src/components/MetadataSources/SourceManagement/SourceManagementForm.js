@@ -8,12 +8,11 @@ import { FormattedMessage } from 'react-intl';
 import {
   Accordion,
   Col,
-  Label,
   Row,
   TextField,
 } from '@folio/stripes/components';
 
-import DisplayContact from '../../DisplayUtils/DisplayContact';
+// import DisplayContact from '../../DisplayUtils/DisplayContact';
 import FindOrganization from './FindOrganization/FindOrganization';
 import ContactFieldArray from '../../DisplayUtils/ContactFieldArray';
 
@@ -59,7 +58,7 @@ class SourceManagementForm extends React.Component {
         />
 
         {/* CONTACTS INTERNAL is repeatable */}
-        <div className={BasicCss.addMarginBottomAndTop}>
+        {/* <div className={BasicCss.addMarginBottomAndTop}>
           <Row>
             <Label className={BasicCss.styleForFormLabel}>
               <FormattedMessage id="ui-finc-config.source.contact.title" />
@@ -93,7 +92,7 @@ class SourceManagementForm extends React.Component {
               </FormattedMessage>
             </Col>
           </Row>
-        </div>
+        </div> */}
         <Row>
           <Col xs={8}>
             <Field

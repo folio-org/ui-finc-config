@@ -13,20 +13,21 @@ import ContactField from './ContactField';
 
 class ContactFieldArray extends React.Component {
   static propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object),
     name: PropTypes.string.isRequired,
     onAddField: PropTypes.func.isRequired,
     onDeleteField: PropTypes.func.isRequired,
-    intialContacts: PropTypes.arrayOf(PropTypes.object),
+    // intialContacts: PropTypes.arrayOf(PropTypes.object),
   }
 
-  // static defaultProps = {
-  //   items: [],
-  // }
+  static defaultProps = {
+    items: [],
+  }
 
   renderContact = () => {
-    const { name, intialContacts } = this.props;
+    const { name, items } = this.props;
 
-    return intialContacts.map((contact, index) => (
+    return items.map((contact, index) => (
       <EditCard
         key={index}
         data-test-cc-number={index}
@@ -53,7 +54,7 @@ class ContactFieldArray extends React.Component {
         <div id="source-form-contacts">
           {this.renderContact()}
         </div>
-        <Button id="add-period-button" onClick={() => this.props.onAddField()}>
+        <Button id="add-contact-button" onClick={() => this.props.onAddField()}>
           <FormattedMessage id="ui-finc-config.source.contact.add" />
         </Button>
       </div>

@@ -11,7 +11,7 @@ import {
   KeyValue,
   Row,
 } from '@folio/stripes/components';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { stripesConnect } from '@folio/stripes/core';
 
 
@@ -32,13 +32,14 @@ class SourceManagementView extends React.Component {
   static propTypes = {
     id: PropTypes.string,
     metadataSource: PropTypes.object,
-    resources: PropTypes.shape({
-      org: PropTypes.object,
-      failed: PropTypes.object,
-    }).isRequired,
+    // resources: PropTypes.shape({
+    //   org: PropTypes.object,
+    //   failed: PropTypes.object,
+    // }).isRequired,
   };
 
   renderContacts = () => {
+  // renderContacts() {
     const { metadataSource } = this.props;
 
     if (!metadataSource) {
@@ -88,27 +89,27 @@ class SourceManagementView extends React.Component {
   render() {
     const { metadataSource, id } = this.props;
     const sourceId = _.get(metadataSource, 'id', '-');
-    const organization = _.get(this.props.metadataSource, 'organization', '-');
+    // const organization = _.get(this.props.metadataSource, 'organization', '-');
 
-    let orgValue;
-    if (this.props.resources.org && this.props.resources.org.failed) {
-      if (organization.name) {
-        orgValue = organization.name;
-      } else {
-        orgValue = '-';
-      }
-    } else {
-      orgValue = (
-        <React.Fragment>
-          <Link to={{
-            pathname: `${urls.organizationView(organization.id)}`,
-          }}
-          >
-            {organization.name}
-          </Link>
-        </React.Fragment>
-      );
-    }
+    // let orgValue;
+    // if (this.props.resources.org && this.props.resources.org.failed) {
+    //   if (organization.name) {
+    //     orgValue = organization.name;
+    //   } else {
+    //     orgValue = '-';
+    //   }
+    // } else {
+    //   orgValue = (
+    //     <React.Fragment>
+    //       <Link to={{
+    //         pathname: `${urls.organizationView(organization.id)}`,
+    //       }}
+    //       >
+    //         {organization.name}
+    //       </Link>
+    //     </React.Fragment>
+    //   );
+    // }
 
     return (
       <React.Fragment>
@@ -124,12 +125,12 @@ class SourceManagementView extends React.Component {
               </Button>
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.source.organization" />}
               value={orgValue}
             />
-          </Row>
+          </Row> */}
           <Row className={css.addMarginForContacts}>
             <Col xs={6}>
               <Headline
