@@ -11,10 +11,7 @@ export default Factory.extend({
     id: '',
     name: ''
   },
-  contacts: {
-    internal: [],
-    external: [],
-  },
+  contacts: [],
   indexingLevel: '',
   generalNotes: '',
   lastProcessed: '',
