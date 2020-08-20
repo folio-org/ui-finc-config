@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -10,67 +9,19 @@ import {
 import { Pluggable } from '@folio/stripes/core';
 
 import BasicCss from '../../../BasicStyle.css';
-import css from './OrganizationView.css';
 
 class FindOrganization extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    const o = props.intialVendor || {};
+  //   const o = props.intialVendor || {};
 
-    // console.log('intialVendor');
-    // console.log(props.intialVendor);
-
-    this.state = {
-      vendor: {
-        id: o.externalId,
-        name: o.name,
-        type: 'contact'
-      },
-    };
-    this.inputVendorId = o.externalId;
-    this.inputVendorName = o.name;
-  }
-
-  // selectVendor = (o) => {
-  //   console.log('selectVendor');
-  //   console.log(o);
-  //   this.props.form.mutators.setOrganization({
-  //     externalId: o.id,
-  //     name: o.name,
-  //     type: 'contact'
-  //   });
-
-  //   this.setState(() => {
-  //     return { vendor: {
-  //       id: o.externalId,
-  //       name: o.name,
-  //       type: 'contact'
-  //     } };
-  //   });
+  //   this.inputVendorId = o.externalId;
+  //   this.inputVendorName = o.name;
   // }
-
-  renderVendorName = (vendor) => {
-    if (_.isEmpty(vendor.id)) {
-      return null;
-    }
-
-    const name = _.isEmpty(vendor.name) ?
-      '-' :
-      <div>{vendor.name}</div>;
-
-    return (
-      <div
-        className={`${css.section} ${css.active}`}
-        name="organizationName"
-      >
-        <div>{name}</div>
-      </div>);
-  }
 
   render() {
     const disableRecordCreation = true;
-    const vendorName = this.renderVendorName(this.state.vendor);
     const buttonProps = { 'marginBottom0': true };
     const pluggable =
       <Pluggable
@@ -107,9 +58,6 @@ class FindOrganization extends React.Component {
         </Row>
         <Row>
           { pluggable }
-        </Row>
-        <Row>
-          { vendorName }
         </Row>
       </React.Fragment>
     );

@@ -8,7 +8,7 @@ import {
   Col,
   Row,
   Select,
-  // TextArea,
+  TextField,
 } from '@folio/stripes/components';
 import FindOrganization from '../MetadataSources/SourceManagement/FindOrganization/FindOrganization';
 
@@ -79,13 +79,27 @@ export default class ContactField extends React.Component {
         <Row>
           <Col xs={12}>
             <Field
+              ariaLabel="Add organization"
+              component={TextField}
+              fullWidth
+              id={`contact-name-${index}`}
+              label={<FormattedMessage id="ui-finc-config.source.contact.name" />}
+              name={`${name}.name`}
+              placeholder="Select a contact"
+              parse={v => v} // Lets us send an empty string instead of `undefined`
+              readOnly
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Field
               component={Select}
               dataOptions={dataContactRole}
               fullWidth
               id={`contact-role-${index}`}
               label={<FormattedMessage id="ui-finc-config.source.contact.role" />}
               name={`${name}.role`}
-              // name="contacts.role"
               placeholder="Select a role for the contact"
               parse={v => v} // Lets us send an empty string instead of `undefined`
             />
