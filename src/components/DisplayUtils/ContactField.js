@@ -7,7 +7,8 @@ import { Field } from 'react-final-form';
 import {
   Col,
   Row,
-  TextArea,
+  Select,
+  // TextArea,
 } from '@folio/stripes/components';
 import FindOrganization from '../MetadataSources/SourceManagement/FindOrganization/FindOrganization';
 
@@ -45,6 +46,12 @@ export default class ContactField extends React.Component {
 
   render = () => {
     const { index, input: { name } } = this.props;
+    const dataContactRole = [
+      { value: 'subject specialist', label: 'Subject specialist' },
+      { value: 'librarian', label: 'Librarian' },
+      { value: 'technical', label: 'Technical' },
+      { value: 'vendor', label: 'Vendor' }
+    ];
 
     return (
       <div>
@@ -69,10 +76,14 @@ export default class ContactField extends React.Component {
         <Row>
           <Col xs={12}>
             <Field
-              component={TextArea}
+              component={Select}
+              dataOptions={dataContactRole}
+              fullWidth
               id={`contact-role-${index}`}
               label={<FormattedMessage id="ui-finc-config.source.contact.role" />}
               name={`${name}.role`}
+              // name="contacts.role"
+              placeholder="Select a role for the contact"
               parse={v => v} // Lets us send an empty string instead of `undefined`
             />
           </Col>
