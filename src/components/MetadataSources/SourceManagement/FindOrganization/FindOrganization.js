@@ -18,32 +18,37 @@ class FindOrganization extends React.Component {
 
     const o = props.intialVendor || {};
 
-    // console.log('schnabeltier');
+    // console.log('intialVendor');
     // console.log(props.intialVendor);
 
     this.state = {
       vendor: {
         id: o.externalId,
         name: o.name,
+        type: 'contact'
       },
     };
     this.inputVendorId = o.externalId;
     this.inputVendorName = o.name;
   }
 
-  selectVendor = (o) => {
-    this.props.form.mutators.setOrganization({
-      id: o.externalId,
-      name: o.name,
-    });
+  // selectVendor = (o) => {
+  //   console.log('selectVendor');
+  //   console.log(o);
+  //   this.props.form.mutators.setOrganization({
+  //     externalId: o.id,
+  //     name: o.name,
+  //     type: 'contact'
+  //   });
 
-    this.setState(() => {
-      return { vendor: {
-        id: o.externalId,
-        name: o.name
-      } };
-    });
-  }
+  //   this.setState(() => {
+  //     return { vendor: {
+  //       id: o.externalId,
+  //       name: o.name,
+  //       type: 'contact'
+  //     } };
+  //   });
+  // }
 
   renderVendorName = (vendor) => {
     if (_.isEmpty(vendor.id)) {
@@ -72,7 +77,7 @@ class FindOrganization extends React.Component {
         aria-haspopup="true"
         buttonProps={buttonProps}
         columnMapping={this.columnMapping}
-        dataKey="vendor"
+        dataKey="contacts"
         disableRecordCreation={disableRecordCreation}
         id={`clickable-find-organization ${this.props.index}`}
         marginTop0
@@ -85,7 +90,7 @@ class FindOrganization extends React.Component {
         }}
         searchButtonStyle="default"
         searchLabel="Add Organization"
-        selectVendor={this.selectVendor}
+        selectVendor={this.props.selectVendor}
         type="find-organization"
         visibleColumns={['name', 'code', 'description']}
         {...this.props}
@@ -121,6 +126,7 @@ FindOrganization.propTypes = {
     }),
   }),
   index: PropTypes.number,
+  selectVendor: PropTypes.func,
 };
 
 export default FindOrganization;

@@ -254,7 +254,7 @@ export default stripesFinalForm({
   navigationCheck: true,
   mutators: {
     setOrganization: (args, state, tools) => {
-      tools.changeValue(state, 'organization', () => args[0]);
+      tools.changeValue(state, 'contacts', () => args[0]);
     },
   },
 })(MetadataSourceForm);
