@@ -20,11 +20,23 @@ class ContactFieldArray extends React.Component {
     name: PropTypes.string.isRequired,
     onAddField: PropTypes.func.isRequired,
     onDeleteField: PropTypes.func.isRequired,
+    onUpdateField: PropTypes.func.isRequired,
     // intialContacts: PropTypes.arrayOf(PropTypes.object),
   }
 
   static defaultProps = {
     items: [],
+  }
+
+  handleContactSelected = (index, selectedContact = {}) => {
+    // console.log('selectedContact');
+    // console.log(selectedContact);
+
+    this.props.onUpdateField(index, {
+      externalId: selectedContact.id,
+      name: selectedContact.name,
+      type: 'contact',
+    });
   }
 
   renderContact = () => {
@@ -43,6 +55,7 @@ class ContactFieldArray extends React.Component {
           index={index}
           name={`${name}[${index}]`}
           intialContact={contact}
+          selectVendor={selectedContact => this.handleContactSelected(index, selectedContact)}
         />
       </EditCard>
     ));

@@ -19,6 +19,8 @@ export default class ContactField extends React.Component {
       name: PropTypes.string.isRequired,
     }).isRequired,
     intialContact: PropTypes.object,
+    onUpdate: PropTypes.func,
+    selectVendor: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -59,11 +61,12 @@ export default class ContactField extends React.Component {
           <Col xs={5}>
             <Field
               component={FindOrganization}
-              name="organization"
+              name="contacts"
               intialVendor={this.state.organization}
               // stripes={this.props.stripes}
               index={index}
               {...this.props}
+              selectVendor={this.props.selectVendor}
             />
           </Col>
           <Col xs={2}>
