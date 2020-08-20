@@ -10,6 +10,7 @@ import {
   Select,
   TextField,
 } from '@folio/stripes/components';
+
 import FindOrganization from '../MetadataSources/SourceManagement/FindOrganization/FindOrganization';
 
 export default class ContactField extends React.Component {
@@ -19,7 +20,6 @@ export default class ContactField extends React.Component {
       name: PropTypes.string.isRequired,
     }).isRequired,
     intialContact: PropTypes.object,
-    onUpdate: PropTypes.func,
     selectVendor: PropTypes.func.isRequired,
   }
 
@@ -63,7 +63,6 @@ export default class ContactField extends React.Component {
               component={FindOrganization}
               name="contacts"
               intialVendor={this.state.organization}
-              // stripes={this.props.stripes}
               index={index}
               {...this.props}
               selectVendor={this.props.selectVendor}

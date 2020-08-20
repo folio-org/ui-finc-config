@@ -252,9 +252,4 @@ export default stripesFinalForm({
   enableReinitialize: true,
   // set navigationCheck true for confirming changes
   navigationCheck: true,
-  mutators: {
-    setOrganization: (args, state, tools) => {
-      tools.changeValue(state, 'contacts', () => args[0]);
-    },
-  },
 })(MetadataSourceForm);

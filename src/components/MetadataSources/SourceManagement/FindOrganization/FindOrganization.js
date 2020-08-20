@@ -11,15 +11,6 @@ import { Pluggable } from '@folio/stripes/core';
 import BasicCss from '../../../BasicStyle.css';
 
 class FindOrganization extends React.Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   const o = props.intialVendor || {};
-
-  //   this.inputVendorId = o.externalId;
-  //   this.inputVendorName = o.name;
-  // }
-
   render() {
     const disableRecordCreation = true;
     const buttonProps = { 'marginBottom0': true };
@@ -68,11 +59,6 @@ FindOrganization.propTypes = {
   intialVendorId: PropTypes.string,
   intialVendor: PropTypes.object,
   stripes: PropTypes.object,
-  form: PropTypes.shape({
-    mutators: PropTypes.shape({
-      setOrganization: PropTypes.func,
-    }),
-  }),
   index: PropTypes.number,
   selectVendor: PropTypes.func,
 };
