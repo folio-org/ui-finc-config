@@ -14,6 +14,9 @@ import ContactField from './ContactField';
 class ContactFieldArray extends React.Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object),
+    // items: PropTypes.shape({
+    //   contact: PropTypes.arrayOf(PropTypes.object),
+    // }),
     name: PropTypes.string.isRequired,
     onAddField: PropTypes.func.isRequired,
     onDeleteField: PropTypes.func.isRequired,

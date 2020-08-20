@@ -55,6 +55,7 @@ export default class ContactField extends React.Component {
               name="organization"
               intialVendor={this.state.organization}
               // stripes={this.props.stripes}
+              index={index}
               {...this.props}
             />
           </Col>
