@@ -12,23 +12,9 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-// import DisplayContact from '../../DisplayUtils/DisplayContact';
-import FindOrganization from './FindOrganization/FindOrganization';
 import ContactFieldArray from '../../DisplayUtils/ContactFieldArray';
 
-import BasicCss from '../../BasicStyle.css';
-
 class SourceManagementForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    const intialVendor = props.initialValues.organization || {};
-
-    this.state = {
-      organization: intialVendor,
-    };
-  }
-
   render() {
     const { expanded, onToggle, accordionId } = this.props;
 
@@ -39,60 +25,12 @@ class SourceManagementForm extends React.Component {
         onToggle={onToggle}
         open={expanded}
       >
-        <div className={BasicCss.addMarginBottom}>
-          {/* Plugin has to be inside of Field, otherwise pristine is not working */}
-          <Field
-            component={FindOrganization}
-            name="organization"
-            intialVendor={this.state.organization}
-            stripes={this.props.stripes}
-            {...this.props}
-          />
-        </div>
-
         <FieldArray
           component={ContactFieldArray}
           // add name to the array-field, which should be changed
           name="contacts"
           intialContacts={_.get(this.props.initialValues, 'contacts', [])}
         />
-
-        {/* CONTACTS INTERNAL is repeatable */}
-        {/* <div className={BasicCss.addMarginBottomAndTop}>
-          <Row>
-            <Label className={BasicCss.styleForFormLabel}>
-              <FormattedMessage id="ui-finc-config.source.contact.title" />
-            </Label>
-          </Row>
-          <Row>
-            <Col xs={4}>
-              <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.source.contact.name" />
-              </Label>
-            </Col>
-            <Col xs={4}>
-              <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.source.contact.role" />
-              </Label>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <FormattedMessage id="ui-finc-config.source.contacts.title">
-                {ariaLabel => (
-                  <FieldArray
-                    ariaLabel={ariaLabel}
-                    component={DisplayContact}
-                    id="display_contact"
-                    // add name to the array-field, which should be changed
-                    name="contacts"
-                    {...this.props}
-                  />
-                )}
-              </FormattedMessage>
-            </Col>
-          </Row>
-        </div> */}
         <Row>
           <Col xs={8}>
             <Field
@@ -124,14 +62,9 @@ class SourceManagementForm extends React.Component {
 
 SourceManagementForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
-  change: PropTypes.func,
   expanded: PropTypes.bool,
-  // initialValues: PropTypes.shape({
-  //   organization: PropTypes.object
-  // }),
   initialValues: PropTypes.object,
   onToggle: PropTypes.func,
-  stripes: PropTypes.object,
 };
 
 export default SourceManagementForm;

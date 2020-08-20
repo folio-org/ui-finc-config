@@ -7,21 +7,20 @@ import {
   Button,
   Headline,
 } from '@folio/stripes/components';
+import {
+  EditCard,
+  withKiwtFieldArray
+} from '@folio/stripes-erm-components';
 
-import { EditCard, withKiwtFieldArray } from '@folio/stripes-erm-components';
 import ContactField from './ContactField';
 
 class ContactFieldArray extends React.Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object),
-    // items: PropTypes.shape({
-    //   contact: PropTypes.arrayOf(PropTypes.object),
-    // }),
     name: PropTypes.string.isRequired,
     onAddField: PropTypes.func.isRequired,
     onDeleteField: PropTypes.func.isRequired,
     onUpdateField: PropTypes.func.isRequired,
-    // intialContacts: PropTypes.arrayOf(PropTypes.object),
   }
 
   static defaultProps = {
@@ -29,9 +28,6 @@ class ContactFieldArray extends React.Component {
   }
 
   handleContactSelected = (index, selectedContact = {}) => {
-    // console.log('selectedContact');
-    // console.log(selectedContact);
-
     this.props.onUpdateField(index, {
       externalId: selectedContact.id,
       name: selectedContact.name,
