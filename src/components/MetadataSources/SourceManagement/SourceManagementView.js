@@ -45,7 +45,8 @@ class SourceManagementView extends React.Component {
     if (!metadataSource) {
       return 'no values';
     } else {
-      const fields = metadataSource.contacts;
+      // const fields = metadataSource.contacts;
+      const fields = Array.from(metadataSource.contacts);
 
       return (
         <Row>
@@ -55,6 +56,7 @@ class SourceManagementView extends React.Component {
               id={`contact #${parseInt(index + 1, 10)}`}
               headerStart={<span>{`Contact #${parseInt(index + 1, 10)}`}</span>}
               roundedBorder
+              key={`contact #${parseInt(index + 1, 10)}`}
             >
               <Row>
                 <Col xs={3}>
