@@ -74,7 +74,7 @@ class FindOrganization extends React.Component {
         columnMapping={this.columnMapping}
         dataKey="vendor"
         disableRecordCreation={disableRecordCreation}
-        id="clickable-find-organization"
+        id={`clickable-find-organization ${this.props.index}`}
         marginTop0
         onCloseModal={(modalProps) => {
           modalProps.parentMutator.query.update({
@@ -120,6 +120,7 @@ FindOrganization.propTypes = {
       setOrganization: PropTypes.func,
     }),
   }),
+  index: PropTypes.number,
 };
 
 export default FindOrganization;
