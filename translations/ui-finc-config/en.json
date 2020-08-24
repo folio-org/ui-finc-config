@@ -29,8 +29,11 @@
   "source.contact.role": "Role",
   "source.contact.type": "Type",
   "source.contact.title": "Contacts",
+  "source.contact.title.singular": "Contact #{amount}",
   "source.contact.add": "Add contact",
   "source.contact.remove": "Remove contact",
+  "source.contact.or": "or",
+
 
   "source.generalAccordion": "General",
   "source.managementAccordion": "Management",

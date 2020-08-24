@@ -57,9 +57,9 @@ class ContactFieldArray extends React.Component {
       <EditCard
         key={index}
         data-test-cc-number={index}
-        deleteButtonTooltipText={<FormattedMessage id="ui-finc-config.source.contact.remove" values={{ periodNum: index + 1 }} />}
-        header={<FormattedMessage id="ui-finc-config.source.contact.title" values={{ number: index + 1 }} />}
-        onDelete={index !== 0 ? () => this.props.onDeleteField(index, contact) : undefined}
+        deleteButtonTooltipText={<FormattedMessage id="ui-finc-config.source.contact.remove" />}
+        header={<FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount: index + 1 }} />}
+        onDelete={() => this.props.onDeleteField(index, contact)}
       >
         <Field
           component={ContactField}
