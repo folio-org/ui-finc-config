@@ -12,7 +12,7 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-import ContactFieldArray from '../../DisplayUtils/ContactFieldArray';
+import ContactFieldArray from './Contact/ContactFieldArray';
 
 class SourceManagementForm extends React.Component {
   render() {

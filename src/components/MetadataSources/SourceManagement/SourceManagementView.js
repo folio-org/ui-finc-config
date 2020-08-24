@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 
 import {
   Button,
-  Card,
   Col,
   Headline,
   KeyValue,
@@ -18,6 +17,7 @@ import { stripesConnect } from '@folio/stripes/core';
 import BasicCss from '../../BasicStyle.css';
 import css from './SourceManagement.css';
 import urls from '../../DisplayUtils/urls';
+import DisplayContact from './Contact/DisplayContact';
 
 class SourceManagementView extends React.Component {
   static manifest = Object.freeze({
@@ -32,61 +32,7 @@ class SourceManagementView extends React.Component {
   static propTypes = {
     id: PropTypes.string,
     metadataSource: PropTypes.object,
-    // resources: PropTypes.shape({
-    //   org: PropTypes.object,
-    //   failed: PropTypes.object,
-    // }).isRequired,
   };
-
-  renderContacts = () => {
-  // renderContacts() {
-    const { metadataSource } = this.props;
-
-    if (!metadataSource) {
-      return 'no values';
-    } else {
-      // const fields = metadataSource.contacts;
-      const fields = Array.from(metadataSource.contacts);
-
-      return (
-        <Row>
-          {fields.map((elem, index) => (
-            <Card
-              cardStyle="positive"
-              id={`contact #${parseInt(index + 1, 10)}`}
-              headerStart={<span>{`Contact #${parseInt(index + 1, 10)}`}</span>}
-              roundedBorder
-              key={`contact #${parseInt(index + 1, 10)}`}
-            >
-              <Row>
-                <Col xs={3}>
-                  <KeyValue label={<FormattedMessage id="ui-finc-config.source.contact.type" />}>
-                    <span data-test-contact-type>
-                      {elem.type}
-                    </span>
-                  </KeyValue>
-                </Col>
-                <Col xs={3}>
-                  <KeyValue label={<FormattedMessage id="ui-finc-config.source.contact.role" />}>
-                    <span data-test-contact-role>
-                      {elem.role}
-                    </span>
-                  </KeyValue>
-                </Col>
-                <Col xs={6}>
-                  <KeyValue label={<FormattedMessage id="ui-finc-config.source.contact.name" />}>
-                    <span data-test-contact-name>
-                      {elem.name}
-                    </span>
-                  </KeyValue>
-                </Col>
-              </Row>
-            </Card>
-          ))}
-        </Row>
-      );
-    }
-  }
 
   render() {
     const { metadataSource, id } = this.props;
@@ -133,16 +79,18 @@ class SourceManagementView extends React.Component {
               value={orgValue}
             />
           </Row> */}
+          <Row>
+            <Headline
+              className={BasicCss.styleForViewHeadline}
+              size="medium"
+            >
+              <FormattedMessage id="ui-finc-config.source.contact.title" />
+            </Headline>
+          </Row>
           <Row className={css.addMarginForContacts}>
-            <Col xs={6}>
-              <Headline
-                className={BasicCss.styleForViewHeadline}
-                size="medium"
-              >
-                <FormattedMessage id="ui-finc-config.source.contact.title" />
-              </Headline>
-              { this.renderContacts() }
-            </Col>
+            <DisplayContact
+              metadataSource={metadataSource}
+            />
           </Row>
           <Row>
             <KeyValue

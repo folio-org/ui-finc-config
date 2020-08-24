@@ -11,8 +11,9 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-import FindOrganization from '../MetadataSources/SourceManagement/FindOrganization/FindOrganization';
-import FindUser from '../MetadataSources/SourceManagement/FindUser/FindUser';
+import FindOrganization from '../FindOrganization/FindOrganization';
+import FindUser from '../FindUser/FindUser';
+import { Required } from '../../../DisplayUtils/Validate';
 
 export default class ContactField extends React.Component {
   static propTypes = {
@@ -70,7 +71,7 @@ export default class ContactField extends React.Component {
             />
           </Col>
           <Col xs={2}>
-            or
+            <FormattedMessage id="ui-finc-config.source.contact.or" />
           </Col>
           <Col xs={5}>
             <Field
@@ -95,6 +96,8 @@ export default class ContactField extends React.Component {
               placeholder="Select a contact"
               parse={v => v} // Lets us send an empty string instead of `undefined`
               readOnly
+              required
+              validate={Required}
             />
           </Col>
         </Row>
@@ -109,6 +112,8 @@ export default class ContactField extends React.Component {
               name={`${name}.role`}
               placeholder="Select a role for the contact"
               parse={v => v} // Lets us send an empty string instead of `undefined`
+              required
+              validate={Required}
             />
           </Col>
         </Row>
