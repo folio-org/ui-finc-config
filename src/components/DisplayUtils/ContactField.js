@@ -12,6 +12,7 @@ import {
 } from '@folio/stripes/components';
 
 import FindOrganization from '../MetadataSources/SourceManagement/FindOrganization/FindOrganization';
+import FindUser from '../MetadataSources/SourceManagement/FindUser/FindUser';
 
 export default class ContactField extends React.Component {
   static propTypes = {
@@ -72,7 +73,14 @@ export default class ContactField extends React.Component {
             or
           </Col>
           <Col xs={5}>
-            user
+            <Field
+              component={FindUser}
+              name="contacts"
+              intialVendor={this.state.organization}
+              index={index}
+              {...this.props}
+              selectVendor={this.props.selectVendor}
+            />
           </Col>
         </Row>
         <Row>

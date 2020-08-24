@@ -1,9 +1,0 @@
-.section {
-  border-bottom: 1px solid #ebebeb;
-  padding: 5px;
-}
-
-.section.active {
-  background-color: #ebebeb;
-  border-radius: 6px;
-}
