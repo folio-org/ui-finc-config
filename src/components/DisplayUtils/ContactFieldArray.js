@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -28,10 +29,24 @@ class ContactFieldArray extends React.Component {
   }
 
   handleContactSelected = (index, selectedContact = {}) => {
+    const orgName = _.get(selectedContact, 'name', '');
+    const userName = _.get(selectedContact.personal, 'lastName', '') + ', ' + _.get(selectedContact.personal, 'firstName', '');
+    let contactName = '';
+    let contactPlugin = '';
+    if (orgName !== '') {
+      // receiving name from organization-plugin
+      contactPlugin = 'contact';
+      contactName = orgName;
+    } else if (_.get(selectedContact.personal, 'lastName', '') !== '') {
+      // receiving name from user-plugin
+      contactPlugin = 'user';
+      contactName = userName;
+    }
+
     this.props.onUpdateField(index, {
       externalId: selectedContact.id,
-      name: selectedContact.name,
-      type: 'contact',
+      name: contactName,
+      type: contactPlugin,
     });
   }
 

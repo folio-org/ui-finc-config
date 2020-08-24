@@ -62,7 +62,7 @@ export default class ContactField extends React.Component {
           <Col xs={5}>
             <Field
               component={FindOrganization}
-              name="contacts"
+              name="contacts organization"
               intialVendor={this.state.organization}
               index={index}
               {...this.props}
@@ -75,7 +75,7 @@ export default class ContactField extends React.Component {
           <Col xs={5}>
             <Field
               component={FindUser}
-              name="contacts"
+              name="contacts user"
               intialVendor={this.state.organization}
               index={index}
               {...this.props}
