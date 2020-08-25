@@ -22,26 +22,22 @@ export default class ContactField extends React.Component {
       name: PropTypes.string.isRequired,
     }).isRequired,
     intialContact: PropTypes.object,
-    selectVendor: PropTypes.func.isRequired,
+    selectContact: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props);
     this.inputRef = React.createRef();
 
-    const intialVendor = props.intialContact || {};
+    const intialContact = props.intialContact || {};
 
     this.state = {
-      organization: intialVendor,
+      organization: intialContact,
     };
   }
 
   componentDidMount() {
     const value = get(this.props, 'input.value');
-
-    /* Focus only when add agreement period button is clicked in which case the value object
-    would look like value:{ _delete: false }. Prevent focus on initial mount (value === {}) or
-    when value.id is defined */
 
     if (!isEmpty(value) && !value.id && get(this.inputRef, 'current')) {
       this.inputRef.current.focus();
@@ -63,11 +59,11 @@ export default class ContactField extends React.Component {
           <Col xs={5}>
             <Field
               component={FindOrganization}
-              name="contacts organization"
-              intialVendor={this.state.organization}
+              intialContact={this.state.organization}
               index={index}
+              name="contacts organization"
+              selectContact={this.props.selectContact}
               {...this.props}
-              selectVendor={this.props.selectVendor}
             />
           </Col>
           <Col xs={2}>
@@ -76,11 +72,11 @@ export default class ContactField extends React.Component {
           <Col xs={5}>
             <Field
               component={FindUser}
-              name="contacts user"
-              intialVendor={this.state.organization}
+              intialContact={this.state.organization}
               index={index}
+              name="contacts user"
+              selectContact={this.props.selectContact}
               {...this.props}
-              selectVendor={this.props.selectVendor}
             />
           </Col>
         </Row>
@@ -93,8 +89,7 @@ export default class ContactField extends React.Component {
               id={`contact-name-${index}`}
               label={<FormattedMessage id="ui-finc-config.source.contact.name" />}
               name={`${name}.name`}
-              placeholder="Select a contact"
-              parse={v => v} // Lets us send an empty string instead of `undefined`
+              placeholder="Select a organization or a user"
               readOnly
               required
               validate={Required}
@@ -111,7 +106,6 @@ export default class ContactField extends React.Component {
               label={<FormattedMessage id="ui-finc-config.source.contact.role" />}
               name={`${name}.role`}
               placeholder="Select a role for the contact"
-              parse={v => v} // Lets us send an empty string instead of `undefined`
               required
               validate={Required}
             />
