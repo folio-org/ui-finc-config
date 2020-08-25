@@ -32,7 +32,7 @@ class FindUser extends React.Component {
         }}
         searchButtonStyle="default"
         searchLabel="Add User"
-        selectUser={this.props.selectVendor}
+        selectUser={this.props.selectContact}
         type="find-user"
         visibleColumns={['name', 'code', 'description']}
         {...this.props}
@@ -56,11 +56,10 @@ class FindUser extends React.Component {
 }
 
 FindUser.propTypes = {
-  intialVendorId: PropTypes.string,
-  intialVendor: PropTypes.object,
+  intialContact: PropTypes.object,
   stripes: PropTypes.object,
   index: PropTypes.number,
-  selectVendor: PropTypes.func,
+  selectContact: PropTypes.func,
 };
 
 export default FindUser;

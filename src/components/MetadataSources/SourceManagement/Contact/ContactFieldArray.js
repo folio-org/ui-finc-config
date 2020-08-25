@@ -56,7 +56,7 @@ class ContactFieldArray extends React.Component {
     return items.map((contact, index) => (
       <EditCard
         key={index}
-        data-test-cc-number={index}
+        data-test-source-contact-number={index}
         deleteButtonTooltipText={<FormattedMessage id="ui-finc-config.source.contact.remove" />}
         header={<FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount: index + 1 }} />}
         onDelete={() => this.props.onDeleteField(index, contact)}
@@ -66,7 +66,7 @@ class ContactFieldArray extends React.Component {
           index={index}
           name={`${name}[${index}]`}
           intialContact={contact}
-          selectVendor={selectedContact => this.handleContactSelected(index, selectedContact)}
+          selectContact={selectedContact => this.handleContactSelected(index, selectedContact)}
         />
       </EditCard>
     ));

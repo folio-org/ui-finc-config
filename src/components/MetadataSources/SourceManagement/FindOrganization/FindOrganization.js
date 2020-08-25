@@ -32,7 +32,7 @@ class FindOrganization extends React.Component {
         }}
         searchButtonStyle="default"
         searchLabel="Add Organization"
-        selectVendor={this.props.selectVendor}
+        selectVendor={this.props.selectContact}
         type="find-organization"
         visibleColumns={['name', 'code', 'description']}
         {...this.props}
@@ -56,11 +56,10 @@ class FindOrganization extends React.Component {
 }
 
 FindOrganization.propTypes = {
-  intialVendorId: PropTypes.string,
-  intialVendor: PropTypes.object,
+  intialContact: PropTypes.object,
   stripes: PropTypes.object,
   index: PropTypes.number,
-  selectVendor: PropTypes.func,
+  selectContact: PropTypes.func,
 };
 
 export default FindOrganization;
