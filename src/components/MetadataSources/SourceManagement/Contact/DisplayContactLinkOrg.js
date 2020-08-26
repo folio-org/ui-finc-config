@@ -29,12 +29,8 @@ class DisplayContactLinkOrg extends React.Component {
   };
 
   getContactForOrganization = (contact, contactId) => {
-    if (contact.type === 'contact' && this.props.resources.org && this.props.resources.org.failed) {
-      if (contact.name) {
-        return contact.name;
-      } else {
-        return '-';
-      }
+    if (contact.type === 'contact' && this.props.resources.org && this.props.resources.org.failed && contact.name) {
+      return contact.name;
     } else {
       return (
         <React.Fragment>

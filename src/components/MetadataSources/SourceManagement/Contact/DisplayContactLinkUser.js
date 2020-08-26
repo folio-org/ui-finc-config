@@ -29,12 +29,8 @@ class DisplayContactLinkUser extends React.Component {
   };
 
   getContactForUser = (contact, contactId) => {
-    if (contact.type === 'user' && this.props.resources.user && this.props.resources.user.failed) {
-      if (contact.name) {
-        return contact.name;
-      } else {
-        return '-';
-      }
+    if (contact.type === 'user' && this.props.resources.user && this.props.resources.user.failed && contact.name) {
+      return contact.name;
     } else {
       return (
         <React.Fragment>
