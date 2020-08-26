@@ -13,8 +13,20 @@ import {
 } from '@folio/stripes/components';
 
 import ContactFieldArray from './Contact/ContactFieldArray';
+import FindOrganization from './FindOrganization/FindOrganization';
+import BasicCss from '../../BasicStyle.css';
 
 class SourceManagementForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const intialOrganization = props.initialValues.organization || {};
+
+    this.state = {
+      organization: intialOrganization,
+    };
+  }
+
   render() {
     const { expanded, onToggle, accordionId } = this.props;
 
@@ -25,6 +37,16 @@ class SourceManagementForm extends React.Component {
         onToggle={onToggle}
         open={expanded}
       >
+        <div className={BasicCss.addMarginBottom}>
+          {/* Plugin has to be inside of Field, otherwise pristine is not working */}
+          <Field
+            component={FindOrganization}
+            name="organization"
+            intialVendor={this.state.organization}
+            stripes={this.props.stripes}
+            {...this.props}
+          />
+        </div>
         <FieldArray
           component={ContactFieldArray}
           // add name to the array-field, which should be changed
@@ -63,8 +85,12 @@ class SourceManagementForm extends React.Component {
 SourceManagementForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
-  initialValues: PropTypes.object,
+  initialValues: PropTypes.shape({
+    organization: PropTypes.object
+  }),
+  // initialValues: PropTypes.object,
   onToggle: PropTypes.func,
+  stripes: PropTypes.object,
 };
 
 export default SourceManagementForm;

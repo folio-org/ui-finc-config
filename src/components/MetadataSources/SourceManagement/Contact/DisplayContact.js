@@ -9,7 +9,7 @@ import {
   Row,
 } from '@folio/stripes/components';
 
-import DisplayContactLinkOrg from './DisplayContactLinkOrg';
+import DisplayContactLinkContact from './DisplayContactLinkContact';
 import DisplayContactLinkUser from './DisplayContactLinkUser';
 
 class DisplayContact extends React.Component {
@@ -35,7 +35,7 @@ class DisplayContact extends React.Component {
     } else if (contact.type === 'contact') {
       return (
         <React.Fragment>
-          <DisplayContactLinkOrg
+          <DisplayContactLinkContact
             contact={contact}
             contactId={contactId}
           />

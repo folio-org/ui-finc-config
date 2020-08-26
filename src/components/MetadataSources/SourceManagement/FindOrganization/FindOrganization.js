@@ -1,27 +1,78 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
+  Col,
   Label,
   Row,
 } from '@folio/stripes/components';
 import { Pluggable } from '@folio/stripes/core';
 
 import BasicCss from '../../../BasicStyle.css';
+import css from './OrganizationView.css';
 
 class FindOrganization extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const o = props.intialVendor || {};
+
+    this.state = {
+      vendor: {
+        id: o.id,
+        name: o.name,
+      },
+    };
+    this.inputVendorId = o.id;
+    this.inputVendorName = o.name;
+  }
+
+  selectVendor = (o) => {
+    this.props.form.mutators.setOrganization({
+      id: o.id,
+      name: o.name,
+    });
+
+    this.setState(() => {
+      return { vendor: {
+        id: o.id,
+        name: o.name
+      } };
+    });
+  }
+
+  renderVendorName = (vendor) => {
+    if (_.isEmpty(vendor.id)) {
+      return null;
+    }
+
+    const name = _.isEmpty(vendor.name) ?
+      '-' :
+      <div>{vendor.name}</div>;
+
+    return (
+      <div
+        className={`${css.section} ${css.active}`}
+        name="organizationName"
+      >
+        <div>{name}</div>
+      </div>);
+  }
+
   render() {
     const disableRecordCreation = true;
+    const vendorName = this.renderVendorName(this.state.vendor);
     const buttonProps = { 'marginBottom0': true };
     const pluggable =
       <Pluggable
         aria-haspopup="true"
         buttonProps={buttonProps}
         columnMapping={this.columnMapping}
-        dataKey="contacts"
+        dataKey="vendor"
         disableRecordCreation={disableRecordCreation}
-        id={`clickable-find-organization ${this.props.index}`}
+        id="clickable-find-organization"
         marginTop0
         onCloseModal={(modalProps) => {
           modalProps.parentMutator.query.update({
@@ -31,8 +82,8 @@ class FindOrganization extends React.Component {
           });
         }}
         searchButtonStyle="default"
-        searchLabel="Add Organization"
-        selectVendor={this.props.selectContact}
+        searchLabel="Organization look-up"
+        selectVendor={this.selectVendor}
         type="find-organization"
         visibleColumns={['name', 'code', 'description']}
         {...this.props}
@@ -48,7 +99,12 @@ class FindOrganization extends React.Component {
           </Label>
         </Row>
         <Row>
-          { pluggable }
+          <Col xs={4}>
+            { pluggable }
+          </Col>
+          <Col xs={4}>
+            { vendorName }
+          </Col>
         </Row>
       </React.Fragment>
     );
@@ -56,10 +112,14 @@ class FindOrganization extends React.Component {
 }
 
 FindOrganization.propTypes = {
-  intialContact: PropTypes.object,
+  intialVendorId: PropTypes.string,
+  intialVendor: PropTypes.object,
   stripes: PropTypes.object,
-  index: PropTypes.number,
-  selectContact: PropTypes.func,
+  form: PropTypes.shape({
+    mutators: PropTypes.shape({
+      setOrganization: PropTypes.func,
+    }),
+  }),
 };
 
 export default FindOrganization;

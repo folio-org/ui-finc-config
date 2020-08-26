@@ -6,11 +6,11 @@ import { stripesConnect } from '@folio/stripes/core';
 
 import urls from '../../../DisplayUtils/urls';
 
-class DisplayContactLinkOrg extends React.Component {
+class DisplayContactLinkContact extends React.Component {
   static manifest = Object.freeze({
     org: {
       type: 'okapi',
-      path: 'organizations-storage/organizations/!{contactId}',
+      path: 'organizations-storage/contacts/!{contactId}',
       throwErrors: false
     },
     query: {},
@@ -28,14 +28,14 @@ class DisplayContactLinkOrg extends React.Component {
     contactId: PropTypes.string,
   };
 
-  getContactForOrganization = (contact, contactId) => {
+  getContactForContact = (contact, contactId) => {
     if (contact.type === 'contact' && this.props.resources.org && this.props.resources.org.failed && contact.name) {
       return contact.name;
     } else {
       return (
         <React.Fragment>
           <Link to={{
-            pathname: `${urls.organizationView(contactId)}`,
+            pathname: `${urls.contactView(contactId)}`,
           }}
           >
             {contact.name}
@@ -47,7 +47,7 @@ class DisplayContactLinkOrg extends React.Component {
 
   render() {
     const { contact, contactId } = this.props;
-    const contactNameWithLink = this.getContactForOrganization(contact, contactId);
+    const contactNameWithLink = this.getContactForContact(contact, contactId);
 
     return (
       <React.Fragment>
@@ -57,4 +57,4 @@ class DisplayContactLinkOrg extends React.Component {
   }
 }
 
-export default stripesConnect(DisplayContactLinkOrg);
+export default stripesConnect(DisplayContactLinkContact);
