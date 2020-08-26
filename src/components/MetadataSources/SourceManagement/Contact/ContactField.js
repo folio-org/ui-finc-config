@@ -11,7 +11,7 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-import FindOrganization from '../FindOrganization/FindOrganization';
+import FindContact from '../FindContact/FindContact';
 import FindUser from '../FindUser/FindUser';
 import { Required } from '../../../DisplayUtils/Validate';
 
@@ -32,7 +32,7 @@ export default class ContactField extends React.Component {
     const intialContact = props.intialContact || {};
 
     this.state = {
-      organization: intialContact,
+      contact: intialContact,
     };
   }
 
@@ -58,10 +58,10 @@ export default class ContactField extends React.Component {
         <Row>
           <Col xs={5}>
             <Field
-              component={FindOrganization}
+              component={FindContact}
               intialContact={this.state.organization}
               index={index}
-              name="contacts organization"
+              name="contacts contact"
               selectContact={this.props.selectContact}
               {...this.props}
             />
@@ -72,7 +72,7 @@ export default class ContactField extends React.Component {
           <Col xs={5}>
             <Field
               component={FindUser}
-              intialContact={this.state.organization}
+              intialContact={this.state.contact}
               index={index}
               name="contacts user"
               selectContact={this.props.selectContact}
