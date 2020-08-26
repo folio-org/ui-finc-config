@@ -2,8 +2,6 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Row } from '@folio/stripes/components';
-
 import DisplayContact from './DisplayContact';
 
 class DisplayContactsArray extends React.Component {
@@ -24,15 +22,16 @@ class DisplayContactsArray extends React.Component {
       const fields = Array.from(metadataSource.contacts);
 
       return (
-        <Row>
+        <React.Fragment>
           {fields.map((elem, index) => (
             <DisplayContact
               contact={elem}
               contactIndex={index}
               contactId={elem.externalId}
+              key={index}
             />
           ))}
-        </Row>
+        </React.Fragment>
       );
     }
   }

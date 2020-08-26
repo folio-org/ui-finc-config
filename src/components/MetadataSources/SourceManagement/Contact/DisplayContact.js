@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
 
 import {
   Card,
@@ -9,31 +8,12 @@ import {
   KeyValue,
   Row,
 } from '@folio/stripes/components';
-import { stripesConnect } from '@folio/stripes/core';
 
-import urls from '../../../DisplayUtils/urls';
+import DisplayContactLinkOrg from './DisplayContactLinkOrg';
+import DisplayContactLinkUser from './DisplayContactLinkUser';
 
 class DisplayContact extends React.Component {
-  static manifest = Object.freeze({
-    org: {
-      type: 'okapi',
-      path: 'organizations-storage/organizations/!{contactId}',
-      throwErrors: false
-    },
-    user: {
-      type: 'okapi',
-      path: 'users/!{contactId}',
-      throwErrors: false
-    },
-    query: {},
-  });
-
   static propTypes = {
-    resources: PropTypes.shape({
-      org: PropTypes.object,
-      user: PropTypes.object,
-      failed: PropTypes.object,
-    }).isRequired,
     stripes: PropTypes.shape({
       okapi: PropTypes.object
     }),
@@ -42,34 +22,23 @@ class DisplayContact extends React.Component {
     contactId: PropTypes.string,
   };
 
-  getContactAsLink = (contact, contactId) => {
-    if ((contact.type === 'contact' && this.props.resources.org && this.props.resources.org.failed) ||
-    (contact.type === 'user' && this.props.resources.user && this.props.resources.user.failed)) {
-      if (contact.name) {
-        return contact.name;
-      } else {
-        return '-';
-      }
+  getContactLink(contact, contactId) {
+    if (contact.type === 'user') {
+      return (
+        <React.Fragment>
+          <DisplayContactLinkUser
+            contact={contact}
+            contactId={contactId}
+          />
+        </React.Fragment>
+      );
     } else if (contact.type === 'contact') {
       return (
         <React.Fragment>
-          <Link to={{
-            pathname: `${urls.organizationView(contactId)}`,
-          }}
-          >
-            {contact.name}
-          </Link>
-        </React.Fragment>
-      );
-    } else if (contact.type === 'user') {
-      return (
-        <React.Fragment>
-          <Link to={{
-            pathname: `${urls.userView(contactId)}`,
-          }}
-          >
-            {contact.name}
-          </Link>
+          <DisplayContactLinkOrg
+            contact={contact}
+            contactId={contactId}
+          />
         </React.Fragment>
       );
     }
@@ -78,38 +47,6 @@ class DisplayContact extends React.Component {
 
   render() {
     const { contact, contactIndex, contactId } = this.props;
-
-    // let orgValue;
-    // if ((contact.type === 'contact' && this.props.resources.org && this.props.resources.org.failed) ||
-    //     (contact.type === 'user' && this.props.resources.user && this.props.resources.user.failed)) {
-    //   if (contact.name) {
-    //     orgValue = contact.name;
-    //   } else {
-    //     orgValue = '-';
-    //   }
-    // } else if (contact.type === 'contact') {
-    //   orgValue = (
-    //     <React.Fragment>
-    //       <Link to={{
-    //         pathname: `${urls.organizationView(contactId)}`,
-    //       }}
-    //       >
-    //         {contact.name}
-    //       </Link>
-    //     </React.Fragment>
-    //   );
-    // } else if (contact.type === 'user') {
-    //   orgValue = (
-    //     <React.Fragment>
-    //       <Link to={{
-    //         pathname: `${urls.userView(contactId)}`,
-    //       }}
-    //       >
-    //         {contact.name}
-    //       </Link>
-    //     </React.Fragment>
-    //   );
-    // }
 
     return (
       <Card
@@ -137,8 +74,7 @@ class DisplayContact extends React.Component {
           <Col xs={6}>
             <KeyValue label={<FormattedMessage id="ui-finc-config.source.contact.name" />}>
               <span data-test-contact-name>
-                {/* {orgValue} */}
-                {this.getContactAsLink(contact, contactId)}
+                {this.getContactLink(contact, contactId)}
               </span>
             </KeyValue>
           </Col>
@@ -148,4 +84,4 @@ class DisplayContact extends React.Component {
   }
 }
 
-export default stripesConnect(DisplayContact);
+export default DisplayContact;
