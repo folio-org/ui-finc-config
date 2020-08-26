@@ -19,7 +19,7 @@ class FindContact extends React.Component {
         aria-haspopup="true"
         buttonProps={buttonProps}
         columnMapping={this.columnMapping}
-        dataKey="contacts"
+        dataKey="contact"
         disableRecordCreation={disableRecordCreation}
         id={`clickable-find-user ${this.props.index}`}
         marginTop0
@@ -32,7 +32,8 @@ class FindContact extends React.Component {
         }}
         searchButtonStyle="default"
         searchLabel="Add User"
-        selectUser={this.props.selectContact}
+        // selectUser={this.props.selectContact}
+        addContacts={this.props.selectContact}
         type="find-contact"
         visibleColumns={['name', 'code', 'description']}
         {...this.props}

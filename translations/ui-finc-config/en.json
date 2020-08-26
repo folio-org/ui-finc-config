@@ -20,6 +20,7 @@
   "source.label": "Name",
   "source.lastProcessed": "Last processed",
   "source.organization": "Organization",
+  "source.contact": "Contact",
   "source.user": "User",
   "source.status": "Implementation status",
   "source.solrShard": "Solar shard",
