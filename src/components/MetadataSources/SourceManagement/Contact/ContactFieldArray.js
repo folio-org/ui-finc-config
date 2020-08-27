@@ -28,25 +28,28 @@ class ContactFieldArray extends React.Component {
     items: [],
   }
 
-  handleContactSelected = (index, selectedContact = {}) => {
-    const orgName = _.get(selectedContact, 'name', '');
-    const userName = _.get(selectedContact.personal, 'lastName', '') + ', ' + _.get(selectedContact.personal, 'firstName', '');
-    let contactName = '';
-    let contactPlugin = '';
-    if (orgName !== '') {
-      // receiving name from organization-plugin
-      contactPlugin = 'contact';
-      contactName = orgName;
+  handleContactSelected = (index, selectedContact) => {
+    let cName = '';
+    let cId = '';
+    let cPlugin = '';
+
+    if (Array.isArray(selectedContact)) {
+      // receiving name from contact-plugin
+      // just get the first object of returning array
+      cPlugin = 'contact';
+      cId = _.get(selectedContact[0], 'id', '');
+      cName = _.get(selectedContact[0], 'lastName', '') + ', ' + _.get(selectedContact[0], 'firstName', '');
     } else if (_.get(selectedContact.personal, 'lastName', '') !== '') {
       // receiving name from user-plugin
-      contactPlugin = 'user';
-      contactName = userName;
+      cPlugin = 'user';
+      cId = _.get(selectedContact, 'id', '');
+      cName = _.get(selectedContact.personal, 'lastName', '') + ', ' + _.get(selectedContact.personal, 'firstName', '');
     }
 
     this.props.onUpdateField(index, {
-      externalId: selectedContact.id,
-      name: contactName,
-      type: contactPlugin,
+      externalId: cId,
+      name: cName,
+      type: cPlugin,
     });
   }
 

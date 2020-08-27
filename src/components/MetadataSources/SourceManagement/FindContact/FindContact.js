@@ -21,7 +21,7 @@ class FindContact extends React.Component {
         columnMapping={this.columnMapping}
         dataKey="contact"
         disableRecordCreation={disableRecordCreation}
-        id={`clickable-find-user ${this.props.index}`}
+        id={`clickable-find-contact ${this.props.index}`}
         marginTop0
         onCloseModal={(modalProps) => {
           modalProps.parentMutator.query.update({
@@ -31,8 +31,7 @@ class FindContact extends React.Component {
           });
         }}
         searchButtonStyle="default"
-        searchLabel="Add User"
-        // selectUser={this.props.selectContact}
+        searchLabel="Add contact"
         addContacts={this.props.selectContact}
         type="find-contact"
         visibleColumns={['name', 'code', 'description']}
