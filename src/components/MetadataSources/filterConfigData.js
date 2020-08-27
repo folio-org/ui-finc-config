@@ -22,6 +22,13 @@ const filterConfig = [
       { name: 'SLUB dswarm', cql: 'SLUB dswarm' },
       { name: 'SLUB DBoD', cql: 'SLUB DBoD' }
     ],
+  },
+  {
+    label: 'Contact',
+    name: 'contact',
+    cql: 'contacts=/@externalId',
+    operator: ' ',
+    values: [],
   }
 ];
 

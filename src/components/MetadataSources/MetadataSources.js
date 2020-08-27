@@ -46,6 +46,9 @@ class MetadataSources extends React.Component {
     children: PropTypes.object,
     contentData: PropTypes.arrayOf(PropTypes.object),
     disableRecordCreation: PropTypes.bool,
+    filterData: PropTypes.shape({
+      contacts: PropTypes.array,
+    }),
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
@@ -73,6 +76,7 @@ class MetadataSources extends React.Component {
 
   static defaultProps = {
     contentData: {},
+    filterData: {},
     searchString: '',
   }
 
@@ -275,7 +279,7 @@ class MetadataSources extends React.Component {
   }
 
   render() {
-    const { queryGetter, querySetter, onNeedMoreData, onSelectRow, selectedRecordId, source } = this.props;
+    const { queryGetter, querySetter, onNeedMoreData, onSelectRow, selectedRecordId, source, filterData } = this.props;
     const count = source ? source.totalCount() : 0;
     const query = queryGetter() || {};
     const sortOrder = query.sort || '';
@@ -373,6 +377,7 @@ class MetadataSources extends React.Component {
                         </Button>
                         <SourceFilters
                           activeFilters={activeFilters.state}
+                          filterData={filterData}
                           filterHandlers={getFilterHandlers()}
                         />
                       </form>
