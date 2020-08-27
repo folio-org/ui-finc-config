@@ -40,6 +40,12 @@ class SourcesRoute extends React.Component {
         staticFallback: { params: {} },
       },
     },
+    contacts: {
+      type: 'okapi',
+      records: 'contacts',
+      path: 'finc-config/contacts',
+      resourceShouldRefresh: true
+    },
     query: { initialValue: {} },
     resultCount: { initialValue: INITIAL_RESULT_COUNT },
   });
@@ -132,6 +138,9 @@ class SourcesRoute extends React.Component {
     return (
       <MetadataSources
         contentData={_.get(this.props.resources, 'sources.records', [])}
+        filterData={{
+          contacts: _.get(this.props.resources, 'contacts.records', []),
+        }}
         onNeedMoreData={this.handleNeedMoreData}
         queryGetter={this.queryGetter}
         querySetter={this.querySetter}
