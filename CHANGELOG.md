@@ -1,8 +1,9 @@
 # Change history for ui-finc-config
 
 ## 2.0.0 (IN PROGRESS)
-
 * Increment `@folio/stripes` to `v5.0` and `react-router` to `v5.2` (and, bugfix, move it to peer)
+
+## [1.6.0](https://github.com/folio-org/ui-finc-config/tree/v1.6.0) (2020-08-28)
 * Replace deprecated `babel-polyfill` with `core-js` and `regenerator-runtime`
 * Add navigation/link from finc-config to organizations app (UIFC-138)
 * Improve accessibility (UIFC-151)
