@@ -125,7 +125,7 @@ class MetadataSources extends React.Component {
   // generate url for record-details
   rowURL = (id) => {
     return `${urls.sourceView(id)}${this.props.searchString}`;
-    // NEED FILTER: "status.active,status.technical implementation,status.wish,status.negotiation"
+    // NEED FILTER: "status.active,status.technical implementation,status.request,status.negotiation"
   }
 
   // fade in/out of filter-pane
@@ -283,7 +283,7 @@ class MetadataSources extends React.Component {
     return (
       <div data-test-sources>
         <SearchAndSortQuery
-          // NEED FILTER: {"status":["active","implementation","wish"]}
+          // NEED FILTER: {"status":["active","implementation","request"]}
           initialFilterState={this.state.storedFilter.state}
           initialSearchState={this.getCombinedSearch()}
           initialSortState={{ sort: 'label' }}

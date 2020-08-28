@@ -47,11 +47,11 @@ describe('Edit Source', () => {
   describe('implementationStatus can be changed', () => {
     beforeEach(async () => {
       await editSourcePage.implementationStatusSelect.select('Impossible');
-      await editSourcePage.implementationStatusSelect.select('Wish');
+      await editSourcePage.implementationStatusSelect.select('Request');
     });
 
-    it('implementationStatus is changed to "Wish"', () => {
-      expect(editSourcePage.implementationStatusSelect.value).to.be.equal('wish');
+    it('implementationStatus is changed to "Request"', () => {
+      expect(editSourcePage.implementationStatusSelect.value).to.be.equal('request');
     });
   });
 
@@ -71,7 +71,7 @@ describe('Edit Source', () => {
 
     beforeEach(async function () {
       await editSourcePage.sourceName.fill(TEST_NAME);
-      await editSourcePage.implementationStatusSelect.select('Wish');
+      await editSourcePage.implementationStatusSelect.select('Request');
       await editSourcePage.saveSourceBtn.click();
     });
 
