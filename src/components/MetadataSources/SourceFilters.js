@@ -59,7 +59,7 @@ class SourceFilters extends React.Component {
     return null;
   }
 
-  renderCheckboxFilter = (key, props) => {
+  renderCheckboxFilter = (key) => {
     const { activeFilters } = this.props;
     const groupFilters = activeFilters[key] || [];
 
@@ -71,7 +71,7 @@ class SourceFilters extends React.Component {
         label={<FormattedMessage id={`ui-finc-config.source.${key}`} />}
         onClearFilter={() => { this.props.filterHandlers.clearGroup(key); }}
         separator={false}
-        {...props}
+        {...this.props}
       >
         <CheckboxFilter
           dataOptions={this.state[key]}
@@ -86,8 +86,8 @@ class SourceFilters extends React.Component {
   render() {
     return (
       <AccordionSet>
-        {this.renderCheckboxFilter('status', 'Implementation status')}
-        {this.renderCheckboxFilter('solrShard', 'Solar shard')}
+        {this.renderCheckboxFilter('status')}
+        {this.renderCheckboxFilter('solrShard')}
       </AccordionSet>
     );
   }

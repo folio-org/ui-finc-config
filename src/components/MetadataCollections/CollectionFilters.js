@@ -71,7 +71,7 @@ class CollectionFilters extends React.Component {
     return null;
   }
 
-  renderCheckboxFilter = (key, props) => {
+  renderCheckboxFilter = (key) => {
     const { activeFilters } = this.props;
     const groupFilters = activeFilters[key] || [];
 
@@ -83,7 +83,7 @@ class CollectionFilters extends React.Component {
         label={<FormattedMessage id={`ui-finc-config.collection.${key}`} />}
         onClearFilter={() => { this.props.filterHandlers.clearGroup(key); }}
         separator={false}
-        {...props}
+        {...this.props}
       >
         <CheckboxFilter
           dataOptions={this.state[key]}
@@ -128,10 +128,10 @@ class CollectionFilters extends React.Component {
   render() {
     return (
       <AccordionSet>
-        {this.renderMetadataSourceFilter('mdSource', 'Source')}
-        {this.renderCheckboxFilter('metadataAvailable', 'Metadata available')}
-        {this.renderCheckboxFilter('usageRestricted', 'Usage restricted')}
-        {this.renderCheckboxFilter('freeContent', 'Free content')}
+        {this.renderMetadataSourceFilter('mdSource')}
+        {this.renderCheckboxFilter('metadataAvailable')}
+        {this.renderCheckboxFilter('usageRestricted')}
+        {this.renderCheckboxFilter('freeContent')}
       </AccordionSet>
     );
   }
