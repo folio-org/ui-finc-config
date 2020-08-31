@@ -56,7 +56,6 @@ class FindContact extends React.Component {
 }
 
 FindContact.propTypes = {
-  intialContact: PropTypes.object,
   stripes: PropTypes.object,
   index: PropTypes.number,
   selectContact: PropTypes.func,

@@ -28,12 +28,6 @@ export default class ContactField extends React.Component {
   constructor(props) {
     super(props);
     this.inputRef = React.createRef();
-
-    const intialContact = props.intialContact || {};
-
-    this.state = {
-      contact: intialContact,
-    };
   }
 
   componentDidMount() {
@@ -59,7 +53,6 @@ export default class ContactField extends React.Component {
           <Col xs={5}>
             <Field
               component={FindContact}
-              intialContact={this.state.organization}
               index={index}
               name="contacts contact"
               selectContact={this.props.selectContact}
@@ -72,7 +65,6 @@ export default class ContactField extends React.Component {
           <Col xs={5}>
             <Field
               component={FindUser}
-              intialContact={this.state.contact}
               index={index}
               name="contacts user"
               selectContact={this.props.selectContact}
@@ -83,13 +75,13 @@ export default class ContactField extends React.Component {
         <Row>
           <Col xs={12}>
             <Field
-              ariaLabel="Add organization"
+              ariaLabel="Add contact"
               component={TextField}
               fullWidth
               id={`contact-name-${index}`}
               label={<FormattedMessage id="ui-finc-config.source.contact.name" />}
               name={`${name}.name`}
-              placeholder="Select a organization or a user"
+              placeholder="Select a contact or a user"
               readOnly
               required
               validate={Required}

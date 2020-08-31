@@ -88,7 +88,6 @@ SourceManagementForm.propTypes = {
   initialValues: PropTypes.shape({
     organization: PropTypes.object
   }),
-  // initialValues: PropTypes.object,
   onToggle: PropTypes.func,
   stripes: PropTypes.object,
 };
