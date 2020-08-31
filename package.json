@@ -54,7 +54,8 @@
     "prop-types": "^15.6.0",
     "react-final-form": "^6.3.5",
     "react-final-form-arrays": "^3.1.1",
-    "react-router-prop-types": "^1.0.4"
+    "react-router-prop-types": "^1.0.4",
+    "@folio/stripes-erm-components": "^4.0.0"
   },
   "peerDependencies": {
     "@folio/stripes": "^5.0.0",
@@ -65,6 +66,9 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "*"
+  },
+  "optionalDependencies": {
+    "@folio/plugin-find-contact": "*"
   },
   "stripes": {
     "actsAs": [
@@ -79,8 +83,13 @@
       "finc-config/metadata-sources": "2.0",
       "finc-config/metadata-collections": "2.0",
       "finc-config/isils": "1.0",
-      "organizations-storage.organizations": "3.0"
+      "organizations-storage.organizations": "3.0",
+      "organizations-storage.contacts": "2.0",
+      "users": "15.0"
     },
+    "stripesDeps": [
+      "@folio/stripes-erm-components"
+    ],
     "permissionSets": [
       {
         "permissionName": "module.finc-config.enabled",
@@ -103,7 +112,8 @@
           "module.finc-config.enabled",
           "fincConfig.view",
           "organizations-storage.organizations.collection.get",
-          "organizations-storage.organizations.item.get"
+          "organizations-storage.organizations.item.get",
+          "organizations-storage.contacts.all"
         ],
         "visible": true
       }

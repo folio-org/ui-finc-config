@@ -7,24 +7,22 @@ import { FormattedMessage } from 'react-intl';
 import {
   Accordion,
   Col,
-  Label,
   Row,
   TextField,
 } from '@folio/stripes/components';
 
-import DisplayContact from '../../DisplayUtils/DisplayContact';
+import ContactFieldArray from './Contact/ContactFieldArray';
 import FindOrganization from './FindOrganization/FindOrganization';
-
 import BasicCss from '../../BasicStyle.css';
 
 class SourceManagementForm extends React.Component {
   constructor(props) {
     super(props);
 
-    const intialVendor = props.initialValues.organization || {};
+    const intialOrganization = props.initialValues.organization || {};
 
     this.state = {
-      organization: intialVendor,
+      organization: intialOrganization,
     };
   }
 
@@ -48,78 +46,11 @@ class SourceManagementForm extends React.Component {
             {...this.props}
           />
         </div>
-        {/* CONTACTS INTERNAL is repeatable */}
-        <div className={BasicCss.addMarginBottomAndTop}>
-          <Row>
-            <Label className={BasicCss.styleForFormLabel}>
-              <FormattedMessage id="ui-finc-config.source.contacts.internal" />
-            </Label>
-          </Row>
-          <Row>
-            <Col xs={4}>
-              <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.source.contact.name" />
-              </Label>
-            </Col>
-            <Col xs={4}>
-              <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.source.contact.role" />
-              </Label>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <FormattedMessage id="ui-finc-config.source.contacts.internal">
-                {ariaLabel => (
-                  <FieldArray
-                    ariaLabel={ariaLabel}
-                    component={DisplayContact}
-                    id="display_contact_internal"
-                    // add name to the array-field, which should be changed
-                    name="contacts.internal"
-                    {...this.props}
-                  />
-                )}
-              </FormattedMessage>
-            </Col>
-          </Row>
-        </div>
-        {/* CONTACTS EXTERNAL is repeatable */}
-        <div className={BasicCss.addMarginBottomAndTop}>
-          <Row>
-            <Label className={BasicCss.styleForFormLabel}>
-              <FormattedMessage id="ui-finc-config.source.contacts.external" />
-            </Label>
-          </Row>
-          <Row>
-            <Col xs={4}>
-              <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.source.contact.name" />
-              </Label>
-            </Col>
-            <Col xs={4}>
-              <Label className={BasicCss.styleForFormLabel}>
-                <FormattedMessage id="ui-finc-config.source.contact.role" />
-              </Label>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <FormattedMessage id="ui-finc-config.source.contacts.external">
-                {ariaLabel => (
-                  <FieldArray
-                    ariaLabel={ariaLabel}
-                    component={DisplayContact}
-                    id="display_contact_external"
-                    // add name to the array-field, which should be changed
-                    name="contacts.external"
-                    {...this.props}
-                  />
-                )}
-              </FormattedMessage>
-            </Col>
-          </Row>
-        </div>
+        <FieldArray
+          component={ContactFieldArray}
+          // add name to the array-field, which should be changed
+          name="contacts"
+        />
         <Row>
           <Col xs={8}>
             <Field
@@ -151,7 +82,6 @@ class SourceManagementForm extends React.Component {
 
 SourceManagementForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
-  change: PropTypes.func,
   expanded: PropTypes.bool,
   initialValues: PropTypes.shape({
     organization: PropTypes.object

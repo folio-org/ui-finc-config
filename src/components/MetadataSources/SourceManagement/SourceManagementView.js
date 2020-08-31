@@ -8,7 +8,6 @@ import {
   Col,
   Headline,
   KeyValue,
-  MultiColumnList,
   Row,
 } from '@folio/stripes/components';
 import { Link } from 'react-router-dom';
@@ -18,6 +17,7 @@ import { stripesConnect } from '@folio/stripes/core';
 import BasicCss from '../../BasicStyle.css';
 import css from './SourceManagement.css';
 import urls from '../../DisplayUtils/urls';
+import DisplayContactsArray from './Contact/DisplayContactsArray';
 
 class SourceManagementView extends React.Component {
   static manifest = Object.freeze({
@@ -36,32 +36,8 @@ class SourceManagementView extends React.Component {
       org: PropTypes.object,
       failed: PropTypes.object,
     }).isRequired,
+    stripes: PropTypes.object,
   };
-
-  renderContacts = (type) => {
-    const { metadataSource } = this.props;
-
-    if (!metadataSource) {
-      return 'no values';
-    } else {
-      return (
-        <MultiColumnList
-          columnWidths={{
-            name: '46%',
-            role: '46%'
-          }}
-          columnMapping={{
-            name: <FormattedMessage id="ui-finc-config.source.contact.name" />,
-            role: <FormattedMessage id="ui-finc-config.source.contact.role" />
-          }}
-          contentData={_.get(metadataSource.contacts, type, [])}
-          interactive={false}
-          isEmptyMessage={`no ${type} contact`}
-          visibleColumns={['name', 'role']}
-        />
-      );
-    }
-  }
 
   render() {
     const { metadataSource, id } = this.props;
@@ -108,25 +84,19 @@ class SourceManagementView extends React.Component {
               value={orgValue}
             />
           </Row>
+          <Row>
+            <Headline
+              className={BasicCss.styleForViewHeadline}
+              size="medium"
+            >
+              <FormattedMessage id="ui-finc-config.source.contact.title" />
+            </Headline>
+          </Row>
           <Row className={css.addMarginForContacts}>
-            <Col xs={6}>
-              <Headline
-                className={BasicCss.styleForViewHeadline}
-                size="medium"
-              >
-                <FormattedMessage id="ui-finc-config.source.contacts.internal" />
-              </Headline>
-              { this.renderContacts('internal') }
-            </Col>
-            <Col xs={6}>
-              <Headline
-                className={BasicCss.styleForViewHeadline}
-                size="medium"
-              >
-                <FormattedMessage id="ui-finc-config.source.contacts.external" />
-              </Headline>
-              { this.renderContacts('external') }
-            </Col>
+            <DisplayContactsArray
+              metadataSource={metadataSource}
+              stripes={this.props.stripes}
+            />
           </Row>
           <Row>
             <KeyValue

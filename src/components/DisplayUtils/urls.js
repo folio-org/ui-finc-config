@@ -12,6 +12,8 @@ const urls = {
   showAllCollections: (sourceId) => `/finc-config/metadata-collections?filters=mdSource.${sourceId},metadataAvailable.yes,metadataAvailable.no,metadataAvailable.undetermined,usageRestricted.yes,usageRestricted.no,freeContent.yes,freeContent.no,freeContent.undetermined,&query=`,
 
   organizationView: id => `/organizations/view/${id}`,
+  contactView: id => `/organizations/contacts/details/${id}/view`,
+  userView: id => `/users/preview/${id}`,
 };
 
 export default urls;
