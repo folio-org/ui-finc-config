@@ -115,4 +115,7 @@ export default function config() {
   this.get('/finc-config/tiny-metadata-sources', ({ tinyMetadataSources }) => {
     return tinyMetadataSources.all();
   });
+  this.get('/finc-config/contacts', ({ contacts }) => {
+    return contacts.all();
+  });
 }

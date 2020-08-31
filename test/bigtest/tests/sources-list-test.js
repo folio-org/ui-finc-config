@@ -9,6 +9,7 @@ import setupApplication from '../helpers/setup-application';
 import SourcesList from '../interactors/sources-list';
 
 const SOURCE_COUNT = 25;
+const CONTACT_COUNT = 10;
 
 describe('Sources List', () => {
   setupApplication();
@@ -16,6 +17,7 @@ describe('Sources List', () => {
   const sourcesList = new SourcesList();
 
   beforeEach(async function () {
+    this.server.createList('contact', CONTACT_COUNT);
     this.server.createList('finc-config-metadata-source', SOURCE_COUNT);
     this.visit('/finc-config/metadata-sources?filters=status.Active');
     await sourcesList.whenLoaded();
