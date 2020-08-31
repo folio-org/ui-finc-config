@@ -31,7 +31,7 @@ class FindUser extends React.Component {
           });
         }}
         searchButtonStyle="default"
-        searchLabel="Add User"
+        searchLabel="Add user"
         selectUser={this.props.selectContact}
         type="find-user"
         visibleColumns={['name', 'code', 'description']}
