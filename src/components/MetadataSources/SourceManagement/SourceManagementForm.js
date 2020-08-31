@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
@@ -51,7 +50,6 @@ class SourceManagementForm extends React.Component {
           component={ContactFieldArray}
           // add name to the array-field, which should be changed
           name="contacts"
-          intialContacts={_.get(this.props.initialValues, 'contacts', [])}
         />
         <Row>
           <Col xs={8}>

@@ -68,7 +68,6 @@ class ContactFieldArray extends React.Component {
           component={ContactField}
           index={index}
           name={`${name}[${index}]`}
-          intialContact={contact}
           selectContact={selectedContact => this.handleContactSelected(index, selectedContact)}
         />
       </EditCard>

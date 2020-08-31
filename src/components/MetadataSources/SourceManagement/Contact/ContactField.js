@@ -21,7 +21,6 @@ export default class ContactField extends React.Component {
     input: PropTypes.shape({
       name: PropTypes.string.isRequired,
     }).isRequired,
-    intialContact: PropTypes.object,
     selectContact: PropTypes.func.isRequired,
   }
 
