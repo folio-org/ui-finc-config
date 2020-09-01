@@ -7,6 +7,7 @@ import {
   Headline,
   KeyValue,
   List,
+  NoValue,
   Row
 } from '@folio/stripes/components';
 
@@ -60,7 +61,7 @@ class SourceTechnicalView extends React.Component {
 
   render() {
     const { metadataSource, id } = this.props;
-    const accessUrlValue = _.get(metadataSource, 'accessUrl', '-');
+    const accessUrlValue = _.get(metadataSource, 'accessUrl', <NoValue />);
     const accessUrlValueFormatter = <a href={accessUrlValue} target="_blank" rel="noopener noreferrer">{accessUrlValue}</a>;
 
     return (
@@ -69,7 +70,7 @@ class SourceTechnicalView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.source.lastProcessed" />}
-              value={_.get(metadataSource, 'lastProcessed', '-')}
+              value={_.get(metadataSource, 'lastProcessed', <NoValue />)}
             />
           </Row>
           {/* TICKET is repeatable */}
@@ -93,13 +94,13 @@ class SourceTechnicalView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.source.id" />}
-              value={_.get(metadataSource, 'sourceId', '-')}
+              value={_.get(metadataSource, 'sourceId', <NoValue />)}
             />
           </Row>
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.source.solrShard" />}
-              value={_.get(metadataSource, 'solrShard', '-')}
+              value={_.get(metadataSource, 'solrShard', <NoValue />)}
             />
           </Row>
           {/* DELIVERYMETHODS is repeatable */}
@@ -129,7 +130,7 @@ class SourceTechnicalView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.source.updateRhythm" />}
-              value={_.get(metadataSource, 'updateRhythm', '-')}
+              value={_.get(metadataSource, 'updateRhythm', <NoValue />)}
             />
           </Row>
           {/* INFERIORTO is repeatable */}

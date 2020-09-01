@@ -7,6 +7,7 @@ import {
   Headline,
   KeyValue,
   List,
+  NoValue,
   Row
 } from '@folio/stripes/components';
 
@@ -47,13 +48,13 @@ class CollectionManagementView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.metadataAvailable" />}
-              value={_.get(metadataCollection, 'metadataAvailable', '-')}
+              value={_.get(metadataCollection, 'metadataAvailable', <NoValue />)}
             />
           </Row>
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.usageRestricted" />}
-              value={_.get(metadataCollection, 'usageRestricted', '-')}
+              value={_.get(metadataCollection, 'usageRestricted', <NoValue />)}
             />
           </Row>
           <Row>
@@ -70,25 +71,25 @@ class CollectionManagementView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.freeContent" />}
-              value={_.get(metadataCollection, 'freeContent', '-')}
+              value={_.get(metadataCollection, 'freeContent', <NoValue />)}
             />
           </Row>
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.lod.publication" />}
-              value={_.get(metadataCollection, 'lod.publication', '-')}
+              value={_.get(metadataCollection, 'lod.publication', <NoValue />)}
             />
           </Row>
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.lod.note" />}
-              value={_.get(metadataCollection, 'lod.note', '-')}
+              value={_.get(metadataCollection, 'lod.note', <NoValue />)}
             />
           </Row>
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.generalNotes" />}
-              value={_.get(metadataCollection, 'generalNotes', '-')}
+              value={_.get(metadataCollection, 'generalNotes', <NoValue />)}
             />
           </Row>
           <Row>
