@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import {
   Col,
   Label,
+  NoValue,
   Row,
 } from '@folio/stripes/components';
 import { Pluggable } from '@folio/stripes/core';
@@ -49,7 +50,7 @@ class FindOrganization extends React.Component {
     }
 
     const name = _.isEmpty(vendor.name) ?
-      '-' :
+      <NoValue /> :
       <div>{vendor.name}</div>;
 
     return (

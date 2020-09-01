@@ -106,7 +106,7 @@ class MetadataCollectionView extends React.Component {
 
   render() {
     const { record, isLoading } = this.props;
-    const label = _.get(record, 'label', '-');
+    const label = _.get(record, 'label', 'No LABEL');
 
     if (isLoading) return this.renderLoadingPane();
 

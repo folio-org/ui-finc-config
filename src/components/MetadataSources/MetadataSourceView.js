@@ -11,6 +11,7 @@ import {
   ExpandAllButton,
   Icon,
   Layout,
+  NoValue,
   Pane,
   PaneMenu,
   Row,
@@ -105,8 +106,8 @@ class MetadataSourceView extends React.Component {
 
   render() {
     const { record } = this.props;
-    const label = _.get(record, 'label', '-');
-    const organizationId = _.get(record, 'organization.id', '-');
+    const label = _.get(record, 'label', <NoValue />);
+    const organizationId = _.get(record, 'organization.id', 'No LABEL');
 
     return (
       <React.Fragment>

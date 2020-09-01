@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import {
   KeyValue,
+  NoValue,
   Row,
 } from '@folio/stripes/components';
 
@@ -15,23 +16,19 @@ class CollectionInfoView extends React.Component {
   static propTypes = {
     id: PropTypes.string,
     metadataCollection: PropTypes.object,
-    // sourceElement: PropTypes.object,
   };
 
   render() {
     const { metadataCollection, id } = this.props;
 
     // get id and name of the source out of the fields, saved in the current collection
-    const sourceId = _.get(metadataCollection, 'mdSource.id', '-');
-    const sourceName = _.get(metadataCollection, 'mdSource.name', '-');
-    // get the status of the source for setting filter in url out of the associated source
-    // const sourceStatus = _.get(this.props.sourceElement, 'mdSource.status', '-');
+    const sourceId = _.get(metadataCollection, 'mdSource.id', <NoValue />);
+    const sourceName = _.get(metadataCollection, 'mdSource.name', <NoValue />);
     // set the complete source link with name and status
     const sourceLink = (
       <React.Fragment>
         <Link to={{
           pathname: `${urls.sourceView(sourceId)}`,
-          // search: `?filters=status.${_.get(sourceElement, 'status')}`
         }}
         >
           {sourceName}
@@ -45,13 +42,13 @@ class CollectionInfoView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.label" />}
-              value={_.get(metadataCollection, 'label', '-')}
+              value={_.get(metadataCollection, 'label', <NoValue />)}
             />
           </Row>
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.description" />}
-              value={_.get(metadataCollection, 'description', '-')}
+              value={_.get(metadataCollection, 'description', <NoValue />)}
             />
           </Row>
           <Row>

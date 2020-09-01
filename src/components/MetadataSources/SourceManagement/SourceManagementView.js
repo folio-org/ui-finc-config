@@ -8,6 +8,7 @@ import {
   Col,
   Headline,
   KeyValue,
+  NoValue,
   Row,
 } from '@folio/stripes/components';
 import { Link } from 'react-router-dom';
@@ -41,15 +42,15 @@ class SourceManagementView extends React.Component {
 
   render() {
     const { metadataSource, id } = this.props;
-    const sourceId = _.get(metadataSource, 'id', '-');
-    const organization = _.get(this.props.metadataSource, 'organization', '-');
+    const sourceId = _.get(metadataSource, 'id', <NoValue />);
+    const organization = _.get(this.props.metadataSource, 'organization', <NoValue />);
 
     let orgValue;
     if (this.props.resources.org && this.props.resources.org.failed) {
       if (organization.name) {
         orgValue = organization.name;
       } else {
-        orgValue = '-';
+        orgValue = <NoValue />;
       }
     } else {
       orgValue = (
@@ -101,13 +102,13 @@ class SourceManagementView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.source.indexingLevel" />}
-              value={_.get(metadataSource, 'indexingLevel', '-')}
+              value={_.get(metadataSource, 'indexingLevel', <NoValue />)}
             />
           </Row>
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.source.generalNotes" />}
-              value={_.get(metadataSource, 'generalNotes', '-')}
+              value={_.get(metadataSource, 'generalNotes', <NoValue />)}
             />
           </Row>
         </div>
