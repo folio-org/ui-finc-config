@@ -12,18 +12,11 @@ import {
 } from '@folio/stripes/components';
 
 import { Required } from '../../DisplayUtils/Validate';
+import implementationStatusOptions from '../../DataOptions/implementationStatus';
 
 class SourceInfoForm extends React.Component {
   render() {
     const { expanded, onToggle, accordionId } = this.props;
-
-    const dataOptionsStatus = [
-      { value: 'active', label: 'Active' },
-      { value: 'request', label: 'Request' },
-      { value: 'implementation', label: 'Implementation' },
-      { value: 'closed', label: 'Closed' },
-      { value: 'impossible', label: 'Impossible' }
-    ];
 
     return (
       <Accordion
@@ -62,7 +55,7 @@ class SourceInfoForm extends React.Component {
           <Col xs={8}>
             <Field
               component={Select}
-              dataOptions={dataOptionsStatus}
+              dataOptions={implementationStatusOptions}
               fullWidth
               id="addsource_status"
               label={<FormattedMessage id="ui-finc-config.source.status" />}
