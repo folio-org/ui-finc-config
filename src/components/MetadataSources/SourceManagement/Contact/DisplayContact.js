@@ -48,10 +48,6 @@ class DisplayContact extends React.Component {
     return null;
   }
 
-  capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-
   render() {
     const { contact, contactIndex, contactId } = this.props;
     const contactRoleValue = _.get(contact, 'role', '');
@@ -59,7 +55,6 @@ class DisplayContact extends React.Component {
       (e) => e.value === contactRoleValue
     );
     const contactRoleLabel = _.get(dataWithcontactRoleValue, 'label', <NoValue />);
-    const contactType = this.capitalize(contact.type);
 
     return (
       <Card
@@ -73,7 +68,7 @@ class DisplayContact extends React.Component {
           <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-finc-config.source.contact.type" />}>
               <span data-test-contact-type>
-                {contactType}
+                {_.upperFirst(contact.type)}
               </span>
             </KeyValue>
           </Col>
