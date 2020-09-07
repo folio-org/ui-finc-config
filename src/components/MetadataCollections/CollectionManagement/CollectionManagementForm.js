@@ -18,6 +18,11 @@ import {
 import { Required } from '../../DisplayUtils/Validate';
 import PermittedForField from '../../DisplayUtils/PermittedForField';
 
+import metadataAvailableOptions from '../../DataOptions/metadataAvailable';
+import usageRestrictedOptions from '../../DataOptions/usageRestricted';
+import freeContentOptions from '../../DataOptions/freeContent';
+import lodPublicationOptions from '../../DataOptions/lodPublication';
+
 import BasicCss from '../../BasicStyle.css';
 
 let permittedIsRequired;
@@ -73,28 +78,6 @@ class CollectionManagementForm extends React.Component {
     const confirmationMessage = (
       <FormattedMessage id="ui-finc-config.collection.form.selectedUsageRestricted.confirmClearMessage" />
     );
-    const dataOptionsMetadataAvailable = [
-      { value: 'yes', label: 'Yes' },
-      { value: 'no', label: 'No' },
-      { value: 'undetermined', label: 'Undetermined' }
-    ];
-    const dataOptionsUsageRestricted = [
-      { value: 'yes', label: 'Yes' },
-      { value: 'no', label: 'No' }
-    ];
-    const dataOptionsFreeContent = [
-      { value: 'yes', label: 'Yes' },
-      { value: 'no', label: 'No' },
-      { value: 'undetermined', label: 'Undetermined' }
-    ];
-    const dataOptionsLodPublication = [
-      { value: 'permitted (interpreted)', label: 'Permitted (interpreted)' },
-      { value: 'permitted (explicit)', label: 'Permitted (explicit)' },
-      { value: 'permitted (explicit) under conditions', label: 'Permitted (explicit) under conditions' },
-      { value: 'prohibited (interpreted)', label: 'Prohibited (interpreted)' },
-      { value: 'prohibited (explicit)', label: 'Prohibited (explicit)' },
-      { value: 'silent', label: 'Silent' }
-    ];
 
     const usageRestricted = _.get(this.props.values, 'usageRestricted', '');
 
@@ -117,7 +100,7 @@ class CollectionManagementForm extends React.Component {
           <Col xs={8}>
             <Field
               component={Select}
-              dataOptions={dataOptionsMetadataAvailable}
+              dataOptions={metadataAvailableOptions}
               fullWidth
               id="addcollection_metadataAvailable"
               label={<FormattedMessage id="ui-finc-config.collection.metadataAvailable" />}
@@ -130,7 +113,7 @@ class CollectionManagementForm extends React.Component {
           <Col xs={8}>
             <Field
               component={Select}
-              dataOptions={dataOptionsUsageRestricted}
+              dataOptions={usageRestrictedOptions}
               fullWidth
               id="addcollection_usageRestricted"
               label={<FormattedMessage id="ui-finc-config.collection.usageRestricted" />}
@@ -170,7 +153,7 @@ class CollectionManagementForm extends React.Component {
           <Col xs={8}>
             <Field
               component={Select}
-              dataOptions={dataOptionsFreeContent}
+              dataOptions={freeContentOptions}
               fullWidth
               id="addcollection_freeContent"
               label={<FormattedMessage id="ui-finc-config.collection.freeContent" />}
@@ -183,7 +166,7 @@ class CollectionManagementForm extends React.Component {
           <Col xs={8}>
             <Field
               component={Select}
-              dataOptions={dataOptionsLodPublication}
+              dataOptions={lodPublicationOptions}
               fullWidth
               id="addcollection_lodpublication"
               label={<FormattedMessage id="ui-finc-config.collection.lod.publication" />}

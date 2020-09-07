@@ -13,6 +13,11 @@ import {
 
 import BasicCss from '../../BasicStyle.css';
 
+import metadataAvailableOptions from '../../DataOptions/metadataAvailable';
+import usageRestrictedOptions from '../../DataOptions/usageRestricted';
+import freeContentOptions from '../../DataOptions/freeContent';
+import lodPublicationOptions from '../../DataOptions/lodPublication';
+
 class CollectionManagementView extends React.Component {
   static propTypes = {
     id: PropTypes.string,
@@ -42,19 +47,43 @@ class CollectionManagementView extends React.Component {
   render() {
     const { metadataCollection, id } = this.props;
 
+    const metadataAvailableValue = _.get(metadataCollection, 'metadataAvailable', '');
+    const dataWithMetadataAvailableValue = metadataAvailableOptions.find(
+      (e) => e.value === metadataAvailableValue
+    );
+    const metadataAvailableLabel = _.get(dataWithMetadataAvailableValue, 'label', <NoValue />);
+
+    const usageRestrictedValue = _.get(metadataCollection, 'usageRestricted', '');
+    const dataWithUsageRestrictedValue = usageRestrictedOptions.find(
+      (e) => e.value === usageRestrictedValue
+    );
+    const usageRestrictedLabel = _.get(dataWithUsageRestrictedValue, 'label', <NoValue />);
+
+    const freeContentValue = _.get(metadataCollection, 'freeContent', '');
+    const dataWithFreeContentValue = freeContentOptions.find(
+      (e) => e.value === freeContentValue
+    );
+    const freeContentLabel = _.get(dataWithFreeContentValue, 'label', <NoValue />);
+
+    const lodPublicationValue = _.get(metadataCollection, 'lod.publication', '');
+    const dataWithLodPublicationValue = lodPublicationOptions.find(
+      (e) => e.value === lodPublicationValue
+    );
+    const lodPublicationLabel = _.get(dataWithLodPublicationValue, 'label', <NoValue />);
+
     return (
       <React.Fragment>
         <div id={id}>
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.metadataAvailable" />}
-              value={_.get(metadataCollection, 'metadataAvailable', <NoValue />)}
+              value={metadataAvailableLabel}
             />
           </Row>
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.usageRestricted" />}
-              value={_.get(metadataCollection, 'usageRestricted', <NoValue />)}
+              value={usageRestrictedLabel}
             />
           </Row>
           <Row>
@@ -71,13 +100,13 @@ class CollectionManagementView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.freeContent" />}
-              value={_.get(metadataCollection, 'freeContent', <NoValue />)}
+              value={freeContentLabel}
             />
           </Row>
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.collection.lod.publication" />}
-              value={_.get(metadataCollection, 'lod.publication', <NoValue />)}
+              value={lodPublicationLabel}
             />
           </Row>
           <Row>
