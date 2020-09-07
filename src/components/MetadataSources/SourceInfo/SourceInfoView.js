@@ -19,11 +19,11 @@ class SourceInfoView extends React.Component {
 
   render() {
     const { metadataSource, id } = this.props;
-    const iStatus = _.get(metadataSource, 'status', '');
-    const implementationStatus = implementationStatusOptions.find(
-      (e) => e.value === iStatus
+    const statusValue = _.get(metadataSource, 'status', '');
+    const dataWithStatusValue = implementationStatusOptions.find(
+      (e) => e.value === statusValue
     );
-    const implementationStatusLabel = _.get(implementationStatus, 'label', <NoValue />);
+    const statusLabel = _.get(dataWithStatusValue, 'label', <NoValue />);
 
     return (
       <React.Fragment>
@@ -43,7 +43,7 @@ class SourceInfoView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.source.status" />}
-              value={implementationStatusLabel}
+              value={statusLabel}
             />
           </Row>
         </div>
