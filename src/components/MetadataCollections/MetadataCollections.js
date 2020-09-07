@@ -16,6 +16,7 @@ import {
   Button,
   Icon,
   MultiColumnList,
+  NoValue,
   Pane,
   PaneMenu,
   Paneset,
@@ -29,6 +30,9 @@ import {
 import urls from '../DisplayUtils/urls';
 import CollectionFilters from './CollectionFilters';
 import FincNavigation from '../Navigation/FincNavigation';
+import metadataAvailableOptions from '../DataOptions/metadataAvailable';
+import usageRestrictedOptions from '../DataOptions/usageRestricted';
+import freeContentOptions from '../DataOptions/freeContent';
 
 const searchableIndexes = [
   { label: 'All', value: '', makeQuery: term => `(label="${term}*" or description="${term}*" or collectionId="${term}*")` },
@@ -90,13 +94,40 @@ class MetadataCollections extends React.Component {
     };
   }
 
+  getMetadataAvailableLabel(metadataAvailableValue) {
+    const dataWithMetadataAvailableValue = metadataAvailableOptions.find(
+      (e) => e.value === metadataAvailableValue
+    );
+    const metadataAvailableLabel = _.get(dataWithMetadataAvailableValue, 'label', <NoValue />);
+
+    return metadataAvailableLabel;
+  }
+
+  getUsageRestrictedLabel(usageRestrictedValue) {
+    const dataWithUsageRestrictedValue = usageRestrictedOptions.find(
+      (e) => e.value === usageRestrictedValue
+    );
+    const usageRestrictedLabel = _.get(dataWithUsageRestrictedValue, 'label', <NoValue />);
+
+    return usageRestrictedLabel;
+  }
+
+  getFreeContentLabel(freeContentValue) {
+    const dataWithFreeContentValue = freeContentOptions.find(
+      (e) => e.value === freeContentValue
+    );
+    const freeContentLabel = _.get(dataWithFreeContentValue, 'label', <NoValue />);
+
+    return freeContentLabel;
+  }
+
   resultsFormatter = {
     label: collection => collection.label,
     mdSource: collection => collection.mdSource.name,
-    metadataAvailable: collection => collection.metadataAvailable,
-    usageRestricted: collection => collection.usageRestricted,
+    metadataAvailable: collection => this.getMetadataAvailableLabel(collection.metadataAvailable),
+    usageRestricted: collection => this.getUsageRestrictedLabel(collection.usageRestricted),
     permittedFor: collection => collection.permittedFor.join('; '),
-    freeContent: collection => collection.freeContent,
+    freeContent: collection => this.getFreeContentLabel(collection.freeContent),
   };
 
   rowFormatter = (row) => {

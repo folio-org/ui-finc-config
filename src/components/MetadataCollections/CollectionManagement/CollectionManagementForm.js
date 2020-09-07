@@ -17,12 +17,10 @@ import {
 
 import { Required } from '../../DisplayUtils/Validate';
 import PermittedForField from '../../DisplayUtils/PermittedForField';
-
 import metadataAvailableOptions from '../../DataOptions/metadataAvailable';
 import usageRestrictedOptions from '../../DataOptions/usageRestricted';
 import freeContentOptions from '../../DataOptions/freeContent';
 import lodPublicationOptions from '../../DataOptions/lodPublication';
-
 import BasicCss from '../../BasicStyle.css';
 
 let permittedIsRequired;
