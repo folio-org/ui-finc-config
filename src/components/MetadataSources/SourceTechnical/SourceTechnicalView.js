@@ -12,6 +12,7 @@ import {
 } from '@folio/stripes/components';
 
 import BasicCss from '../../BasicStyle.css';
+import solrShardOptions from '../../DataOptions/solrShard';
 
 class SourceTechnicalView extends React.Component {
   static propTypes = {
@@ -63,6 +64,12 @@ class SourceTechnicalView extends React.Component {
     const { metadataSource, id } = this.props;
     const accessUrlValue = _.get(metadataSource, 'accessUrl', <NoValue />);
     const accessUrlValueFormatter = <a href={accessUrlValue} target="_blank" rel="noopener noreferrer">{accessUrlValue}</a>;
+    const solrValue = _.get(metadataSource, 'solrShard', '');
+    const dataWithSolrValue = solrShardOptions.find(
+      (e) => e.value === solrValue
+    );
+    const solrLabel = _.get(dataWithSolrValue, 'label', <NoValue />);
+
 
     return (
       <React.Fragment>
@@ -100,7 +107,7 @@ class SourceTechnicalView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-config.source.solrShard" />}
-              value={_.get(metadataSource, 'solrShard', <NoValue />)}
+              value={solrLabel}
             />
           </Row>
           {/* DELIVERYMETHODS is repeatable */}
