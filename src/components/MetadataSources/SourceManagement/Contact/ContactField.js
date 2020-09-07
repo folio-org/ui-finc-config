@@ -14,6 +14,7 @@ import {
 import FindContact from '../FindContact/FindContact';
 import FindUser from '../FindUser/FindUser';
 import { Required } from '../../../DisplayUtils/Validate';
+import contactRoleOptions from '../../../DataOptions/contactRole';
 
 export default class ContactField extends React.Component {
   static propTypes = {
@@ -39,12 +40,6 @@ export default class ContactField extends React.Component {
 
   render = () => {
     const { index, input: { name } } = this.props;
-    const dataContactRole = [
-      { value: 'subject specialist', label: 'Subject specialist' },
-      { value: 'librarian', label: 'Librarian' },
-      { value: 'technical', label: 'Technical' },
-      { value: 'vendor', label: 'Vendor' }
-    ];
 
     return (
       <div>
@@ -91,7 +86,7 @@ export default class ContactField extends React.Component {
           <Col xs={12}>
             <Field
               component={Select}
-              dataOptions={dataContactRole}
+              dataOptions={contactRoleOptions}
               fullWidth
               id={`contact-role-${index}`}
               label={<FormattedMessage id="ui-finc-config.source.contact.role" />}
