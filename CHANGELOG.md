@@ -3,6 +3,12 @@
 ## 2.0.0 (IN PROGRESS)
 * Increment `@folio/stripes` to `v5.0` and `react-router` to `v5.2` (and, bugfix, move it to peer)
 
+## [1.7.0](https://github.com/folio-org/ui-finc-config/tree/v1.7.0) (2020-09-08)
+* Redesign of metadata-sources' contacts (UIFC-209)
+* Add possibility to filter by contact's name (UIFC-184)
+* Be compliant to language rules (UIFC-212)
+* Increment interface version `finc-config/metadata-sources` to 3.0
+
 ## [1.6.0](https://github.com/folio-org/ui-finc-config/tree/v1.6.0) (2020-08-28)
 * Replace deprecated `babel-polyfill` with `core-js` and `regenerator-runtime`
 * Add navigation/link from finc-config to organizations app (UIFC-138)
