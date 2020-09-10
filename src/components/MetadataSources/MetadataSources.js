@@ -57,23 +57,13 @@ class MetadataSources extends React.Component {
     }).isRequired,
     onNeedMoreData: PropTypes.func,
     onSelectRow: PropTypes.func,
-    // packageInfo: PropTypes.shape({ // values pulled from the provider's package.json config object
-    //   initialFilters: PropTypes.string, // default filters
-    //   moduleName: PropTypes.string, // machine-readable, for HTML ids and translation keys
-    //   stripes: PropTypes.shape({
-    //     route: PropTypes.string, // base route; used to construct URLs
-    //   }).isRequired,
-    //   router: PropTypes.object,
-    // }),
     queryGetter: PropTypes.func,
     querySetter: PropTypes.func,
     searchString: PropTypes.string,
+    selectedRecordId: PropTypes.string,
     source: PropTypes.object,
     // add values for search-selectbox
     onChangeIndex: PropTypes.func,
-    // selectedIndex: PropTypes.object,
-    selectedRecordId: PropTypes.string,
-    // filterHandlers: PropTypes.object,
     activeFilters: PropTypes.object,
   };
 
