@@ -116,6 +116,7 @@ class SourceFilters extends React.Component {
           dataOptions={dataOptions}
           id="contact-filter"
           onChange={value => this.props.filterHandlers.state({ ...activeFilters, contact: [value] })}
+          placeholder="Select a contact"
           value={contactFilters[0] || ''}
         />
       </Accordion>
