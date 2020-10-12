@@ -68,7 +68,7 @@ class SourceInfoForm extends React.Component {
                   id="addsource_status"
                   label={<FormattedMessage id="ui-finc-config.source.status" />}
                   name="status"
-                  placeholder="Select a status for the metadata source"
+                  placeholder=" "
                   required
                   validate={Required}
                 />

@@ -114,7 +114,7 @@ class CollectionManagementForm extends React.Component {
                   id="addcollection_metadataAvailable"
                   label={<FormattedMessage id="ui-finc-config.collection.metadataAvailable" />}
                   name="metadataAvailable"
-                  placeholder="Select if metadata is available for the metadata collection"
+                  placeholder=" "
                 />
               )}
             </IntlConsumer>
@@ -132,7 +132,7 @@ class CollectionManagementForm extends React.Component {
                   label={<FormattedMessage id="ui-finc-config.collection.usageRestricted" />}
                   name="usageRestricted"
                   onChange={this.changeSelectedUsageRestricted}
-                  placeholder="Select if usage is restricted for the metadata collection"
+                  placeholder=" "
                   required
                   validate={Required}
                 />
@@ -168,7 +168,7 @@ class CollectionManagementForm extends React.Component {
                   id="addcollection_freeContent"
                   label={<FormattedMessage id="ui-finc-config.collection.freeContent" />}
                   name="freeContent"
-                  placeholder="Select if content is free for the metadata collection"
+                  placeholder=" "
                 />
               )}
             </IntlConsumer>
@@ -185,7 +185,7 @@ class CollectionManagementForm extends React.Component {
                   id="addcollection_lodpublication"
                   label={<FormattedMessage id="ui-finc-config.collection.lod.publication" />}
                   name="lod.publication"
-                  placeholder="Select the LOD publication for the metadata collection"
+                  placeholder=" "
                 />
               )}
             </IntlConsumer>

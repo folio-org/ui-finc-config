@@ -378,7 +378,6 @@ class MetadataCollections extends React.Component {
                             // add values for search-selectbox
                             onChangeIndex={(e) => { this.onChangeIndex(e.target.value, getSearchHandlers(), searchValue); }}
                             searchableIndexes={searchableIndexes}
-                            searchableIndexesPlaceholder={null}
                             selectedIndex={this.state.storedSearchIndex}
                           />
                           <Button

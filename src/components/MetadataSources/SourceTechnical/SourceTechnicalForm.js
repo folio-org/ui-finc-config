@@ -91,7 +91,7 @@ class SourceTechnicalForm extends React.Component {
               id="addsource_solrShard"
               label={<FormattedMessage id="ui-finc-config.source.solrShard" />}
               name="solrShard"
-              placeholder="Select a solr shard for the metadata source"
+              placeholder=" "
             />
           </Col>
         </Row>

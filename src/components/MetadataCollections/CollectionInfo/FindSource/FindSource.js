@@ -94,7 +94,6 @@ class FindSource extends React.Component {
               fullWidth
               id="addcollection_mdSource"
               name="mdSource.name"
-              // placeholder={<FormattedMessage id="ui-finc-config.collection.placeholder.mdSource" />}
               placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.mdSource' })}
               readOnly
               validate={MdSourceRequired}

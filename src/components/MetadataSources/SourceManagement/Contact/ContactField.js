@@ -99,7 +99,7 @@ export default class ContactField extends React.Component {
                   id={`contact-role-${index}`}
                   label={<FormattedMessage id="ui-finc-config.source.contact.role" />}
                   name={`${name}.role`}
-                  placeholder="Select a role for the contact"
+                  placeholder=" "
                   required
                   validate={Required}
                 />
