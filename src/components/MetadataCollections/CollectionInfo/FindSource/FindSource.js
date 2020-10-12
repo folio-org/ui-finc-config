@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import {
+  injectIntl,
+  FormattedMessage
+} from 'react-intl';
 import { Field } from 'react-final-form';
 
 import {
@@ -15,6 +18,12 @@ import BasicCss from '../../../BasicStyle.css';
 import { MdSourceRequired } from '../../../DisplayUtils/Validate';
 
 class FindSource extends React.Component {
+  static propTypes = {
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }),
+  };
+
   constructor(props) {
     super(props);
 
@@ -39,6 +48,7 @@ class FindSource extends React.Component {
   }
 
   render() {
+    const { intl } = this.props;
     const disableRecordCreation = true;
     const buttonProps = { 'marginBottom0': true };
     const pluggable =
@@ -84,7 +94,8 @@ class FindSource extends React.Component {
               fullWidth
               id="addcollection_mdSource"
               name="mdSource.name"
-              placeholder="Please add a metadata source"
+              // placeholder={<FormattedMessage id="ui-finc-config.collection.placeholder.mdSource" />}
+              placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.mdSource' })}
               readOnly
               validate={MdSourceRequired}
             />
@@ -104,4 +115,4 @@ FindSource.propTypes = {
   intialSource: PropTypes.object,
 };
 
-export default FindSource;
+export default injectIntl(FindSource);
