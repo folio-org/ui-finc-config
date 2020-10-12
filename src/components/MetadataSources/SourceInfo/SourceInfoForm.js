@@ -41,7 +41,6 @@ class SourceInfoForm extends React.Component {
               id="addsource_label"
               label={<FormattedMessage id="ui-finc-config.source.label" />}
               name="label"
-              placeholder="Enter a name to identify the metadata source"
               required
               validate={Required}
             />
@@ -55,7 +54,6 @@ class SourceInfoForm extends React.Component {
               id="addsource_description"
               label={<FormattedMessage id="ui-finc-config.source.description" />}
               name="description"
-              placeholder="Enter a description for the metadata source"
             />
           </Col>
         </Row>

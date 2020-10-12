@@ -199,7 +199,6 @@ class CollectionManagementForm extends React.Component {
               id="addcollection_lodnote"
               label={<FormattedMessage id="ui-finc-config.collection.lod.note" />}
               name="lod.note"
-              placeholder="Enter a LOD note for the metadata collection"
             />
           </Col>
         </Row>
@@ -211,7 +210,6 @@ class CollectionManagementForm extends React.Component {
               id="addcollection_generalNotes"
               label={<FormattedMessage id="ui-finc-config.collection.generalNotes" />}
               name="generalNotes"
-              placeholder="Enter a general note for the metadata collection"
             />
           </Col>
         </Row>

@@ -82,7 +82,6 @@ export default class ContactField extends React.Component {
               id={`contact-name-${index}`}
               label={<FormattedMessage id="ui-finc-config.source.contact.name" />}
               name={`${name}.name`}
-              placeholder="Select a contact or a user"
               readOnly
               required
               validate={Required}

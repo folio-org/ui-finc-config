@@ -48,7 +48,6 @@ class CollectionInfoForm extends React.Component {
               id="addcollection_label"
               label={<FormattedMessage id="ui-finc-config.collection.label" />}
               name="label"
-              placeholder="Enter a name to identify the metadata collection"
               required
               validate={Required}
             />
@@ -62,7 +61,6 @@ class CollectionInfoForm extends React.Component {
               id="addcollection_description"
               label={<FormattedMessage id="ui-finc-config.collection.description" />}
               name="description"
-              placeholder="Enter a description for the metadata collection"
             />
           </Col>
         </Row>

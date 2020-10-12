@@ -37,7 +37,6 @@ class CollectionTechnicalForm extends React.Component {
               id="addcollection_collectionId"
               label={<FormattedMessage id="ui-finc-config.collection.id" />}
               name="collectionId"
-              placeholder="Enter collection ID for the metadata collection"
               required
               validate={Required}
             />
@@ -51,7 +50,6 @@ class CollectionTechnicalForm extends React.Component {
               id="addcollection_productIsil"
               label={<FormattedMessage id="ui-finc-config.collection.productIsil" />}
               name="productIsil"
-              placeholder="Enter product ISIL for the metadata collection"
             />
           </Col>
         </Row>

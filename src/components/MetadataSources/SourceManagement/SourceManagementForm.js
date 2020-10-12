@@ -57,7 +57,6 @@ class SourceManagementForm extends React.Component {
               id="addsource_indexingLevel"
               label={<FormattedMessage id="ui-finc-config.source.indexingLevel" />}
               name="indexingLevel"
-              placeholder="Enter a indexing level for the metadata source"
             />
           </Col>
         </Row>
@@ -69,7 +68,6 @@ class SourceManagementForm extends React.Component {
               id="addsource_generalNotes"
               label={<FormattedMessage id="ui-finc-config.source.generalNotes" />}
               name="generalNotes"
-              placeholder="Enter a general note for the metadata source"
             />
           </Col>
         </Row>
