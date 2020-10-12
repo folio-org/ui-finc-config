@@ -93,6 +93,7 @@
   "collection.usageRestricted": "Usage restricted",
   "collection.selectedBy": "Selected by",
   "collection.placeholder.mdSource": "Please add a metadata source",
+  "collection.placeholder.permittedFor": "Enter one ISIL per field for each insititution with permitted metadata usage",
 
   "collection.generalAccordion": "General",
   "collection.managementAccordion": "Management",

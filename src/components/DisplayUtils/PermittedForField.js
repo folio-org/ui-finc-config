@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-import { FormattedMessage } from 'react-intl';
+import {
+  injectIntl,
+  FormattedMessage
+} from 'react-intl';
 
 import {
   Button,
@@ -19,6 +22,9 @@ class PermittedForField extends React.Component {
     ariaLabel: PropTypes.string,
     disable: PropTypes.bool,
     fields: PropTypes.object,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }),
   };
 
   componentDidUpdate(prevProps) {
@@ -31,7 +37,7 @@ class PermittedForField extends React.Component {
   }
 
   render() {
-    const { fields, ariaLabel, disable } = this.props;
+    const { fields, ariaLabel, disable, intl } = this.props;
 
     return (
       <Row>
@@ -45,6 +51,7 @@ class PermittedForField extends React.Component {
                   fullWidth
                   id={elem}
                   name={elem}
+                  placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.permittedFor' })}
                   // first field is required
                   validate={index === 0 ? Required : undefined}
                 />
@@ -68,4 +75,4 @@ class PermittedForField extends React.Component {
   }
 }
 
-export default PermittedForField;
+export default injectIntl(PermittedForField);
