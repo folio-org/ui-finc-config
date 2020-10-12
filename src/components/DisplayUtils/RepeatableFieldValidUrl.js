@@ -17,10 +17,11 @@ class RepeatableFieldValidUrl extends React.Component {
   static propTypes = {
     ariaLabel: PropTypes.string,
     fields: PropTypes.object,
+    placeholder: PropTypes.string,
   };
 
   render() {
-    const { fields, ariaLabel } = this.props;
+    const { fields, ariaLabel, placeholder } = this.props;
 
     return (
       <Row>
@@ -34,6 +35,7 @@ class RepeatableFieldValidUrl extends React.Component {
                   fullWidth
                   id={elem}
                   name={elem}
+                  placeholder={placeholder}
                   validate={ValidateUrl}
                 />
               </Col>

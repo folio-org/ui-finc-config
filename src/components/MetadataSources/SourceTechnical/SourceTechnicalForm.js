@@ -53,6 +53,7 @@ class SourceTechnicalForm extends React.Component {
                 component={RepeatableFieldValidUrl}
                 id="display_tickets"
                 name="tickets"
+                placeholder=" "
               />
             </Col>
           </Row>

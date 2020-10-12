@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
-import { FormattedMessage } from 'react-intl';
+import {
+  injectIntl,
+  FormattedMessage
+} from 'react-intl';
 
 import {
   Accordion,
@@ -20,7 +23,7 @@ import BasicCss from '../../BasicStyle.css';
 
 class CollectionTechnicalForm extends React.Component {
   render() {
-    const { expanded, onToggle, accordionId } = this.props;
+    const { expanded, onToggle, accordionId, intl } = this.props;
 
     return (
       <Accordion
@@ -66,6 +69,7 @@ class CollectionTechnicalForm extends React.Component {
                 component={RepeatableFieldValidUrl}
                 id="display_tickets"
                 name="tickets"
+                placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.tickets' })}
               />
             </Col>
           </Row>
@@ -83,6 +87,7 @@ class CollectionTechnicalForm extends React.Component {
                 component={RepeatableFieldValidUrl}
                 id="display_contentFiles"
                 name="contentFiles"
+                placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.contentFiles' })}
               />
             </Col>
           </Row>
@@ -112,7 +117,10 @@ class CollectionTechnicalForm extends React.Component {
 CollectionTechnicalForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }),
   onToggle: PropTypes.func,
 };
 
-export default CollectionTechnicalForm;
+export default injectIntl(CollectionTechnicalForm);
