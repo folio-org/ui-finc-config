@@ -18,6 +18,8 @@ const metadatacollection = {
     'note': 'Note for test publication'
   },
   'collectionId': 'psa-459',
+  'tickets': [],
+  'contentFiles': [],
   'solrMegaCollections': [
     '21st Century Political Science'
   ],

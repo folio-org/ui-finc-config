@@ -19,6 +19,8 @@ const metadatacollections = [
       'note': 'Note for test publication'
     },
     'collectionId': 'psa-459',
+    'tickets': [],
+    'contentFiles': [],
     'solrMegaCollections': [
       '21st Century Political Science'
     ],
@@ -46,6 +48,8 @@ const metadatacollections = [
       'note': 'Note for test publication'
     },
     'collectionId': 'coe-123',
+    'tickets': [],
+    'contentFiles': [],
     'solrMegaCollections': [
       '21st Century COE Program'
     ],

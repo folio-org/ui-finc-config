@@ -9,6 +9,9 @@ const metadatasource = {
     'http://redmine.de/123',
     'http://redmine.de/456'
   ],
+  'deliveryMethods': [],
+  'formats': [],
+  'inferiorTo': [],
   'status': 'implementation',
   'contacts': [
     {
