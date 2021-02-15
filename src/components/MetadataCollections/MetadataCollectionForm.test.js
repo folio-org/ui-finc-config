@@ -37,7 +37,7 @@ const onClose = jest.fn();
 const handleSubmit = jest.fn();
 const onSubmit = jest.fn();
 
-const renderMetadataCollectionForm = () => {
+const renderEmptyMetadataCollectionForm = (initialValues = {}) => {
   return renderWithIntl(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
@@ -45,7 +45,7 @@ const renderMetadataCollectionForm = () => {
           onSubmit={jest.fn}
           render={() => (
             <MetadataCollectionForm
-              initialValues={COLLECTION}
+              initialValues={initialValues}
               handlers={{ onClose, onDelete }}
               handleSubmit={handleSubmit}
               onSubmit={onSubmit}
@@ -58,23 +58,38 @@ const renderMetadataCollectionForm = () => {
 };
 
 describe('MetadataCollectionForm', () => {
-  test('renders form', async () => {
-    renderMetadataCollectionForm(stripes);
-    expect(screen.getByText('Usage restricted')).toBeVisible();
-  });
-
-  describe('select usage restricted', () => {
+  describe('select Metadata available', () => {
     beforeEach(() => {
-      renderMetadataCollectionForm(stripes);
+      renderEmptyMetadataCollectionForm();
       userEvent.selectOptions(
-        screen.getByLabelText('Usage restricted', { exact: false }), ['yes']
+        screen.getByLabelText('Metadata available', { exact: false }), ['yes']
       );
     });
-
-    test('permittedFor textField should be visible', async () => {
-      // expect(screen.getByPlaceholderText('Enter one ISIL for an insititution with permitted metadata usage')).toBeInTheDocument();
-      expect(document.getElementById('permittedFor[0]')).toBeInTheDocument();
+    test('test required fields', async () => {
+      userEvent.click(screen.getByText('Save & close'));
+      expect(screen.getAllByText('Required!', { exact: false })).toHaveLength(4);
+      expect(screen.getAllByText('Metadata source required!', { exact: false })).toHaveLength(1);
     });
   });
 });
+
+
+// describe('MetadataCollectionForm', () => {
+//   test('renders form', async () => {
+//     renderEmptyMetadataCollectionForm();
+//     expect(screen.getByText('Metadata available')).toBeVisible();
+//   });
+
+//   // TODO: move to management form:
+//   beforeEach(() => {
+//     renderEmptyMetadataCollectionForm(stripes);
+//     userEvent.selectOptions(
+//       screen.getByLabelText('Usage restricted', { exact: false }), ['yes']
+//     );
+//   });
+//   test('permittedFor textField should be visible', async () => {
+//     // expect(screen.getByPlaceholderText('Enter one ISIL for an insititution with permitted metadata usage')).toBeInTheDocument();
+//     expect(document.getElementById('permittedFor[0]')).toBeInTheDocument();
+//   });
+// });
 
