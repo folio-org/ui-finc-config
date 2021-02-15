@@ -77,7 +77,7 @@ class MetadataCollectionForm extends React.Component {
     return (
       <PaneMenu>
         <FormattedMessage id="ui-finc-config.form.close">
-          { ariaLabel => (
+          { ([ariaLabel]) => (
             <IconButton
               ariaLabel={ariaLabel}
               icon="times"
