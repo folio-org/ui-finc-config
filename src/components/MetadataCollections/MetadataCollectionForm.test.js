@@ -1,36 +1,15 @@
+// import { noop } from 'lodash';
 import React from 'react';
-import { noop } from 'lodash';
+import { MemoryRouter } from 'react-router-dom';
+import { Form } from 'react-final-form';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Form } from 'react-final-form';
 import { StripesContext } from '@folio/stripes-core/src/StripesContext';
-import { MemoryRouter } from 'react-router-dom';
+
 import renderWithIntl from '../../../test/jest/helpers/renderWithIntl';
 import MetadataCollectionForm from './MetadataCollectionForm';
-import COLLECTION from '../../../test/fixtures/metadatacollection';
-
-const stripes = {
-  clone: () => ({ ...stripes }),
-  connect: Component => <Component />,
-  config: {},
-  hasInterface: () => true,
-  hasPerm: jest.fn().mockReturnValue(true),
-  logger: { log: noop },
-  locale: 'en-US',
-  okapi: {
-    tenant: 'diku',
-    url: 'https://folio-testing-okapi.dev.folio.org',
-  },
-  plugins: {},
-  user: {
-    perms: {},
-    user: {
-      id: 'b1add99d-530b-5912-94f3-4091b4d87e2c',
-      username: 'diku_admin',
-    },
-  },
-  withOkapi: true,
-};
+// import COLLECTION from '../../../test/fixtures/metadatacollection';
+import stripes from '../../../test/jest/__mock__/stripesCore.mock';
 
 const onDelete = jest.fn();
 const onClose = jest.fn();
@@ -93,11 +72,10 @@ describe('MetadataCollectionForm', () => {
 
 // describe('MetadataCollectionForm', () => {
 //   test('renders form', async () => {
-//     renderEmptyMetadataCollectionForm();
+//     renderEmptyMetadataCollectionForm(); display accordio
 //     expect(screen.getByText('Metadata available')).toBeVisible();
 //   });
 
-//   // TODO: move to management form:
 //   beforeEach(() => {
 //     renderEmptyMetadataCollectionForm(stripes);
 //     userEvent.selectOptions(

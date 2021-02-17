@@ -1,7 +1,7 @@
+// import { noop } from 'lodash';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { screen } from '@testing-library/react';
-import { noop } from 'lodash';
 import { StripesContext } from '@folio/stripes-core/src/StripesContext';
 
 import '../../../test/jest/__mock__';
@@ -9,29 +9,7 @@ import translationsProperties from '../../../test/jest/helpers/translationsPrope
 import renderWithIntl from '../../../test/jest/helpers';
 import COLLECTION from '../../../test/fixtures/metadatacollection';
 import MetadataCollectionView from './MetadataCollectionView';
-
-const stripes = {
-  clone: () => ({ ...stripes }),
-  connect: Component => <Component />,
-  config: {},
-  hasInterface: () => true,
-  hasPerm: jest.fn().mockReturnValue(true),
-  logger: { log: noop },
-  locale: 'en-US',
-  okapi: {
-    tenant: 'diku',
-    url: 'https://folio-testing-okapi.dev.folio.org',
-  },
-  plugins: {},
-  user: {
-    perms: {},
-    user: {
-      id: 'b1add99d-530b-5912-94f3-4091b4d87e2c',
-      username: 'diku_admin',
-    },
-  },
-  withOkapi: true,
-};
+import stripes from '../../../test/jest/__mock__/stripesCore.mock';
 
 // const metadata = {
 //   createdDate: '2020-12-22T14:45:14.855+00:00',
