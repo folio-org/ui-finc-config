@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-// import { screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { noop } from 'lodash';
 import { StripesContext } from '@folio/stripes-core/src/StripesContext';
 
@@ -45,7 +45,7 @@ const handlers = {
   onEdit: jest.fn,
 };
 
-const renderMetadateCollectionView = (fakeStripes = stripes) => (
+const renderMetadateCollectionView = (fakeStripes = stripes, record = COLLECTION) => (
   renderWithIntl(
     <MemoryRouter>
       <StripesContext.Provider value={fakeStripes}>
@@ -53,7 +53,7 @@ const renderMetadateCollectionView = (fakeStripes = stripes) => (
           canEdit
           handlers={handlers}
           isLoading={false}
-          record={COLLECTION}
+          record={record}
         />
       </StripesContext.Provider>
     </MemoryRouter>,
@@ -63,7 +63,7 @@ const renderMetadateCollectionView = (fakeStripes = stripes) => (
 
 describe('MetadataCollectionView', () => {
   beforeEach(() => {
-    renderMetadateCollectionView(stripes);
+    renderMetadateCollectionView(stripes, COLLECTION);
   });
 
   it('edit button should be present', () => {
@@ -72,5 +72,20 @@ describe('MetadataCollectionView', () => {
   it('accordions should be present', () => {
     expect(document.querySelector('#managementAccordion')).toBeInTheDocument();
     expect(document.querySelector('#technicalAccordion')).toBeInTheDocument();
+  });
+  it('should display name', () => {
+    expect(screen.getByLabelText('21st Century Political Science Association')).toBeInTheDocument();
+  });
+  it('should display description', () => {
+    expect(screen.getByText('This is a test metadata collection 2')).toBeInTheDocument();
+  });
+  it('should display metadata source', () => {
+    expect(screen.getByText('Early Music Online')).toBeInTheDocument();
+  });
+  it('should display LOD note', () => {
+    expect(screen.getByText('Note for test publication')).toBeInTheDocument();
+  });
+  it('should display metadata available', () => {
+    expect(screen.getByText('Metadata available')).toBeInTheDocument();
   });
 });

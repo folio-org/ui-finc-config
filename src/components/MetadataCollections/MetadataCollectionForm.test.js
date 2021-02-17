@@ -58,6 +58,22 @@ const renderEmptyMetadataCollectionForm = (initialValues = {}) => {
 };
 
 describe('MetadataCollectionForm', () => {
+  test('should display accordion', () => {
+    renderEmptyMetadataCollectionForm();
+    expect(document.querySelector('#editCollectionInfo')).toBeInTheDocument();
+    expect(document.querySelector('#editCollectionManagement')).toBeInTheDocument();
+    expect(document.querySelector('#editCollectionTechnical')).toBeInTheDocument();
+    // userEvent.click(screen.getByText('Save & close'));
+    // expect(getAllByText('Required!')).toHaveLength(1);
+  });
+
+  test('should display all fields', () => {
+    renderEmptyMetadataCollectionForm();
+    expect(document.querySelector('#addcollection_label')).toBeInTheDocument();
+    expect(document.querySelector('#addcollection_description')).toBeInTheDocument();
+    expect(document.querySelector('#addcollection_mdSource')).toBeInTheDocument();
+  });
+
   describe('select Metadata available', () => {
     beforeEach(() => {
       renderEmptyMetadataCollectionForm();
@@ -72,6 +88,7 @@ describe('MetadataCollectionForm', () => {
     });
   });
 });
+
 
 
 // describe('MetadataCollectionForm', () => {
