@@ -61,7 +61,7 @@ describe('MetadataCollectionForm', () => {
     beforeEach(() => {
       renderEmptyMetadataCollectionForm();
     });
-    test('should display accordion', () => {
+    test('should display accordions', () => {
       expect(document.querySelector('#editCollectionInfo')).toBeInTheDocument();
       expect(document.querySelector('#editCollectionManagement')).toBeInTheDocument();
       expect(document.querySelector('#editCollectionTechnical')).toBeInTheDocument();
@@ -136,7 +136,7 @@ describe('MetadataCollectionForm', () => {
           screen.getByLabelText('Usage restricted', { exact: false }), ['no']
         );
       });
-      test('clear permitted for modal should be visible', async () => {
+      test('clear permittedFor', async () => {
         expect(screen.getByText('Clear permitted for?')).toBeInTheDocument();
         expect(screen.getByText('Do you want to clear permitted for when changing usage restricted?')).toBeInTheDocument();
         userEvent.click(screen.getByText('Clear permitted for'));
