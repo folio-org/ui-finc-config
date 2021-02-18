@@ -85,6 +85,7 @@ describe('MetadataCollectionForm', () => {
         // expect(screen.getAllByText(/required/i)).toHaveLength(5);
         expect(screen.getAllByText('Required!', { exact: false })).toHaveLength(4);
         expect(screen.getAllByText('Metadata source required!')).toHaveLength(1);
+        expect(onSubmit).not.toHaveBeenCalled();
       });
     });
     test('permittedFor textField should NOT be visible', async () => {
@@ -108,6 +109,18 @@ describe('MetadataCollectionForm', () => {
     });
     test('description should have value of fixture collection', () => {
       expect(screen.getByDisplayValue('This is a test metadata collection 2')).toBeInTheDocument();
+    });
+
+    describe('select metadata available no', () => {
+      beforeEach(() => {
+        userEvent.selectOptions(
+          screen.getByLabelText('Metadata available'), ['no']
+        );
+      });
+      test('click save should call onSubmit function', async () => {
+        userEvent.click(screen.getByText('Save & close'));
+        expect(onSubmit).toHaveBeenCalled();
+      });
     });
   });
 });
