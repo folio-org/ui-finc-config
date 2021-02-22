@@ -2,6 +2,7 @@ const metadatasource = {
   'id': '6dd325f8-b1d5-4568-a0d7-aecf6b8d6697',
   'label': 'Cambridge University Press Journals',
   'internalId': 1,
+  'sourceId' : 12345,
   'solrShard': 'UBL main',
   'lastProcessed': '2018-06-14',
   'description': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore.',
