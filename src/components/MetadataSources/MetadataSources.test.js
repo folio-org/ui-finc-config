@@ -1,16 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { noop } from 'lodash';
-// import { screen } from '@testing-library/react';
 
 import { StripesContext } from '@folio/stripes-core/src/StripesContext';
-import {
-  StripesConnectedSource,
-  // SearchAndSortQuery,
-} from '@folio/stripes/smart-components';
-// import {
-//   MultiColumnList,
-// } from '@folio/stripes/components';
+import { StripesConnectedSource } from '@folio/stripes/smart-components';
 
 import '../../../test/jest/__mock__';
 import renderWithIntl from '../../../test/jest/helpers/renderWithIntl';
@@ -18,11 +11,6 @@ import translationsProperties from '../../../test/jest/helpers/translationsPrope
 import metadatasources from '../../../test/fixtures/metadatasources';
 import MetadataSources from './MetadataSources';
 import stripes from '../../../test/jest/__mock__/stripesCore.mock';
-
-// const query = {
-//   query: '',
-//   sort: 'label',
-// };
 
 const filterData = { contacts: [
   {
@@ -60,7 +48,7 @@ const renderMetadataSources = () => (
           onNeedMoreData={jest.fn()}
           queryGetter={jest.fn()}
           querySetter={jest.fn()}
-          searchString={'metadataAvailable.yes'}
+          searchString={'status.active,status.implementation'}
           selectedRecordId={''}
           onChangeIndex={jest.fn()}
         />
