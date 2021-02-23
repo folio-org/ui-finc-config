@@ -48,6 +48,7 @@ const renderMetadataSourceForm = (initialValues = SOURCE) => {
               handlers={{ onClose, onDelete }}
               handleSubmit={handleSubmit}
               onSubmit={onSubmit}
+              onDelete={onDelete}
             />
           )}
         />
@@ -107,6 +108,38 @@ describe('MetadataSourceForm', () => {
         userEvent.click(screen.getByText('Save & close'));
         expect(onSubmit).toHaveBeenCalled();
       });
+    });
+  });
+
+  describe('delete source', () => {
+    beforeEach(() => {
+      renderMetadataSourceForm();
+    });
+
+    test('delete modal is present', () => {
+      userEvent.click(screen.getByText('Delete'));
+      expect(document.getElementById('delete-source-confirmation')).toBeInTheDocument();
+      expect(screen.getByText('Do you really want to delete Cambridge University Press Journals?')).toBeInTheDocument();
+    });
+
+    test('click cancel', () => {
+      userEvent.click(screen.getByText('Delete'));
+      const cancel = screen.getByRole('button', {
+        name: 'Cancel',
+        id: 'clickable-delete-source-confirmation-cancel',
+      });
+      userEvent.click(cancel);
+      expect(onDelete).not.toHaveBeenCalled();
+    });
+
+    test('click submit', () => {
+      userEvent.click(screen.getByText('Delete'));
+      const submit = screen.getByRole('button', {
+        name: 'Submit',
+        id: 'clickable-delete-source-confirmation-confirm',
+      });
+      userEvent.click(submit);
+      expect(onDelete).toHaveBeenCalled();
     });
   });
 });

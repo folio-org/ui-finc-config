@@ -48,6 +48,7 @@ const renderMetadataCollectionForm = (initialValues = COLLECTION) => {
               handlers={{ onClose, onDelete }}
               handleSubmit={handleSubmit}
               onSubmit={onSubmit}
+              onDelete={onDelete}
             />
           )}
         />
@@ -142,6 +143,38 @@ describe('MetadataCollectionForm', () => {
         userEvent.click(screen.getByText('Clear permitted for'));
         expect(document.getElementById('permittedFor[0]')).not.toBeInTheDocument();
       });
+    });
+  });
+
+  describe('delete collection', () => {
+    beforeEach(() => {
+      renderMetadataCollectionForm();
+    });
+
+    test('delete modal is present', () => {
+      userEvent.click(screen.getByText('Delete'));
+      expect(document.getElementById('delete-collection-confirmation')).toBeInTheDocument();
+      expect(screen.getByText('Do you really want to delete 21st Century Political Science Association?')).toBeInTheDocument();
+    });
+
+    test('click cancel', () => {
+      userEvent.click(screen.getByText('Delete'));
+      const cancel = screen.getByRole('button', {
+        name: 'Cancel',
+        id: 'clickable-delete-collection-confirmation-cancel',
+      });
+      userEvent.click(cancel);
+      expect(onDelete).not.toHaveBeenCalled();
+    });
+
+    test('click submit', () => {
+      userEvent.click(screen.getByText('Delete'));
+      const submit = screen.getByRole('button', {
+        name: 'Submit',
+        id: 'clickable-delete-collection-confirmation-confirm',
+      });
+      userEvent.click(submit);
+      expect(onDelete).toHaveBeenCalled();
     });
   });
 });
