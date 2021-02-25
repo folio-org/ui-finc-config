@@ -1,32 +1,12 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+import { ControlledVocab } from '@folio/stripes/smart-components';
 
-import { ControlledVocab } from '@folio/stripes/smart-components'; // StripesConnectedSource
-
-// import fakeStripes from '../../test/jest/__mock__/stripesCore.mock';
-// import Isils from '../../test/fixtures/isils';
+import fakeStripes from '../../test/jest/__mock__/stripesCore.mock';
 import renderWithIntl from '../../test/jest/helpers';
 import IsilSettings from './IsilSettings';
 import translationsProperties from '../../test/jest/helpers/translationsProperties';
-
-const fakeStripes = { connect: (Component) => Component, hasPerm: () => false };
-const fakeMutator = { isils: {} };
-const fakeResources = { isils: {} };
-
-// const renderControlledVocab = (stripes = fakeStripes, mutator = fakeMutator, resources = fakeResources) => renderWithIntl(
-//   <ControlledVocab
-//     baseUrl="finc-config/isils"
-//     label="Isils"
-//     labelSingular="Isil"
-//     objectLabel="Isil"
-//     mutator={mutator}
-//     resources={resources}
-//     stripes={{ connect: (Component) => Component, hasPerm: () => true }}
-//   />,
-//   translationsProperties
-// );
-
-// const ConnectedControlledVocab = fakeStripes.connect(renderControlledVocab);
+// import Isils from '../../test/fixtures/isils';
 
 const renderIsilSettings = () => renderWithIntl(
   <IsilSettings
@@ -38,11 +18,14 @@ const renderIsilSettings = () => renderWithIntl(
 describe('IsilSettings', () => {
   beforeEach(() => {
     ControlledVocab.mockClear();
+    renderIsilSettings({ fakeStripes });
+  });
+
+  it('should render ConnectedControlledVocab component', async () => {
+    expect(ControlledVocab).toHaveBeenCalled();
   });
 
   it('should render correct label', async () => {
-    renderIsilSettings({ fakeStripes }, fakeMutator, fakeResources);
-
     expect(screen.getByText('Isils')).toBeInTheDocument();
   });
 });
