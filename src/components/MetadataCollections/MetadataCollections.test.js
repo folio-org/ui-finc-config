@@ -63,7 +63,6 @@ const renderMetadataCollections = () => (
           visibleColumns={['label', 'mdSource', 'metadataAvailable', 'usageRestricted', 'permittedFor', 'freeContent']}
         />
         </MetadataCollections> */}
-        {/* </DataContext.Provider> */}
       </StripesContext.Provider>
     </Router>,
     translationsProperties
