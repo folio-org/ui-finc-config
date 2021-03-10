@@ -2,6 +2,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { screen } from '@testing-library/react';
+// import userEvent from '@testing-library/user-event';
 import { StripesContext } from '@folio/stripes-core/src/StripesContext';
 
 import '../../../test/jest/__mock__';
@@ -62,5 +63,8 @@ describe('MetadataSourceView', () => {
   });
   it('should display status', () => {
     expect(screen.getByText('Implementation')).toBeInTheDocument();
+  });
+  test('should display button', async () => {
+    expect(screen.getByText('Show all collections')).toBeInTheDocument();
   });
 });
