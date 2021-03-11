@@ -10,6 +10,8 @@ import SourceCreateRoute from './routes/SourceCreateRoute';
 import CollectionCreateRoute from './routes/CollectionCreateRoute';
 import CollectionEditRoute from './routes/CollectionEditRoute';
 import SourceEditRoute from './routes/SourceEditRoute';
+import CollectionViewRoute from './routes/CollectionViewRoute';
+import SourceViewRoute from './routes/SourceViewRoute';
 import collections from '../test/fixtures/metadatacollections';
 import sources from '../test/fixtures/metadatasources';
 import collection from '../test/fixtures/metadatacollection';
@@ -82,6 +84,37 @@ const editRouteProps = {
   },
 };
 
+const viewRouteProps = {
+  history: {
+    action: 'PUSH',
+    block: jest.fn(),
+    createHref: jest.fn(),
+    go: jest.fn(),
+    listen: jest.fn(),
+    location: {
+      hash: '',
+      pathname: '',
+      search: '',
+    },
+    push: () => jest.fn(),
+    replace: () => jest.fn(),
+  },
+  location: {
+    hash: '',
+    pathname: '',
+    search: '',
+  },
+  match: {
+    params: {
+      id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
+    }
+  },
+  resources: {
+    collection: { collection },
+    source: { source },
+  },
+};
+
 const renderWithRouter = (component) => {
   const history = createMemoryHistory();
   return {
@@ -135,4 +168,16 @@ it('should render CollectionEditRoute', () => {
 
   expect(document.querySelector('#form-collection')).toBeInTheDocument();
   // expect(screen.getByText('21st Century Political Science Association')).toBeInTheDocument();
+});
+
+it('should render SourceViewRoute', () => {
+  renderWithRouter(<SourceViewRoute {...viewRouteProps} />);
+
+  expect(document.querySelector('#pane-sourcedetails')).toBeInTheDocument();
+});
+
+it('should render CollectionViewRoute', () => {
+  renderWithRouter(<CollectionViewRoute {...viewRouteProps} />);
+
+  expect(document.querySelector('#pane-collectiondetails')).toBeInTheDocument();
 });
