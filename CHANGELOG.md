@@ -1,5 +1,8 @@
 # Change history for ui-finc-config
 
+## [3.0.0](https://github.com/folio-org/ui-finc-config/tree/v3.0.0) (2021-03-19)
+* Increment `@folio/stripes` to `v6.0` (UIFC-229)
+
 ## [2.0.0](https://github.com/folio-org/ui-finc-config/tree/v2.0.0) (2020-10-15)
 * Increment `@folio/stripes` to `v5.0` and `react-router` to `v5.2` (and, bugfix, move it to peer)
 * Use interface `finc-config/metadata-sources` `v3.0`
