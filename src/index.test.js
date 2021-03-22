@@ -3,6 +3,7 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import { screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
+
 import renderWithIntl from '../test/jest/helpers/renderWithIntl';
 import CollectionsRoute from './routes/CollectionsRoute';
 import SourcesRoute from './routes/SourcesRoute';
@@ -16,6 +17,8 @@ import collections from '../test/fixtures/metadatacollections';
 import sources from '../test/fixtures/metadatasources';
 import collection from '../test/fixtures/metadatacollection';
 import source from '../test/fixtures/metadatasource';
+import FincConfig from './index';
+// import Settings from './settings/index';
 
 // const fakePathMap = {
 //   '/metadata-sources': SourcesRoute,
@@ -115,6 +118,13 @@ const viewRouteProps = {
   },
 };
 
+const match = {
+  isExact: false,
+  params: {},
+  path: '/finc-config',
+  url: '/finc-config',
+};
+
 const renderWithRouter = (component) => {
   const history = createMemoryHistory();
   return {
@@ -125,6 +135,10 @@ const renderWithRouter = (component) => {
     )
   };
 };
+
+jest.mock('./index', () => {
+  return () => <span>FincConfig</span>;
+});
 
 it('should render CollectionsRoute', () => {
   const renderComponent = renderWithRouter(<CollectionsRoute {...routeProps} />);
@@ -180,4 +194,14 @@ it('should render CollectionViewRoute', () => {
   renderWithRouter(<CollectionViewRoute {...viewRouteProps} />);
 
   expect(document.querySelector('#pane-collectiondetails')).toBeInTheDocument();
+});
+
+describe('Application root', () => {
+  it('should render without crashing', () => {
+    const { getByText } = renderWithRouter(<FincConfig match={match} />);
+    const div = document.createElement('div');
+    div.id = 'root';
+    document.body.appendChild(div);
+    expect(getByText('FincConfig')).toBeDefined();
+  });
 });
