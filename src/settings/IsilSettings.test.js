@@ -6,7 +6,6 @@ import fakeStripes from '../../test/jest/__mock__/stripesCore.mock';
 import renderWithIntl from '../../test/jest/helpers';
 import IsilSettings from './IsilSettings';
 import translationsProperties from '../../test/jest/helpers/translationsProperties';
-// import Isils from '../../test/fixtures/isils';
 
 const renderIsilSettings = () => renderWithIntl(
   <IsilSettings

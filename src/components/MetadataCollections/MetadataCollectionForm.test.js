@@ -1,4 +1,3 @@
-// import { noop } from 'lodash';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';

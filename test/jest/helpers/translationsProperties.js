@@ -1,4 +1,3 @@
-
 import stripesComponentsTranslations from '@folio/stripes-components/translations/stripes-components/en';
 import stripesSmartComponentsTranslations from '@folio/stripes-smart-components/translations/stripes-smart-components/en';
 

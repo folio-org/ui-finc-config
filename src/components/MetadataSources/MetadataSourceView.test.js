@@ -1,8 +1,6 @@
-// import { noop } from 'lodash';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
 import { StripesContext } from '@folio/stripes-core/src/StripesContext';
 
 import '../../../test/jest/__mock__';
@@ -11,13 +9,6 @@ import renderWithIntl from '../../../test/jest/helpers';
 import SOURCE from '../../../test/fixtures/metadatasource';
 import MetadataSourceView from './MetadataSourceView';
 import stripes from '../../../test/jest/__mock__/stripesCore.mock';
-
-// const metadata = {
-//   createdDate: '2020-12-22T14:45:14.855+00:00',
-//   createdByUserId: '01d830e9-3308-56e2-9f94-e9e7bd186307',
-//   updatedDate: '2020-12-22T14:45:14.855+00:00',
-//   updatedByUserId: '01d830e9-3308-56e2-9f94-e9e7bd186307'
-// };
 
 const handlers = {
   onClose: jest.fn,

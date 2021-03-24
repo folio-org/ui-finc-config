@@ -1,16 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { noop } from 'lodash';
-// import { screen } from '@testing-library/react';
-
 import { StripesContext } from '@folio/stripes-core/src/StripesContext';
-import {
-  StripesConnectedSource,
-  // SearchAndSortQuery,
-} from '@folio/stripes/smart-components';
-// import {
-//   MultiColumnList,
-// } from '@folio/stripes/components';
+import { StripesConnectedSource } from '@folio/stripes/smart-components';
 
 import '../../../test/jest/__mock__';
 import renderWithIntl from '../../../test/jest/helpers/renderWithIntl';
@@ -19,11 +11,6 @@ import metadatacollections from '../../../test/fixtures/metadatacollections';
 import mdSources from '../../../test/fixtures/tinyMetadataSources';
 import MetadataCollections from './MetadataCollections';
 import stripes from '../../../test/jest/__mock__/stripesCore.mock';
-
-// const query = {
-//   query: '',
-//   sort: 'label',
-// };
 
 const tinySources = { mdSources };
 
@@ -57,12 +44,6 @@ const renderMetadataCollections = () => (
           selectedRecordId={''}
           onChangeIndex={jest.fn()}
         />
-        {/* <MultiColumnList
-          contentData={metadatacollections}
-          id="list-collections"
-          visibleColumns={['label', 'mdSource', 'metadataAvailable', 'usageRestricted', 'permittedFor', 'freeContent']}
-        />
-        </MetadataCollections> */}
       </StripesContext.Provider>
     </Router>,
     translationsProperties
@@ -70,7 +51,6 @@ const renderMetadataCollections = () => (
 );
 
 describe('Collections SASQ View', () => {
-  // let renderCollectionsViewResult;
   beforeEach(() => {
     renderMetadataCollections(metadatacollections, testCollection, tinySources, noop, noop, noop, '', '', noop);
   });
@@ -115,12 +95,9 @@ describe('Collections SASQ View', () => {
 
   // TODO: list of results will not rendered yet
   it('should have proper list results size', () => {
-    // myTestView(metadatacollections, tinySources, noop, noop);
-    // '#list-collections > [role=row]'
     // expect(document.querySelectorAll('#pane-collectionresults-content .mclRowContainer > [role=row]').length).toEqual(2);
     // expect(screen.getAllByRole('row').length).toEqual(2);
     // expect(document.querySelector('[role=row]')).toBeInTheDocument();
-    // expect(document.querySelector('#list-sources')).toBeInTheDocument();
 
     // pane is rendered:
     expect(document.querySelector('#pane-collectionresults')).toBeInTheDocument();

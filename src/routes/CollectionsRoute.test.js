@@ -2,24 +2,11 @@ import { noop } from 'lodash';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-// import '@folio/stripes-erm-components/test/jest/__mock__';
-// import { renderWithIntl } from '@folio/stripes-erm-components/test/jest/helpers';
-
 import '../../test/jest/__mock__';
 import renderWithIntl from '../../test/jest/helpers/renderWithIntl';
 import translationsProperties from '../../test/jest/helpers';
 import collections from '../../test/fixtures/metadatacollections';
 import CollectionsRoute from './CollectionsRoute';
-
-// jest.mock('@folio/stripes-erm-components', () => ({
-//   ...jest.requireActual('@folio/stripes-erm-components'),
-//   InternalContactSelection: () => <div>InternalContactSelection</div>,
-// }));
-
-// jest.mock('@folio/stripes-components', () => ({
-//   ...jest.requireActual('@folio/stripes-components'),
-//   Selection: () => <div>Selection</div>,
-// }));
 
 const routeProps = {
   history: {

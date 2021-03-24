@@ -1,4 +1,3 @@
-// import { noop } from 'lodash';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
@@ -9,7 +8,6 @@ import { StripesContext } from '@folio/stripes-core/src/StripesContext';
 
 import renderWithIntl from '../../../../test/jest/helpers/renderWithIntl';
 import SourceManagementForm from './SourceManagementForm';
-// import SOURCE from '../../../../test/fixtures/metadatasource';
 import stripes from '../../../../test/jest/__mock__/stripesCore.mock';
 
 const onToggle = jest.fn();

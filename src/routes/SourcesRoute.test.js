@@ -2,7 +2,6 @@ import { noop } from 'lodash';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-// import '@folio/stripes-erm-components/test/jest/__mock__';
 import '../../test/jest/__mock__';
 import renderWithIntl from '../../test/jest/helpers/renderWithIntl';
 import translationsProperties from '../../test/jest/helpers';

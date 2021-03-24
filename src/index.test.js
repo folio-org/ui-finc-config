@@ -18,27 +18,6 @@ import sources from '../test/fixtures/metadatasources';
 import collection from '../test/fixtures/metadatacollection';
 import source from '../test/fixtures/metadatasource';
 import FincConfig from './index';
-// import Settings from './settings/index';
-
-// const fakePathMap = {
-//   '/metadata-sources': SourcesRoute,
-//   '/metadata-sources/create': SourceCreateRoute,
-//   undefined: NoMatch
-// };
-
-// const showSettings = true;
-
-// const renderFincConfig = () => {
-//   const history = createMemoryHistory();
-//   return { ...renderWithIntl(
-//     <Router history={history}>
-//       <FincConfig
-//         match={match}
-//         showSettings={showSettings}
-//       />
-//     </Router>,
-//   ) };
-// };
 
 const routeProps = {
   history: {
@@ -174,14 +153,12 @@ it('should render SourceEditRoute', () => {
   renderWithRouter(<SourceEditRoute {...editRouteProps} />);
 
   expect(document.querySelector('#form-source')).toBeInTheDocument();
-  // expect(screen.getByText('Cambridge University Press Journals')).toBeInTheDocument();
 });
 
 it('should render CollectionEditRoute', () => {
   renderWithRouter(<CollectionEditRoute {...editRouteProps} />);
 
   expect(document.querySelector('#form-collection')).toBeInTheDocument();
-  // expect(screen.getByText('21st Century Political Science Association')).toBeInTheDocument();
 });
 
 it('should render SourceViewRoute', () => {
