@@ -60,7 +60,7 @@ const renderMetadataSources = () => (
 
 describe('Sources SASQ View', () => {
   beforeEach(() => {
-    renderMetadataSources(metadatasources, testSource, noop, noop, noop, '', '', noop);
+    renderMetadataSources();
   });
 
   afterEach(() => {

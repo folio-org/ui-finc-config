@@ -52,7 +52,7 @@ const renderMetadataCollections = () => (
 
 describe('Collections SASQ View', () => {
   beforeEach(() => {
-    renderMetadataCollections(metadatacollections, testCollection, tinySources, noop, noop, noop, '', '', noop);
+    renderMetadataCollections();
   });
 
   afterEach(() => {
