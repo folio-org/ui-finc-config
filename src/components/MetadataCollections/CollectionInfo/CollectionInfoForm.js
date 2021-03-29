@@ -69,6 +69,7 @@ class CollectionInfoForm extends React.Component {
           <Field
             component={FindSource}
             name="mdSource"
+            id="addcollection_mdSource"
             intialSource={this.state.source}
             {...this.props}
           />

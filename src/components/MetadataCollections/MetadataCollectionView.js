@@ -44,8 +44,6 @@ class MetadataCollectionView extends React.Component {
     };
 
     this.editButton = React.createRef();
-
-    this.connectedViewMetaData = this.props.stripes.connect(ViewMetaData);
   }
 
   handleExpandAll = (obj) => {
@@ -105,7 +103,7 @@ class MetadataCollectionView extends React.Component {
   }
 
   render() {
-    const { record, isLoading } = this.props;
+    const { record, isLoading, stripes } = this.props;
     const label = _.get(record, 'label', 'No LABEL');
 
     if (isLoading) return this.renderLoadingPane();
@@ -122,8 +120,9 @@ class MetadataCollectionView extends React.Component {
           paneTitle={<span data-test-collection-header-title>{label}</span>}
         >
           <AccordionSet>
-            <this.connectedViewMetaData
+            <ViewMetaData
               metadata={_.get(record, 'metadata', {})}
+              stripes={stripes}
             />
             <CollectionInfoView
               id="collectionInfo"

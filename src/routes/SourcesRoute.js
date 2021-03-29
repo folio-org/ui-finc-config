@@ -1,8 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 import { stripesConnect } from '@folio/stripes/core';
+import { Layout } from '@folio/stripes/components';
 import {
   makeQueryFunction,
   StripesConnectedSource
@@ -77,7 +79,9 @@ class SourcesRoute extends React.Component {
     this.logger = props.stripes.logger;
     this.searchField = React.createRef();
 
-    this.state = {};
+    this.state = {
+      hasPerms: props.stripes.hasPerm('finc-config.metadata-sources.collection.get'),
+    };
   }
 
   componentDidMount() {
@@ -130,6 +134,15 @@ class SourcesRoute extends React.Component {
 
     if (this.source) {
       this.source.update(this.props, 'sources');
+    }
+
+    if (!this.state.hasPerms) {
+      return (
+        <Layout className="textCentered">
+          <h2><FormattedMessage id="stripes-smart-components.permissionError" /></h2>
+          <p><FormattedMessage id="stripes-smart-components.permissionsDoNotAllowAccess" /></p>
+        </Layout>
+      );
     }
 
     return (

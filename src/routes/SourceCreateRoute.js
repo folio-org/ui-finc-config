@@ -26,6 +26,7 @@ class SourceCreateRoute extends React.Component {
     }).isRequired,
     mutator: PropTypes.shape({
       sources: PropTypes.shape({
+        POST: PropTypes.func.isRequired,
       }).isRequired,
     }).isRequired,
     stripes: PropTypes.shape({

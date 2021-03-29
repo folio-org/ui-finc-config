@@ -26,6 +26,7 @@ class CollectionCreateRoute extends React.Component {
     }).isRequired,
     mutator: PropTypes.shape({
       collections: PropTypes.shape({
+        POST: PropTypes.func.isRequired,
       }).isRequired,
     }).isRequired,
     resources: PropTypes.shape({

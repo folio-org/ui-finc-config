@@ -31,6 +31,8 @@ class SourceEditRoute extends React.Component {
     }).isRequired,
     mutator: PropTypes.shape({
       sources: PropTypes.shape({
+        PUT: PropTypes.func.isRequired,
+        DELETE: PropTypes.func.isRequired,
       }).isRequired,
     }).isRequired,
     resources: PropTypes.object,

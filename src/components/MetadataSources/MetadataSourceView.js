@@ -45,8 +45,6 @@ class MetadataSourceView extends React.Component {
     };
 
     this.editButton = React.createRef();
-
-    this.connectedViewMetaData = this.props.stripes.connect(ViewMetaData);
   }
 
   handleExpandAll = (obj) => {
@@ -124,7 +122,7 @@ class MetadataSourceView extends React.Component {
           paneTitle={<span data-test-source-header-title>{label}</span>}
         >
           <AccordionSet>
-            <this.connectedViewMetaData
+            <ViewMetaData
               metadata={_.get(record, 'metadata', {})}
               stripes={this.props.stripes}
             />

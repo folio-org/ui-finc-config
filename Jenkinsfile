@@ -6,5 +6,5 @@ buildNPM {
   runLint = true
   runSonarqube = false
   runTest = true
-  runTestOptions = '--karma.singleRun --karma.browsers ChromeDocker --karma.reporters mocha junit --coverage'
+  runTestOptions = ''
 }

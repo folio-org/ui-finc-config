@@ -90,6 +90,8 @@ CollectionEditRoute.propTypes = {
   }).isRequired,
   mutator: PropTypes.shape({
     collections: PropTypes.shape({
+      PUT: PropTypes.func.isRequired,
+      DELETE: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
   resources: PropTypes.shape({

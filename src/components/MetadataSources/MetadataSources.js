@@ -315,7 +315,7 @@ class MetadataSources extends React.Component {
     }
 
     return (
-      <div data-test-sources>
+      <div data-test-sources data-testid="sources">
         <SearchAndSortQuery
           // NEED FILTER: {"status":["active","implementation","request"]}
           initialFilterState={this.state.storedFilter.state}
