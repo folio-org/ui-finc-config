@@ -43,8 +43,8 @@
     "sources.title": "Sources de métadonnées",
     "collections.title": "Collections de métadonnées",
     "collection.selectedBy": "Sélectionné par",
-    "collection.form.selectedUsageRestricted.clearModalHeading": "Clear permitted for?",
-    "collection.form.selectedUsageRestricted.confirmClearLabel": "Clear permitted for",
+    "collection.form.selectedUsageRestricted.clearModalHeading": "Effacer \"autorisé pour?\"",
+    "collection.form.selectedUsageRestricted.confirmClearLabel": "Effacer \"autorisé pour?\"",
     "collection.form.selectedUsageRestricted.confirmClearMessage": "Do you want to clear permitted for when changing usage restricted?",
     "searchInputLabel": "Rechercher",
     "edit": "Modifier",
@@ -107,7 +107,7 @@
     "dataOption.technical": "Technique",
     "dataOption.vendor": "Fournisseur",
     "collection.placeholder.mdSource": "Veuillez ajouter une source de métadonnées",
-    "collection.placeholder.permittedFor": "Enter one ISIL for an insititution with permitted metadata usage",
+    "collection.placeholder.permittedFor": "Entrez un ISIL pour une institution avec une utilisation de métadonnées autorisée",
     "collection.placeholder.tickets": "Entrez une URL vers un problème connexe",
     "collection.placeholder.contentFiles": "Entrez une URL vers un serveur de fichiers"
 }
