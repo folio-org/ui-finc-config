@@ -80,7 +80,7 @@
     "plugin.buttonLabel.source": "Ajouter une source de métadonnées",
     "navigation.sources": "Sources",
     "navigation.collections": "Collections",
-    "settings.isils.isilIsEmpty": "Please fill isil to continue",
+    "settings.isils.isilIsEmpty": "Veuillez remplir isil pour continuer",
     "settings.isils.tenantIsEmpty": "Please fill tenant to continue",
     "permission.module.enabled": "Finc config: module is enabled",
     "permission.settings.manage": "Settings (Finc config): Can view and edit settings",
