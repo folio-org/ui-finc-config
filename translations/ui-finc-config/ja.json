@@ -94,7 +94,7 @@
     "collection.search.label": "Name",
     "collection.search.description": "説明",
     "collection.search.collectionId": "ID",
-    "dataOption.active": "Active",
+    "dataOption.active": "有効",
     "dataOption.request": "Request",
     "dataOption.implementation": "Implementation",
     "dataOption.closed": "Closed",
