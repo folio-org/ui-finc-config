@@ -14,7 +14,7 @@
     "test": "yarn run test:jest",
     "test:jest": "jest --ci --coverage --silent",
     "lint": "eslint src",
-    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-erm-usage ./translations/ui-erm-usage/compiled"
+    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-finc-config ./translations/ui-finc-config/compiled"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.10.4",
