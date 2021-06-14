@@ -1,5 +1,9 @@
 # Change history for ui-finc-config
 
+## [3.0.1](https://github.com/folio-org/ui-finc-config/tree/v3.0.1) (2021-06-14)
+* Replace bigtest by rtl jest (UIFC-238)
+* Translation ast (UIFC-244)
+
 ## [3.0.0](https://github.com/folio-org/ui-finc-config/tree/v3.0.0) (2021-03-19)
 * Increment `@folio/stripes` to `v6.0` (UIFC-229)
 

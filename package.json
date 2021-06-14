@@ -1,6 +1,6 @@
 {
   "name": "@folio/finc-config",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Index configuration of finc catalogues",
   "main": "src/index.js",
   "repository": "folio-org/ui-finc-config",
