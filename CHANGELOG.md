@@ -1,5 +1,8 @@
 # Change history for ui-finc-config
 
+## [4.0.0](https://github.com/folio-org/ui-finc-config/tree/v4.0.0) (2021-09-30)
+* Increment stripes to v7 (UIFC-254)
+
 ## [3.0.1](https://github.com/folio-org/ui-finc-config/tree/v3.0.1) (2021-06-14)
 * Replace bigtest by rtl jest (UIFC-238)
 * Translation ast (UIFC-244)
