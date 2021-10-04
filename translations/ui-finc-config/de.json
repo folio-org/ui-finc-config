@@ -19,7 +19,7 @@
     "settings.isils.label": "Isils",
     "settings.isils.labelSingular": "Isil",
     "settings.isils.library": "Library",
-    "settings.isils.tenant": "Tenant",
+    "settings.isils.tenant": "Mandant",
     "source.description": "Description",
     "source.organization": "Organization",
     "source.indexingLevel": "Indexing level",
