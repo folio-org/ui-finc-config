@@ -4,6 +4,8 @@ Copyright (C) 2018 The Open Library Foundation
 
 This software is distributed under the terms of the Apache License, Version 2.0. See the file "[LICENSE](LICENSE)" for more information.
 
+<img alt="EFRE-Lod logo" src="https://github.com/folio-org/ui-finc-config/blob/master/EFRE_2015_quer_RGB_klein.jpg" width="500" >
+
 ## Introduction
 
 This is a [Stripes](https://github.com/folio-org/stripes-core/) UI module for administrating metadata sources and collections for the finc user community.
