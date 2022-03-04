@@ -14,6 +14,7 @@
     "test": "yarn run test:jest",
     "test:jest": "jest --ci --coverage --silent",
     "lint": "eslint src",
+    "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-finc-config ./translations/ui-finc-config/compiled"
   },
   "devDependencies": {
@@ -35,7 +36,7 @@
     "@folio/stripes-form": "^7.0.0",
     "@folio/stripes-logger": "^1.0.0",
     "@folio/stripes-smart-components": "^7.0.0",
-    "@formatjs/cli": "^4.2.17",
+    "@formatjs/cli": "^4.2.20",
     "@testing-library/dom": "^7.26.6",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.2",
