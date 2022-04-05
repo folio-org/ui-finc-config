@@ -79,7 +79,7 @@
     "plugin.buttonLabel.organization": "Add organization",
     "plugin.buttonLabel.source": "Add metadata source",
     "navigation.sources": "Sources",
-    "navigation.collections": "Collections",
+    "navigation.collections": "コレクション",
     "settings.isils.isilIsEmpty": "Please fill isil to continue",
     "settings.isils.tenantIsEmpty": "Please fill tenant to continue",
     "permission.module.enabled": "Finc config: module is enabled",
