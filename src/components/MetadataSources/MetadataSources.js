@@ -53,7 +53,7 @@ class MetadataSources extends React.Component {
     contentData: PropTypes.arrayOf(PropTypes.object),
     disableRecordCreation: PropTypes.bool,
     filterData: PropTypes.shape({
-      contacts: PropTypes.array,
+      contacts: PropTypes.arrayOf(PropTypes.object),
     }),
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,

@@ -54,7 +54,7 @@ class MetadataCollections extends React.Component {
     contentData: PropTypes.arrayOf(PropTypes.object),
     disableRecordCreation: PropTypes.bool,
     filterData: PropTypes.shape({
-      mdSources: PropTypes.array,
+      mdSources: PropTypes.arrayOf(PropTypes.object),
     }),
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
