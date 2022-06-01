@@ -60,7 +60,7 @@
     "source.user": "User",
     "source.contact.type": "Type",
     "source.contact.title": "Contacts",
-    "source.contact.title.singular": "Contact #{amount}",
+    "source.contact.title.singular": "Kontakt #{amount}",
     "source.contact.add": "Add contact",
     "source.contact.remove": "Remove contact",
     "source.contact.or": "or",
