@@ -14,6 +14,7 @@
     "test": "yarn run test:jest",
     "test:jest": "jest --ci --coverage --silent",
     "lint": "eslint src",
+    "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-finc-config ./translations/ui-finc-config/compiled"
   },
   "devDependencies": {
