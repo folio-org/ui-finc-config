@@ -50,7 +50,7 @@
     "edit": "Upravit",
     "form.saveAndClose": "Uložit a zavřít",
     "form.create": "Vytvořit",
-    "form.delete": "Odstranit",
+    "form.delete": "Smazat",
     "form.cancel": "Zrušit",
     "form.close": "Zavřít dialogové okno úprav",
     "source.contact.name": "Jméno",
@@ -67,7 +67,7 @@
     "noPermission": "Bez povolení",
     "renderList.isEmpty": "Žádné jednotky k zobrazení",
     "noSourceYet": "Zatím žádný zdroj",
-    "form.delete.confirm.message": "Opravdu chcete odstranit {name}?",
+    "form.delete.confirm.message": "Opravdu chcete smazat {name}?",
     "form.button.add": "+ Přidat",
     "form.validate.required": "Požadované!",
     "form.validate.urlRequired": "Je vyžadována platná URL s http:// nebo https://!",
@@ -108,6 +108,6 @@
     "dataOption.vendor": "Prodejce",
     "collection.placeholder.mdSource": "Přidejte prosím zdroj metadat",
     "collection.placeholder.permittedFor": "Zadejte jeden ISIL pro instituci s povoleným použitím metadat.",
-    "collection.placeholder.tickets": "Zadejte adresu URL souvisejícího problému",
+    "collection.placeholder.tickets": "Zadejte URL souvisejícího vydání",
     "collection.placeholder.contentFiles": "Zadejte adresu URL souborového serveru"
 }
