@@ -88,7 +88,7 @@
     "permission.view": "Finc config: Can view metadatasources and metadatacollections",
     "source.search.all": "All",
     "source.search.label": "Name",
-    "source.search.description": "Description",
+    "source.search.description": "Descrizione",
     "source.search.sourceId": "ID",
     "collection.search.all": "Tutto",
     "collection.search.label": "Nome",
