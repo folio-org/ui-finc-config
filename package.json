@@ -107,7 +107,7 @@
       "finc-config/isils": "1.0",
       "organizations-storage.organizations": "3.0",
       "organizations-storage.contacts": "2.0",
-      "users": "15.0"
+      "users": "15.0 16.0"
     },
     "stripesDeps": [
       "@folio/stripes-erm-components"
