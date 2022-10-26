@@ -1,5 +1,9 @@
 # Change history for ui-finc-config
 
+## [4.1.0](https://github.com/folio-org/ui-finc-config/tree/v4.1.0) (2022-10-26)
+* Upgrade Users interface to 16.0 (UIFC-278)
+* Replace babel-eslint with @babel/eslint-parser (UIFC-269)
+
 ## [4.0.0](https://github.com/folio-org/ui-finc-config/tree/v4.0.0) (2021-09-30)
 * Increment stripes to v7 (UIFC-254)
 
