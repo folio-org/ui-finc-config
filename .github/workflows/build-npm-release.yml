@@ -22,7 +22,7 @@ jobs:
     if : ${{ startsWith(github.ref, 'refs/tags/v') }}
     env:
       YARN_TEST_OPTIONS: ''
-      SQ_ROOT_DIR: ''
+      SQ_ROOT_DIR: './src'
       COMPILE_TRANSLATION_FILES: 'true'
       PUBLISH_MOD_DESCRIPTOR: 'true'
       FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folio/'
