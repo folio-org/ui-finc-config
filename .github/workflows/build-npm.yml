@@ -19,7 +19,7 @@ jobs:
   github-actions-ci:
     env:
       YARN_TEST_OPTIONS: ''
-      SQ_ROOT_DIR: ''
+      SQ_ROOT_DIR: './src'
       COMPILE_TRANSLATION_FILES: 'true'
       PUBLISH_MOD_DESCRIPTOR: 'true'
       FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
@@ -134,20 +134,20 @@ jobs:
       - name: Fetch branches for SonarCloud
         run: git fetch --no-tags ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY} +refs/heads/${{ env.DEFAULT_BRANCH }}:refs/remotes/origin/${{ env.DEFAULT_BRANCH }}
 
-    #  - name: Run SonarCloud scan
-    #    uses: sonarsource/sonarcloud-github-action@master
-    #    with:
-    #      args: >
-    #        -Dsonar.organization=folio-org
-    #        -Dsonar.projectKey=org.folio:${{ github.event.repository.name }}
-    #        -Dsonar.projectName=${{ github.event.repository.name }}
-    #        -Dsonar.sources=${{ env.SQ_ROOT_DIR }}
-    #        -Dsonar.language=js
-    #        -Dsonar.javascript.lcov.reportPaths=${{ env.SQ_LCOV_REPORT }}
-    #        -Dsonar.exclusions=${{ env.SQ_EXCLUSIONS }}
-    #    env:
-    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Run SonarCloud scan
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.organization=folio-org
+            -Dsonar.projectKey=org.folio:${{ github.event.repository.name }}
+            -Dsonar.projectName=${{ github.event.repository.name }}
+            -Dsonar.sources=${{ env.SQ_ROOT_DIR }}
+            -Dsonar.language=js
+            -Dsonar.javascript.lcov.reportPaths=${{ env.SQ_LCOV_REPORT }}
+            -Dsonar.exclusions=${{ env.SQ_EXCLUSIONS }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Set up NPM environment for publishing
         if: ${{ github.ref == 'refs/heads/master' || github.ref  == 'refs/heads/main' }}
