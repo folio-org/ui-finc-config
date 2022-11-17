@@ -10,7 +10,7 @@
     "source.technicalAccordion": "Technické",
     "collection.label": "Název",
     "collection.metadataAvailable": "Dostupná metadata",
-    "collection.usageRestricted": "Použití omezeno",
+    "collection.usageRestricted": "Využití omezeno",
     "collection.permittedFor": "Povoleno pro",
     "collection.freeContent": "Bezplatný obsah",
     "collection.generalAccordion": "Obecné",
@@ -45,7 +45,7 @@
     "collection.selectedBy": "Vybráno podle",
     "collection.form.selectedUsageRestricted.clearModalHeading": "Jasně povoleno pro?",
     "collection.form.selectedUsageRestricted.confirmClearLabel": "Jasné povoleno pro",
-    "collection.form.selectedUsageRestricted.confirmClearMessage": "Chcete zrušit povolenou hodnotu při změně omezeného použití?",
+    "collection.form.selectedUsageRestricted.confirmClearMessage": "Chcete zrušit povolenou hodnotu při změně omezeného využití?",
     "searchInputLabel": "Vyhledávání",
     "edit": "Upravit",
     "form.saveAndClose": "Uložit a zavřít",
@@ -107,7 +107,7 @@
     "dataOption.technical": "Technické",
     "dataOption.vendor": "Prodejce",
     "collection.placeholder.mdSource": "Přidejte prosím zdroj metadat",
-    "collection.placeholder.permittedFor": "Zadejte jeden ISIL pro instituci s povoleným použitím metadat.",
+    "collection.placeholder.permittedFor": "Zadejte jeden ISIL pro instituci s povoleným využitím metadat.",
     "collection.placeholder.tickets": "Zadejte URL souvisejícího vydání",
     "collection.placeholder.contentFiles": "Zadejte adresu URL souborového serveru"
 }
