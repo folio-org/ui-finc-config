@@ -46,7 +46,7 @@
     "collection.form.selectedUsageRestricted.clearModalHeading": "\"Zugelassen für\" löschen?",
     "collection.form.selectedUsageRestricted.confirmClearLabel": "\"Zugelassen für\" löschen",
     "collection.form.selectedUsageRestricted.confirmClearMessage": "Do you want to clear permitted for when changing usage restricted?",
-    "searchInputLabel": "Suche",
+    "searchInputLabel": "Suchen",
     "edit": "Bearbeiten",
     "form.saveAndClose": "Speichern & schließen",
     "form.create": "Erstellen",
