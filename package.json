@@ -29,7 +29,7 @@
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^6.1.0",
-    "@folio/plugin-find-finc-metadata-source": "^3.0.0",
+    "@folio/plugin-find-finc-metadata-source": "^5.0.0",
     "@folio/stripes": "^8.0.0",
     "@folio/stripes-cli": "^2.0.0",
     "@folio/stripes-components": "^11.0.0",
