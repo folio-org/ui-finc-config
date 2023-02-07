@@ -48,7 +48,13 @@ class SourcesRoute extends React.Component {
       path: 'finc-config/contacts',
       resourceShouldRefresh: true
     },
-    query: { initialValue: {} },
+    query: {
+      initialValue: {
+        query: '',
+        filters: 'status.active,status.implementation',
+        sort: 'label'
+      }
+    },
     resultCount: { initialValue: INITIAL_RESULT_COUNT },
   });
 
