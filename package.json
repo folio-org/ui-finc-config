@@ -95,7 +95,7 @@
     ],
     "displayName": "ui-finc-config.meta.title",
     "route": "/finc-config",
-    "home": "/finc-config/metadata-sources",
+    "home": "/finc-config/metadata-sources?filters=status.active,status.implementation",
     "queryResource": "query",
     "okapiInterfaces": {
       "finc-config/metadata-sources": "3.0",
