@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const path = require('path');
 
-const esModules = ['@folio'].join('|');
+const esModules = ['@folio', '@k-int'].join('|');
 
 module.exports = {
   collectCoverageFrom: [

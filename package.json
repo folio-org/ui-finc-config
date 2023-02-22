@@ -67,7 +67,8 @@
     "sinon": "^7.1.1"
   },
   "dependencies": {
-    "@folio/stripes-erm-components": "^5.0.0",
+    "@folio/stripes-erm-components": "^8.0.0",
+    "@k-int/stripes-kint-components": "^4.0.0",
     "final-form": "^4.18.7",
     "final-form-arrays": "^3.0.2",
     "lodash": "^4.17.4",
