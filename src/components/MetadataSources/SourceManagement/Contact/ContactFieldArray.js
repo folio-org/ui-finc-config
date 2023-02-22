@@ -8,27 +8,17 @@ import {
   Button,
   Headline,
 } from '@folio/stripes/components';
-import {
-  EditCard,
-  withKiwtFieldArray,
-} from '@folio/stripes-erm-components';
+import { EditCard } from '@folio/stripes-erm-components';
+import { useKiwtFieldArray } from '@k-int/stripes-kint-components';
 
 import ContactField from './ContactField';
 
-class ContactFieldArray extends React.Component {
-  static propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object),
-    name: PropTypes.string.isRequired,
-    onAddField: PropTypes.func.isRequired,
-    onDeleteField: PropTypes.func.isRequired,
-    onUpdateField: PropTypes.func.isRequired,
-  }
+const ContactFieldArray = ({
+  fields: { name },
+}) => {
+  const { items, onAddField, onDeleteField, onUpdateField } = useKiwtFieldArray(name);
 
-  static defaultProps = {
-    items: [],
-  }
-
-  handleContactSelected = (index, selectedContact) => {
+  const handleContactSelected = (index, selectedContact) => {
     let cName = '';
     let cId = '';
     let cPlugin = '';
@@ -46,49 +36,52 @@ class ContactFieldArray extends React.Component {
       cName = _.get(selectedContact.personal, 'lastName', '') + ', ' + _.get(selectedContact.personal, 'firstName', '');
     }
 
-    this.props.onUpdateField(index, {
+    onUpdateField(index, {
       externalId: cId,
       name: cName,
       type: cPlugin,
     });
-  }
+  };
 
-  renderContact = () => {
-    const { name, items } = this.props;
-
+  const renderContact = () => {
     return items.map((contact, index) => (
       <EditCard
         data-test-source-contact-number={index}
         deleteButtonTooltipText={<FormattedMessage id="ui-finc-config.source.contact.remove" />}
         header={<FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount: index + 1 }} />}
         key={index}
-        onDelete={() => this.props.onDeleteField(index, contact)}
+        onDelete={() => onDeleteField(index, contact)}
       >
         <Field
           component={ContactField}
           index={index}
           name={`${name}[${index}]`}
-          selectContact={selectedContact => this.handleContactSelected(index, selectedContact)}
+          selectContact={selectedContact => handleContactSelected(index, selectedContact)}
         />
       </EditCard>
     ));
-  }
+  };
 
-  render = () => {
-    return (
-      <div>
-        <Headline>
-          <FormattedMessage id="ui-finc-config.source.contact.title" />
-        </Headline>
-        <div id="source-form-contacts">
-          {this.renderContact()}
-        </div>
-        <Button id="add-contact-button" onClick={() => this.props.onAddField()}>
-          <FormattedMessage id="ui-finc-config.source.contact.add" />
-        </Button>
+  return (
+    <div>
+      <Headline>
+        <FormattedMessage id="ui-finc-config.source.contact.title" />
+      </Headline>
+      <div id="source-form-contacts">
+        {renderContact()}
       </div>
-    );
-  }
-}
+      <Button id="add-contact-button" onClick={() => onAddField()}>
+        <FormattedMessage id="ui-finc-config.source.contact.add" />
+      </Button>
+    </div>
+  );
+};
 
-export default withKiwtFieldArray(ContactFieldArray);
+ContactFieldArray.propTypes = {
+  name: PropTypes.string,
+  fields: PropTypes.shape({
+    name: PropTypes.string,
+  }),
+};
+
+export default ContactFieldArray;
