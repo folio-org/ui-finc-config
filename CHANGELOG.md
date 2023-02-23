@@ -1,7 +1,11 @@
 # Change history for ui-finc-config
 
-## [5.0.0] (IN PROGRESS)
+## [5.1.0] (IN PROGRESS)
+
+## [5.0.0](https://github.com/folio-org/ui-finc-config/tree/v5.0.0) (2023-02-23)
 * Bump Stripes to v8, drop `react-redux`, `redux`, bump `plugin-find-finc-metadata-source` ([UIFC-290](https://issues.folio.org/browse/UIFC-290))
+* No results shown on first open ([UIFC-297](https://issues.folio.org/browse/UIFC-297))
+* Upgrade stripes-erm-components to v8 ([UIFC-295](https://issues.folio.org/browse/UIFC-295))
 
 ## [4.1.0](https://github.com/folio-org/ui-finc-config/tree/v4.1.0) (2022-10-26)
 * Upgrade Users interface to 16.0 (UIFC-278)
