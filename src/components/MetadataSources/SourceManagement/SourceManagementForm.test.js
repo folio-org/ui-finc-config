@@ -4,7 +4,7 @@ import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { StripesContext } from '@folio/stripes-core/src/StripesContext';
+import { StripesContext } from '@folio/stripes/core';
 
 import renderWithIntl from '../../../../test/jest/helpers/renderWithIntl';
 import SourceManagementForm from './SourceManagementForm';
