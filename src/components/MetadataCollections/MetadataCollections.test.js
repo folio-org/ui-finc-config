@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { noop } from 'lodash';
-import { StripesContext } from '@folio/stripes-core/src/StripesContext';
+import { StripesContext } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
 
 import '../../../test/jest/__mock__';

@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { StripesContext } from '@folio/stripes-core/src/StripesContext';
+import { StripesContext } from '@folio/stripes/core';
 
 import renderWithIntl from '../../../test/jest/helpers/renderWithIntl';
 import MetadataCollectionForm from './MetadataCollectionForm';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { screen } from '@testing-library/react';
-import { StripesContext } from '@folio/stripes-core/src/StripesContext';
+import { StripesContext } from '@folio/stripes/core';
 
 import '../../../test/jest/__mock__';
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
