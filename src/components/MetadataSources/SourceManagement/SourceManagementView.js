@@ -53,16 +53,16 @@ class SourceManagementView extends React.Component {
       }
     } else {
       orgValue = (
-        <React.Fragment>
+        <>
           <Link to={{ pathname: `${urls.organizationView(organization.id)}` }}>
             {organization.name}
           </Link>
-        </React.Fragment>
+        </>
       );
     }
 
     return (
-      <React.Fragment>
+      <>
         <div id={id}>
           <Row>
             <Col xs={6}>
@@ -107,7 +107,7 @@ class SourceManagementView extends React.Component {
             />
           </Row>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -46,8 +46,8 @@ const renderMetadataSources = (stripes) => (
           onNeedMoreData={jest.fn()}
           queryGetter={jest.fn()}
           querySetter={jest.fn()}
-          searchString={'status.active,status.implementation'}
-          selectedRecordId={''}
+          searchString="status.active,status.implementation"
+          selectedRecordId=""
           onChangeIndex={jest.fn()}
         />
       </StripesContext.Provider>

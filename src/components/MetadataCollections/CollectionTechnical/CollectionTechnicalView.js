@@ -63,7 +63,7 @@ class CollectionTechnicalView extends React.Component {
     const { metadataCollection, id } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <div id={id}>
           <Row>
             <KeyValue
@@ -111,7 +111,7 @@ class CollectionTechnicalView extends React.Component {
             { this.renderList('solrMegaCollections') }
           </Row>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

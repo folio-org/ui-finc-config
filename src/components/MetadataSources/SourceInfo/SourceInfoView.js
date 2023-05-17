@@ -29,7 +29,7 @@ class SourceInfoView extends React.Component {
     const implementationStatusLabel = this.getDataLable('status');
 
     return (
-      <React.Fragment>
+      <>
         <div id={id}>
           <Row>
             <KeyValue
@@ -50,7 +50,7 @@ class SourceInfoView extends React.Component {
             />
           </Row>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

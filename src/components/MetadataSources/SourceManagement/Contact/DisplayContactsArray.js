@@ -21,7 +21,7 @@ class DisplayContactsArray extends React.Component {
       const fields = Array.from(metadataSource.contacts);
 
       return (
-        <React.Fragment>
+        <>
           {fields.map((elem, index) => (
             <DisplayContact
               contact={elem}
@@ -30,7 +30,7 @@ class DisplayContactsArray extends React.Component {
               key={index}
             />
           ))}
-        </React.Fragment>
+        </>
       );
     }
   }

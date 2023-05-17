@@ -39,8 +39,8 @@ const renderMetadataCollections = (stripes) => (
           onNeedMoreData={jest.fn()}
           queryGetter={jest.fn()}
           querySetter={jest.fn()}
-          searchString={'metadataAvailable.yes'}
-          selectedRecordId={''}
+          searchString="metadataAvailable.yes"
+          selectedRecordId=""
           onChangeIndex={jest.fn()}
         />
       </StripesContext.Provider>

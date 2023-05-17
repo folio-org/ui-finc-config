@@ -41,7 +41,7 @@ class FindUser extends React.Component {
       </Pluggable>;
 
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Label className={BasicCss.styleForFormLabel}>
             <FormattedMessage id="ui-finc-config.source.user" />
@@ -50,7 +50,7 @@ class FindUser extends React.Component {
         <Row>
           { pluggable }
         </Row>
-      </React.Fragment>
+      </>
     );
   }
 }
