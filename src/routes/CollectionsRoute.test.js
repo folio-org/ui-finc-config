@@ -1,10 +1,9 @@
 import { noop } from 'lodash';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { render } from '@testing-library/react';
 
-import '../../test/jest/__mock__';
-import renderWithIntl from '../../test/jest/helpers/renderWithIntl';
-import translationsProperties from '../../test/jest/helpers';
+import withIntlConfiguration from '../../test/jest/helpers/withIntlConfiguration';
 import collections from '../../test/fixtures/metadatacollections';
 import CollectionsRoute from './CollectionsRoute';
 
@@ -24,16 +23,17 @@ const routeProps = {
   resources: { collections }
 };
 
+jest.unmock('react-intl');
+
 describe('CollectionsRoute', () => {
   describe('rendering the route with permissions', () => {
     let renderComponent;
     beforeEach(() => {
-      renderComponent = renderWithIntl(
+      renderComponent = render(withIntlConfiguration(
         <MemoryRouter>
           <CollectionsRoute {...routeProps} />
-        </MemoryRouter>,
-        translationsProperties
-      );
+        </MemoryRouter>
+      ));
     });
 
     test('renders the collections component', () => {
@@ -45,15 +45,14 @@ describe('CollectionsRoute', () => {
   describe('rendering with no permissions', () => {
     let renderComponent;
     beforeEach(() => {
-      renderComponent = renderWithIntl(
+      renderComponent = render(withIntlConfiguration(
         <MemoryRouter>
           <CollectionsRoute
             {...routeProps}
             stripes={{ hasPerm: () => false }}
           />
-        </MemoryRouter>,
-        translationsProperties
-      );
+        </MemoryRouter>
+      ));
     });
 
     test('displays the permission error', () => {

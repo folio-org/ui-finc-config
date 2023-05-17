@@ -1,22 +1,22 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { StripesContext } from '@folio/stripes/core';
 
-import renderWithIntl from '../../../test/jest/helpers/renderWithIntl';
+import { StripesContext, useStripes } from '@folio/stripes/core';
+
+import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
 import MetadataSourceForm from './MetadataSourceForm';
 import SOURCE from '../../../test/fixtures/metadatasource';
-import stripes from '../../../test/jest/__mock__/stripesCore.mock';
 
 const onDelete = jest.fn();
 const onClose = jest.fn();
 const handleSubmit = jest.fn();
 const onSubmit = jest.fn();
 
-const renderEmptyMetadataSourceForm = (initialValues = {}) => {
-  return renderWithIntl(
+const renderEmptyMetadataSourceForm = (stripes, initialValues = {}) => {
+  return render(withIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
@@ -32,11 +32,11 @@ const renderEmptyMetadataSourceForm = (initialValues = {}) => {
         />
       </MemoryRouter>
     </StripesContext.Provider>
-  );
+  ));
 };
 
-const renderMetadataSourceForm = (initialValues = SOURCE) => {
-  return renderWithIntl(
+const renderMetadataSourceForm = (stripes, initialValues = SOURCE) => {
+  return render(withIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
@@ -53,14 +53,23 @@ const renderMetadataSourceForm = (initialValues = SOURCE) => {
         />
       </MemoryRouter>
     </StripesContext.Provider>
-  );
+  ));
 };
 
+jest.unmock('react-intl');
+
 describe('MetadataSourceForm', () => {
+  let stripes;
+
+  beforeEach(() => {
+    stripes = useStripes();
+  });
+
   describe('CREATE: empty form', () => {
     beforeEach(() => {
-      renderEmptyMetadataSourceForm();
+      renderEmptyMetadataSourceForm(stripes);
     });
+
     test('should display accordions', () => {
       expect(document.querySelector('#editSourceInfo')).toBeInTheDocument();
       expect(document.querySelector('#editSourceManagement')).toBeInTheDocument();
@@ -79,6 +88,7 @@ describe('MetadataSourceForm', () => {
           screen.getByLabelText('Solr shard'), ['UBL main']
         );
       });
+
       test('test required fields', async () => {
         userEvent.click(screen.getByText('Save & close'));
         expect(screen.getAllByText(/required/i)).toHaveLength(3);
@@ -91,8 +101,9 @@ describe('MetadataSourceForm', () => {
 
   describe('EDIT: form with initial values', () => {
     beforeEach(() => {
-      renderMetadataSourceForm();
+      renderMetadataSourceForm(stripes);
     });
+
     test('label should have value of fixture source', () => {
       expect(screen.getByDisplayValue('Cambridge University Press Journals')).toBeInTheDocument();
     });
@@ -103,6 +114,7 @@ describe('MetadataSourceForm', () => {
           screen.getByLabelText('Solr shard'), ['UBL ai']
         );
       });
+
       test('click save should call onSubmit function', async () => {
         userEvent.click(screen.getByText('Save & close'));
         expect(onSubmit).toHaveBeenCalled();
@@ -112,7 +124,7 @@ describe('MetadataSourceForm', () => {
 
   describe('delete source', () => {
     beforeEach(() => {
-      renderMetadataSourceForm();
+      renderMetadataSourceForm(stripes);
     });
 
     test('delete modal is present', () => {

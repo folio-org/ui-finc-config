@@ -1,23 +1,22 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { ControlledVocab } from '@folio/stripes/smart-components';
 
-import fakeStripes from '../../test/jest/__mock__/stripesCore.mock';
-import renderWithIntl from '../../test/jest/helpers';
+import withIntlConfiguration from '../../test/jest/helpers/withIntlConfiguration';
 import IsilSettings from './IsilSettings';
-import translationsProperties from '../../test/jest/helpers/translationsProperties';
 
-const renderIsilSettings = () => renderWithIntl(
+const renderIsilSettings = () => render(withIntlConfiguration(
   <IsilSettings
     stripes={{ connect: (Component) => Component, hasPerm: () => true }}
-  />,
-  translationsProperties
-);
+  />
+));
+
+jest.unmock('react-intl');
 
 describe('IsilSettings', () => {
   beforeEach(() => {
     ControlledVocab.mockClear();
-    renderIsilSettings({ fakeStripes });
+    renderIsilSettings();
   });
 
   it('should render ConnectedControlledVocab component', async () => {

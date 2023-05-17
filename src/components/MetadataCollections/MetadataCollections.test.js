@@ -1,16 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { noop } from 'lodash';
-import { StripesContext } from '@folio/stripes/core';
+import { render } from '@testing-library/react';
+
+import { StripesContext, useStripes } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
 
-import '../../../test/jest/__mock__';
-import renderWithIntl from '../../../test/jest/helpers/renderWithIntl';
-import translationsProperties from '../../../test/jest/helpers/translationsProperties';
+import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
 import metadatacollections from '../../../test/fixtures/metadatacollections';
 import mdSources from '../../../test/fixtures/tinyMetadataSources';
 import MetadataCollections from './MetadataCollections';
-import stripes from '../../../test/jest/__mock__/stripesCore.mock';
 
 const tinySources = { mdSources };
 
@@ -29,8 +28,8 @@ const testCollection = {
 
 const connectedTestCollection = new StripesConnectedSource(testCollection.props, testCollection.logger, 'collections');
 
-const renderMetadataCollections = () => (
-  renderWithIntl(
+const renderMetadataCollections = (stripes) => (
+  render(withIntlConfiguration(
     <Router>
       <StripesContext.Provider value={stripes}>
         <MetadataCollections
@@ -45,14 +44,18 @@ const renderMetadataCollections = () => (
           onChangeIndex={jest.fn()}
         />
       </StripesContext.Provider>
-    </Router>,
-    translationsProperties
-  )
+    </Router>
+  ))
 );
 
+jest.unmock('react-intl');
+
 describe('Collections SASQ View', () => {
+  let stripes;
+
   beforeEach(() => {
-    renderMetadataCollections();
+    stripes = useStripes();
+    renderMetadataCollections(stripes);
   });
 
   afterEach(() => {

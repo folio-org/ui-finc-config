@@ -1,10 +1,9 @@
 import { noop } from 'lodash';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { render } from '@testing-library/react';
 
-import '../../test/jest/__mock__';
-import renderWithIntl from '../../test/jest/helpers/renderWithIntl';
-import translationsProperties from '../../test/jest/helpers';
+import withIntlConfiguration from '../../test/jest/helpers/withIntlConfiguration';
 import sources from '../../test/fixtures/metadatasources';
 import SourcesRoute from './SourcesRoute';
 
@@ -24,16 +23,17 @@ const routeProps = {
   resources: { sources }
 };
 
+jest.unmock('react-intl');
+
 describe('SourcesRoute', () => {
   describe('rendering the route with permissions', () => {
     let renderComponent;
     beforeEach(() => {
-      renderComponent = renderWithIntl(
+      renderComponent = render(withIntlConfiguration(
         <MemoryRouter>
           <SourcesRoute {...routeProps} />
-        </MemoryRouter>,
-        translationsProperties
-      );
+        </MemoryRouter>
+      ));
     });
 
     test('renders the sources component', () => {
@@ -45,15 +45,14 @@ describe('SourcesRoute', () => {
   describe('rendering with no permissions', () => {
     let renderComponent;
     beforeEach(() => {
-      renderComponent = renderWithIntl(
+      renderComponent = render(withIntlConfiguration(
         <MemoryRouter>
           <SourcesRoute
             {...routeProps}
             stripes={{ hasPerm: () => false }}
           />
-        </MemoryRouter>,
-        translationsProperties
-      );
+        </MemoryRouter>
+      ));
     });
 
     test('displays the permission error', () => {
