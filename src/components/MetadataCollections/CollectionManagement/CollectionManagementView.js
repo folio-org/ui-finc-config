@@ -56,7 +56,7 @@ class CollectionManagementView extends React.Component {
     const lodPublicationLabel = this.getDataLable('lod.publication');
 
     return (
-      <React.Fragment>
+      <>
         <div id={id}>
           <Row>
             <KeyValue
@@ -117,7 +117,7 @@ class CollectionManagementView extends React.Component {
             { this.renderList('selectedBy') }
           </Row>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

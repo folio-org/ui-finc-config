@@ -78,7 +78,7 @@ class FindSource extends React.Component {
       </Pluggable>;
 
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Label className={BasicCss.styleForFormLabel} required>
             <FormattedMessage id="ui-finc-config.collection.mdSource" />
@@ -100,7 +100,7 @@ class FindSource extends React.Component {
             />
           </Col>
         </Row>
-      </React.Fragment>
+      </>
     );
   }
 }

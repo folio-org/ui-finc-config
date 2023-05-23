@@ -1,16 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { noop } from 'lodash';
+import { render } from '@testing-library/react';
 
-import { StripesContext } from '@folio/stripes/core';
+import { StripesContext, useStripes } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
 
-import '../../../test/jest/__mock__';
-import renderWithIntl from '../../../test/jest/helpers/renderWithIntl';
-import translationsProperties from '../../../test/jest/helpers/translationsProperties';
+import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
 import metadatasources from '../../../test/fixtures/metadatasources';
 import MetadataSources from './MetadataSources';
-import stripes from '../../../test/jest/__mock__/stripesCore.mock';
 
 const filterData = { contacts: [
   {
@@ -37,8 +35,8 @@ const testSource = {
 
 const connectedTestSource = new StripesConnectedSource(testSource.props, testSource.logger, 'sources');
 
-const renderMetadataSources = () => (
-  renderWithIntl(
+const renderMetadataSources = (stripes) => (
+  render(withIntlConfiguration(
     <Router>
       <StripesContext.Provider value={stripes}>
         <MetadataSources
@@ -48,19 +46,23 @@ const renderMetadataSources = () => (
           onNeedMoreData={jest.fn()}
           queryGetter={jest.fn()}
           querySetter={jest.fn()}
-          searchString={'status.active,status.implementation'}
-          selectedRecordId={''}
+          searchString="status.active,status.implementation"
+          selectedRecordId=""
           onChangeIndex={jest.fn()}
         />
       </StripesContext.Provider>
-    </Router>,
-    translationsProperties
-  )
+    </Router>
+  ))
 );
 
+jest.unmock('react-intl');
+
 describe('Sources SASQ View', () => {
+  let stripes;
+
   beforeEach(() => {
-    renderMetadataSources();
+    stripes = useStripes();
+    renderMetadataSources(stripes);
   });
 
   afterEach(() => {

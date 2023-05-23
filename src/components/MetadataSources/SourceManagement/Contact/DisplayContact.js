@@ -24,21 +24,21 @@ class DisplayContact extends React.Component {
   getContactLink(contact, contactId) {
     if (contact.type === 'user') {
       return (
-        <React.Fragment>
+        <>
           <DisplayContactLinkUser
             contact={contact}
             contactId={contactId}
           />
-        </React.Fragment>
+        </>
       );
     } else if (contact.type === 'contact') {
       return (
-        <React.Fragment>
+        <>
           <DisplayContactLinkContact
             contact={contact}
             contactId={contactId}
           />
-        </React.Fragment>
+        </>
       );
     }
     return null;
@@ -61,7 +61,7 @@ class DisplayContact extends React.Component {
       <Card
         cardStyle="positive"
         data-test-contact-card
-        headerStart={<span>{<FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount : contactIndex + 1 }} />}</span>}
+        headerStart={<span><FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount : contactIndex + 1 }} /></span>}
         id={`contact-${parseInt(contactIndex + 1, 10)}`}
         roundedBorder
       >

@@ -1,10 +1,10 @@
 import { noop } from 'lodash';
 import React from 'react';
 import { Router } from 'react-router-dom';
-import { screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
+import { render, screen } from '@testing-library/react';
 
-import renderWithIntl from '../test/jest/helpers/renderWithIntl';
+import withIntlConfiguration from '../test/jest/helpers/withIntlConfiguration';
 import CollectionsRoute from './routes/CollectionsRoute';
 import SourcesRoute from './routes/SourcesRoute';
 import SourceCreateRoute from './routes/SourceCreateRoute';
@@ -107,13 +107,15 @@ const match = {
 const renderWithRouter = (component) => {
   const history = createMemoryHistory();
   return {
-    ...renderWithIntl(
+    ...render(withIntlConfiguration(
       <Router history={history}>
         {component}
       </Router>
-    )
+    ))
   };
 };
+
+jest.unmock('react-intl');
 
 jest.mock('./index', () => {
   return () => <span>FincConfig</span>;

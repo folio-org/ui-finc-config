@@ -93,7 +93,7 @@ class FindOrganization extends React.Component {
       </Pluggable>;
 
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Label className={BasicCss.styleForFormLabel}>
             <FormattedMessage id="ui-finc-config.source.organization" />
@@ -107,7 +107,7 @@ class FindOrganization extends React.Component {
             { vendorName }
           </Col>
         </Row>
-      </React.Fragment>
+      </>
     );
   }
 }

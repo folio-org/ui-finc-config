@@ -1,8 +1,4 @@
-import './currencyData.mock';
-import './documentCreateRange.mock';
-import './matchMedia.mock';
-import './intl.mock';
-import './stripesConfig.mock';
-import './stripesCore.mock';
-import './stripesIcon.mock';
+import '@folio/stripes-acq-components/test/jest/__mock__';
+
+// we need to mock ControlledVocab for IsilSettings.test.js
 import './stripesSmartComponents.mock';

@@ -2,21 +2,21 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { StripesContext } from '@folio/stripes/core';
 
-import renderWithIntl from '../../../../test/jest/helpers/renderWithIntl';
+import { StripesContext, useStripes } from '@folio/stripes/core';
+
+import withIntlConfiguration from '../../../../test/jest/helpers/withIntlConfiguration';
 import SourceManagementForm from './SourceManagementForm';
-import stripes from '../../../../test/jest/__mock__/stripesCore.mock';
 
 const onToggle = jest.fn();
 const setOrganization = jest.fn();
 
 const organization = {};
 
-const renderSourceManagementForm = (initialValues = { organization }) => {
-  return renderWithIntl(
+const renderSourceManagementForm = (stripes, initialValues = { organization }) => {
+  return render(withIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
@@ -36,13 +36,19 @@ const renderSourceManagementForm = (initialValues = { organization }) => {
         />
       </MemoryRouter>
     </StripesContext.Provider>
-  );
+  ));
 };
 
+jest.unmock('react-intl');
+
 describe('SourceManagementForm', () => {
+  let stripes;
+
   beforeEach(() => {
-    renderSourceManagementForm();
+    stripes = useStripes();
+    renderSourceManagementForm(stripes);
   });
+
   it('add contact button should be visible', () => {
     expect(document.querySelector('#add-contact-button')).toBeInTheDocument();
     expect(screen.getByText('Add contact')).toBeInTheDocument();

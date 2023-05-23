@@ -30,11 +30,11 @@ class DisplayContactLinkUser extends React.Component {
       return contact.name;
     } else {
       return (
-        <React.Fragment>
+        <>
           <Link to={{ pathname: `${urls.userView(contactId)}` }}>
             {contact.name}
           </Link>
-        </React.Fragment>
+        </>
       );
     }
   }
@@ -44,9 +44,9 @@ class DisplayContactLinkUser extends React.Component {
     const contactNameWithLink = this.getContactForUser(contact, contactId);
 
     return (
-      <React.Fragment>
+      <>
         {contactNameWithLink}
-      </React.Fragment>
+      </>
     );
   }
 }

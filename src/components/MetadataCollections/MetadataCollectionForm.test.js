@@ -1,22 +1,22 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
-import { screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { StripesContext } from '@folio/stripes/core';
 
-import renderWithIntl from '../../../test/jest/helpers/renderWithIntl';
+import { StripesContext, useStripes } from '@folio/stripes/core';
+
+import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
 import MetadataCollectionForm from './MetadataCollectionForm';
 import COLLECTION from '../../../test/fixtures/metadatacollection';
-import stripes from '../../../test/jest/__mock__/stripesCore.mock';
 
 const onDelete = jest.fn();
 const onClose = jest.fn();
 const handleSubmit = jest.fn();
 const onSubmit = jest.fn();
 
-const renderEmptyMetadataCollectionForm = (initialValues = {}) => {
-  return renderWithIntl(
+const renderEmptyMetadataCollectionForm = (stripes, initialValues = {}) => {
+  return render(withIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
@@ -32,11 +32,11 @@ const renderEmptyMetadataCollectionForm = (initialValues = {}) => {
         />
       </MemoryRouter>
     </StripesContext.Provider>
-  );
+  ));
 };
 
-const renderMetadataCollectionForm = (initialValues = COLLECTION) => {
-  return renderWithIntl(
+const renderMetadataCollectionForm = (stripes, initialValues = COLLECTION) => {
+  return render(withIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
@@ -53,14 +53,23 @@ const renderMetadataCollectionForm = (initialValues = COLLECTION) => {
         />
       </MemoryRouter>
     </StripesContext.Provider>
-  );
+  ));
 };
 
+jest.unmock('react-intl');
+
 describe('MetadataCollectionForm', () => {
+  let stripes;
+
+  beforeEach(() => {
+    stripes = useStripes();
+  });
+
   describe('CREATE: empty form', () => {
     beforeEach(() => {
-      renderEmptyMetadataCollectionForm();
+      renderEmptyMetadataCollectionForm(stripes);
     });
+
     test('should display accordions', () => {
       expect(document.querySelector('#editCollectionInfo')).toBeInTheDocument();
       expect(document.querySelector('#editCollectionManagement')).toBeInTheDocument();
@@ -79,6 +88,7 @@ describe('MetadataCollectionForm', () => {
           screen.getByLabelText('Metadata available'), ['yes']
         );
       });
+
       test('test required fields', async () => {
         userEvent.click(screen.getByText('Save & close'));
         // TODO: Required! of RequiredRepeatableField is not considered yet
@@ -93,12 +103,14 @@ describe('MetadataCollectionForm', () => {
     test('permittedFor textField should NOT be visible', async () => {
       expect(document.getElementById('permittedFor[0]')).not.toBeInTheDocument();
     });
+
     describe('select usageRestricted yes', () => {
       beforeEach(() => {
         userEvent.selectOptions(
           screen.getByLabelText('Usage restricted', { exact: false }), ['yes']
         );
       });
+
       test('permittedFor textField should be visible', async () => {
         await waitFor(() => expect(document.getElementById('permittedFor[0]')).toBeInTheDocument());
         expect(screen.getByPlaceholderText('Enter one ISIL for an insititution with permitted metadata usage')).toBeInTheDocument();
@@ -108,8 +120,9 @@ describe('MetadataCollectionForm', () => {
 
   describe('EDIT: form with initial values', () => {
     beforeEach(() => {
-      renderMetadataCollectionForm();
+      renderMetadataCollectionForm(stripes);
     });
+
     test('description should have value of fixture collection', () => {
       expect(screen.getByDisplayValue('This is a test metadata collection 2')).toBeInTheDocument();
     });
@@ -120,6 +133,7 @@ describe('MetadataCollectionForm', () => {
           screen.getByLabelText('Metadata available'), ['no']
         );
       });
+
       test('click save should call onSubmit function', async () => {
         userEvent.click(screen.getByText('Save & close'));
         expect(onSubmit).toHaveBeenCalled();
@@ -130,12 +144,14 @@ describe('MetadataCollectionForm', () => {
       expect(document.getElementById('permittedFor[0]')).toBeInTheDocument();
       expect(document.getElementById('permittedFor[1]')).toBeInTheDocument();
     });
+
     describe('select usageRestricted no', () => {
       beforeEach(() => {
         userEvent.selectOptions(
           screen.getByLabelText('Usage restricted', { exact: false }), ['no']
         );
       });
+
       test('clear permittedFor', async () => {
         expect(screen.getByText('Clear permitted for?')).toBeInTheDocument();
         expect(screen.getByText('Do you want to clear permitted for when changing usage restricted?')).toBeInTheDocument();
@@ -147,7 +163,7 @@ describe('MetadataCollectionForm', () => {
 
   describe('delete collection', () => {
     beforeEach(() => {
-      renderMetadataCollectionForm();
+      renderMetadataCollectionForm(stripes);
     });
 
     test('delete modal is present', () => {

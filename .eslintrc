@@ -1,26 +1,15 @@
 {
-  "globals": {
-    "process": true
-  },
   "extends": "@folio/eslint-config-stripes",
   "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "legacyDecorators": true
+  "overrides": [
+    {
+      "files": ["**/*.test.js", "test/jest/**/*"]
     }
-  },
-  "plugins": [
-    "babel",
-    "no-only-tests",
-    "react-hooks"
   ],
-  "root": true,
   "env": {
     "jest": true
   },
   "rules": {
-    "react/jsx-curly-brace-presence": "off",
-    "react/jsx-fragments": "off",
-    "prefer-object-spread": "off"
+    "import/no-extraneous-dependencies": "off"
   }
 }

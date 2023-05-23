@@ -26,15 +26,15 @@ class CollectionInfoView extends React.Component {
     const sourceName = _.get(metadataCollection, 'mdSource.name', <NoValue />);
     // set the complete source link with name and status
     const sourceLink = (
-      <React.Fragment>
+      <>
         <Link to={{ pathname: `${urls.sourceView(sourceId)}` }}>
           {sourceName}
         </Link>
-      </React.Fragment>
+      </>
     );
 
     return (
-      <React.Fragment>
+      <>
         <div id={id}>
           <Row>
             <KeyValue
@@ -55,7 +55,7 @@ class CollectionInfoView extends React.Component {
             />
           </Row>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

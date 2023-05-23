@@ -65,7 +65,7 @@ class SourceTechnicalView extends React.Component {
     const accessUrlValueFormatter = <a href={accessUrlValue} target="_blank" rel="noopener noreferrer">{accessUrlValue}</a>;
 
     return (
-      <React.Fragment>
+      <>
         <div id={id}>
           <Row>
             <KeyValue
@@ -146,7 +146,7 @@ class SourceTechnicalView extends React.Component {
             { this.renderList('inferiorTo') }
           </Row>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }
