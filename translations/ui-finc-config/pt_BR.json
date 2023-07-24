@@ -108,6 +108,6 @@
     "dataOption.vendor": "Fornecedor",
     "collection.placeholder.mdSource": "Adicione uma fonte de metadados",
     "collection.placeholder.permittedFor": "Insira um ISIL para uma instituição com uso permitido de metadados",
-    "collection.placeholder.tickets": "Insira um URL para um problema relacionado",
+    "collection.placeholder.tickets": "Insira uma URL para o fascículo relacionado",
     "collection.placeholder.contentFiles": "Insira um URL para um servidor de arquivos"
 }
