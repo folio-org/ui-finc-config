@@ -1,7 +1,7 @@
 import { noop } from 'lodash';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { render } from '@folio/jest-config-stripes/testing-library/react';
 
 import withIntlConfiguration from '../../test/jest/helpers/withIntlConfiguration';
 import collections from '../../test/fixtures/metadatacollections';

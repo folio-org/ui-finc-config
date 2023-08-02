@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { StripesContext, useStripes } from '@folio/stripes/core';
