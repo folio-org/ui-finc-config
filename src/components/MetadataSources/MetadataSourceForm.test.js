@@ -83,17 +83,17 @@ describe('MetadataSourceForm', () => {
     });
 
     describe('select solr shard', () => {
-      beforeEach(() => {
-        userEvent.selectOptions(
+      beforeEach(async () => {
+        await userEvent.selectOptions(
           screen.getByLabelText('Solr shard'), ['UBL main']
         );
       });
 
       test('test required fields', async () => {
-        userEvent.click(screen.getByText('Save & close'));
+        await userEvent.click(screen.getByText('Save & close'));
         expect(screen.getAllByText(/required/i)).toHaveLength(3);
         expect(screen.getAllByText('Required!', { exact: true })).toHaveLength(2);
-        expect(screen.getAllByText('Integer required!')).toHaveLength(1);
+        expect(screen.getByText('Integer required!')).toBeInTheDocument();
         expect(onSubmit).not.toHaveBeenCalled();
       });
     });
@@ -109,14 +109,14 @@ describe('MetadataSourceForm', () => {
     });
 
     describe('change solr shard', () => {
-      beforeEach(() => {
-        userEvent.selectOptions(
+      beforeEach(async () => {
+        await userEvent.selectOptions(
           screen.getByLabelText('Solr shard'), ['UBL ai']
         );
       });
 
       test('click save should call onSubmit function', async () => {
-        userEvent.click(screen.getByText('Save & close'));
+        await userEvent.click(screen.getByText('Save & close'));
         expect(onSubmit).toHaveBeenCalled();
       });
     });
@@ -127,29 +127,29 @@ describe('MetadataSourceForm', () => {
       renderMetadataSourceForm(stripes);
     });
 
-    test('delete modal is present', () => {
-      userEvent.click(screen.getByText('Delete'));
+    test('delete modal is present', async () => {
+      await userEvent.click(screen.getByText('Delete'));
       expect(document.getElementById('delete-source-confirmation')).toBeInTheDocument();
       expect(screen.getByText('Do you really want to delete Cambridge University Press Journals?')).toBeInTheDocument();
     });
 
-    test('click cancel', () => {
-      userEvent.click(screen.getByText('Delete'));
+    test('click cancel', async () => {
+      await userEvent.click(screen.getByText('Delete'));
       const cancel = screen.getByRole('button', {
         name: 'Cancel',
         id: 'clickable-delete-source-confirmation-cancel',
       });
-      userEvent.click(cancel);
+      await userEvent.click(cancel);
       expect(onDelete).not.toHaveBeenCalled();
     });
 
-    test('click submit', () => {
-      userEvent.click(screen.getByText('Delete'));
+    test('click submit', async () => {
+      await userEvent.click(screen.getByText('Delete'));
       const submit = screen.getByRole('button', {
         name: 'Submit',
         id: 'clickable-delete-source-confirmation-confirm',
       });
-      userEvent.click(submit);
+      await userEvent.click(submit);
       expect(onDelete).toHaveBeenCalled();
     });
   });

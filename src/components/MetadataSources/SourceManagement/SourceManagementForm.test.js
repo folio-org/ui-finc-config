@@ -55,7 +55,7 @@ describe('SourceManagementForm', () => {
   });
 
   test('contact form with fields should be visible after click add button ', async () => {
-    userEvent.click(await screen.findByText('Add contact'));
+    await userEvent.click(await screen.findByText('Add contact'));
     expect(document.querySelector('#source-form-contacts')).toBeInTheDocument();
     expect(document.querySelector('#contact-name-0')).toBeInTheDocument();
     expect(document.querySelector('#contact-role-0')).toBeInTheDocument();
