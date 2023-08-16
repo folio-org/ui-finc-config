@@ -93,14 +93,6 @@
         "visible": false
       },
       {
-        "permissionName": "ui-finc-config.module.enabled",
-        "displayName": "Finc config: module is enabled",
-        "subPermissions": [
-          "module.finc-config.enabled"
-        ],
-        "visible": true
-      },
-      {
         "permissionName": "settings.finc-config.enabled",
         "displayName": "Settings (finc-config): display list of settings pages",
         "subPermissions": [
@@ -112,8 +104,6 @@
         "permissionName": "ui-finc-config.settings.manage",
         "displayName": "Settings (Finc config): Can view and edit settings",
         "subPermissions": [
-          "finc-config.module.enabled",
-          "settings.enabled",
           "settings.finc-config.enabled",
           "finc-config.isils.collection.get",
           "finc-config.isils.item.get",
@@ -128,7 +118,14 @@
         "displayName": "Finc config: All permissions",
         "description": "All permissions for finc config",
         "subPermissions": [
-          "finc-config.all"
+          "ui-finc-config.settings.manage",
+          "ui-finc-config.view",
+          "finc-config.metadata-collections.item.post",
+          "finc-config.metadata-collections.item.put",
+          "finc-config.metadata-collections.item.delete",
+          "finc-config.metadata-sources.item.post",
+          "finc-config.metadata-sources.item.put",
+          "finc-config.metadata-sources.item.delete"
         ],
         "visible": true
       },
@@ -137,14 +134,15 @@
         "displayName": "Finc config: Can view metadatasources and metadatacollections",
         "description": "Can view metadatasources and metadatacollections",
         "subPermissions": [
-          "finc-config.module.enabled",
+          "module.finc-config.enabled",
           "finc-config.metadata-collections.collection.get",
           "finc-config.metadata-collections.item.get",
           "finc-config.metadata-sources.collection.get",
           "finc-config.metadata-sources.item.get",
           "organizations-storage.organizations.collection.get",
           "organizations-storage.organizations.item.get",
-          "organizations-storage.contacts.all"
+          "organizations-storage.contacts.collection.get",
+          "organizations-storage.contacts.item.get"
         ],
         "visible": true
       }
