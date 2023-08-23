@@ -2,8 +2,8 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
@@ -55,7 +55,7 @@ describe('SourceManagementForm', () => {
   });
 
   test('contact form with fields should be visible after click add button ', async () => {
-    userEvent.click(await screen.findByText('Add contact'));
+    await userEvent.click(await screen.findByText('Add contact'));
     expect(document.querySelector('#source-form-contacts')).toBeInTheDocument();
     expect(document.querySelector('#contact-name-0')).toBeInTheDocument();
     expect(document.querySelector('#contact-role-0')).toBeInTheDocument();

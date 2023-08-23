@@ -1,7 +1,10 @@
 # Change history for ui-finc-config
 
-## [5.2.0] (IN PROGRESS)
+## [6.0.0] (IN PROGRESS)
+* Upgrade React to v18 ([UIFC-317](https://issues.folio.org/browse/UIFC-317))
+* Update permissions ([UIFC-324](https://issues.folio.org/browse/UIFC-324))
 * Replace BigTest tests ([UIFC-288](https://issues.folio.org/browse/UIFC-288))
+* Avoid private paths in `stripes-core` imports ([UIFC-312](https://issues.folio.org/browse/UIFC-312))
 
 ## [5.1.0](https://github.com/folio-org/ui-finc-config/tree/v5.1.0) (2023-03-16)
 * Translations update

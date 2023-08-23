@@ -1,8 +1,8 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
@@ -83,19 +83,19 @@ describe('MetadataCollectionForm', () => {
     });
 
     describe('select metadata available', () => {
-      beforeEach(() => {
-        userEvent.selectOptions(
+      beforeEach(async () => {
+        await userEvent.selectOptions(
           screen.getByLabelText('Metadata available'), ['yes']
         );
       });
 
       test('test required fields', async () => {
-        userEvent.click(screen.getByText('Save & close'));
+        await userEvent.click(screen.getByText('Save & close'));
         // TODO: Required! of RequiredRepeatableField is not considered yet
         // expect(screen.getAllByText('Required!')).toHaveLength(4);
         // expect(screen.getAllByText(/required/i)).toHaveLength(5);
         expect(screen.getAllByText('Required!', { exact: false })).toHaveLength(4);
-        expect(screen.getAllByText('Metadata source required!')).toHaveLength(1);
+        expect(screen.getByText('Metadata source required!')).toBeInTheDocument();
         expect(onSubmit).not.toHaveBeenCalled();
       });
     });
@@ -105,8 +105,8 @@ describe('MetadataCollectionForm', () => {
     });
 
     describe('select usageRestricted yes', () => {
-      beforeEach(() => {
-        userEvent.selectOptions(
+      beforeEach(async () => {
+        await userEvent.selectOptions(
           screen.getByLabelText('Usage restricted', { exact: false }), ['yes']
         );
       });
@@ -128,14 +128,14 @@ describe('MetadataCollectionForm', () => {
     });
 
     describe('select metadata available no', () => {
-      beforeEach(() => {
-        userEvent.selectOptions(
+      beforeEach(async () => {
+        await userEvent.selectOptions(
           screen.getByLabelText('Metadata available'), ['no']
         );
       });
 
       test('click save should call onSubmit function', async () => {
-        userEvent.click(screen.getByText('Save & close'));
+        await userEvent.click(screen.getByText('Save & close'));
         expect(onSubmit).toHaveBeenCalled();
       });
     });
@@ -146,8 +146,8 @@ describe('MetadataCollectionForm', () => {
     });
 
     describe('select usageRestricted no', () => {
-      beforeEach(() => {
-        userEvent.selectOptions(
+      beforeEach(async () => {
+        await userEvent.selectOptions(
           screen.getByLabelText('Usage restricted', { exact: false }), ['no']
         );
       });
@@ -155,7 +155,7 @@ describe('MetadataCollectionForm', () => {
       test('clear permittedFor', async () => {
         expect(screen.getByText('Clear permitted for?')).toBeInTheDocument();
         expect(screen.getByText('Do you want to clear permitted for when changing usage restricted?')).toBeInTheDocument();
-        userEvent.click(screen.getByText('Clear permitted for'));
+        await userEvent.click(screen.getByText('Clear permitted for'));
         expect(document.getElementById('permittedFor[0]')).not.toBeInTheDocument();
       });
     });
@@ -166,29 +166,29 @@ describe('MetadataCollectionForm', () => {
       renderMetadataCollectionForm(stripes);
     });
 
-    test('delete modal is present', () => {
-      userEvent.click(screen.getByText('Delete'));
+    test('delete modal is present', async () => {
+      await userEvent.click(screen.getByText('Delete'));
       expect(document.getElementById('delete-collection-confirmation')).toBeInTheDocument();
       expect(screen.getByText('Do you really want to delete 21st Century Political Science Association?')).toBeInTheDocument();
     });
 
-    test('click cancel', () => {
-      userEvent.click(screen.getByText('Delete'));
+    test('click cancel', async () => {
+      await userEvent.click(screen.getByText('Delete'));
       const cancel = screen.getByRole('button', {
         name: 'Cancel',
         id: 'clickable-delete-collection-confirmation-cancel',
       });
-      userEvent.click(cancel);
+      await userEvent.click(cancel);
       expect(onDelete).not.toHaveBeenCalled();
     });
 
-    test('click submit', () => {
-      userEvent.click(screen.getByText('Delete'));
+    test('click submit', async () => {
+      await userEvent.click(screen.getByText('Delete'));
       const submit = screen.getByRole('button', {
         name: 'Submit',
         id: 'clickable-delete-collection-confirmation-confirm',
       });
-      userEvent.click(submit);
+      await userEvent.click(submit);
       expect(onDelete).toHaveBeenCalled();
     });
   });
