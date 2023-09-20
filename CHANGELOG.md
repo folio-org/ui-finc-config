@@ -1,6 +1,7 @@
 # Change history for ui-finc-config
 
 ## [6.0.0] (IN PROGRESS)
+* Migrate to react-intl v6 ([UIFC-326](https://issues.folio.org/browse/UIFC-326))
 * Upgrade React to v18 ([UIFC-317](https://issues.folio.org/browse/UIFC-317))
 * Update permissions ([UIFC-324](https://issues.folio.org/browse/UIFC-324))
 * Replace BigTest tests ([UIFC-288](https://issues.folio.org/browse/UIFC-288))
