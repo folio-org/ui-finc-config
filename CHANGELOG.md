@@ -1,6 +1,8 @@
 # Change history for ui-finc-config
 
-## [6.0.0] (IN PROGRESS)
+## [6.1.0] (IN PROGRESS)
+
+## [6.0.0](https://github.com/folio-org/ui-finc-config/tree/v6.0.0) (2023-10-18)
 * Migrate to react-intl v6 ([UIFC-326](https://issues.folio.org/browse/UIFC-326))
 * Upgrade React to v18 ([UIFC-317](https://issues.folio.org/browse/UIFC-317))
 * Update permissions ([UIFC-324](https://issues.folio.org/browse/UIFC-324))
