@@ -13,6 +13,7 @@ import {
   IconButton,
   Pane,
   PaneFooter,
+  PaneHeader,
   PaneMenu,
   Paneset,
   Row,
@@ -77,7 +78,7 @@ class MetadataSourceForm extends React.Component {
         <FormattedMessage id="ui-finc-config.form.close">
           { ([ariaLabel]) => (
             <IconButton
-              ariaLabel={ariaLabel}
+              aria-label={ariaLabel}
               icon="times"
               id="clickable-closesourcedialog"
               onClick={this.props.handlers.onClose}
@@ -166,12 +167,17 @@ class MetadataSourceForm extends React.Component {
     });
   }
 
+  renderFormPaneHeader = () => (
+    <PaneHeader
+      firstMenu={this.getFirstMenu()}
+      lastMenu={this.getLastMenu()}
+      paneTitle={this.props.initialValues.id ? this.props.initialValues.label : <FormattedMessage id="ui-finc-config.form.create" />}
+    />
+  );
+
   render() {
     const { initialValues, isLoading, onDelete } = this.props;
     const { confirmDelete, sections } = this.state;
-    const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-config.form.create" />;
-    const firstMenu = this.getFirstMenu();
-    const lastMenu = this.getLastMenu();
     const footer = this.getPaneFooter();
     const name = initialValues.label;
 
@@ -186,10 +192,8 @@ class MetadataSourceForm extends React.Component {
         <Paneset isRoot>
           <Pane
             defaultWidth="100%"
-            firstMenu={firstMenu}
             footer={footer}
-            lastMenu={lastMenu}
-            paneTitle={paneTitle}
+            renderHeader={this.renderFormPaneHeader}
           >
             <div className={BasicStyle.styleForFormContent}>
               <AccordionSet>

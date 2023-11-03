@@ -22,6 +22,7 @@ import {
   MultiColumnList,
   NoValue,
   Pane,
+  PaneHeader,
   PaneMenu,
   Paneset,
   SearchField,
@@ -302,6 +303,28 @@ class MetadataSources extends React.Component {
     }
   }
 
+  renderFilterPaneHeader = () => (
+    <PaneHeader
+      lastMenu={
+        <PaneMenu>
+          <CollapseFilterPaneButton onClick={this.toggleFilterPane} />
+        </PaneMenu>
+      }
+      paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
+    />
+  );
+
+
+  renderResultsPaneHeader = (activeFilters, source) => (
+    <PaneHeader
+      appIcon={<AppIcon app="finc-config" />}
+      firstMenu={this.renderResultsFirstMenu(activeFilters)}
+      lastMenu={this.renderResultsLastMenu()}
+      paneTitle={<FormattedMessage id="ui-finc-config.sources.title" />}
+      paneSub={this.renderResultsPaneSubtitle(source)}
+    />
+  );
+
   render() {
     const { intl, queryGetter, querySetter, onNeedMoreData, onSelectRow, selectedRecordId, source, filterData } = this.props;
     const count = source ? source.totalCount() : 0;
@@ -348,14 +371,7 @@ class MetadataSources extends React.Component {
                       data-test-source-pane-filter
                       defaultWidth="18%"
                       id="pane-sourcefilter"
-                      lastMenu={
-                        <PaneMenu>
-                          <CollapseFilterPaneButton
-                            onClick={this.toggleFilterPane}
-                          />
-                        </PaneMenu>
-                      }
-                      paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
+                      renderHeader={this.renderFilterPaneHeader}
                     >
                       <form onSubmit={onSubmitSearch}>
                         {this.renderNavigation('source')}
@@ -409,15 +425,11 @@ class MetadataSources extends React.Component {
                     </Pane>
                   }
                   <Pane
-                    appIcon={<AppIcon app="finc-config" />}
                     data-test-source-pane-results
                     defaultWidth="fill"
-                    firstMenu={this.renderResultsFirstMenu(activeFilters)}
                     id="pane-sourceresults"
-                    lastMenu={this.renderResultsLastMenu()}
                     padContent={false}
-                    paneTitle={<FormattedMessage id="ui-finc-config.sources.title" />}
-                    paneSub={this.renderResultsPaneSubtitle(source)}
+                    renderHeader={() => this.renderResultsPaneHeader(activeFilters, source)}
                   >
                     <MultiColumnList
                       autosize

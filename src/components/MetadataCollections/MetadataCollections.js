@@ -22,6 +22,7 @@ import {
   MultiColumnList,
   NoValue,
   Pane,
+  PaneHeader,
   PaneMenu,
   Paneset,
   SearchField,
@@ -324,6 +325,28 @@ class MetadataCollections extends React.Component {
     return visibleColumns;
   }
 
+  renderFilterPaneHeader = () => (
+    <PaneHeader
+      lastMenu={
+        <PaneMenu>
+          <CollapseFilterPaneButton onClick={this.toggleFilterPane} />
+        </PaneMenu>
+      }
+      paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
+    />
+  );
+
+
+  renderResultsPaneHeader = (activeFilters, collection) => (
+    <PaneHeader
+      appIcon={<AppIcon app="finc-config" />}
+      firstMenu={this.renderResultsFirstMenu(activeFilters)}
+      lastMenu={this.renderResultsLastMenu()}
+      paneTitle={<FormattedMessage id="ui-finc-config.collections.title" />}
+      paneSub={this.renderResultsPaneSubtitle(collection)}
+    />
+  );
+
   render() {
     const { intl, queryGetter, querySetter, onNeedMoreData, onSelectRow, selectedRecordId, collection, filterData } = this.props;
     const count = collection ? collection.totalCount() : 0;
@@ -371,14 +394,7 @@ class MetadataCollections extends React.Component {
                       data-test-collection-pane-filter
                       defaultWidth="18%"
                       id="pane-collectionfilter"
-                      lastMenu={
-                        <PaneMenu>
-                          <CollapseFilterPaneButton
-                            onClick={this.toggleFilterPane}
-                          />
-                        </PaneMenu>
-                      }
-                      paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
+                      renderHeader={this.renderFilterPaneHeader}
                     >
                       <form onSubmit={onSubmitSearch}>
                         {this.renderNavigation('collection')}
@@ -432,15 +448,11 @@ class MetadataCollections extends React.Component {
                     </Pane>
                   }
                   <Pane
-                    appIcon={<AppIcon app="finc-config" />}
                     data-test-collection-pane-results
                     defaultWidth="fill"
-                    firstMenu={this.renderResultsFirstMenu(activeFilters)}
                     id="pane-collectionresults"
-                    lastMenu={this.renderResultsLastMenu()}
                     padContent={false}
-                    paneTitle={<FormattedMessage id="ui-finc-config.collections.title" />}
-                    paneSub={this.renderResultsPaneSubtitle(collection)}
+                    renderHeader={() => this.renderResultsPaneHeader(activeFilters, collection)}
                   >
                     <MultiColumnList
                       autosize
