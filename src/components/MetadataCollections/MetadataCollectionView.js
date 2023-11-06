@@ -12,6 +12,7 @@ import {
   Icon,
   Layout,
   Pane,
+  PaneHeader,
   PaneMenu,
   Row,
 } from '@folio/stripes/components';
@@ -86,14 +87,29 @@ class MetadataCollectionView extends React.Component {
     );
   }
 
+  renderLoadingPanePaneHeader = () => (
+    <PaneHeader
+      dismissible
+      onClose={this.props.handlers.onClose}
+      paneTitle={<span data-test-collection-header-title>loading</span>}
+    />
+  );
+
+  renderDetailsPanePaneHeader = (label) => (
+    <PaneHeader
+      dismissible
+      lastMenu={this.renderEditPaneMenu()}
+      onClose={this.props.handlers.onClose}
+      paneTitle={<span data-test-collection-header-title>{label}</span>}
+    />
+  );
+
   renderLoadingPane = () => {
     return (
       <Pane
         defaultWidth="40%"
-        dismissible
         id="pane-collectiondetails"
-        onClose={this.props.handlers.onClose}
-        paneTitle={<span data-test-collection-header-title>loading</span>}
+        renderHeader={this.renderLoadingPanePaneHeader}
       >
         <Layout className="marginTop1">
           <Icon icon="spinner-ellipsis" width="10px" />
@@ -113,11 +129,8 @@ class MetadataCollectionView extends React.Component {
         <Pane
           data-test-collection-pane-details
           defaultWidth="40%"
-          dismissible
           id="pane-collectiondetails"
-          lastMenu={this.renderEditPaneMenu()}
-          onClose={this.props.handlers.onClose}
-          paneTitle={<span data-test-collection-header-title>{label}</span>}
+          renderHeader={() => this.renderDetailsPanePaneHeader(label)}
         >
           <AccordionSet>
             <ViewMetaData
