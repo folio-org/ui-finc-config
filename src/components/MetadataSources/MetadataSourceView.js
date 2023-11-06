@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
+import { useStripes } from '@folio/stripes/core';
 import {
   Accordion,
   AccordionSet,
@@ -23,59 +24,28 @@ import SourceInfoView from './SourceInfo/SourceInfoView';
 import SourceManagementView from './SourceManagement/SourceManagementView';
 import SourceTechnicalView from './SourceTechnical/SourceTechnicalView';
 
-class MetadataSourceView extends React.Component {
-  static propTypes = {
-    canEdit: PropTypes.bool,
-    handlers: PropTypes.shape({
-      onClose: PropTypes.func.isRequired,
-      onEdit: PropTypes.func,
-    }).isRequired,
-    isLoading: PropTypes.bool,
-    record: PropTypes.object,
-    stripes: PropTypes.object,
+const MetadataSourceView = ({
+  canEdit,
+  handlers,
+  isLoading,
+  record,
+}) => {
+  const editButton = useRef();
+
+  const stripes = useStripes();
+
+  const initialAccordionStatus = {
+    managementAccordion: false,
+    technicalAccordion: false,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      accordions: {
-        managementAccordion: false,
-        technicalAccordion: false
-      },
-    };
-
-    this.editButton = React.createRef();
-  }
-
-  handleExpandAll = (obj) => {
-    this.setState((curState) => {
-      const newState = _.cloneDeep(curState);
-
-      newState.accordions = obj;
-      return newState;
-    });
-  }
-
-  handleAccordionToggle = ({ id }) => {
-    this.setState((state) => {
-      const newState = _.cloneDeep(state);
-
-      if (!_.has(newState.accordions, id)) newState.accordions[id] = true;
-      newState.accordions[id] = !newState.accordions[id];
-      return newState;
-    });
-  }
-
-  renderEditPaneMenu = () => {
-    const { canEdit, handlers } = this.props;
-
+  const renderEditPaneMenu = () => {
     return (
       <PaneMenu>
         {canEdit && (
           <Button
             aria-label={<FormattedMessage id="ui-finc-config.edit" />}
-            buttonRef={this.editButton}
+            buttonRef={editButton}
             buttonStyle="primary"
             id="clickable-edit-source"
             marginBottom0
@@ -86,104 +56,102 @@ class MetadataSourceView extends React.Component {
         )}
       </PaneMenu>
     );
-  }
+  };
 
-  renderLoadingPanePaneHeader = () => (
+  const renderLoadingPanePaneHeader = () => (
     <PaneHeader
       dismissible
-      onClose={this.props.handlers.onClose}
+      onClose={handlers.onClose}
       paneTitle={<span data-test-collection-header-title>loading</span>}
     />
   );
 
-  renderDetailsPanePaneHeader = (label) => (
+  const renderDetailsPanePaneHeader = (label) => (
     <PaneHeader
       dismissible
-      lastMenu={this.renderEditPaneMenu()}
-      onClose={this.props.handlers.onClose}
+      lastMenu={renderEditPaneMenu()}
+      onClose={handlers.onClose}
       paneTitle={<span data-test-source-header-title>{label}</span>}
     />
   );
 
-  renderLoadingPane = () => {
+  const renderLoadingPane = () => {
     return (
       <Pane
         defaultWidth="40%"
         id="pane-sourcedetails"
-        renderHeader={this.renderLoadingPanePaneHeader}
+        renderHeader={renderLoadingPanePaneHeader}
       >
         <Layout className="marginTop1">
           <Icon icon="spinner-ellipsis" width="10px" />
         </Layout>
       </Pane>
     );
-  }
+  };
 
-  render() {
-    const { record, isLoading } = this.props;
-    const label = _.get(record, 'label', <NoValue />);
-    const organizationId = _.get(record, 'organization.id', 'No LABEL');
+  const label = _.get(record, 'label', <NoValue />);
+  const organizationId = _.get(record, 'organization.id', 'No LABEL');
 
-    if (isLoading) return this.renderLoadingPane();
+  if (isLoading) return renderLoadingPane();
 
-    return (
-      <>
-        <Pane
-          data-test-source-pane-details
-          defaultWidth="40%"
-          id="pane-sourcedetails"
-          renderHeader={() => this.renderDetailsPanePaneHeader(label)}
-        >
-          <AccordionSet>
-            <ViewMetaData
-              metadata={_.get(record, 'metadata', {})}
-              stripes={this.props.stripes}
-            />
-            <SourceInfoView
-              id="sourceInfo"
+  return (
+    <>
+      <Pane
+        data-test-source-pane-details
+        defaultWidth="40%"
+        id="pane-sourcedetails"
+        renderHeader={() => renderDetailsPanePaneHeader(label)}
+      >
+        <AccordionSet initialStatus={initialAccordionStatus}>
+          <ViewMetaData
+            metadata={_.get(record, 'metadata', {})}
+            stripes={stripes}
+          />
+          <SourceInfoView
+            id="sourceInfo"
+            metadataSource={record}
+            stripes={stripes}
+          />
+          <Row end="xs">
+            <Col xs>
+              <ExpandAllButton id="clickable-expand-all" />
+            </Col>
+          </Row>
+          <Accordion
+            id="managementAccordion"
+            label={<FormattedMessage id="ui-finc-config.source.managementAccordion" />}
+          >
+            <SourceManagementView
+              id="sourceManagement"
               metadataSource={record}
-              stripes={this.props.stripes}
+              organizationId={organizationId}
+              stripes={stripes}
             />
-            <Row end="xs">
-              <Col xs>
-                <ExpandAllButton
-                  accordionStatus={this.state.accordions}
-                  onToggle={this.handleExpandAll}
-                  setStatus={null}
-                />
-              </Col>
-            </Row>
-            <Accordion
-              id="managementAccordion"
-              label={<FormattedMessage id="ui-finc-config.source.managementAccordion" />}
-              onToggle={this.handleAccordionToggle}
-              open={this.state.accordions.managementAccordion}
-            >
-              <SourceManagementView
-                id="sourceManagement"
-                metadataSource={record}
-                organizationId={organizationId}
-                stripes={this.props.stripes}
-              />
-            </Accordion>
-            <Accordion
-              id="technicalAccordion"
-              label={<FormattedMessage id="ui-finc-config.source.technicalAccordion" />}
-              onToggle={this.handleAccordionToggle}
-              open={this.state.accordions.technicalAccordion}
-            >
-              <SourceTechnicalView
-                id="sourceTechnical"
-                metadataSource={record}
-                stripes={this.props.stripes}
-              />
-            </Accordion>
-          </AccordionSet>
-        </Pane>
-      </>
-    );
-  }
-}
+          </Accordion>
+          <Accordion
+            id="technicalAccordion"
+            label={<FormattedMessage id="ui-finc-config.source.technicalAccordion" />}
+          >
+            <SourceTechnicalView
+              id="sourceTechnical"
+              metadataSource={record}
+              stripes={stripes}
+            />
+          </Accordion>
+        </AccordionSet>
+      </Pane>
+    </>
+  );
+};
 
+MetadataSourceView.propTypes = {
+  canEdit: PropTypes.bool,
+  handlers: PropTypes.shape({
+    onClose: PropTypes.func.isRequired,
+    onEdit: PropTypes.func,
+  }).isRequired,
+  isLoading: PropTypes.bool,
+  record: PropTypes.object,
+};
 
 export default MetadataSourceView;
