@@ -55,7 +55,7 @@ const MetadataCollectionView = ({
         )}
       </PaneMenu>
     );
-  }
+  };
 
   const renderLoadingPanePaneHeader = () => (
     <PaneHeader
@@ -86,7 +86,7 @@ const MetadataCollectionView = ({
         </Layout>
       </Pane>
     );
-  }
+  };
 
   const label = _.get(record, 'label', 'No LABEL');
 
