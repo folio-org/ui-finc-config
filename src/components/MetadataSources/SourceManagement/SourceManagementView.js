@@ -46,7 +46,7 @@ const SourceManagementView = ({
   let orgValue = <NoValue />;
   const sourceId = _.get(metadataSource, 'id', <NoValue />);
 
-  const { organization, isLoading: isLoadingOrganization, isError } = useOrganization(organizationId);
+  const { organization, isLoading: isLoadingOrganization, isError } = useOrganization();
   const sourcesOrganization = _.get(metadataSource, 'organization', <NoValue />);
 
   if (!_.isEmpty(organizationId) && !isLoadingOrganization) {
