@@ -90,7 +90,7 @@ const MetadataSourceView = ({
   };
 
   const label = _.get(record, 'label', <NoValue />);
-  const organizationId = _.get(record, 'organization.id', 'No LABEL');
+  const organizationId = _.get(record, 'organization.id', '');
 
   if (isLoading) return renderLoadingPane();
 

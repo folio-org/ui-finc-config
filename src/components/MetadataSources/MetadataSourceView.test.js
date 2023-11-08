@@ -1,7 +1,11 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query';
 
+import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
 import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
@@ -13,18 +17,22 @@ const handlers = {
   onEdit: jest.fn,
 };
 
+const queryClient = new QueryClient();
+
 const renderMetadataSourceView = (stripes, record = SOURCE) => (
   render(withIntlConfiguration(
-    <MemoryRouter>
-      <StripesContext.Provider value={stripes}>
-        <MetadataSourceView
-          canEdit
-          handlers={handlers}
-          isLoading={false}
-          record={record}
-        />
-      </StripesContext.Provider>
-    </MemoryRouter>
+    <QueryClientProvider client={queryClient}>
+      <MemoryRouter>
+        <StripesContext.Provider value={stripes}>
+          <MetadataSourceView
+            canEdit
+            handlers={handlers}
+            isLoading={false}
+            record={record}
+          />
+        </StripesContext.Provider>
+      </MemoryRouter>
+    </QueryClientProvider>
   ))
 );
 
