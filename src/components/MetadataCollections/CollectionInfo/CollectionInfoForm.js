@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'react-final-form';
+import { useForm, Field } from 'react-final-form';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -13,71 +13,73 @@ import {
 import { Required } from '../../DisplayUtils/Validate';
 import FindSource from './FindSource/FindSource';
 
-class CollectionInfoForm extends React.Component {
-  constructor(props) {
-    super(props);
+const CollectionInfoForm = ({
+  accordionId,
+  expanded,
+  initialValues,
+  onToggle,
+}) => {
+  const [query, setQuery] = useState(initialValues.mdSource || {});
 
-    this.columnMapping =
-    {
-      name: 'Label',
-      id: 'SourceId',
+  const { change } = useForm();
+
+  const updateValue = useCallback((newSource) => {
+    const sourceUpdated = {
+      id: newSource.id,
+      name: newSource.label,
     };
 
-    const intialSource = props.initialValues.mdSource || {};
+    // change state
+    setQuery(sourceUpdated);
 
-    this.state = {
-      source: intialSource,
-    };
-  }
+    // change field
+    change('mdSource', sourceUpdated);
+  }, [change]);
 
-  render() {
-    const { expanded, onToggle, accordionId } = this.props;
-
-    return (
-      <Accordion
-        id={accordionId}
-        label={<FormattedMessage id="ui-finc-config.collection.generalAccordion" />}
-        onToggle={onToggle}
-        open={expanded}
-      >
-        <Row>
-          <Col xs={8}>
-            <Field
-              component={TextField}
-              fullWidth
-              id="addcollection_label"
-              label={<FormattedMessage id="ui-finc-config.collection.label" />}
-              name="label"
-              required
-              validate={Required}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={8}>
-            <Field
-              component={TextField}
-              fullWidth
-              id="addcollection_description"
-              label={<FormattedMessage id="ui-finc-config.collection.description" />}
-              name="description"
-            />
-          </Col>
-        </Row>
-        <div>
-          {/* Plugin has to be inside of Field, otherwise pristine is not working */}
+  return (
+    <Accordion
+      id={accordionId}
+      label={<FormattedMessage id="ui-finc-config.collection.generalAccordion" />}
+      onToggle={onToggle}
+      open={expanded}
+    >
+      <Row>
+        <Col xs={8}>
           <Field
-            component={FindSource}
-            name="mdSource"
-            id="addcollection_mdSource"
-            intialSource={this.state.source}
-            {...this.props}
+            component={TextField}
+            fullWidth
+            id="addcollection_label"
+            label={<FormattedMessage id="ui-finc-config.collection.label" />}
+            name="label"
+            required
+            validate={Required}
           />
-        </div>
-      </Accordion>
-    );
-  }
-}
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={8}>
+          <Field
+            component={TextField}
+            fullWidth
+            id="addcollection_description"
+            label={<FormattedMessage id="ui-finc-config.collection.description" />}
+            name="description"
+          />
+        </Col>
+      </Row>
+      <div>
+        {/* Plugin has to be inside of Field, otherwise pristine is not working */}
+        <Field
+          component={FindSource}
+          name="mdSource"
+          id="addcollection_mdSource"
+          intialSource={query}
+          selectSource={selectedSource => updateValue(selectedSource)}
+        />
+      </div>
+    </Accordion>
+  );
+};
 
 CollectionInfoForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
@@ -86,7 +88,6 @@ CollectionInfoForm.propTypes = {
     mdSource: PropTypes.object
   }),
   onToggle: PropTypes.func,
-  stripes: PropTypes.object,
 };
 
 export default CollectionInfoForm;

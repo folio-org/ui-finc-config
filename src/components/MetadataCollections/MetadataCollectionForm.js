@@ -259,9 +259,9 @@ export default stripesFinalForm({
   // set navigationCheck true for confirming changes
   navigationCheck: true,
   mutators: {
-    setSource: (args, state, tools) => {
-      tools.changeValue(state, 'mdSource', () => args[0]);
-    },
+    // setSource: (args, state, tools) => {
+    //   tools.changeValue(state, 'mdSource', () => args[0]);
+    // },
     clearPermittedFor: (_args, state, tools) => {
       tools.changeValue(state, 'permittedFor', () => []);
     },
