@@ -1,9 +1,9 @@
-import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import { useQuery } from 'react-query';
 
-import { stripesConnect } from '@folio/stripes/core';
+import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataSourceView from '../components/MetadataSources/MetadataSourceView';
@@ -11,27 +11,48 @@ import MetadataSourceView from '../components/MetadataSources/MetadataSourceView
 const SourceViewRoute = ({
   history,
   location,
-  match,
-  resources,
-  stripes,
+  match: { params: { id: sourceId } },
 }) => {
+  const stripes = useStripes();
+  const hasPerms = stripes.hasPerm('finc-config.metadata-sources.item.put');
+
+  const SOURCE_API = 'finc-config/metadata-sources';
+
+  const useSource = () => {
+    const ky = useOkapiKy();
+
+    const { isLoading, data: source = {} } = useQuery(
+      [SOURCE_API, sourceId],
+      () => ky.get(`${SOURCE_API}/${sourceId}`).json(),
+      // The query will not execute until the id exists
+      { enabled: Boolean(sourceId) },
+    );
+
+    return ({
+      isLoading,
+      source,
+    });
+  };
+
+  const { source, isLoading: isSourceLoading } = useSource();
+
   const handleClose = () => {
     history.push(`${urls.sources()}${location.search}`);
   };
 
   const handleEdit = () => {
-    history.push(`${urls.sourceEdit(match.params.id)}${location.search}`);
+    history.push(`${urls.sourceEdit(sourceId)}${location.search}`);
   };
 
   return (
     <MetadataSourceView
-      canEdit={stripes.hasPerm('finc-config.metadata-sources.item.put')}
+      canEdit={hasPerms}
       handlers={{
         onClose: handleClose,
         onEdit: handleEdit,
       }}
-      isLoading={_.get(resources, 'source.isPending', true)}
-      record={_.get(resources, 'source.records', []).find(i => i.id === match.params.id)}
+      isLoading={isSourceLoading}
+      record={source}
       stripes={stripes}
     />
   );
@@ -54,12 +75,4 @@ SourceViewRoute.propTypes = {
   }).isRequired,
 };
 
-SourceViewRoute.manifest = Object.freeze({
-  source: {
-    type: 'okapi',
-    path: 'finc-config/metadata-sources/:{id}',
-  },
-  query: {},
-});
-
-export default stripesConnect(SourceViewRoute);
+export default SourceViewRoute;

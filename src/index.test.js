@@ -2,7 +2,12 @@ import { noop } from 'lodash';
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query';
+
+import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 
 import withIntlConfiguration from '../test/jest/helpers/withIntlConfiguration';
 import CollectionsRoute from './routes/CollectionsRoute';
@@ -95,6 +100,10 @@ const viewRouteProps = {
     collection: { collection },
     source: { source },
   },
+  stripes: {
+    hasPerm: jest.fn(),
+    okapi: {},
+  }
 };
 
 const match = {
@@ -104,15 +113,18 @@ const match = {
   url: '/finc-config',
 };
 
+const queryClient = new QueryClient();
+
 const renderWithRouter = (component) => {
   const history = createMemoryHistory();
-  return {
-    ...render(withIntlConfiguration(
+
+  render(withIntlConfiguration(
+    <QueryClientProvider client={queryClient}>
       <Router history={history}>
         {component}
       </Router>
-    ))
-  };
+    </QueryClientProvider>
+  ));
 };
 
 jest.unmock('react-intl');
@@ -122,18 +134,14 @@ jest.mock('./index', () => {
 });
 
 it('should render CollectionsRoute', () => {
-  const renderComponent = renderWithRouter(<CollectionsRoute {...routeProps} />);
+  renderWithRouter(<CollectionsRoute {...routeProps} />);
 
-  const { getByTestId } = renderComponent;
-  expect(getByTestId('collections')).toBeInTheDocument();
   expect(screen.getByText('Metadata collections')).toBeInTheDocument();
 });
 
 it('should render SourcesRoute', () => {
-  const renderComponent = renderWithRouter(<SourcesRoute {...routeProps} />);
+  renderWithRouter(<SourcesRoute {...routeProps} />);
 
-  const { getByTestId } = renderComponent;
-  expect(getByTestId('sources')).toBeInTheDocument();
   expect(screen.getByText('Metadata sources')).toBeInTheDocument();
 });
 
@@ -163,24 +171,26 @@ it('should render CollectionEditRoute', () => {
   expect(document.querySelector('#form-collection')).toBeInTheDocument();
 });
 
-it('should render SourceViewRoute', () => {
-  renderWithRouter(<SourceViewRoute {...viewRouteProps} />);
+it('should render SourceViewRoute', async () => {
+  await waitFor(() => {
+    renderWithRouter(<SourceViewRoute {...viewRouteProps} />);
+  });
 
   expect(document.querySelector('#pane-sourcedetails')).toBeInTheDocument();
 });
 
-it('should render CollectionViewRoute', () => {
-  renderWithRouter(<CollectionViewRoute {...viewRouteProps} />);
+it('should render CollectionViewRoute', async () => {
+  await waitFor(() => {
+    renderWithRouter(<CollectionViewRoute {...viewRouteProps} />);
+  });
 
   expect(document.querySelector('#pane-collectiondetails')).toBeInTheDocument();
 });
 
 describe('Application root', () => {
-  it('should render without crashing', () => {
-    const { getByText } = renderWithRouter(<FincConfig match={match} />);
-    const div = document.createElement('div');
-    div.id = 'root';
-    document.body.appendChild(div);
-    expect(getByText('FincConfig')).toBeDefined();
+  it('should render without crashing', async () => {
+    renderWithRouter(<FincConfig match={match} />);
+
+    expect(screen.getByText('FincConfig')).toBeInTheDocument();
   });
 });

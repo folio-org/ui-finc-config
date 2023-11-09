@@ -1,9 +1,9 @@
-import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import { useQuery } from 'react-query';
 
-import { stripesConnect } from '@folio/stripes/core';
+import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionView from '../components/MetadataCollections/MetadataCollectionView';
@@ -11,27 +11,48 @@ import MetadataCollectionView from '../components/MetadataCollections/MetadataCo
 const CollectionViewRoute = ({
   history,
   location,
-  match,
-  resources,
-  stripes,
+  match: { params: { id: collectionId } },
 }) => {
+  const stripes = useStripes();
+  const hasPerms = stripes.hasPerm('finc-config.metadata-collections.item.put');
+
+  const COLLECTION_API = 'finc-config/metadata-collections';
+
+  const useCollection = () => {
+    const ky = useOkapiKy();
+
+    const { isLoading, data: collection = {} } = useQuery(
+      [COLLECTION_API, collectionId],
+      () => ky.get(`${COLLECTION_API}/${collectionId}`).json(),
+      // The query will not execute until the id exists
+      { enabled: Boolean(collectionId) },
+    );
+
+    return ({
+      isLoading,
+      collection,
+    });
+  };
+
+  const { collection, isLoading: isCollectionLoading } = useCollection();
+
   const handleClose = () => {
     history.push(`${urls.collections()}${location.search}`);
   };
 
   const handleEdit = () => {
-    history.push(`${urls.collectionEdit(match.params.id)}${location.search}`);
+    history.push(`${urls.collectionEdit(collectionId)}${location.search}`);
   };
 
   return (
     <MetadataCollectionView
-      canEdit={stripes.hasPerm('finc-config.metadata-collections.item.put')}
+      canEdit={hasPerms}
       handlers={{
         onClose: handleClose,
         onEdit: handleEdit,
       }}
-      isLoading={_.get(resources, 'collection.isPending', true)}
-      record={_.get(resources, 'collection.records', []).find(i => i.id === match.params.id)}
+      isLoading={isCollectionLoading}
+      record={collection}
       stripes={stripes}
     />
   );
@@ -54,12 +75,4 @@ CollectionViewRoute.propTypes = {
   }).isRequired,
 };
 
-CollectionViewRoute.manifest = Object.freeze({
-  collection: {
-    type: 'okapi',
-    path: 'finc-config/metadata-collections/:{id}',
-  },
-  query: {},
-});
-
-export default stripesConnect(CollectionViewRoute);
+export default CollectionViewRoute;
