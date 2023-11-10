@@ -66,13 +66,10 @@ CollectionViewRoute.propTypes = {
       id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  resources: PropTypes.shape({
-    collection: PropTypes.object,
-  }).isRequired,
   stripes: PropTypes.shape({
     hasPerm: PropTypes.func.isRequired,
     okapi: PropTypes.object.isRequired,
-  }).isRequired,
+  }),
 };
 
 export default CollectionViewRoute;
