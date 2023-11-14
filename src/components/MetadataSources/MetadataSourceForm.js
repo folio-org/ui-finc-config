@@ -221,7 +221,7 @@ class MetadataSourceForm extends React.Component {
                   accordionId="editSourceManagement"
                   expanded={sections.editSourceManagement}
                   onToggle={this.handleSectionToggle}
-                  {...this.props}
+                  initialValues={initialValues}
                 />
                 <SourceTechnicalForm
                   accordionId="editSourceTechnical"
@@ -254,9 +254,9 @@ export default stripesFinalForm({
   enableReinitialize: true,
   // set navigationCheck true for confirming changes
   navigationCheck: true,
-  mutators: {
-    setOrganization: (args, state, tools) => {
-      tools.changeValue(state, 'organization', () => args[0]);
-    },
-  },
+  // mutators: {
+  //   setOrganization: (args, state, tools) => {
+  //     tools.changeValue(state, 'organization', () => args[0]);
+  //   },
+  // },
 })(MetadataSourceForm);
