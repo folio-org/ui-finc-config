@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
   injectIntl,
   FormattedMessage
 } from 'react-intl';
-import { Field } from 'react-final-form';
+import { useForm, Field } from 'react-final-form';
 
 import {
   Col,
@@ -19,8 +19,19 @@ import { MdSourceRequired } from '../../../DisplayUtils/Validate';
 
 const FindSource = ({
   intl,
-  selectSource,
 }) => {
+  const { change } = useForm();
+
+  const selectSource = useCallback((newSource) => {
+    const sourceUpdated = {
+      id: newSource.id,
+      name: newSource.label,
+    };
+
+    // change field
+    change('mdSource', sourceUpdated);
+  }, [change]);
+
   const columnMapping = {
     name: 'Label',
     id: 'SourceId',
@@ -66,11 +77,12 @@ const FindSource = ({
         <Col xs={4}>
           <Field
             component={TextField}
+            disabled
             fullWidth
             id="addcollection_mdSource"
             name="mdSource.name"
             placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.mdSource' })}
-            readOnly
+            type="text"
             validate={MdSourceRequired}
           />
         </Col>
@@ -83,7 +95,6 @@ FindSource.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired,
   }),
-  selectSource: PropTypes.func.isRequired,
 };
 
 export default injectIntl(FindSource);

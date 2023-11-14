@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useForm, Field } from 'react-final-form';
+import { Field } from 'react-final-form';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -16,26 +16,8 @@ import FindSource from './FindSource/FindSource';
 const CollectionInfoForm = ({
   accordionId,
   expanded,
-  initialValues,
   onToggle,
 }) => {
-  const [query, setQuery] = useState(initialValues.mdSource || {});
-
-  const { change } = useForm();
-
-  const updateValue = useCallback((newSource) => {
-    const sourceUpdated = {
-      id: newSource.id,
-      name: newSource.label,
-    };
-
-    // change state
-    setQuery(sourceUpdated);
-
-    // change field
-    change('mdSource', sourceUpdated);
-  }, [change]);
-
   return (
     <Accordion
       id={accordionId}
@@ -68,14 +50,7 @@ const CollectionInfoForm = ({
         </Col>
       </Row>
       <div>
-        {/* Plugin has to be inside of Field, otherwise pristine is not working */}
-        <Field
-          component={FindSource}
-          name="mdSource"
-          id="addcollection_mdSource"
-          intialSource={query}
-          selectSource={selectedSource => updateValue(selectedSource)}
-        />
+        <FindSource />
       </div>
     </Accordion>
   );
@@ -84,9 +59,6 @@ const CollectionInfoForm = ({
 CollectionInfoForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
-  initialValues: PropTypes.shape({
-    mdSource: PropTypes.object
-  }),
   onToggle: PropTypes.func,
 };
 
