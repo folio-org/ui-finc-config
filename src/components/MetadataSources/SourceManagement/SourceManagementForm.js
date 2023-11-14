@@ -18,7 +18,6 @@ import BasicCss from '../../BasicStyle.css';
 const SourceManagementForm = ({
   accordionId,
   expanded,
-  initialValues,
   onToggle,
 }) => {
   return (
@@ -29,12 +28,7 @@ const SourceManagementForm = ({
       open={expanded}
     >
       <div className={BasicCss.addMarginBottom}>
-        {/* Plugin has to be inside of Field, otherwise pristine is not working */}
-        <Field
-          component={FindOrganization}
-          name="organization"
-          intialOrganization={initialValues?.organization}
-        />
+        <FindOrganization />
       </div>
       <FieldArray
         component={ContactFieldArray}
@@ -69,9 +63,6 @@ const SourceManagementForm = ({
 SourceManagementForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
-  initialValues: PropTypes.shape({
-    organization: PropTypes.object
-  }),
   onToggle: PropTypes.func,
 };
 

@@ -1,30 +1,19 @@
-import _ from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useForm } from 'react-final-form';
+import { useForm, Field } from 'react-final-form';
 
 import {
   Col,
   Label,
-  NoValue,
   Row,
+  TextField,
 } from '@folio/stripes/components';
 import { Pluggable } from '@folio/stripes/core';
 
 import BasicCss from '../../../BasicStyle.css';
-import css from './OrganizationView.css';
 
-const FindOrganization = ({
-  intialOrganization,
-}) => {
-  const [organization, setOrganization] = useState();
-
+const FindOrganization = () => {
   const { change } = useForm();
-
-  useEffect(() => {
-    setOrganization(intialOrganization);
-  }, [intialOrganization]);
 
   const selectOrganization = useCallback((newOrganization) => {
     const organizationUpdated = {
@@ -32,31 +21,11 @@ const FindOrganization = ({
       name: newOrganization.name,
     };
 
-    // change state
-    setOrganization(organizationUpdated);
-
     // change field
     change('organization', organizationUpdated);
   }, [change]);
 
-  const renderVendorName = (vendor) => {
-    if (_.isEmpty(vendor?.id)) {
-      return null;
-    }
-
-    const name = _.isEmpty(vendor.name) ? <NoValue /> : <div>{vendor.name}</div>;
-
-    return (
-      <div
-        className={`${css.section} ${css.active}`}
-        name="organizationName"
-      >
-        <div>{name}</div>
-      </div>);
-  };
-
   const disableRecordCreation = true;
-  const vendorName = renderVendorName(organization);
   const buttonProps = { 'marginBottom0': true };
   const pluggable =
     <Pluggable
@@ -94,15 +63,16 @@ const FindOrganization = ({
           { pluggable }
         </Col>
         <Col xs={4}>
-          { vendorName }
+          <Field
+            component={TextField}
+            disabled
+            name="organization.name"
+            type="text"
+          />
         </Col>
       </Row>
     </>
   );
-};
-
-FindOrganization.propTypes = {
-  intialOrganization: PropTypes.object,
 };
 
 export default FindOrganization;
