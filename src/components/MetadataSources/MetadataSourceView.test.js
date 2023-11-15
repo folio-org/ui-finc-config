@@ -5,7 +5,7 @@ import {
   QueryClientProvider,
 } from 'react-query';
 
-import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
+import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
 import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
@@ -41,9 +41,11 @@ jest.unmock('react-intl');
 describe('MetadataSourceView', () => {
   let stripes;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     stripes = useStripes();
-    renderMetadataSourceView(stripes, SOURCE);
+    await waitFor(() => {
+      renderMetadataSourceView(stripes, SOURCE);
+    });
   });
 
   it('edit button should be present', () => {

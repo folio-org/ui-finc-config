@@ -1,35 +1,45 @@
+import { isEmpty } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
-import { stripesConnect } from '@folio/stripes/core';
+import { useOkapiKy } from '@folio/stripes/core';
+import { NoValue } from '@folio/stripes/components';
 
 import urls from '../../../DisplayUtils/urls';
 
-class DisplayContactLinkUser extends React.Component {
-  static manifest = Object.freeze({
-    user: {
-      type: 'okapi',
-      path: 'users/!{contactId}',
-      throwErrors: false
-    },
-    query: {},
-  });
+const DisplayContactLinkUser = ({
+  contact,
+  contactId,
+}) => {
+  const USERS_API = 'users';
 
-  static propTypes = {
-    contact: PropTypes.object,
-    contactId: PropTypes.string,
-    resources: PropTypes.shape({
-      user: PropTypes.object,
-      failed: PropTypes.object,
-    }).isRequired,
+  const useUser = () => {
+    const ky = useOkapiKy();
+
+    const { isLoading, data: user = {}, ...rest } = useQuery(
+      [USERS_API, contactId],
+      () => ky.get(`${USERS_API}/${contactId}`).json(),
+      // The query will not execute until the id exists
+      { enabled: Boolean(contactId) },
+    );
+
+    return ({
+      isLoading,
+      user,
+      ...rest
+    });
   };
 
-  getContactForUser = (contact, contactId) => {
-    if (contact.type === 'user' && this.props.resources.user && this.props.resources.user.failed && contact.name) {
-      return contact.name;
+  let contactNameWithLink = <NoValue />;
+  const { user, isLoading: isLoadingUser, isError } = useUser();
+
+  if (!isEmpty(contactId) && !isLoadingUser) {
+    if (contact.type === 'user' && user && isError && contact.name) {
+      contactNameWithLink = contact.name;
     } else {
-      return (
+      contactNameWithLink = (
         <>
           <Link to={{ pathname: `${urls.userView(contactId)}` }}>
             {contact.name}
@@ -39,16 +49,16 @@ class DisplayContactLinkUser extends React.Component {
     }
   }
 
-  render() {
-    const { contact, contactId } = this.props;
-    const contactNameWithLink = this.getContactForUser(contact, contactId);
+  return (
+    <>
+      {contactNameWithLink}
+    </>
+  );
+};
 
-    return (
-      <>
-        {contactNameWithLink}
-      </>
-    );
-  }
-}
+DisplayContactLinkUser.propTypes = {
+  contact: PropTypes.object,
+  contactId: PropTypes.string,
+};
 
-export default stripesConnect(DisplayContactLinkUser);
+export default DisplayContactLinkUser;
