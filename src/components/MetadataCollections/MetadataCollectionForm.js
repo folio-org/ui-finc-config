@@ -1,5 +1,5 @@
-import React from 'react';
-import { cloneDeep, isEqual } from 'lodash';
+import React, { useState } from 'react';
+import { isEqual } from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -27,54 +27,35 @@ import CollectionManagementForm from './CollectionManagement/CollectionManagemen
 import CollectionTechnicalForm from './CollectionTechnical/CollectionTechnicalForm';
 import BasicStyle from '../BasicStyle.css';
 
-class MetadataCollectionForm extends React.Component {
-  static propTypes = {
-    handlers: PropTypes.PropTypes.shape({
-      onClose: PropTypes.func.isRequired,
-    }),
-    handleSubmit: PropTypes.func.isRequired,
-    initialValues: PropTypes.object,
-    invalid: PropTypes.bool,
-    isLoading: PropTypes.bool,
-    onDelete: PropTypes.func,
-    pristine: PropTypes.bool,
-    submitting: PropTypes.bool,
+const MetadataCollectionForm = ({
+  handlers: { onClose },
+  handleSubmit,
+  initialValues,
+  invalid,
+  isLoading,
+  onDelete,
+  pristine,
+  submitting,
+}) => {
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const initialAccordionStatus = {
+    editCollectionInfo: true,
+    editCollectionManagement: true,
+    editCollectionTechnical: true
   };
 
-  static defaultProps = {
-    initialValues: {},
-  }
+  const doBeginDelete = () => {
+    setConfirmDelete(true);
+  };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      confirmDelete: false,
-      sections: {
-        editCollectionInfo: true,
-        editCollectionManagement: true,
-        editCollectionTechnical: true
-      },
-    };
-
-    this.handleExpandAll = this.handleExpandAll.bind(this);
-  }
-
-  beginDelete = () => {
-    this.setState({
-      confirmDelete: true,
-    });
-  }
-
-  confirmDelete = (confirmation) => {
-    if (confirmation) {
-      this.deleteCollection();
-    } else {
-      this.setState({ confirmDelete: false });
+  const doConfirmDelete = (confirmation) => {
+    if (!confirmation) {
+      setConfirmDelete(false);
     }
-  }
+  };
 
-  getFirstMenu() {
+  const getFirstMenu = () => {
     return (
       <PaneMenu>
         <FormattedMessage id="ui-finc-config.form.close">
@@ -83,17 +64,15 @@ class MetadataCollectionForm extends React.Component {
               aria-label={ariaLabel}
               icon="times"
               id="clickable-closecollectiondialog"
-              onClick={this.props.handlers.onClose}
+              onClick={onClose}
             />
           )}
         </FormattedMessage>
       </PaneMenu>
     );
-  }
+  };
 
-  getLastMenu() {
-    const { initialValues } = this.props;
-    const { confirmDelete } = this.state;
+  const getLastMenu = () => {
     const isEditing = initialValues && initialValues.id;
 
     return (
@@ -105,7 +84,7 @@ class MetadataCollectionForm extends React.Component {
               disabled={confirmDelete}
               id="clickable-delete-collection"
               marginBottom0
-              onClick={this.beginDelete}
+              onClick={doBeginDelete}
               title="delete"
             >
               <FormattedMessage id="ui-finc-config.form.delete" />
@@ -114,17 +93,9 @@ class MetadataCollectionForm extends React.Component {
         )}
       </PaneMenu>
     );
-  }
+  };
 
-  getPaneFooter() {
-    const {
-      handlers: { onClose },
-      handleSubmit,
-      invalid,
-      pristine,
-      submitting
-    } = this.props;
-
+  const getPaneFooter = () => {
     const disabled = pristine || submitting || invalid;
 
     const startButton = (
@@ -154,103 +125,92 @@ class MetadataCollectionForm extends React.Component {
     );
 
     return <PaneFooter renderStart={startButton} renderEnd={endButton} />;
-  }
+  };
 
-  handleExpandAll(sections) {
-    this.setState({ sections });
-  }
-
-  handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const newState = cloneDeep(state);
-
-      newState.sections[id] = !newState.sections[id];
-      return newState;
-    });
-  }
-
-  renderFormPaneHeader = () => (
+  const renderFormPaneHeader = () => (
     <PaneHeader
-      firstMenu={this.getFirstMenu()}
-      lastMenu={this.getLastMenu()}
-      paneTitle={this.props.initialValues.id ? this.props.initialValues.label : <FormattedMessage id="ui-finc-config.form.create" />}
+      firstMenu={getFirstMenu()}
+      lastMenu={getLastMenu()}
+      paneTitle={initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-config.form.create" />}
     />
   );
 
-  render() {
-    const { initialValues, isLoading, onDelete, handleSubmit } = this.props;
-    const { confirmDelete, sections } = this.state;
-    const footer = this.getPaneFooter();
-    const name = initialValues.label;
+  const footer = getPaneFooter();
+  const name = initialValues.label;
 
-    if (isLoading) return <Icon icon="spinner-ellipsis" width="10px" />;
+  if (isLoading) return <Icon icon="spinner-ellipsis" width="10px" />;
 
-    return (
-      <form
-        className={BasicStyle.styleForFormRoot}
-        data-test-collection-form-page
-        id="form-collection"
-        onSubmit={handleSubmit}
-      >
-        <Paneset isRoot>
-          <Pane
-            defaultWidth="100%"
-            footer={footer}
-            renderHeader={this.renderFormPaneHeader}
-          >
-            <div className={BasicStyle.styleForFormContent}>
-              <AccordionSet>
-                <Row end="xs">
-                  <Col xs>
-                    <ExpandAllButton
-                      accordionStatus={sections}
-                      id="clickable-expand-all"
-                      onToggle={this.handleExpandAll}
-                      setStatus={null}
-                    />
-                  </Col>
-                </Row>
-                {initialValues.metadata &&
-                  initialValues.metadata.createdDate && (
-                    <ViewMetaData metadata={initialValues.metadata} />
-                )}
-                <CollectionInfoForm
-                  accordionId="editCollectionInfo"
-                  expanded={sections.editCollectionInfo}
-                  onToggle={this.handleSectionToggle}
-                  {...this.props}
-                />
-                <CollectionManagementForm
-                  accordionId="editCollectionManagement"
-                  expanded={sections.editCollectionManagement}
-                  onToggle={this.handleSectionToggle}
-                  {...this.props}
-                />
-                <CollectionTechnicalForm
-                  accordionId="editCollectionTechnical"
-                  expanded={sections.editCollectionTechnical}
-                  onToggle={this.handleSectionToggle}
-                  {...this.props}
-                />
-              </AccordionSet>
-              <ConfirmationModal
-                heading={<FormattedMessage id="ui-finc-config.form.delete" />}
-                id="delete-collection-confirmation"
-                message={<FormattedMessage
-                  id="ui-finc-config.form.delete.confirm.message"
-                  values={{ name }}
-                />}
-                onCancel={() => { this.confirmDelete(false); }}
-                onConfirm={() => onDelete()}
-                open={confirmDelete}
+  return (
+    <form
+      className={BasicStyle.styleForFormRoot}
+      data-test-collection-form-page
+      id="form-collection"
+      onSubmit={handleSubmit}
+    >
+      <Paneset isRoot>
+        <Pane
+          defaultWidth="100%"
+          footer={footer}
+          renderHeader={renderFormPaneHeader}
+        >
+          <div className={BasicStyle.styleForFormContent}>
+            <AccordionSet initialStatus={initialAccordionStatus}>
+              <Row end="xs">
+                <Col xs>
+                  <ExpandAllButton id="clickable-expand-all" />
+                </Col>
+              </Row>
+              {initialValues.metadata &&
+                initialValues.metadata.createdDate && (
+                  <ViewMetaData metadata={initialValues.metadata} />
+              )}
+              <CollectionInfoForm
+                accordionId="editCollectionInfo"
+                expanded={initialAccordionStatus.editCollectionInfo}
               />
-            </div>
-          </Pane>
-        </Paneset>
-      </form>
-    );
-  }
-}
+              <CollectionManagementForm
+                accordionId="editCollectionManagement"
+                expanded={initialAccordionStatus.editCollectionManagement}
+              />
+              <CollectionTechnicalForm
+                accordionId="editCollectionTechnical"
+                expanded={initialAccordionStatus.editCollectionTechnical}
+              />
+            </AccordionSet>
+            <ConfirmationModal
+              heading={<FormattedMessage id="ui-finc-config.form.delete" />}
+              id="delete-collection-confirmation"
+              message={<FormattedMessage
+                id="ui-finc-config.form.delete.confirm.message"
+                values={{ name }}
+              />}
+              onCancel={() => { doConfirmDelete(false); }}
+              onConfirm={() => onDelete()}
+              open={confirmDelete}
+            />
+          </div>
+        </Pane>
+      </Paneset>
+    </form>
+  );
+};
+
+MetadataCollectionForm.propTypes = {
+  handlers: PropTypes.PropTypes.shape({
+    onClose: PropTypes.func.isRequired,
+  }),
+  handleSubmit: PropTypes.func.isRequired,
+  initialValues: PropTypes.object,
+  invalid: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  onDelete: PropTypes.func,
+  pristine: PropTypes.bool,
+  submitting: PropTypes.bool,
+};
+
+MetadataCollectionForm.defaultProps = {
+  initialValues: {},
+};
 
 export default stripesFinalForm({
   initialValuesEqual: (a, b) => isEqual(a, b),
@@ -258,8 +218,4 @@ export default stripesFinalForm({
   enableReinitialize: true,
   // set navigationCheck true for confirming changes
   navigationCheck: true,
-  // necessary for permittedFor logic
-  subscription: {
-    values: true
-  },
 })(MetadataCollectionForm);

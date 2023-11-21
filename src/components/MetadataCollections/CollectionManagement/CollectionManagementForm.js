@@ -1,7 +1,6 @@
-import _ from 'lodash';
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useForm, Field } from 'react-final-form';
+import { useForm, useFormState, Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
   FormattedMessage,
@@ -34,8 +33,6 @@ let permittedIsRequired;
 const CollectionManagementForm = ({
   accordionId,
   expanded,
-  onToggle,
-  values,
 }) => {
   const { change } = useForm();
 
@@ -45,17 +42,20 @@ const CollectionManagementForm = ({
 
   const [update, setUpdate] = useState(0); // eslint-disable-line no-unused-vars
 
+  const formState = useFormState();
+  const valuePermittedFor = formState.values.permittedFor;
+  const valueUsageRestricted = formState.values.usageRestricted;
+
   const containerRect = useRef();
 
   const changeSelectedUsageRestricted = event => {
     event.preventDefault();
 
     const usageRestrictedVal = event.target.value;
-    const permittedValue = _.get(values, 'permittedFor', []);
 
     if (usageRestrictedVal === 'yes') {
       setAddPermittedForField(true);
-    } else if (permittedValue.length > 0) {
+    } else if (valuePermittedFor.length > 0) {
       setAddPermittedForField(false);
       setConfirmClear(true);
       setSelectedUsageRestricted(usageRestrictedVal);
@@ -94,9 +94,7 @@ const CollectionManagementForm = ({
     <FormattedMessage id="ui-finc-config.collection.form.selectedUsageRestricted.confirmClearMessage" />
   );
 
-  const usageRestricted = _.get(values, 'usageRestricted', '');
-
-  if (usageRestricted === 'yes') {
+  if (valueUsageRestricted === 'yes') {
     permittedIsRequired = true;
   } else {
     permittedIsRequired = false;
@@ -108,7 +106,6 @@ const CollectionManagementForm = ({
     <Accordion
       id={accordionId}
       label={<FormattedMessage id="ui-finc-config.collection.managementAccordion" />}
-      onToggle={onToggle}
       open={expanded}
     >
       <Row>
@@ -237,8 +234,6 @@ const CollectionManagementForm = ({
 CollectionManagementForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
-  onToggle: PropTypes.func,
-  values: PropTypes.shape(),
 };
 
 export default injectIntl(CollectionManagementForm);

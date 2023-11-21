@@ -10,7 +10,6 @@ import { StripesContext, useStripes } from '@folio/stripes/core';
 import withIntlConfiguration from '../../../../test/jest/helpers/withIntlConfiguration';
 import SourceManagementForm from './SourceManagementForm';
 
-const onToggle = jest.fn();
 const setOrganization = jest.fn();
 
 const organization = {};
@@ -30,7 +29,6 @@ const renderSourceManagementForm = (stripes, initialValues = { organization }) =
               accordionId="editSourceManagement"
               expanded
               initialValues={initialValues}
-              onToggle={onToggle}
             />
           )}
         />

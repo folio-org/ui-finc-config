@@ -25,13 +25,11 @@ const CollectionTechnicalForm = ({
   accordionId,
   expanded,
   intl,
-  onToggle,
 }) => {
   return (
     <Accordion
       id={accordionId}
       label={<FormattedMessage id="ui-finc-config.collection.technicalAccordion" />}
-      onToggle={onToggle}
       open={expanded}
     >
       <Row>
@@ -121,7 +119,6 @@ CollectionTechnicalForm.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired,
   }),
-  onToggle: PropTypes.func,
 };
 
 export default injectIntl(CollectionTechnicalForm);

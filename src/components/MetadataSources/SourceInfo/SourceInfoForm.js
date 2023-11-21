@@ -25,12 +25,10 @@ export const getDataOptions = (intl, field) => {
 const SourceInfoForm = ({
   accordionId,
   expanded,
-  onToggle,
 }) => {
   return (
     <Accordion
       label={<FormattedMessage id="ui-finc-config.source.generalAccordion" />}
-      onToggle={onToggle}
       open={expanded}
       id={accordionId}
     >
@@ -87,7 +85,6 @@ SourceInfoForm.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired,
   }),
-  onToggle: PropTypes.func,
 };
 
 export default SourceInfoForm;
