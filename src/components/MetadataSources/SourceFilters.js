@@ -112,7 +112,7 @@ const SourceFilters = ({
 
   return (
     <AccordionSet>
-      {renderContactsFilter('contact')}
+      {renderContactsFilter()}
       {renderCheckboxFilter('status')}
       {renderCheckboxFilter('solrShard')}
     </AccordionSet>
