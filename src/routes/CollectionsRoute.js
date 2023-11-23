@@ -155,6 +155,7 @@ class CollectionsRoute extends React.Component {
         querySetter={this.querySetter}
         searchString={location.search}
         selectedRecordId={match.params.id}
+        searchField={this.searchField}
         // add values for search-selectbox
         onChangeIndex={this.onChangeIndex}
       >

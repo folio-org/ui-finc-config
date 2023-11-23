@@ -55,7 +55,7 @@ const CollectionManagementForm = ({
 
     if (usageRestrictedVal === 'yes') {
       setAddPermittedForField(true);
-    } else if (valuePermittedFor.length > 0) {
+    } else if (valuePermittedFor?.length > 0) {
       setAddPermittedForField(false);
       setConfirmClear(true);
       setSelectedUsageRestricted(usageRestrictedVal);

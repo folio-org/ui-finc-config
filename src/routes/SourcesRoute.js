@@ -160,6 +160,7 @@ class SourcesRoute extends React.Component {
         querySetter={this.querySetter}
         searchString={location.search}
         selectedRecordId={match.params.id}
+        searchField={this.searchField}
         source={this.source}
         // add values for search-selectbox
         onChangeIndex={this.onChangeIndex}
