@@ -16,7 +16,6 @@ const CollectionEditRoute = ({
 }) => {
   const stripes = useStripes();
   const ky = useOkapiKy();
-  // const queryClient = useQueryClient();
 
   const hasPerms = stripes.hasPerm('finc-config.metadata-collections.item.put');
 
@@ -41,7 +40,6 @@ const CollectionEditRoute = ({
     [COLLECTION_API, 'putCollection'],
     (payload) => ky.put(COLLECTION_API, { json: payload })
       .then(() => {
-        // queryClient.invalidateQueries(COLLECTION_API);
         handleClose();
       })
   );

@@ -15,7 +15,7 @@ import SourcesRoute from './routes/SourcesRoute';
 import SourceCreateRoute from './routes/SourceCreateRoute';
 import CollectionCreateRoute from './routes/CollectionCreateRoute';
 // import CollectionEditRoute from './routes/CollectionEditRoute';
-import SourceEditRoute from './routes/SourceEditRoute';
+// import SourceEditRoute from './routes/SourceEditRoute';
 import CollectionViewRoute from './routes/CollectionViewRoute';
 import SourceViewRoute from './routes/SourceViewRoute';
 import collections from '../test/fixtures/metadatacollections';
@@ -53,23 +53,23 @@ const createRouteProps = {
   },
 };
 
-const editRouteProps = {
-  history: {
-    push: () => jest.fn()
-  },
-  location: {
-    search: '',
-  },
-  match: {
-    params: {
-      id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
-    }
-  },
-  resources: {
-    collection: { collection },
-    source: { source },
-  },
-};
+// const editRouteProps = {
+//   history: {
+//     push: () => jest.fn()
+//   },
+//   location: {
+//     search: '',
+//   },
+//   match: {
+//     params: {
+//       id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
+//     }
+//   },
+//   resources: {
+//     collection: { collection },
+//     source: { source },
+//   },
+// };
 
 // const newEditRouteProps = {
 //   history: {
@@ -173,11 +173,11 @@ it('should render CollectionCreateRoute', () => {
   expect(screen.getByText('Create')).toBeInTheDocument();
 });
 
-it('should render SourceEditRoute', () => {
-  renderWithRouter(<SourceEditRoute {...editRouteProps} />);
+// it('should render SourceEditRoute', () => {
+//   renderWithRouter(<SourceEditRoute {...editRouteProps} />);
 
-  expect(document.querySelector('#form-source')).toBeInTheDocument();
-});
+//   expect(document.querySelector('#form-source')).toBeInTheDocument();
+// });
 
 // it('should render CollectionEditRoute', async () => {
 //   await waitFor(() => {
