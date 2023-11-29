@@ -31,7 +31,10 @@ describe('CollectionsRoute', () => {
     beforeEach(() => {
       renderComponent = render(withIntlConfiguration(
         <MemoryRouter>
-          <CollectionsRoute {...routeProps} />
+          <CollectionsRoute
+            {...routeProps}
+            stripes={{ hasPerm: () => true, logger: { log: () => jest.fn() } }}
+          />
         </MemoryRouter>
       ));
     });
@@ -49,7 +52,7 @@ describe('CollectionsRoute', () => {
         <MemoryRouter>
           <CollectionsRoute
             {...routeProps}
-            stripes={{ hasPerm: () => false }}
+            stripes={{ hasPerm: () => false, logger: { log: () => jest.fn() } }}
           />
         </MemoryRouter>
       ));
