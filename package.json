@@ -42,7 +42,8 @@
     "prop-types": "^15.6.0",
     "react-final-form": "^6.3.5",
     "react-final-form-arrays": "^3.1.1",
-    "react-router-prop-types": "^1.0.4"
+    "react-router-prop-types": "^1.0.4",
+    "uuid": "^9.0.0"
   },
   "peerDependencies": {
     "@folio/stripes": "^9.0.0",

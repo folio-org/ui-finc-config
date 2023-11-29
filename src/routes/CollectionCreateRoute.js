@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { useMutation } from 'react-query';
+import { v4 as uuidv4 } from 'uuid';
 
-import { stripesConnect } from '@folio/stripes/core';
+import { stripesConnect, useOkapiKy } from '@folio/stripes/core';
 
 import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
 import urls from '../components/DisplayUtils/urls';
@@ -10,22 +12,28 @@ import urls from '../components/DisplayUtils/urls';
 const CollectionCreateRoute = ({
   history,
   location,
-  mutator,
   stripes,
 }) => {
+  const ky = useOkapiKy();
   const hasPerms = stripes.hasPerm('finc-config.metadata-collections.item.post');
+
+  const COLLECTION_API = 'finc-config/metadata-collections';
 
   const handleClose = () => {
     history.push(`${urls.collections()}${location.search}`);
   };
 
-  const handleSubmit = (collection) => {
-    mutator.collections
-      .POST(collection)
-      .then(({ id }) => {
-        history.push(`${urls.collectionView(id)}${location.search}`);
-      });
-  };
+  const { mutateAsync: createCollection } = useMutation({
+    mutationFn: (payload) => {
+      const id = uuidv4();
+      const newPayload = { ...payload, id };
+
+      ky.post(COLLECTION_API, { json: newPayload })
+        .then(() => {
+          history.push(`${urls.collectionView(id)}${location.search}`);
+        });
+    }
+  });
 
   const getInitialSolrMegaCollection = () => {
     // add first field for required repeatable field
@@ -40,7 +48,7 @@ const CollectionCreateRoute = ({
     <MetadataCollectionForm
       handlers={{ onClose: handleClose }}
       initialValues={getInitialSolrMegaCollection()}
-      onSubmit={handleSubmit}
+      onSubmit={createCollection}
     />
   );
 };
@@ -60,11 +68,6 @@ CollectionCreateRoute.propTypes = {
   }).isRequired,
   location: PropTypes.shape({
     search: PropTypes.string.isRequired,
-  }).isRequired,
-  mutator: PropTypes.shape({
-    collections: PropTypes.shape({
-      POST: PropTypes.func.isRequired,
-    }).isRequired,
   }).isRequired,
   resources: PropTypes.shape({
     collections: PropTypes.object,
