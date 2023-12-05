@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash';
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -22,10 +22,10 @@ const SourceEditRoute = ({
 
   const SOURCE_API = `finc-config/metadata-sources/${match.params.id}`;
 
-  const { data: source = {}, isLoading: isSourceLoading } = useContext(useQuery(
+  const { data: source = {}, isLoading: isSourceLoading } = useQuery(
     [SOURCE_API, 'getSource'],
     () => ky.get(SOURCE_API).json()
-  ));
+  );
 
   const getInitialValues = () => {
     const initialValues = cloneDeep(source);
