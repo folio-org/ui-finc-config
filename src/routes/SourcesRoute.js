@@ -34,9 +34,6 @@ const SourcesRoute = ({
     source.update({ resources, mutator }, 'sources');
   }
 
-  // const [source, setSource] = useState();
-  // setSource(new StripesConnectedSource({ resources, mutator }, stripes.logger, 'sources'));
-
   useEffect(() => {
     if (searchField.current) {
       searchField.current.focus();
