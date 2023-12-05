@@ -27,13 +27,7 @@ const CollectionsRoute = ({
   const hasPerms = stripes.hasPerm('finc-config.metadata-collections.collection.get');
   const searchField = useRef();
 
-  let [source, setSource] = useState(); // eslint-disable-line prefer-const
-  if (!source) {
-    source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'collections');
-    setSource(source);
-  } else {
-    source.update({ resources, mutator }, 'collections');
-  }
+  const [source] = useState(new StripesConnectedSource({ resources, mutator }, stripes.logger, 'collections'));
 
   useEffect(() => {
     if (searchField.current) {

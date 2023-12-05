@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm, useFormState, Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
@@ -40,13 +40,9 @@ const CollectionManagementForm = ({
   const [selectedUsageRestricted, setSelectedUsageRestricted] = useState('');
   const [addPermittedForField, setAddPermittedForField] = useState(false);
 
-  const [update, setUpdate] = useState(0); // eslint-disable-line no-unused-vars
-
   const formState = useFormState();
   const valuePermittedFor = formState.values.permittedFor;
   const valueUsageRestricted = formState.values.usageRestricted;
-
-  const containerRect = useRef();
 
   const changeSelectedUsageRestricted = event => {
     event.preventDefault();
@@ -64,21 +60,12 @@ const CollectionManagementForm = ({
     change('usageRestricted', usageRestrictedVal);
   };
 
-  // this is the equivalent of `forceUpdate` for functional components.
-  const updateHandle = () => {
-    if (containerRect.current) {
-      setUpdate(u => u + 1);
-    }
-  };
-
   const confirmClearPermittedFor = confirmation => {
     if (confirmation) {
       change('permittedFor', []);
       change('usageRestricted', selectedUsageRestricted);
-      updateHandle();
     } else {
       change('usageRestricted', 'yes');
-      updateHandle();
     }
     setConfirmClear(false);
   };
