@@ -27,12 +27,15 @@ const CollectionsRoute = ({
   const hasPerms = stripes.hasPerm('finc-config.metadata-collections.collection.get');
   const searchField = useRef();
 
-  const [source, setSource] = useState();
-  if (!source) {
-    setSource(new StripesConnectedSource({ resources, mutator }, stripes.logger, 'collections'));
-  } else {
-    source.update({ resources, mutator }, 'collections');
-  }
+  const [source] = useState(() => {
+    // Create initial source
+    return new StripesConnectedSource({ resources, mutator }, stripes.logger, 'collections');
+  });
+
+  useEffect(() => {
+    // Update source when resources or mutator change
+    source?.update({ resources, mutator }, 'collections');
+  }, [resources, mutator, source]);
 
   useEffect(() => {
     if (searchField.current) {
