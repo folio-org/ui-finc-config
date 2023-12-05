@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { useMutation } from 'react-query';
 import { v4 as uuidv4 } from 'uuid';
 
-import { stripesConnect, useOkapiKy } from '@folio/stripes/core';
+import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm';
 import urls from '../components/DisplayUtils/urls';
@@ -12,9 +12,9 @@ import urls from '../components/DisplayUtils/urls';
 const SourceCreateRoute = ({
   history,
   location,
-  stripes,
 }) => {
   const ky = useOkapiKy();
+  const stripes = useStripes();
   const hasPerms = stripes.hasPerm('finc-config.metadata-sources.item.post');
 
   const SOURCE_API = 'finc-config/metadata-sources';
@@ -52,10 +52,6 @@ SourceCreateRoute.propTypes = {
   location: PropTypes.shape({
     search: PropTypes.string.isRequired,
   }).isRequired,
-  stripes: PropTypes.shape({
-    hasPerm: PropTypes.func.isRequired,
-    okapi: PropTypes.object.isRequired,
-  }).isRequired,
 };
 
-export default stripesConnect(SourceCreateRoute);
+export default SourceCreateRoute;

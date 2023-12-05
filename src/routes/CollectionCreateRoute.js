@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { useMutation } from 'react-query';
 import { v4 as uuidv4 } from 'uuid';
 
-import { stripesConnect, useOkapiKy } from '@folio/stripes/core';
+import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
 import urls from '../components/DisplayUtils/urls';
@@ -12,9 +12,9 @@ import urls from '../components/DisplayUtils/urls';
 const CollectionCreateRoute = ({
   history,
   location,
-  stripes,
 }) => {
   const ky = useOkapiKy();
+  const stripes = useStripes();
   const hasPerms = stripes.hasPerm('finc-config.metadata-collections.item.post');
 
   const COLLECTION_API = 'finc-config/metadata-collections';
@@ -53,15 +53,6 @@ const CollectionCreateRoute = ({
   );
 };
 
-CollectionCreateRoute.manifest = Object.freeze({
-  collections: {
-    type: 'okapi',
-    path: 'finc-config/metadata-collections',
-    fetch: false,
-    shouldRefresh: () => false,
-  },
-});
-
 CollectionCreateRoute.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
@@ -69,13 +60,6 @@ CollectionCreateRoute.propTypes = {
   location: PropTypes.shape({
     search: PropTypes.string.isRequired,
   }).isRequired,
-  resources: PropTypes.shape({
-    collections: PropTypes.object,
-  }).isRequired,
-  stripes: PropTypes.shape({
-    hasPerm: PropTypes.func.isRequired,
-    okapi: PropTypes.object.isRequired,
-  }).isRequired,
 };
 
-export default stripesConnect(CollectionCreateRoute);
+export default CollectionCreateRoute;
