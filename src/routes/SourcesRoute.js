@@ -12,12 +12,14 @@ import {
 
 import MetadataSources from '../components/MetadataSources/MetadataSources';
 import filterConfig from '../components/MetadataSources/filterConfigData';
+import urls from '../components/DisplayUtils/urls';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
 
 const SourcesRoute = ({
   children,
+  history,
   location,
   match,
   mutator,
@@ -33,9 +35,22 @@ const SourcesRoute = ({
   });
 
   useEffect(() => {
+    const oldCount = source.totalCount();
+    const oldRecords = source.records();
+
     // Update source when resources or mutator change
     source?.update({ resources, mutator }, 'sources');
-  }, [resources, mutator, source]);
+
+    const newCount = source.totalCount();
+    const newRecords = source.records();
+
+    if (newCount === 1) {
+      if (oldCount !== 1 || (oldCount === 1 && oldRecords[0].id !== newRecords[0].id)) {
+        const record = newRecords[0];
+        history.push(`${urls.sourceView(record.id)}${location.search}`);
+      }
+    }
+  }, [resources, mutator, source, history, location.search]);
 
   useEffect(() => {
     if (searchField.current) {
@@ -132,6 +147,9 @@ SourcesRoute.manifest = Object.freeze({
 
 SourcesRoute.propTypes = {
   children: PropTypes.node,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   location: PropTypes.shape({
     search: PropTypes.string,
   }).isRequired,
