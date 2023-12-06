@@ -51,7 +51,7 @@ const SourcesRoute = ({
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resources]);
+  }, [resources, mutator]);
 
   useEffect(() => {
     if (searchField.current) {
