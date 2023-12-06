@@ -50,7 +50,8 @@ const CollectionsRoute = ({
         history.push(`${urls.collectionView(record.id)}${location.search}`);
       }
     }
-  }, [resources, mutator, source, history, location.search]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resources]);
 
   useEffect(() => {
     if (searchField.current) {
