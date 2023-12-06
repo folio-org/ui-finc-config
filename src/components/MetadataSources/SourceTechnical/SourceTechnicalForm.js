@@ -32,11 +32,13 @@ export const getDataOptions = (field) => {
 const SourceTechnicalForm = ({
   accordionId,
   expanded,
+  onToggle,
 }) => {
   return (
     <Accordion
       id={accordionId}
       label={<FormattedMessage id="ui-finc-config.source.technicalAccordion" />}
+      onToggle={onToggle}
       open={expanded}
     >
       {/* TICKETS (is repeatable) ... */}
@@ -164,6 +166,7 @@ const SourceTechnicalForm = ({
 SourceTechnicalForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
+  onToggle: PropTypes.func,
 };
 
 export default SourceTechnicalForm;

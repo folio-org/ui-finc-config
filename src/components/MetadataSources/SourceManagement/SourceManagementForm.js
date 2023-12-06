@@ -18,11 +18,13 @@ import BasicCss from '../../BasicStyle.css';
 const SourceManagementForm = ({
   accordionId,
   expanded,
+  onToggle,
 }) => {
   return (
     <Accordion
       id={accordionId}
       label={<FormattedMessage id="ui-finc-config.source.managementAccordion" />}
+      onToggle={onToggle}
       open={expanded}
     >
       <div className={BasicCss.addMarginBottom}>
@@ -61,6 +63,7 @@ const SourceManagementForm = ({
 SourceManagementForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
+  onToggle: PropTypes.func,
 };
 
 export default SourceManagementForm;

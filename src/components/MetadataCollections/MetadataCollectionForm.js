@@ -39,10 +39,18 @@ const MetadataCollectionForm = ({
 }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
 
-  const initialAccordionStatus = {
+  const [accordionsState, setAccordionsState] = useState({
     editCollectionInfo: true,
     editCollectionManagement: true,
-    editCollectionTechnical: true
+    editCollectionTechnical: true,
+  });
+
+  const handleExpandAll = (obj) => {
+    setAccordionsState(obj);
+  };
+
+  const handleAccordionToggle = ({ id }) => {
+    setAccordionsState({ ...accordionsState, [id]: !accordionsState[id] });
   };
 
   const doBeginDelete = () => {
@@ -154,10 +162,14 @@ const MetadataCollectionForm = ({
           renderHeader={renderFormPaneHeader}
         >
           <div className={BasicStyle.styleForFormContent}>
-            <AccordionSet initialStatus={initialAccordionStatus}>
+            <AccordionSet>
               <Row end="xs">
                 <Col xs>
-                  <ExpandAllButton id="clickable-expand-all" />
+                  <ExpandAllButton
+                    accordionStatus={accordionsState}
+                    onToggle={handleExpandAll}
+                    setStatus={null}
+                  />
                 </Col>
               </Row>
               {initialValues.metadata &&
@@ -166,15 +178,18 @@ const MetadataCollectionForm = ({
               )}
               <CollectionInfoForm
                 accordionId="editCollectionInfo"
-                expanded={initialAccordionStatus.editCollectionInfo}
+                expanded={accordionsState.editCollectionInfo}
+                onToggle={handleAccordionToggle}
               />
               <CollectionManagementForm
                 accordionId="editCollectionManagement"
-                expanded={initialAccordionStatus.editCollectionManagement}
+                expanded={accordionsState.editCollectionManagement}
+                onToggle={handleAccordionToggle}
               />
               <CollectionTechnicalForm
                 accordionId="editCollectionTechnical"
-                expanded={initialAccordionStatus.editCollectionTechnical}
+                expanded={accordionsState.editCollectionTechnical}
+                onToggle={handleAccordionToggle}
               />
             </AccordionSet>
             <ConfirmationModal

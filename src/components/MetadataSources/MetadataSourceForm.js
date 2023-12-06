@@ -38,10 +38,18 @@ const MetadataSourceForm = ({
 }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
 
-  const initialAccordionStatus = {
+  const [accordionsState, setAccordionsState] = useState({
     editSourceInfo: true,
     editSourceManagement: true,
     editSourceTechnical: true
+  });
+
+  const handleExpandAll = (obj) => {
+    setAccordionsState(obj);
+  };
+
+  const handleAccordionToggle = ({ id }) => {
+    setAccordionsState({ ...accordionsState, [id]: !accordionsState[id] });
   };
 
   const doBeginDelete = () => {
@@ -152,10 +160,14 @@ const MetadataSourceForm = ({
           renderHeader={renderFormPaneHeader}
         >
           <div className={BasicStyle.styleForFormContent}>
-            <AccordionSet initialStatus={initialAccordionStatus}>
+            <AccordionSet>
               <Row end="xs">
                 <Col xs>
-                  <ExpandAllButton id="clickable-expand-all" />
+                  <ExpandAllButton
+                    accordionStatus={accordionsState}
+                    onToggle={handleExpandAll}
+                    setStatus={null}
+                  />
                 </Col>
               </Row>
               {initialValues.metadata &&
@@ -164,16 +176,19 @@ const MetadataSourceForm = ({
               )}
               <SourceInfoForm
                 accordionId="editSourceInfo"
-                expanded={initialAccordionStatus.editSourceInfo}
+                expanded={accordionsState.editSourceInfo}
+                onToggle={handleAccordionToggle}
               />
               <SourceManagementForm
                 accordionId="editSourceManagement"
-                expanded={initialAccordionStatus.editSourceManagement}
+                expanded={accordionsState.editSourceManagement}
+                onToggle={handleAccordionToggle}
                 initialValues={initialValues}
               />
               <SourceTechnicalForm
                 accordionId="editSourceTechnical"
-                expanded={initialAccordionStatus.editSourceTechnical}
+                expanded={accordionsState.editSourceTechnical}
+                onToggle={handleAccordionToggle}
               />
             </AccordionSet>
             <ConfirmationModal

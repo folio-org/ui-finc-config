@@ -16,11 +16,13 @@ import FindSource from './FindSource/FindSource';
 const CollectionInfoForm = ({
   accordionId,
   expanded,
+  onToggle,
 }) => {
   return (
     <Accordion
       id={accordionId}
       label={<FormattedMessage id="ui-finc-config.collection.generalAccordion" />}
+      onToggle={onToggle}
       open={expanded}
     >
       <Row>
@@ -57,6 +59,7 @@ const CollectionInfoForm = ({
 CollectionInfoForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
+  onToggle: PropTypes.func,
 };
 
 export default CollectionInfoForm;

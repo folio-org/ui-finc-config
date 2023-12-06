@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
 import _ from 'lodash';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -34,9 +34,17 @@ const MetadataSourceView = ({
 
   const stripes = useStripes();
 
-  const initialAccordionStatus = {
+  const [accordionsState, setAccordionsState] = useState({
     managementAccordion: false,
     technicalAccordion: false,
+  });
+
+  const handleExpandAll = (obj) => {
+    setAccordionsState(obj);
+  };
+
+  const handleAccordionToggle = ({ id }) => {
+    setAccordionsState({ ...accordionsState, [id]: !accordionsState[id] });
   };
 
   const renderEditPaneMenu = () => {
@@ -102,7 +110,7 @@ const MetadataSourceView = ({
         id="pane-sourcedetails"
         renderHeader={() => renderDetailsPanePaneHeader(label)}
       >
-        <AccordionSet initialStatus={initialAccordionStatus}>
+        <AccordionSet>
           <ViewMetaData
             metadata={_.get(record, 'metadata', {})}
             stripes={stripes}
@@ -114,12 +122,18 @@ const MetadataSourceView = ({
           />
           <Row end="xs">
             <Col xs>
-              <ExpandAllButton id="clickable-expand-all" />
+              <ExpandAllButton
+                accordionStatus={accordionsState}
+                onToggle={handleExpandAll}
+                setStatus={null}
+              />
             </Col>
           </Row>
           <Accordion
             id="managementAccordion"
             label={<FormattedMessage id="ui-finc-config.source.managementAccordion" />}
+            onToggle={handleAccordionToggle}
+            open={accordionsState.managementAccordion}
           >
             <SourceManagementView
               id="sourceManagement"
@@ -131,6 +145,8 @@ const MetadataSourceView = ({
           <Accordion
             id="technicalAccordion"
             label={<FormattedMessage id="ui-finc-config.source.technicalAccordion" />}
+            onToggle={handleAccordionToggle}
+            open={accordionsState.technicalAccordion}
           >
             <SourceTechnicalView
               id="sourceTechnical"

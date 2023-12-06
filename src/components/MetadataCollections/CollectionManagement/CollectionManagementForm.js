@@ -33,6 +33,7 @@ let permittedIsRequired;
 const CollectionManagementForm = ({
   accordionId,
   expanded,
+  onToggle,
 }) => {
   const { change } = useForm();
 
@@ -93,6 +94,7 @@ const CollectionManagementForm = ({
     <Accordion
       id={accordionId}
       label={<FormattedMessage id="ui-finc-config.collection.managementAccordion" />}
+      onToggle={onToggle}
       open={expanded}
     >
       <Row>
@@ -221,6 +223,7 @@ const CollectionManagementForm = ({
 CollectionManagementForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
+  onToggle: PropTypes.func,
 };
 
 export default injectIntl(CollectionManagementForm);
