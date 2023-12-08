@@ -43,7 +43,7 @@ const SourceManagementView = ({
     });
   };
 
-  let orgValue = <NoValue />;
+  let orgValue;
   const sourceId = _.get(metadataSource, 'id', <NoValue />);
 
   const { organization, isLoading: isLoadingOrganization, isError } = useOrganization();

@@ -21,8 +21,6 @@ import CollectionViewRoute from './routes/CollectionViewRoute';
 import SourceViewRoute from './routes/SourceViewRoute';
 import collections from '../test/fixtures/metadatacollections';
 import sources from '../test/fixtures/metadatasources';
-import collection from '../test/fixtures/metadatacollection';
-import source from '../test/fixtures/metadatasource';
 import FincConfig from './index';
 
 const routeProps = {
@@ -48,10 +46,6 @@ const createRouteProps = {
   location: {
     search: '',
   },
-  mutator: {
-    collections: { POST: jest.fn().mockReturnValue(Promise.resolve()) },
-    sources: { POST: jest.fn().mockReturnValue(Promise.resolve()) },
-  },
 };
 
 const editRouteProps = {
@@ -65,10 +59,6 @@ const editRouteProps = {
     params: {
       id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
     }
-  },
-  resources: {
-    collection: { collection },
-    source: { source },
   },
 };
 
@@ -96,10 +86,6 @@ const viewRouteProps = {
     params: {
       id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
     }
-  },
-  resources: {
-    collection: { collection },
-    source: { source },
   },
 };
 
@@ -186,7 +172,7 @@ it('should render CollectionViewRoute', async () => {
 });
 
 describe('Application root', () => {
-  it('should render without crashing', async () => {
+  it('should render without crashing', () => {
     renderWithRouter(<FincConfig match={match} />);
 
     expect(screen.getByText('FincConfig')).toBeInTheDocument();

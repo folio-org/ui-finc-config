@@ -22,7 +22,7 @@ import RepeatableFieldValidUrl from '../../DisplayUtils/RepeatableFieldValidUrl'
 import { solrShardOptions } from '../../DataOptions/dataOptions';
 import BasicCss from '../../BasicStyle.css';
 
-export const getDataOptions = (field) => {
+const getDataOptions = (field) => {
   return field.map((item) => ({
     label: item.value,
     value: item.value,

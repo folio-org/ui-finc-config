@@ -66,10 +66,6 @@ SourceViewRoute.propTypes = {
       id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  stripes: PropTypes.shape({
-    hasPerm: PropTypes.func.isRequired,
-    okapi: PropTypes.object.isRequired,
-  }),
 };
 
 export default SourceViewRoute;

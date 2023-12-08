@@ -15,7 +15,7 @@ import { IntlConsumer } from '@folio/stripes/core';
 import { Required } from '../../DisplayUtils/Validate';
 import { implementationStatusOptions } from '../../DataOptions/dataOptions';
 
-export const getDataOptions = (intl, field) => {
+const getDataOptions = (intl, field) => {
   return field.map((item) => ({
     label: item.value ? intl.formatMessage({ id: `ui-finc-config.dataOption.${item.value}` }) : '',
     value: item.value,
