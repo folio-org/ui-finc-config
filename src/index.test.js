@@ -9,6 +9,7 @@ import {
 
 import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 
+import { useOkapiKy } from '@folio/stripes/core';
 import withIntlConfiguration from '../test/jest/helpers/withIntlConfiguration';
 import CollectionsRoute from './routes/CollectionsRoute';
 import SourcesRoute from './routes/SourcesRoute';
@@ -65,6 +66,10 @@ const editRouteProps = {
       id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
     }
   },
+  resources: {
+    collection: { collection },
+    source: { source },
+  },
 };
 
 const viewRouteProps = {
@@ -96,10 +101,6 @@ const viewRouteProps = {
     collection: { collection },
     source: { source },
   },
-  stripes: {
-    hasPerm: jest.fn(),
-    okapi: {},
-  }
 };
 
 const match = {
@@ -113,14 +114,15 @@ const queryClient = new QueryClient();
 
 const renderWithRouter = (component) => {
   const history = createMemoryHistory();
-
-  render(withIntlConfiguration(
-    <QueryClientProvider client={queryClient}>
-      <Router history={history}>
-        {component}
-      </Router>
-    </QueryClientProvider>
-  ));
+  return {
+    ...render(withIntlConfiguration(
+      <QueryClientProvider client={queryClient}>
+        <Router history={history}>
+          {component}
+        </Router>
+      </QueryClientProvider>
+    ))
+  };
 };
 
 jest.unmock('react-intl');
@@ -129,15 +131,21 @@ jest.mock('./index', () => {
   return () => <span>FincConfig</span>;
 });
 
+useOkapiKy.mockReturnValue({
+  get: jest.fn(() => ({ json: () => jest.fn() }))
+});
+
 it('should render CollectionsRoute', () => {
   renderWithRouter(<CollectionsRoute {...routeProps} />);
 
+  expect(screen.getByTestId('collections')).toBeInTheDocument();
   expect(screen.getByText('Metadata collections')).toBeInTheDocument();
 });
 
 it('should render SourcesRoute', () => {
   renderWithRouter(<SourcesRoute {...routeProps} />);
 
+  expect(screen.getByTestId('sources')).toBeInTheDocument();
   expect(screen.getByText('Metadata sources')).toBeInTheDocument();
 });
 
@@ -155,20 +163,26 @@ it('should render CollectionCreateRoute', () => {
   expect(screen.getByText('Create')).toBeInTheDocument();
 });
 
-it('should render SourceViewRoute', async () => {
-  await waitFor(() => {
-    renderWithRouter(<SourceViewRoute {...viewRouteProps} />);
-  });
+it('should render SourceEditRoute', async () => {
+  renderWithRouter(<SourceEditRoute {...editRouteProps} />);
+  await waitFor(() => expect(document.querySelector('#form-source')).toBeInTheDocument());
+});
 
-  expect(document.querySelector('#pane-sourcedetails')).toBeInTheDocument();
+it('should render CollectionEditRoute', async () => {
+  renderWithRouter(<CollectionEditRoute {...editRouteProps} />);
+  await waitFor(() => expect(document.querySelector('#form-collection')).toBeInTheDocument());
+});
+
+it('should render SourceViewRoute', async () => {
+  renderWithRouter(<SourceViewRoute {...viewRouteProps} />);
+
+  await waitFor(() => expect(document.querySelector('#pane-sourcedetails')).toBeInTheDocument());
 });
 
 it('should render CollectionViewRoute', async () => {
-  await waitFor(() => {
-    renderWithRouter(<CollectionViewRoute {...viewRouteProps} />);
-  });
+  renderWithRouter(<CollectionViewRoute {...viewRouteProps} />);
 
-  expect(document.querySelector('#pane-collectiondetails')).toBeInTheDocument();
+  await waitFor(() => expect(document.querySelector('#pane-collectiondetails')).toBeInTheDocument());
 });
 
 describe('Application root', () => {
@@ -176,25 +190,5 @@ describe('Application root', () => {
     renderWithRouter(<FincConfig match={match} />);
 
     expect(screen.getByText('FincConfig')).toBeInTheDocument();
-  });
-});
-
-describe('render SourceEditRoute', () => {
-  beforeEach(async () => {
-    await waitFor(() => renderWithRouter(<SourceEditRoute {...editRouteProps} />));
-  });
-
-  it('should render form-source', async () => {
-    expect(document.querySelector('#form-source')).toBeInTheDocument();
-  });
-});
-
-describe('render CollectionEditRoute', () => {
-  beforeEach(async () => {
-    await waitFor(() => renderWithRouter(<CollectionEditRoute {...editRouteProps} />));
-  });
-
-  it('should render form-collection', async () => {
-    expect(document.querySelector('#form-collection')).toBeInTheDocument();
   });
 });

@@ -8,7 +8,6 @@ import '@folio/stripes-acq-components/test/jest/__mock__/matchMedia.mock';
 import '@folio/stripes-acq-components/test/jest/__mock__/reactIntl.mock';
 import '@folio/stripes-acq-components/test/jest/__mock__/reactVirtualizedAutoSize.mock';
 import '@folio/stripes-acq-components/test/jest/__mock__/stripesConfig.mock';
-// import '@folio/stripes-acq-components/test/jest/__mock__/stripesCore.mock';
-import './stripesCore.mock';
+import '@folio/stripes-acq-components/test/jest/__mock__/stripesCore.mock';
 import '@folio/stripes-acq-components/test/jest/__mock__/stripesIcon.mock';
 import '@folio/stripes-acq-components/test/jest/__mock__/stripesSmartComponents.mock';
