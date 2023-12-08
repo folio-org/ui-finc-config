@@ -12,10 +12,10 @@ import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-libr
 import withIntlConfiguration from '../test/jest/helpers/withIntlConfiguration';
 import CollectionsRoute from './routes/CollectionsRoute';
 import SourcesRoute from './routes/SourcesRoute';
-// import SourceCreateRoute from './routes/SourceCreateRoute';
-// import CollectionCreateRoute from './routes/CollectionCreateRoute';
-// import CollectionEditRoute from './routes/CollectionEditRoute';
-// import SourceEditRoute from './routes/SourceEditRoute';
+import SourceCreateRoute from './routes/SourceCreateRoute';
+import CollectionCreateRoute from './routes/CollectionCreateRoute';
+import CollectionEditRoute from './routes/CollectionEditRoute';
+import SourceEditRoute from './routes/SourceEditRoute';
 import CollectionViewRoute from './routes/CollectionViewRoute';
 import SourceViewRoute from './routes/SourceViewRoute';
 import collections from '../test/fixtures/metadatacollections';
@@ -40,36 +40,32 @@ const routeProps = {
   resources: { collections, sources }
 };
 
-// const createRouteProps = {
-//   history: {
-//     push: () => jest.fn()
-//   },
-//   location: {
-//     search: '',
-//   },
-//   mutator: {
-//     collections: { POST: jest.fn().mockReturnValue(Promise.resolve()) },
-//     sources: { POST: jest.fn().mockReturnValue(Promise.resolve()) },
-//   },
-// };
+const createRouteProps = {
+  history: {
+    push: () => jest.fn()
+  },
+  location: {
+    search: '',
+  },
+  mutator: {
+    collections: { POST: jest.fn().mockReturnValue(Promise.resolve()) },
+    sources: { POST: jest.fn().mockReturnValue(Promise.resolve()) },
+  },
+};
 
-// const editRouteProps = {
-//   history: {
-//     push: () => jest.fn()
-//   },
-//   location: {
-//     search: '',
-//   },
-//   match: {
-//     params: {
-//       id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
-//     }
-//   },
-//   resources: {
-//     collection: { collection },
-//     source: { source },
-//   },
-// };
+const editRouteProps = {
+  history: {
+    push: () => jest.fn()
+  },
+  location: {
+    search: '',
+  },
+  match: {
+    params: {
+      id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
+    }
+  },
+};
 
 const viewRouteProps = {
   history: {
@@ -145,33 +141,19 @@ it('should render SourcesRoute', () => {
   expect(screen.getByText('Metadata sources')).toBeInTheDocument();
 });
 
-// it('should render SourceCreateRoute', () => {
-//   renderWithRouter(<SourceCreateRoute {...createRouteProps} />);
+it('should render SourceCreateRoute', () => {
+  renderWithRouter(<SourceCreateRoute {...createRouteProps} />);
 
-//   expect(document.querySelector('#form-source')).toBeInTheDocument();
-//   expect(screen.getByText('Create')).toBeInTheDocument();
-// });
+  expect(document.querySelector('#form-source')).toBeInTheDocument();
+  expect(screen.getByText('Create')).toBeInTheDocument();
+});
 
-// it('should render CollectionCreateRoute', () => {
-//   renderWithRouter(<CollectionCreateRoute {...createRouteProps} />);
+it('should render CollectionCreateRoute', () => {
+  renderWithRouter(<CollectionCreateRoute {...createRouteProps} />);
 
-//   expect(document.querySelector('#form-collection')).toBeInTheDocument();
-//   expect(screen.getByText('Create')).toBeInTheDocument();
-// });
-
-// it('should render SourceEditRoute', () => {
-//   renderWithRouter(<SourceEditRoute {...editRouteProps} />);
-
-//   expect(document.querySelector('#form-source')).toBeInTheDocument();
-// });
-
-// it('should render CollectionEditRoute', async () => {
-//   await waitFor(() => {
-//     renderWithRouter(<CollectionEditRoute {...newEditRouteProps} />);
-//   });
-
-//   expect(document.querySelector('#form-collection')).toBeInTheDocument();
-// });
+  expect(document.querySelector('#form-collection')).toBeInTheDocument();
+  expect(screen.getByText('Create')).toBeInTheDocument();
+});
 
 it('should render SourceViewRoute', async () => {
   await waitFor(() => {
@@ -194,5 +176,25 @@ describe('Application root', () => {
     renderWithRouter(<FincConfig match={match} />);
 
     expect(screen.getByText('FincConfig')).toBeInTheDocument();
+  });
+});
+
+describe('render SourceEditRoute', () => {
+  beforeEach(async () => {
+    await waitFor(() => renderWithRouter(<SourceEditRoute {...editRouteProps} />));
+  });
+
+  it('should render form-source', async () => {
+    expect(document.querySelector('#form-source')).toBeInTheDocument();
+  });
+});
+
+describe('render CollectionEditRoute', () => {
+  beforeEach(async () => {
+    await waitFor(() => renderWithRouter(<CollectionEditRoute {...editRouteProps} />));
+  });
+
+  it('should render form-collection', async () => {
+    expect(document.querySelector('#form-collection')).toBeInTheDocument();
   });
 });
