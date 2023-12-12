@@ -13,14 +13,11 @@ import {
 
 import BasicCss from '../../BasicStyle.css';
 
-class CollectionManagementView extends React.Component {
-  static propTypes = {
-    id: PropTypes.string,
-    metadataCollection: PropTypes.object,
-  };
-
-  renderList = (values) => {
-    const { metadataCollection } = this.props;
+const CollectionManagementView = ({
+  id,
+  metadataCollection,
+}) => {
+  const renderList = (values) => {
     const isEmptyMessage = <FormattedMessage id="ui-finc-config.renderList.isEmpty" />;
 
     if (!metadataCollection) {
@@ -37,89 +34,91 @@ class CollectionManagementView extends React.Component {
         />
       );
     }
-  }
+  };
 
-  getDataLable(field) {
-    const fieldValue = _.get(this.props.metadataCollection, field, '');
+  const getDataLable = (field) => {
+    const fieldValue = _.get(metadataCollection, field, '');
     if (fieldValue !== '') {
       return <FormattedMessage id={`ui-finc-config.dataOption.${fieldValue}`} />;
     } else {
       return <NoValue />;
     }
-  }
+  };
 
-  render() {
-    const { metadataCollection, id } = this.props;
-    const metadataAvailableLabel = this.getDataLable('metadataAvailable');
-    const usageRestrictedLabel = this.getDataLable('usageRestricted');
-    const freeContentLabel = this.getDataLable('freeContent');
-    const lodPublicationLabel = this.getDataLable('lod.publication');
+  const metadataAvailableLabel = getDataLable('metadataAvailable');
+  const usageRestrictedLabel = getDataLable('usageRestricted');
+  const freeContentLabel = getDataLable('freeContent');
+  const lodPublicationLabel = getDataLable('lod.publication');
 
-    return (
-      <>
-        <div id={id}>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-config.collection.metadataAvailable" />}
-              value={metadataAvailableLabel}
-            />
-          </Row>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-config.collection.usageRestricted" />}
-              value={usageRestrictedLabel}
-            />
-          </Row>
-          <Row>
-            <Headline
-              className={BasicCss.styleForViewHeadline}
-              size="medium"
-            >
-              <FormattedMessage id="ui-finc-config.collection.permittedFor" />
-            </Headline>
-          </Row>
-          <Row>
-            { this.renderList('permittedFor') }
-          </Row>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-config.collection.freeContent" />}
-              value={freeContentLabel}
-            />
-          </Row>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-config.collection.lod.publication" />}
-              value={lodPublicationLabel}
-            />
-          </Row>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-config.collection.lod.note" />}
-              value={_.get(metadataCollection, 'lod.note', <NoValue />)}
-            />
-          </Row>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-config.collection.generalNotes" />}
-              value={_.get(metadataCollection, 'generalNotes', <NoValue />)}
-            />
-          </Row>
-          <Row>
-            <Headline
-              className={BasicCss.styleForViewHeadline}
-              size="medium"
-            >
-              <FormattedMessage id="ui-finc-config.collection.selectedBy" />
-            </Headline>
-          </Row>
-          <Row>
-            { this.renderList('selectedBy') }
-          </Row>
-        </div>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <div id={id}>
+        <Row>
+          <KeyValue
+            label={<FormattedMessage id="ui-finc-config.collection.metadataAvailable" />}
+            value={metadataAvailableLabel}
+          />
+        </Row>
+        <Row>
+          <KeyValue
+            label={<FormattedMessage id="ui-finc-config.collection.usageRestricted" />}
+            value={usageRestrictedLabel}
+          />
+        </Row>
+        <Row>
+          <Headline
+            className={BasicCss.styleForViewHeadline}
+            size="medium"
+          >
+            <FormattedMessage id="ui-finc-config.collection.permittedFor" />
+          </Headline>
+        </Row>
+        <Row>
+          { renderList('permittedFor') }
+        </Row>
+        <Row>
+          <KeyValue
+            label={<FormattedMessage id="ui-finc-config.collection.freeContent" />}
+            value={freeContentLabel}
+          />
+        </Row>
+        <Row>
+          <KeyValue
+            label={<FormattedMessage id="ui-finc-config.collection.lod.publication" />}
+            value={lodPublicationLabel}
+          />
+        </Row>
+        <Row>
+          <KeyValue
+            label={<FormattedMessage id="ui-finc-config.collection.lod.note" />}
+            value={_.get(metadataCollection, 'lod.note', <NoValue />)}
+          />
+        </Row>
+        <Row>
+          <KeyValue
+            label={<FormattedMessage id="ui-finc-config.collection.generalNotes" />}
+            value={_.get(metadataCollection, 'generalNotes', <NoValue />)}
+          />
+        </Row>
+        <Row>
+          <Headline
+            className={BasicCss.styleForViewHeadline}
+            size="medium"
+          >
+            <FormattedMessage id="ui-finc-config.collection.selectedBy" />
+          </Headline>
+        </Row>
+        <Row>
+          { renderList('selectedBy') }
+        </Row>
+      </div>
+    </>
+  );
+};
+
+CollectionManagementView.propTypes = {
+  id: PropTypes.string,
+  metadataCollection: PropTypes.object,
+};
 
 export default CollectionManagementView;

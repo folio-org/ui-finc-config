@@ -31,7 +31,10 @@ describe('SourcesRoute', () => {
     beforeEach(() => {
       renderComponent = render(withIntlConfiguration(
         <MemoryRouter>
-          <SourcesRoute {...routeProps} />
+          <SourcesRoute
+            {...routeProps}
+            stripes={{ hasPerm: () => true, logger: { log: () => jest.fn() } }}
+          />
         </MemoryRouter>
       ));
     });
@@ -49,7 +52,7 @@ describe('SourcesRoute', () => {
         <MemoryRouter>
           <SourcesRoute
             {...routeProps}
-            stripes={{ hasPerm: () => false }}
+            stripes={{ hasPerm: () => false, logger: { log: () => jest.fn() } }}
           />
         </MemoryRouter>
       ));

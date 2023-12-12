@@ -1,6 +1,8 @@
 # Change history for ui-finc-config
 
 ## [6.1.0] (IN PROGRESS)
+* Remove deprecated pane properties ([UIFC-337](https://issues.folio.org/browse/UIFC-337))
+* Use functional components instead of class components ([UIFC-338](https://issues.folio.org/browse/UIFC-338))
 
 ## [6.0.0](https://github.com/folio-org/ui-finc-config/tree/v6.0.0) (2023-10-18)
 * Migrate to react-intl v6 ([UIFC-326](https://issues.folio.org/browse/UIFC-326))

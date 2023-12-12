@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -27,52 +26,43 @@ import SourceManagementForm from './SourceManagement/SourceManagementForm';
 import SourceTechnicalForm from './SourceTechnical/SourceTechnicalForm';
 import BasicStyle from '../BasicStyle.css';
 
-class MetadataSourceForm extends React.Component {
-  static propTypes = {
-    handlers: PropTypes.PropTypes.shape({
-      onClose: PropTypes.func.isRequired,
-    }),
-    handleSubmit: PropTypes.func.isRequired,
-    initialValues: PropTypes.object,
-    invalid: PropTypes.bool,
-    isLoading: PropTypes.bool,
-    onDelete: PropTypes.func,
-    pristine: PropTypes.bool,
-    submitting: PropTypes.bool,
+const MetadataSourceForm = ({
+  handlers: { onClose },
+  handleSubmit,
+  initialValues,
+  invalid,
+  isLoading,
+  onDelete,
+  pristine,
+  submitting,
+}) => {
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const [accordionsState, setAccordionsState] = useState({
+    editSourceInfo: true,
+    editSourceManagement: true,
+    editSourceTechnical: true
+  });
+
+  const handleExpandAll = (obj) => {
+    setAccordionsState(obj);
   };
 
-  static defaultProps = {
-    initialValues: {},
-  }
+  const handleAccordionToggle = ({ id }) => {
+    setAccordionsState({ ...accordionsState, [id]: !accordionsState[id] });
+  };
 
-  constructor(props) {
-    super(props);
+  const doBeginDelete = () => {
+    setConfirmDelete(true);
+  };
 
-    this.state = {
-      confirmDelete: false,
-      sections: {
-        editSourceInfo: true,
-        editSourceManagement: true,
-        editSourceTechnical: true
-      },
-    };
-
-    this.handleExpandAll = this.handleExpandAll.bind(this);
-  }
-
-  beginDelete = () => {
-    this.setState({
-      confirmDelete: true,
-    });
-  }
-
-  confirmDelete = (confirmation) => {
+  const doConfirmDelete = (confirmation) => {
     if (!confirmation) {
-      this.setState({ confirmDelete: false });
+      setConfirmDelete(false);
     }
-  }
+  };
 
-  getFirstMenu() {
+  const getFirstMenu = () => {
     return (
       <PaneMenu>
         <FormattedMessage id="ui-finc-config.form.close">
@@ -81,17 +71,15 @@ class MetadataSourceForm extends React.Component {
               aria-label={ariaLabel}
               icon="times"
               id="clickable-closesourcedialog"
-              onClick={this.props.handlers.onClose}
+              onClick={onClose}
             />
           )}
         </FormattedMessage>
       </PaneMenu>
     );
-  }
+  };
 
-  getLastMenu() {
-    const { initialValues } = this.props;
-    const { confirmDelete } = this.state;
+  const getLastMenu = () => {
     const isEditing = initialValues && initialValues.id;
 
     return (
@@ -103,7 +91,7 @@ class MetadataSourceForm extends React.Component {
               disabled={confirmDelete}
               id="clickable-delete-source"
               marginBottom0
-              onClick={this.beginDelete}
+              onClick={doBeginDelete}
               title="delete"
             >
               <FormattedMessage id="ui-finc-config.form.delete" />
@@ -112,17 +100,9 @@ class MetadataSourceForm extends React.Component {
         )}
       </PaneMenu>
     );
-  }
+  };
 
-  getPaneFooter() {
-    const {
-      handlers: { onClose },
-      handleSubmit,
-      invalid,
-      pristine,
-      submitting
-    } = this.props;
-
+  const getPaneFooter = () => {
     const disabled = pristine || submitting || invalid;
 
     const startButton = (
@@ -152,111 +132,104 @@ class MetadataSourceForm extends React.Component {
     );
 
     return <PaneFooter renderStart={startButton} renderEnd={endButton} />;
-  }
+  };
 
-  handleExpandAll(sections) {
-    this.setState({ sections });
-  }
-
-  handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const newState = _.cloneDeep(state);
-
-      newState.sections[id] = !newState.sections[id];
-      return newState;
-    });
-  }
-
-  renderFormPaneHeader = () => (
+  const renderFormPaneHeader = () => (
     <PaneHeader
-      firstMenu={this.getFirstMenu()}
-      lastMenu={this.getLastMenu()}
-      paneTitle={this.props.initialValues.id ? this.props.initialValues.label : <FormattedMessage id="ui-finc-config.form.create" />}
+      firstMenu={getFirstMenu()}
+      lastMenu={getLastMenu()}
+      paneTitle={initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-config.form.create" />}
     />
   );
 
-  render() {
-    const { initialValues, isLoading, onDelete } = this.props;
-    const { confirmDelete, sections } = this.state;
-    const footer = this.getPaneFooter();
-    const name = initialValues.label;
+  const footer = getPaneFooter();
+  const name = initialValues.label;
 
-    if (isLoading) return <Icon icon="spinner-ellipsis" width="10px" />;
+  if (isLoading) return <Icon icon="spinner-ellipsis" width="10px" />;
 
-    return (
-      <form
-        className={BasicStyle.styleForFormRoot}
-        data-test-source-form-page
-        id="form-source"
-      >
-        <Paneset isRoot>
-          <Pane
-            defaultWidth="100%"
-            footer={footer}
-            renderHeader={this.renderFormPaneHeader}
-          >
-            <div className={BasicStyle.styleForFormContent}>
-              <AccordionSet>
-                <Row end="xs">
-                  <Col xs>
-                    <ExpandAllButton
-                      accordionStatus={sections}
-                      id="clickable-expand-all"
-                      onToggle={this.handleExpandAll}
-                      setStatus={null}
-                    />
-                  </Col>
-                </Row>
-                {initialValues.metadata &&
-                  initialValues.metadata.createdDate && (
-                    <ViewMetaData metadata={initialValues.metadata} />
-                )}
-                <SourceInfoForm
-                  accordionId="editSourceInfo"
-                  expanded={sections.editSourceInfo}
-                  onToggle={this.handleSectionToggle}
-                  {...this.props}
-                />
-                <SourceManagementForm
-                  accordionId="editSourceManagement"
-                  expanded={sections.editSourceManagement}
-                  onToggle={this.handleSectionToggle}
-                  {...this.props}
-                />
-                <SourceTechnicalForm
-                  accordionId="editSourceTechnical"
-                  expanded={sections.editSourceTechnical}
-                  onToggle={this.handleSectionToggle}
-                  {...this.props}
-                />
-              </AccordionSet>
-              <ConfirmationModal
-                heading={<FormattedMessage id="ui-finc-config.form.delete" />}
-                id="delete-source-confirmation"
-                message={<FormattedMessage
-                  id="ui-finc-config.form.delete.confirm.message"
-                  values={{ name }}
-                />}
-                onCancel={() => { this.confirmDelete(false); }}
-                onConfirm={() => onDelete()}
-                open={confirmDelete}
+  return (
+    <form
+      className={BasicStyle.styleForFormRoot}
+      data-test-source-form-page
+      id="form-source"
+    >
+      <Paneset isRoot>
+        <Pane
+          defaultWidth="100%"
+          footer={footer}
+          renderHeader={renderFormPaneHeader}
+        >
+          <div className={BasicStyle.styleForFormContent}>
+            <AccordionSet>
+              <Row end="xs">
+                <Col xs>
+                  <ExpandAllButton
+                    accordionStatus={accordionsState}
+                    onToggle={handleExpandAll}
+                    setStatus={null}
+                  />
+                </Col>
+              </Row>
+              {initialValues.metadata &&
+                initialValues.metadata.createdDate && (
+                  <ViewMetaData metadata={initialValues.metadata} />
+              )}
+              <SourceInfoForm
+                accordionId="editSourceInfo"
+                expanded={accordionsState.editSourceInfo}
+                onToggle={handleAccordionToggle}
               />
-            </div>
-          </Pane>
-        </Paneset>
-      </form>
-    );
-  }
-}
+              <SourceManagementForm
+                accordionId="editSourceManagement"
+                expanded={accordionsState.editSourceManagement}
+                onToggle={handleAccordionToggle}
+                initialValues={initialValues}
+              />
+              <SourceTechnicalForm
+                accordionId="editSourceTechnical"
+                expanded={accordionsState.editSourceTechnical}
+                onToggle={handleAccordionToggle}
+              />
+            </AccordionSet>
+            <ConfirmationModal
+              heading={<FormattedMessage id="ui-finc-config.form.delete" />}
+              id="delete-source-confirmation"
+              message={<FormattedMessage
+                id="ui-finc-config.form.delete.confirm.message"
+                values={{ name }}
+              />}
+              onCancel={() => { doConfirmDelete(false); }}
+              onConfirm={() => onDelete()}
+              open={confirmDelete}
+            />
+          </div>
+        </Pane>
+      </Paneset>
+    </form>
+  );
+};
+
+MetadataSourceForm.propTypes = {
+  handlers: PropTypes.PropTypes.shape({
+    onClose: PropTypes.func.isRequired,
+  }),
+  handleSubmit: PropTypes.func.isRequired,
+  initialValues: PropTypes.object,
+  invalid: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  onDelete: PropTypes.func,
+  pristine: PropTypes.bool,
+  submitting: PropTypes.bool,
+};
+
+MetadataSourceForm.defaultProps = {
+  initialValues: {},
+};
+
 
 export default stripesFinalForm({
   // the form will reinitialize every time the initialValues prop changes
   enableReinitialize: true,
   // set navigationCheck true for confirming changes
   navigationCheck: true,
-  mutators: {
-    setOrganization: (args, state, tools) => {
-      tools.changeValue(state, 'organization', () => args[0]);
-    },
-  },
 })(MetadataSourceForm);

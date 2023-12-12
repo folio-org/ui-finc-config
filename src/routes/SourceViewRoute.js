@@ -1,70 +1,71 @@
-import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import { useQuery } from 'react-query';
 
-import { stripesConnect } from '@folio/stripes/core';
+import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataSourceView from '../components/MetadataSources/MetadataSourceView';
 
-class SourceViewRoute extends React.Component {
-  static manifest = Object.freeze({
-    source: {
-      type: 'okapi',
-      path: 'finc-config/metadata-sources/:{id}',
-    },
-    query: {},
-  });
+const SourceViewRoute = ({
+  history,
+  location,
+  match: { params: { id: sourceId } },
+}) => {
+  const stripes = useStripes();
+  const hasPerms = stripes.hasPerm('finc-config.metadata-sources.item.put');
 
-  static propTypes = {
-    history: ReactRouterPropTypes.history.isRequired,
-    location: ReactRouterPropTypes.location.isRequired,
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired,
-    resources: PropTypes.shape({
-      source: PropTypes.object,
-    }).isRequired,
-    stripes: PropTypes.shape({
-      hasPerm: PropTypes.func.isRequired,
-      okapi: PropTypes.object.isRequired,
-    }).isRequired,
+  const SOURCE_API = 'finc-config/metadata-sources';
+
+  const useSource = () => {
+    const ky = useOkapiKy();
+
+    const { isLoading, data: source = {} } = useQuery(
+      [SOURCE_API, sourceId],
+      () => ky.get(`${SOURCE_API}/${sourceId}`).json(),
+      // The query will not execute until the id exists
+      { enabled: Boolean(sourceId) },
+    );
+
+    return ({
+      isLoading,
+      source,
+    });
   };
 
-  handleClose = () => {
-    const { location } = this.props;
-    this.props.history.push(`${urls.sources()}${location.search}`);
-  }
+  const { source, isLoading: isSourceLoading } = useSource();
 
-  handleEdit = () => {
-    const { location, match } = this.props;
-    this.props.history.push(`${urls.sourceEdit(match.params.id)}${location.search}`);
-  }
+  const handleClose = () => {
+    history.push(`${urls.sources()}${location.search}`);
+  };
 
-  getRecord = (id) => {
-    return _.get(this.props.resources, 'sources.records', [])
-      .find(i => i.id === id);
-  }
+  const handleEdit = () => {
+    history.push(`${urls.sourceEdit(sourceId)}${location.search}`);
+  };
 
-  render() {
-    const { stripes } = this.props;
+  return (
+    <MetadataSourceView
+      canEdit={hasPerms}
+      handlers={{
+        onClose: handleClose,
+        onEdit: handleEdit,
+      }}
+      isLoading={isSourceLoading}
+      record={source}
+      stripes={stripes}
+    />
+  );
+};
 
-    return (
-      <MetadataSourceView
-        canEdit={stripes.hasPerm('finc-config.metadata-sources.item.put')}
-        handlers={{
-          onClose: this.handleClose,
-          onEdit: this.handleEdit,
-        }}
-        isLoading={_.get(this.props.resources, 'source.isPending', true)}
-        record={_.get(this.props.resources, 'source.records', []).find(i => i.id === this.props.match.params.id)}
-        stripes={this.props.stripes}
-      />
-    );
-  }
-}
+SourceViewRoute.propTypes = {
+  history: ReactRouterPropTypes.history.isRequired,
+  location: ReactRouterPropTypes.location.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
-export default stripesConnect(SourceViewRoute);
+export default SourceViewRoute;

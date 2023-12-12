@@ -15,73 +15,54 @@ import ContactFieldArray from './Contact/ContactFieldArray';
 import FindOrganization from './FindOrganization/FindOrganization';
 import BasicCss from '../../BasicStyle.css';
 
-class SourceManagementForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    const intialOrganization = props.initialValues.organization || {};
-
-    this.state = {
-      organization: intialOrganization,
-    };
-  }
-
-  render() {
-    const { expanded, onToggle, accordionId } = this.props;
-
-    return (
-      <Accordion
-        id={accordionId}
-        label={<FormattedMessage id="ui-finc-config.source.managementAccordion" />}
-        onToggle={onToggle}
-        open={expanded}
-      >
-        <div className={BasicCss.addMarginBottom}>
-          {/* Plugin has to be inside of Field, otherwise pristine is not working */}
+const SourceManagementForm = ({
+  accordionId,
+  expanded,
+  onToggle,
+}) => {
+  return (
+    <Accordion
+      id={accordionId}
+      label={<FormattedMessage id="ui-finc-config.source.managementAccordion" />}
+      onToggle={onToggle}
+      open={expanded}
+    >
+      <div className={BasicCss.addMarginBottom}>
+        <FindOrganization />
+      </div>
+      <FieldArray
+        component={ContactFieldArray}
+        name="contacts"
+      />
+      <Row>
+        <Col xs={8}>
           <Field
-            component={FindOrganization}
-            name="organization"
-            intialVendor={this.state.organization}
-            {...this.props}
+            component={TextField}
+            fullWidth
+            id="addsource_indexingLevel"
+            label={<FormattedMessage id="ui-finc-config.source.indexingLevel" />}
+            name="indexingLevel"
           />
-        </div>
-        <FieldArray
-          component={ContactFieldArray}
-          name="contacts"
-        />
-        <Row>
-          <Col xs={8}>
-            <Field
-              component={TextField}
-              fullWidth
-              id="addsource_indexingLevel"
-              label={<FormattedMessage id="ui-finc-config.source.indexingLevel" />}
-              name="indexingLevel"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={8}>
-            <Field
-              component={TextField}
-              fullWidth
-              id="addsource_generalNotes"
-              label={<FormattedMessage id="ui-finc-config.source.generalNotes" />}
-              name="generalNotes"
-            />
-          </Col>
-        </Row>
-      </Accordion>
-    );
-  }
-}
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={8}>
+          <Field
+            component={TextField}
+            fullWidth
+            id="addsource_generalNotes"
+            label={<FormattedMessage id="ui-finc-config.source.generalNotes" />}
+            name="generalNotes"
+          />
+        </Col>
+      </Row>
+    </Accordion>
+  );
+};
 
 SourceManagementForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
-  initialValues: PropTypes.shape({
-    organization: PropTypes.object
-  }),
   onToggle: PropTypes.func,
 };
 

@@ -5,35 +5,32 @@ import { FormattedMessage } from 'react-intl';
 
 import DisplayContact from './DisplayContact';
 
-class DisplayContactsArray extends React.Component {
-  static propTypes = {
-    metadataSource: PropTypes.object,
-  };
+const DisplayContactsArray = ({ metadataSource }) => {
+  const contacts = _.get(metadataSource, 'contacts', []);
+  const isEmptyMessage = <FormattedMessage id="ui-finc-config.renderList.isEmpty" />;
 
-  render() {
-    const { metadataSource } = this.props;
-    const contacts = _.get(metadataSource, 'contacts', []);
-    const isEmptyMessage = <FormattedMessage id="ui-finc-config.renderList.isEmpty" />;
+  if (contacts.length === 0) {
+    return isEmptyMessage;
+  } else {
+    const fields = Array.from(metadataSource.contacts);
 
-    if (contacts.length === 0) {
-      return isEmptyMessage;
-    } else {
-      const fields = Array.from(metadataSource.contacts);
-
-      return (
-        <>
-          {fields.map((elem, index) => (
-            <DisplayContact
-              contact={elem}
-              contactId={elem.externalId}
-              contactIndex={index}
-              key={index}
-            />
-          ))}
-        </>
-      );
-    }
+    return (
+      <>
+        {fields.map((elem, index) => (
+          <DisplayContact
+            contact={elem}
+            contactId={elem.externalId}
+            contactIndex={index}
+            key={index}
+          />
+        ))}
+      </>
+    );
   }
-}
+};
+
+DisplayContactsArray.propTypes = {
+  metadataSource: PropTypes.object,
+};
 
 export default DisplayContactsArray;

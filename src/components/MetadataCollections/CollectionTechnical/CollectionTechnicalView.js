@@ -13,14 +13,11 @@ import {
 
 import BasicCss from '../../BasicStyle.css';
 
-class CollectionTechnicalView extends React.Component {
-  static propTypes = {
-    id: PropTypes.string,
-    metadataCollection: PropTypes.object,
-  };
-
-  renderList = (values) => {
-    const { metadataCollection } = this.props;
+const CollectionTechnicalView = ({
+  id,
+  metadataCollection,
+}) => {
+  const renderList = (values) => {
     const isEmptyMessage = <FormattedMessage id="ui-finc-config.renderList.isEmpty" />;
 
     if (!metadataCollection) {
@@ -37,10 +34,9 @@ class CollectionTechnicalView extends React.Component {
         />
       );
     }
-  }
+  };
 
-  renderUrlList = (values) => {
-    const { metadataCollection } = this.props;
+  const renderUrlList = (values) => {
     const isEmptyMessage = <FormattedMessage id="ui-finc-config.renderList.isEmpty" />;
 
     if (!metadataCollection) {
@@ -57,63 +53,64 @@ class CollectionTechnicalView extends React.Component {
         />
       );
     }
-  }
+  };
 
-  render() {
-    const { metadataCollection, id } = this.props;
+  return (
+    <>
+      <div id={id}>
+        <Row>
+          <KeyValue
+            label={<FormattedMessage id="ui-finc-config.collection.id" />}
+            value={_.get(metadataCollection, 'collectionId', <NoValue />)}
+          />
+        </Row>
+        <Row>
+          <KeyValue
+            label={<FormattedMessage id="ui-finc-config.collection.productIsil" />}
+            value={_.get(metadataCollection, 'productIsil', <NoValue />)}
+          />
+        </Row>
+        <Row>
+          <Headline
+            className={BasicCss.styleForViewHeadline}
+            size="medium"
+          >
+            <FormattedMessage id="ui-finc-config.collection.tickets" />
+          </Headline>
+        </Row>
+        <Row>
+          { renderUrlList('tickets') }
+        </Row>
+        <Row>
+          <Headline
+            className={BasicCss.styleForViewHeadline}
+            size="medium"
+          >
+            <FormattedMessage id="ui-finc-config.collection.contentFiles" />
+          </Headline>
+        </Row>
+        <Row>
+          { renderUrlList('contentFiles') }
+        </Row>
+        <Row>
+          <Headline
+            className={BasicCss.styleForViewHeadline}
+            size="medium"
+          >
+            <FormattedMessage id="ui-finc-config.collection.solrMegaCollections" />
+          </Headline>
+        </Row>
+        <Row>
+          { renderList('solrMegaCollections') }
+        </Row>
+      </div>
+    </>
+  );
+};
 
-    return (
-      <>
-        <div id={id}>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-config.collection.id" />}
-              value={_.get(metadataCollection, 'collectionId', <NoValue />)}
-            />
-          </Row>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-config.collection.productIsil" />}
-              value={_.get(metadataCollection, 'productIsil', <NoValue />)}
-            />
-          </Row>
-          <Row>
-            <Headline
-              className={BasicCss.styleForViewHeadline}
-              size="medium"
-            >
-              <FormattedMessage id="ui-finc-config.collection.tickets" />
-            </Headline>
-          </Row>
-          <Row>
-            { this.renderUrlList('tickets') }
-          </Row>
-          <Row>
-            <Headline
-              className={BasicCss.styleForViewHeadline}
-              size="medium"
-            >
-              <FormattedMessage id="ui-finc-config.collection.contentFiles" />
-            </Headline>
-          </Row>
-          <Row>
-            { this.renderUrlList('contentFiles') }
-          </Row>
-          <Row>
-            <Headline
-              className={BasicCss.styleForViewHeadline}
-              size="medium"
-            >
-              <FormattedMessage id="ui-finc-config.collection.solrMegaCollections" />
-            </Headline>
-          </Row>
-          <Row>
-            { this.renderList('solrMegaCollections') }
-          </Row>
-        </div>
-      </>
-    );
-  }
-}
+CollectionTechnicalView.propTypes = {
+  id: PropTypes.string,
+  metadataCollection: PropTypes.object,
+};
 
 export default CollectionTechnicalView;

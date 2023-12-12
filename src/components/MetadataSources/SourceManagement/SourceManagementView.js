@@ -3,7 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
+import { useOkapiKy } from '@folio/stripes/core';
 import {
   Button,
   Col,
@@ -12,42 +14,45 @@ import {
   NoValue,
   Row,
 } from '@folio/stripes/components';
-import { stripesConnect } from '@folio/stripes/core';
-
 
 import BasicCss from '../../BasicStyle.css';
 import css from './SourceManagement.css';
 import urls from '../../DisplayUtils/urls';
 import DisplayContactsArray from './Contact/DisplayContactsArray';
 
-class SourceManagementView extends React.Component {
-  static manifest = Object.freeze({
-    org: {
-      type: 'okapi',
-      path: 'organizations-storage/organizations/!{organizationId}',
-      throwErrors: false
-    },
-    query: {},
-  });
+const SourceManagementView = ({
+  id,
+  metadataSource,
+  organizationId,
+}) => {
+  const ORGANIZATIONS_API = 'organizations-storage/organizations';
 
-  static propTypes = {
-    id: PropTypes.string,
-    metadataSource: PropTypes.object,
-    resources: PropTypes.shape({
-      org: PropTypes.object,
-      failed: PropTypes.object,
-    }).isRequired,
+  const useOrganization = () => {
+    const ky = useOkapiKy();
+
+    const { isLoading, data: organization = {}, ...rest } = useQuery(
+      [ORGANIZATIONS_API, organizationId],
+      () => ky.get(`${ORGANIZATIONS_API}/${organizationId}`).json(),
+      { enabled: Boolean(organizationId) },
+    );
+
+    return ({
+      isLoading,
+      organization,
+      ...rest
+    });
   };
 
-  render() {
-    const { metadataSource, id } = this.props;
-    const sourceId = _.get(metadataSource, 'id', <NoValue />);
-    const organization = _.get(this.props.metadataSource, 'organization', <NoValue />);
+  let orgValue;
+  const sourceId = _.get(metadataSource, 'id', <NoValue />);
 
-    let orgValue;
-    if (this.props.resources.org && this.props.resources.org.failed) {
-      if (organization.name) {
-        orgValue = organization.name;
+  const { organization, isLoading: isLoadingOrganization, isError } = useOrganization();
+  const sourcesOrganization = _.get(metadataSource, 'organization', <NoValue />);
+
+  if (!_.isEmpty(organizationId) && !isLoadingOrganization) {
+    if (isError) {
+      if (sourcesOrganization.name) {
+        orgValue = sourcesOrganization.name;
       } else {
         orgValue = <NoValue />;
       }
@@ -55,61 +60,67 @@ class SourceManagementView extends React.Component {
       orgValue = (
         <>
           <Link to={{ pathname: `${urls.organizationView(organization.id)}` }}>
-            {organization.name}
+            {sourcesOrganization.name}
           </Link>
         </>
       );
     }
-
-    return (
-      <>
-        <div id={id}>
-          <Row>
-            <Col xs={6}>
-              <Button
-                buttonStyle="primary"
-                id="showAllCollections"
-                to={urls.showAllCollections(sourceId)}
-              >
-                <FormattedMessage id="ui-finc-config.source.button.showAllCollections" />
-              </Button>
-            </Col>
-          </Row>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-config.source.organization" />}
-              value={orgValue}
-            />
-          </Row>
-          <Row>
-            <Headline
-              className={BasicCss.styleForViewHeadline}
-              size="medium"
-            >
-              <FormattedMessage id="ui-finc-config.source.contact.title" />
-            </Headline>
-          </Row>
-          <Row className={css.addMarginForContacts}>
-            <DisplayContactsArray
-              metadataSource={metadataSource}
-            />
-          </Row>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-config.source.indexingLevel" />}
-              value={_.get(metadataSource, 'indexingLevel', <NoValue />)}
-            />
-          </Row>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-config.source.generalNotes" />}
-              value={_.get(metadataSource, 'generalNotes', <NoValue />)}
-            />
-          </Row>
-        </div>
-      </>
-    );
   }
-}
 
-export default stripesConnect(SourceManagementView);
+  return (
+    <>
+      <div id={id}>
+        <Row>
+          <Col xs={6}>
+            <Button
+              buttonStyle="primary"
+              id="showAllCollections"
+              to={urls.showAllCollections(sourceId)}
+            >
+              <FormattedMessage id="ui-finc-config.source.button.showAllCollections" />
+            </Button>
+          </Col>
+        </Row>
+        <Row>
+          <KeyValue
+            label={<FormattedMessage id="ui-finc-config.source.organization" />}
+            value={orgValue}
+          />
+        </Row>
+        <Row>
+          <Headline
+            className={BasicCss.styleForViewHeadline}
+            size="medium"
+          >
+            <FormattedMessage id="ui-finc-config.source.contact.title" />
+          </Headline>
+        </Row>
+        <Row className={css.addMarginForContacts}>
+          <DisplayContactsArray
+            metadataSource={metadataSource}
+          />
+        </Row>
+        <Row>
+          <KeyValue
+            label={<FormattedMessage id="ui-finc-config.source.indexingLevel" />}
+            value={_.get(metadataSource, 'indexingLevel', <NoValue />)}
+          />
+        </Row>
+        <Row>
+          <KeyValue
+            label={<FormattedMessage id="ui-finc-config.source.generalNotes" />}
+            value={_.get(metadataSource, 'generalNotes', <NoValue />)}
+          />
+        </Row>
+      </div>
+    </>
+  );
+};
+
+SourceManagementView.propTypes = {
+  id: PropTypes.string,
+  metadataSource: PropTypes.object,
+  organizationId: PropTypes.string,
+};
+
+export default SourceManagementView;

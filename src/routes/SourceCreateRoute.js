@@ -1,73 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { useMutation } from 'react-query';
+import { v4 as uuidv4 } from 'uuid';
 
-import { stripesConnect } from '@folio/stripes/core';
+import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm';
 import urls from '../components/DisplayUtils/urls';
 
-class SourceCreateRoute extends React.Component {
-  static manifest = Object.freeze({
-    sources: {
-      type: 'okapi',
-      path: 'finc-config/metadata-sources',
-      fetch: false,
-      shouldRefresh: () => false,
-    },
+const SourceCreateRoute = ({
+  history,
+  location,
+}) => {
+  const ky = useOkapiKy();
+  const stripes = useStripes();
+  const hasPerms = stripes.hasPerm('finc-config.metadata-sources.item.post');
+
+  const SOURCE_API = 'finc-config/metadata-sources';
+
+  const handleClose = () => {
+    history.push(`${urls.sources()}${location.search}`);
+  };
+
+  const { mutateAsync: createSource } = useMutation({
+    mutationFn: (payload) => {
+      const id = uuidv4();
+      const newPayload = { ...payload, id };
+
+      ky.post(SOURCE_API, { json: newPayload })
+        .then(() => {
+          history.push(`${urls.sourceView(id)}${location.search}`);
+        });
+    }
   });
 
-  static propTypes = {
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      search: PropTypes.string.isRequired,
-    }).isRequired,
-    mutator: PropTypes.shape({
-      sources: PropTypes.shape({
-        POST: PropTypes.func.isRequired,
-      }).isRequired,
-    }).isRequired,
-    stripes: PropTypes.shape({
-      hasPerm: PropTypes.func.isRequired,
-      okapi: PropTypes.object.isRequired,
-    }).isRequired,
-  }
+  if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
 
-  constructor(props) {
-    super(props);
+  return (
+    <MetadataSourceForm
+      handlers={{ onClose: handleClose }}
+      onSubmit={createSource}
+    />
+  );
+};
 
-    this.state = {
-      hasPerms: props.stripes.hasPerm('finc-config.metadata-sources.item.post'),
-    };
-  }
+SourceCreateRoute.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
-  handleClose = () => {
-    const { location } = this.props;
-    this.props.history.push(`${urls.sources()}${location.search}`);
-  }
-
-  handleSubmit = (source) => {
-    const { history, location, mutator } = this.props;
-
-    mutator.sources
-      .POST(source)
-      .then(({ id }) => {
-        history.push(`${urls.sourceView(id)}${location.search}`);
-      });
-  }
-
-  render() {
-    if (!this.state.hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
-
-    return (
-      <MetadataSourceForm
-        handlers={{ onClose: this.handleClose }}
-        onSubmit={this.handleSubmit}
-      />
-    );
-  }
-}
-
-export default stripesConnect(SourceCreateRoute);
+export default SourceCreateRoute;

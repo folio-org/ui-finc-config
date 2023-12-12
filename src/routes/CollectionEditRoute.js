@@ -1,80 +1,73 @@
-import _ from 'lodash';
+import { cloneDeep } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { useMutation, useQuery } from 'react-query';
 
-import { stripesConnect } from '@folio/stripes/core';
+import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
 import urls from '../components/DisplayUtils/urls';
 
-class CollectionEditRoute extends React.Component {
-  static manifest = Object.freeze({
-    collections: {
-      type: 'okapi',
-      path: 'finc-config/metadata-collections/:{id}',
-      shouldRefresh: () => false,
-    },
-  });
+const CollectionEditRoute = ({
+  history,
+  location,
+  match,
+}) => {
+  const stripes = useStripes();
+  const ky = useOkapiKy();
 
-  constructor(props) {
-    super(props);
+  const hasPerms = stripes.hasPerm('finc-config.metadata-collections.item.put');
 
-    this.state = {
-      hasPerms: props.stripes.hasPerm('finc-config.metadata-collections.item.put')
-    };
-  }
+  const COLLECTION_API = `finc-config/metadata-collections/${match.params.id}`;
 
-  getInitialValues = () => {
-    const initialValues = _.get(this.props.resources, 'collections.records', []).find(i => i.id === this.props.match.params.id);
+  const { data: collection = {}, isLoading: isCollectionLoading } = useQuery(
+    [COLLECTION_API, 'getCollection'],
+    () => ky.get(COLLECTION_API).json()
+  );
+
+  const getInitialValues = () => {
+    const initialValues = cloneDeep(collection);
 
     return initialValues;
-  }
+  };
 
-  handleClose = () => {
-    const { location, match } = this.props;
-    this.props.history.push(`${urls.collectionView(match.params.id)}${location.search}`);
-  }
+  const handleClose = () => {
+    history.push(`${urls.collectionView(match.params.id)}${location.search}`);
+  };
 
-  handleSubmit = (collection) => {
-    const { history, location, mutator } = this.props;
+  const { mutateAsync: putCollection } = useMutation(
+    [COLLECTION_API, 'putCollection'],
+    (payload) => ky.put(COLLECTION_API, { json: payload })
+      .then(() => {
+        handleClose();
+      })
+  );
 
-    mutator.collections
-      .PUT(collection)
-      .then(({ id }) => {
-        history.push(`${urls.collectionView(id)}${location.search}`);
-      });
-  }
+  const { mutateAsync: deleteCollection } = useMutation(
+    [COLLECTION_API, 'deleteCollection'],
+    () => ky.delete(COLLECTION_API)
+      .then(() => {
+        history.push(`${urls.collections()}${location.search}`);
+      })
+  );
 
-  deleteCollection = (collection) => {
-    const { history, location, mutator } = this.props;
+  const handleSubmit = (values) => {
+    return putCollection(values);
+  };
 
-    mutator.collections.DELETE({ collection }).then(() => {
-      history.push(`${urls.collections()}${location.search}`);
-    });
-  }
+  if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
 
-  fetchIsPending = () => {
-    return Object.values(this.props.resources)
-      .filter(resource => resource)
-      .some(resource => resource.isPending);
-  }
-
-  render() {
-    if (!this.state.hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
-    if (this.fetchIsPending()) return 'loading';
-
-    return (
-      <MetadataCollectionForm
-        handlers={{ onClose: this.handleClose }}
-        initialValues={this.getInitialValues()}
-        isLoading={this.fetchIsPending()}
-        onDelete={this.deleteCollection}
-        onSubmit={this.handleSubmit}
-      />
-    );
-  }
-}
+  return (
+    <MetadataCollectionForm
+      handlers={{ onClose: handleClose }}
+      initialValues={getInitialValues()}
+      isLoading={isCollectionLoading}
+      onDelete={deleteCollection}
+      onSubmit={handleSubmit}
+    />
+  );
+};
 
 CollectionEditRoute.propTypes = {
   history: PropTypes.shape({
@@ -88,18 +81,6 @@ CollectionEditRoute.propTypes = {
       id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  mutator: PropTypes.shape({
-    collections: PropTypes.shape({
-      PUT: PropTypes.func.isRequired,
-      DELETE: PropTypes.func.isRequired,
-    }).isRequired,
-  }).isRequired,
-  resources: PropTypes.shape({
-    collection: PropTypes.object,
-  }).isRequired,
-  stripes: PropTypes.shape({
-    hasPerm: PropTypes.func.isRequired,
-  }).isRequired,
 };
 
-export default stripesConnect(CollectionEditRoute);
+export default CollectionEditRoute;

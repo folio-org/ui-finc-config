@@ -1,104 +1,87 @@
-import _ from 'lodash';
+import { cloneDeep } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import { stripesConnect } from '@folio/stripes/core';
+import { useMutation, useQuery } from 'react-query';
+
+import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm';
 import urls from '../components/DisplayUtils/urls';
 
-class SourceEditRoute extends React.Component {
-  static manifest = Object.freeze({
-    sources: {
-      type: 'okapi',
-      path: 'finc-config/metadata-sources/:{id}',
-      shouldRefresh: () => false,
-    },
-  });
+const SourceEditRoute = ({
+  history,
+  location,
+  match,
+}) => {
+  const stripes = useStripes();
+  const ky = useOkapiKy();
 
-  static propTypes = {
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      search: PropTypes.string.isRequired,
-    }).isRequired,
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired,
-    mutator: PropTypes.shape({
-      sources: PropTypes.shape({
-        PUT: PropTypes.func.isRequired,
-        DELETE: PropTypes.func.isRequired,
-      }).isRequired,
-    }).isRequired,
-    resources: PropTypes.object,
-    stripes: PropTypes.shape({
-      hasPerm: PropTypes.func.isRequired,
-      okapi: PropTypes.object.isRequired,
-    }).isRequired,
-  }
+  const hasPerms = stripes.hasPerm('finc-config.metadata-sources.item.put');
 
-  constructor(props) {
-    super(props);
+  const SOURCE_API = `finc-config/metadata-sources/${match.params.id}`;
 
-    this.state = {
-      hasPerms: props.stripes.hasPerm('finc-config.metadata-sources.item.put')
-    };
-  }
+  const { data: source = {}, isLoading: isSourceLoading } = useQuery(
+    [SOURCE_API, 'getSource'],
+    () => ky.get(SOURCE_API).json()
+  );
 
-  getInitialValues = () => {
-    const initialValues = _.get(this.props.resources, 'sources.records', []).find(i => i.id === this.props.match.params.id);
+  const getInitialValues = () => {
+    const initialValues = cloneDeep(source);
 
     return initialValues;
-  }
+  };
 
-  handleClose = () => {
-    const { location, match } = this.props;
-    this.props.history.push(`${urls.sourceView(match.params.id)}${location.search}`);
-  }
+  const handleClose = () => {
+    history.push(`${urls.sourceView(match.params.id)}${location.search}`);
+  };
 
-  handleSubmit = (source) => {
-    const { history, location, mutator } = this.props;
+  const { mutateAsync: putSource } = useMutation(
+    [SOURCE_API, 'putSource'],
+    (payload) => ky.put(SOURCE_API, { json: payload })
+      .then(() => {
+        handleClose();
+      })
+  );
 
-    mutator.sources
-      .PUT(source)
-      .then(({ id }) => {
-        history.push(`${urls.sourceView(id)}${location.search}`);
-      });
-  }
+  const { mutateAsync: deleteSource } = useMutation(
+    [SOURCE_API, 'deleteSource'],
+    () => ky.delete(SOURCE_API)
+      .then(() => {
+        history.push(`${urls.sources()}${location.search}`);
+      })
+  );
 
-  deleteSource = (source) => {
-    const { history, location, mutator } = this.props;
+  const handleSubmit = (values) => {
+    return putSource(values);
+  };
 
-    mutator.sources.DELETE({ source }).then(() => {
-      history.push(`${urls.sources()}${location.search}`);
-    });
-  }
+  if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
 
-  fetchIsPending = () => {
-    return Object.values(this.props.resources)
-      .filter(resource => resource)
-      .some(resource => resource.isPending);
-  }
+  return (
+    <MetadataSourceForm
+      handlers={{ onClose: handleClose }}
+      initialValues={getInitialValues()}
+      isLoading={isSourceLoading}
+      onDelete={deleteSource}
+      onSubmit={handleSubmit}
+    />
+  );
+};
 
-  render() {
-    if (!this.state.hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
-    if (this.fetchIsPending()) return 'loading';
+SourceEditRoute.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string.isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
-    return (
-      <MetadataSourceForm
-        handlers={{ onClose: this.handleClose }}
-        initialValues={this.getInitialValues()}
-        isLoading={this.fetchIsPending()}
-        onDelete={this.deleteSource}
-        onSubmit={this.handleSubmit}
-      />
-    );
-  }
-}
-
-export default stripesConnect(SourceEditRoute);
+export default SourceEditRoute;
