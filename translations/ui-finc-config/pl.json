@@ -95,7 +95,7 @@
     "collection.search.description": "Opis",
     "collection.search.collectionId": "ID",
     "dataOption.active": "Aktywny",
-    "dataOption.request": "Żądanie",
+    "dataOption.request": "Rezerwacja",
     "dataOption.implementation": "Wdrożenie",
     "dataOption.closed": "Zamknięte",
     "dataOption.impossible": "Niemożliwe",
