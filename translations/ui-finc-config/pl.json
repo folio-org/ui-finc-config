@@ -19,7 +19,7 @@
     "settings.isils.label": "Isils",
     "settings.isils.labelSingular": "Isil",
     "settings.isils.library": "Biblioteka",
-    "settings.isils.tenant": "Dzierżawca",
+    "settings.isils.tenant": "Tenant",
     "source.description": "Opis",
     "source.organization": "Organizacja",
     "source.indexingLevel": "Poziom indeksowania",
