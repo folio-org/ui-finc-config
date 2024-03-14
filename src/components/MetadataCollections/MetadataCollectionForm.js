@@ -128,7 +128,7 @@ const MetadataCollectionForm = ({
         onClick={handleSubmit}
         type="submit"
       >
-        <FormattedMessage id="ui-finc-config.form.saveAndClose" />
+        <FormattedMessage id="stripes-components.saveAndClose" />
       </Button>
     );
 
