@@ -1,6 +1,6 @@
 {
   "name": "@folio/finc-config",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "description": "Index configuration of finc catalogues",
   "main": "src/index.js",
   "repository": "folio-org/ui-finc-config",
@@ -19,7 +19,7 @@
     "@folio/eslint-config-stripes": "^7.0.0",
     "@folio/jest-config-stripes": "^2.0.0",
     "@folio/stripes": "^9.0.0",
-    "@folio/stripes-acq-components": "^5.0.0",
+    "@folio/stripes-acq-components": "~5.1.0",
     "@folio/stripes-cli": "^3.0.0",
     "@folio/stripes-components": "^12.0.0",
     "@folio/stripes-core": "^10.0.0",

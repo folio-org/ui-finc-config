@@ -1,6 +1,8 @@
 # Change history for ui-finc-config
 
-## [6.1.0] (IN PROGRESS)
+## [6.2.0] (IN PROGRESS)
+
+## [6.1.0](https://github.com/folio-org/ui-finc-config/tree/v6.1.0) (2024-03-20)
 * Remove deprecated pane properties ([UIFC-337](https://issues.folio.org/browse/UIFC-337))
 * Use functional components instead of class components ([UIFC-338](https://issues.folio.org/browse/UIFC-338))
 * Use translation keys of stripes-components ([UIFC-354](https://folio-org.atlassian.net/browse/UIFC-354))
