@@ -48,7 +48,6 @@
     "collection.form.selectedUsageRestricted.confirmClearMessage": "Do you want to clear permitted for when changing usage restricted?",
     "searchInputLabel": "검색",
     "edit": "Edit",
-    "form.saveAndClose": "저장 후 닫기",
     "form.create": "생성",
     "form.delete": "삭제",
     "form.cancel": "취소",

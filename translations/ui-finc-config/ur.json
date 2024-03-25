@@ -48,7 +48,6 @@
     "collection.form.selectedUsageRestricted.confirmClearMessage": "Do you want to clear permitted for when changing usage restricted?",
     "searchInputLabel": "Search",
     "edit": "Edit",
-    "form.saveAndClose": "Save & close",
     "form.create": "Create",
     "form.delete": "Delete",
     "form.cancel": "Cancel",

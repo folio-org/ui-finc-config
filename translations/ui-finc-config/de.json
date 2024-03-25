@@ -48,7 +48,6 @@
     "collection.form.selectedUsageRestricted.confirmClearMessage": "Sollen hinterlegte zugelassene Institutionen gelöscht werden, wenn die Nutzungseinschränkung geändert wird?",
     "searchInputLabel": "Suche",
     "edit": "Bearbeiten",
-    "form.saveAndClose": "Speichern & schließen",
     "form.create": "Erstellen",
     "form.delete": "Löschen",
     "form.cancel": "Abbrechen",
