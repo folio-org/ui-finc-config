@@ -48,7 +48,6 @@
     "collection.form.selectedUsageRestricted.confirmClearMessage": "在更改使用限制时，是否要清除允许的权限？",
     "searchInputLabel": "搜索",
     "edit": "编辑",
-    "form.saveAndClose": "保存并关闭",
     "form.create": "新增",
     "form.delete": "删除",
     "form.cancel": "取消",
