@@ -106,7 +106,7 @@
     "dataOption.technical": "Techniczny",
     "dataOption.vendor": "Sprzedawca",
     "collection.placeholder.mdSource": "Dodaj źródło metadanych",
-    "collection.placeholder.permittedFor": "Wpisz jeden ISIL dla instytucji z dozwolonym użyciem metadanych",
-    "collection.placeholder.tickets": "Wpisz adres URL powiązanego problemu",
+    "collection.placeholder.permittedFor": "Wprowadź jeden ISIL dla instytucji z dozwolonym użyciem metadanych",
+    "collection.placeholder.tickets": "Wprowadź adres URL powiązanego problemu",
     "collection.placeholder.contentFiles": "Wprowadź adres URL do serwera plików"
 }
