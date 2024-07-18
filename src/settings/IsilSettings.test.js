@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
 import { ControlledVocab } from '@folio/stripes/smart-components';
 

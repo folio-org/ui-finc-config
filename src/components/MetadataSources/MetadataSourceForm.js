@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -29,7 +29,7 @@ import BasicStyle from '../BasicStyle.css';
 const MetadataSourceForm = ({
   handlers: { onClose },
   handleSubmit,
-  initialValues,
+  initialValues = {},
   invalid,
   isLoading,
   onDelete,
@@ -221,11 +221,6 @@ MetadataSourceForm.propTypes = {
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
 };
-
-MetadataSourceForm.defaultProps = {
-  initialValues: {},
-};
-
 
 export default stripesFinalForm({
   // the form will reinitialize every time the initialValues prop changes

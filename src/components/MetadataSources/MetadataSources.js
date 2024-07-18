@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   withRouter,
   Link,
@@ -50,16 +50,16 @@ const defaultSearchIndex = '';
 
 const MetadataSources = ({
   children,
-  contentData,
+  contentData = {},
   disableRecordCreation,
-  filterData,
+  filterData = {},
   history,
   intl,
   onNeedMoreData,
   onSelectRow,
   queryGetter,
   querySetter,
-  searchString,
+  searchString = '',
   selectedRecordId,
   searchField,
   source,
@@ -472,12 +472,6 @@ MetadataSources.propTypes = {
   // add values for search-selectbox
   onChangeIndex: PropTypes.func,
   activeFilters: PropTypes.object,
-};
-
-MetadataSources.defaultProps = {
-  contentData: {},
-  filterData: {},
-  searchString: '',
 };
 
 export default injectIntl(withRouter(MetadataSources));

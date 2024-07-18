@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -13,7 +13,11 @@ import { CheckboxFilter } from '@folio/stripes/smart-components';
 import filterConfig from './filterConfigData';
 
 const SourceFilters = ({
-  activeFilters,
+  activeFilters = {
+    status: [],
+    solrShard: [],
+    contact: [],
+  },
   filterData,
   filterHandlers,
 }) => {
@@ -123,14 +127,6 @@ SourceFilters.propTypes = {
   activeFilters: PropTypes.object,
   filterData: PropTypes.object,
   filterHandlers: PropTypes.object,
-};
-
-SourceFilters.defaultProps = {
-  activeFilters: {
-    status: [],
-    solrShard: [],
-    contact: [],
-  }
 };
 
 export default SourceFilters;

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Link,
@@ -51,16 +51,16 @@ const defaultSearchIndex = '';
 const MetadataCollections = ({
   children,
   collection,
-  contentData,
+  contentData = { mdSources: [] },
   disableRecordCreation,
-  filterData,
+  filterData = {},
   history,
   intl,
   onNeedMoreData,
   onSelectRow,
   queryGetter,
   querySetter,
-  searchString,
+  searchString = '',
   selectedRecordId,
   searchField,
   // add values for search-selectbox
@@ -487,12 +487,6 @@ MetadataCollections.propTypes = {
   // add values for search-selectbox
   onChangeIndex: PropTypes.func,
   activeFilters: PropTypes.object,
-};
-
-MetadataCollections.defaultProps = {
-  contentData: { mdSources: [] },
-  filterData: {},
-  searchString: '',
 };
 
 export default injectIntl(withRouter(MetadataCollections));
