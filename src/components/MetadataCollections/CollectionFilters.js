@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -13,7 +13,12 @@ import { CheckboxFilter } from '@folio/stripes/smart-components';
 import filterConfig from './filterConfigData';
 
 const CollectionFilters = ({
-  activeFilters,
+  activeFilters = {
+    metadataAvailable: [],
+    usageRestricted: [],
+    freeContent: [],
+    mdSource: [],
+  },
   filterData,
   filterHandlers,
 }) => {
@@ -125,15 +130,6 @@ CollectionFilters.propTypes = {
   activeFilters: PropTypes.object,
   filterData: PropTypes.object,
   filterHandlers: PropTypes.object,
-};
-
-CollectionFilters.defaultProps = {
-  activeFilters: {
-    metadataAvailable: [],
-    usageRestricted: [],
-    freeContent: [],
-    mdSource: [],
-  }
 };
 
 export default CollectionFilters;

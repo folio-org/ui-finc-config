@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { isEqual } from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -30,7 +30,7 @@ import BasicStyle from '../BasicStyle.css';
 const MetadataCollectionForm = ({
   handlers: { onClose },
   handleSubmit,
-  initialValues,
+  initialValues = {},
   invalid,
   isLoading,
   onDelete,
@@ -221,10 +221,6 @@ MetadataCollectionForm.propTypes = {
   onDelete: PropTypes.func,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
-};
-
-MetadataCollectionForm.defaultProps = {
-  initialValues: {},
 };
 
 export default stripesFinalForm({

@@ -1,4 +1,3 @@
-import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
 import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';

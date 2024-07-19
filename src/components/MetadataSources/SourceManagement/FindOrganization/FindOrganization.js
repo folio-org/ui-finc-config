@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm, Field } from 'react-final-form';
 

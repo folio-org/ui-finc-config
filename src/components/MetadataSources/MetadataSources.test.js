@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { noop } from 'lodash';
 import { render } from '@folio/jest-config-stripes/testing-library/react';
