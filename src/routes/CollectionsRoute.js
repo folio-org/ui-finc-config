@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -17,148 +17,152 @@ import urls from '../components/DisplayUtils/urls';
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
 
-const CollectionsRoute = ({
-  children,
-  history,
-  location,
-  match,
-  mutator,
-  resources,
-  stripes,
-}) => {
-  const hasPerms = stripes.hasPerm('finc-config.metadata-collections.collection.get');
-  const searchField = useRef();
-
-  const [source] = useState(() => {
-    // Create initial source
-    return new StripesConnectedSource({ resources, mutator }, stripes.logger, 'collections');
+class CollectionsRoute extends React.Component {
+  static manifest = Object.freeze({
+    collections: {
+      type: 'okapi',
+      records: 'fincConfigMetadataCollections',
+      recordsRequired: '%{resultCount}',
+      perRequest: 30,
+      path: 'finc-config/metadata-collections',
+      GET: {
+        params: {
+          query: makeQueryFunction(
+            'cql.allRecords=1',
+            '(label="%{query.query}*" or description="%{query.query}*" or collectionId="%{query.query}*")',
+            {
+              'label': 'label',
+              'description': 'description',
+              'collectionId': 'collectionId',
+            },
+            filterConfig,
+            2,
+          ),
+        },
+        staticFallback: { params: {} },
+      },
+    },
+    mdSources: {
+      type: 'okapi',
+      records: 'tinyMetadataSources',
+      path: 'finc-config/tiny-metadata-sources',
+      resourceShouldRefresh: true
+    },
+    query: { initialValue: {} },
+    resultCount: { initialValue: INITIAL_RESULT_COUNT },
   });
 
-  useEffect(() => {
-    const oldCount = source.totalCount();
-    const oldRecords = source.records();
+  static propTypes = {
+    children: PropTypes.node,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string,
+    }).isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.string,
+      }),
+    }),
+    mutator: PropTypes.object,
+    resources: PropTypes.object,
+    stripes: PropTypes.shape({
+      hasPerm: PropTypes.func,
+      logger: PropTypes.object,
+    }),
+  }
 
-    // Update source when resources or mutator change
-    source?.update({ resources, mutator }, 'collections');
+  constructor(props) {
+    super(props);
 
-    const newCount = source.totalCount();
-    const newRecords = source.records();
+    this.logger = props.stripes.logger;
+    this.searchField = React.createRef();
+
+    this.state = {
+      hasPerms: props.stripes.hasPerm('finc-config.metadata-collections.collection.get'),
+    };
+  }
+
+  componentDidMount() {
+    this.collection = new StripesConnectedSource(this.props, this.logger, 'collections');
+
+    if (this.searchField.current) {
+      this.searchField.current.focus();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const newCount = this.collection.totalCount();
+    const newRecords = this.collection.records();
 
     if (newCount === 1) {
+      const { history, location } = this.props;
+
+      const prevSource = new StripesConnectedSource(prevProps, this.logger, 'collections');
+      const oldCount = prevSource.totalCount();
+      const oldRecords = prevSource.records();
+
       if (oldCount !== 1 || (oldCount === 1 && oldRecords[0].id !== newRecords[0].id)) {
         const record = newRecords[0];
         history.push(`${urls.collectionView(record.id)}${location.search}`);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resources, mutator]);
+  }
 
-  useEffect(() => {
-    if (searchField.current) {
-      searchField.current.focus();
-    }
-  }, []);
-
-  const querySetter = ({ nsValues }) => {
-    mutator.query.update(nsValues);
+  querySetter = ({ nsValues }) => {
+    this.props.mutator.query.update(nsValues);
   };
 
-  const queryGetter = () => {
-    return _.get(resources, 'query', {});
+  queryGetter = () => {
+    return _.get(this.props.resources, 'query', {});
   };
 
-  const handleNeedMoreData = () => {
-    if (source) {
-      source.fetchMore(RESULT_COUNT_INCREMENT);
+  handleNeedMoreData = () => {
+    if (this.collection) {
+      this.collection.fetchMore(RESULT_COUNT_INCREMENT);
     }
   };
 
   // add update if search-selectbox is changing
-  const onChangeIndex = (qindex) => {
-    mutator.query.update({ qindex });
+  onChangeIndex = (qindex) => {
+    this.props.mutator.query.update({ qindex });
   };
 
-  if (!hasPerms) {
+  render() {
+    const { location, match, children, resources } = this.props;
+
+    if (this.collection) {
+      this.collection.update(this.props, 'collections');
+    }
+
+    if (!this.state.hasPerms) {
+      return (
+        <Layout className="textCentered">
+          <h2><FormattedMessage id="stripes-smart-components.permissionError" /></h2>
+          <p><FormattedMessage id="stripes-smart-components.permissionsDoNotAllowAccess" /></p>
+        </Layout>
+      );
+    }
+
     return (
-      <Layout className="textCentered">
-        <h2><FormattedMessage id="stripes-smart-components.permissionError" /></h2>
-        <p><FormattedMessage id="stripes-smart-components.permissionsDoNotAllowAccess" /></p>
-      </Layout>
+      <MetadataCollections
+        contentData={_.get(resources, 'collections.records', [])}
+        collection={this.collection}
+        filterData={{ mdSources: _.get(resources, 'mdSources.records', []) }}
+        onNeedMoreData={this.handleNeedMoreData}
+        queryGetter={this.queryGetter}
+        querySetter={this.querySetter}
+        searchString={location.search}
+        selectedRecordId={match.params.id}
+        searchField={this.searchField}
+        // add values for search-selectbox
+        onChangeIndex={this.onChangeIndex}
+      >
+        {children}
+      </MetadataCollections>
     );
   }
-
-  return (
-    <MetadataCollections
-      contentData={_.get(resources, 'collections.records', [])}
-      collection={source}
-      filterData={{ mdSources: _.get(resources, 'mdSources.records', []) }}
-      onNeedMoreData={handleNeedMoreData}
-      queryGetter={queryGetter}
-      querySetter={querySetter}
-      searchString={location.search}
-      selectedRecordId={match.params.id}
-      searchField={searchField}
-      // add values for search-selectbox
-      onChangeIndex={onChangeIndex}
-    >
-      {children}
-    </MetadataCollections>
-  );
-};
-
-CollectionsRoute.manifest = Object.freeze({
-  collections: {
-    type: 'okapi',
-    records: 'fincConfigMetadataCollections',
-    recordsRequired: '%{resultCount}',
-    perRequest: 30,
-    path: 'finc-config/metadata-collections',
-    GET: {
-      params: {
-        query: makeQueryFunction(
-          'cql.allRecords=1',
-          '(label="%{query.query}*" or description="%{query.query}*" or collectionId="%{query.query}*")',
-          {
-            'label': 'label',
-            'description': 'description',
-            'collectionId': 'collectionId',
-          },
-          filterConfig,
-          2,
-        ),
-      },
-      staticFallback: { params: {} },
-    },
-  },
-  mdSources: {
-    type: 'okapi',
-    records: 'tinyMetadataSources',
-    path: 'finc-config/tiny-metadata-sources',
-    resourceShouldRefresh: true
-  },
-  query: { initialValue: {} },
-  resultCount: { initialValue: INITIAL_RESULT_COUNT },
-});
-
-CollectionsRoute.propTypes = {
-  children: PropTypes.node,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-  location: PropTypes.shape({
-    search: PropTypes.string,
-  }).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }),
-  mutator: PropTypes.object,
-  resources: PropTypes.object,
-  stripes: PropTypes.shape({
-    hasPerm: PropTypes.func,
-    logger: PropTypes.object,
-  }),
-};
+}
 
 export default stripesConnect(CollectionsRoute);

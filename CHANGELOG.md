@@ -2,6 +2,7 @@
 
 ## [6.2.0] (IN PROGRESS)
 * React v19: refactor away from default props for functional components([UIFC-355](https://folio-org.atlassian.net/browse/UIFC-355))
+* Fix update resources bug for MetadataSources and MetadataCollections([UIFC-375](https://folio-org.atlassian.net/browse/UIFC-375))
 
 ## [6.1.0](https://github.com/folio-org/ui-finc-config/tree/v6.1.0) (2024-03-20)
 * Remove deprecated pane properties ([UIFC-337](https://issues.folio.org/browse/UIFC-337))
