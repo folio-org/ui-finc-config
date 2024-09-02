@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -30,23 +30,28 @@ const CollectionsRoute = ({
   const hasPerms = stripes.hasPerm('finc-config.metadata-collections.collection.get');
   const searchField = useRef();
 
-  const [source, setSource] = useState();
-  if (!source) {
-    // Create initial source
-    setSource(new StripesConnectedSource({ resources, mutator }, stripes.logger, 'collections'));
-  } else {
+  const source = useMemo(
+    () => new StripesConnectedSource({ resources, mutator }, stripes.logger, 'collections'),
+    [mutator, resources, stripes.logger]
+  );
+
+  const [count, setCount] = useState(source.totalCount());
+  const [records, setRecords] = useState(source.records());
+
+  const previousCount = usePrevious(count);
+  const previousRecords = usePrevious(records);
+
+  useEffect(() => {
     source.update({ resources, mutator }, 'collections');
-  }
+    setCount(source.totalCount());
+    setRecords(source.records());
 
-  const oldCount = usePrevious(source?.totalCount());
-  const oldRecords = usePrevious(source?.records());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resources, mutator]);
 
-  const newCount = source?.totalCount();
-  const newRecords = source?.records();
-
-  if (newCount === 1) {
-    if (oldCount !== 1 || (oldCount === 1 && oldRecords[0].id !== newRecords[0].id)) {
-      const record = newRecords[0];
+  if (count === 1) {
+    if (previousCount !== 1 || (previousCount === 1 && previousRecords[0].id !== records[0].id)) {
+      const record = records[0];
       history.push(`${urls.collectionView(record.id)}${location.search}`);
     }
   }
