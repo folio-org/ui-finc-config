@@ -13,6 +13,7 @@ import {
 import MetadataSources from '../components/MetadataSources/MetadataSources';
 import filterConfig from '../components/MetadataSources/filterConfigData';
 import urls from '../components/DisplayUtils/urls';
+import usePrevious from '../components/hooks/usePrevious';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -29,29 +30,31 @@ const SourcesRoute = ({
   const hasPerms = stripes.hasPerm('finc-config.metadata-sources.collection.get');
   const searchField = useRef();
 
-  const [source] = useState(() => {
-    // Create initial source
-    return new StripesConnectedSource({ resources, mutator }, stripes.logger, 'sources');
-  });
+  const [source] = useState(() => new StripesConnectedSource({ resources, mutator }, stripes.logger, 'sources'));
+
+  const [count, setCount] = useState(source.totalCount());
+  const [records, setRecords] = useState(source.records());
+
+  const previousCount = usePrevious(count);
+  const previousRecords = usePrevious(records);
 
   useEffect(() => {
-    const oldCount = source.totalCount();
-    const oldRecords = source.records();
+    source.update({ resources, mutator }, 'sources');
+    setCount(source.totalCount());
+    setRecords(source.records());
 
-    // Update source when resources or mutator change
-    source?.update({ resources, mutator }, 'sources');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resources, mutator]);
 
-    const newCount = source.totalCount();
-    const newRecords = source.records();
-
-    if (newCount === 1) {
-      if (oldCount !== 1 || (oldCount === 1 && oldRecords[0].id !== newRecords[0].id)) {
-        const record = newRecords[0];
+  useEffect(() => {
+    if (count === 1) {
+      if (previousCount !== 1 || (previousCount === 1 && previousRecords[0].id !== records[0].id)) {
+        const record = records[0];
         history.push(`${urls.sourceView(record.id)}${location.search}`);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resources, mutator]);
+  }, [count, records]);
 
   useEffect(() => {
     if (searchField.current) {
