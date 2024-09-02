@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { useRef, useEffect, useState, useMemo } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -30,7 +30,7 @@ const SourcesRoute = ({
   const hasPerms = stripes.hasPerm('finc-config.metadata-sources.collection.get');
   const searchField = useRef();
 
-  const source = useMemo(
+  const [source] = useState(
     () => new StripesConnectedSource({ resources, mutator }, stripes.logger, 'sources'),
     [mutator, resources, stripes.logger]
   );
@@ -49,12 +49,15 @@ const SourcesRoute = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resources, mutator]);
 
-  if (count === 1) {
-    if (previousCount !== 1 || (previousCount === 1 && previousRecords[0].id !== records[0].id)) {
-      const record = records[0];
-      history.push(`${urls.sourceView(record.id)}${location.search}`);
+  useEffect(() => {
+    if (count === 1) {
+      if (previousCount !== 1 || (previousCount === 1 && previousRecords[0].id !== records[0].id)) {
+        const record = records[0];
+        history.push(`${urls.sourceView(record.id)}${location.search}`);
+      }
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count, records]);
 
   useEffect(() => {
     if (searchField.current) {
