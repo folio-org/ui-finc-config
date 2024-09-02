@@ -30,10 +30,7 @@ const CollectionsRoute = ({
   const hasPerms = stripes.hasPerm('finc-config.metadata-collections.collection.get');
   const searchField = useRef();
 
-  const [source] = useState(
-    () => new StripesConnectedSource({ resources, mutator }, stripes.logger, 'collections'),
-    [mutator, resources, stripes.logger]
-  );
+  const [source] = useState(() => new StripesConnectedSource({ resources, mutator }, stripes.logger, 'collections'));
 
   const [count, setCount] = useState(source.totalCount());
   const [records, setRecords] = useState(source.records());
