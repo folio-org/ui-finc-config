@@ -104,7 +104,7 @@
     "dataOption.subject specialist": "Specjalista tematyczny",
     "dataOption.librarian": "Bibliotekarz",
     "dataOption.technical": "Techniczny",
-    "dataOption.vendor": "Sprzedawca",
+    "dataOption.vendor": "Dostawca",
     "collection.placeholder.mdSource": "Dodaj źródło metadanych",
     "collection.placeholder.permittedFor": "Wprowadź jeden ISIL dla instytucji z dozwolonym użyciem metadanych",
     "collection.placeholder.tickets": "Wprowadź adres URL powiązanego problemu",
