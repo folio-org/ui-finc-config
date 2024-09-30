@@ -1,8 +1,8 @@
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
-import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
-import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
+import { render, screen, within } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
 import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
@@ -70,31 +70,24 @@ describe('MetadataSourceForm', () => {
     });
 
     test('should display accordions', () => {
-      expect(document.querySelector('#editSourceInfo')).toBeInTheDocument();
-      expect(document.querySelector('#editSourceManagement')).toBeInTheDocument();
-      expect(document.querySelector('#editSourceTechnical')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Icon General' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Icon Management' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Icon Technical' })).toBeInTheDocument();
     });
 
     test('should display fields', () => {
-      expect(document.querySelector('#addsource_label')).toBeInTheDocument();
-      expect(document.querySelector('#addsource_description')).toBeInTheDocument();
-      expect(document.querySelector('#addsource_status')).toBeInTheDocument();
+      expect(screen.getByRole('textbox', { name: 'Name' })).toBeInTheDocument();
+      expect(screen.getByRole('textbox', { name: 'Description' })).toBeInTheDocument();
+      expect(screen.getByRole('combobox', { name: 'Implementation status' })).toBeInTheDocument();
     });
 
-    describe('select solr shard', () => {
-      beforeEach(async () => {
-        await userEvent.selectOptions(
-          screen.getByLabelText('Solr shard'), ['UBL main']
-        );
-      });
-
-      test('test required fields', async () => {
-        await userEvent.click(screen.getByText('Save & close'));
-        expect(screen.getAllByText(/required/i)).toHaveLength(3);
-        expect(screen.getAllByText('Required!', { exact: true })).toHaveLength(2);
-        expect(screen.getByText('Integer required!')).toBeInTheDocument();
-        expect(onSubmit).not.toHaveBeenCalled();
-      });
+    test('if select solr shard and save is showing required fields', async () => {
+      await userEvent.selectOptions(screen.getByRole('combobox', { name: /Solr shard/ }), 'UBL main');
+      await userEvent.click(screen.getByRole('button', { name: 'Save & close' }));
+      expect(screen.getAllByText(/required/i)).toHaveLength(3);
+      expect(screen.getAllByText('Required!', { exact: true })).toHaveLength(2);
+      expect(screen.getByText('Integer required!')).toBeInTheDocument();
+      expect(onSubmit).not.toHaveBeenCalled();
     });
   });
 
@@ -107,17 +100,10 @@ describe('MetadataSourceForm', () => {
       expect(screen.getByDisplayValue('Cambridge University Press Journals')).toBeInTheDocument();
     });
 
-    describe('change solr shard', () => {
-      beforeEach(async () => {
-        await userEvent.selectOptions(
-          screen.getByLabelText('Solr shard'), ['UBL ai']
-        );
-      });
-
-      test('click save should call onSubmit function', async () => {
-        await userEvent.click(screen.getByText('Save & close'));
-        expect(onSubmit).toHaveBeenCalled();
-      });
+    test('if change solr shard and click save is calling onSubmit function', async () => {
+      await userEvent.selectOptions(screen.getByRole('combobox', { name: /Solr shard/ }), 'UBL ai');
+      await userEvent.click(screen.getByRole('button', { name: 'Save & close' }));
+      expect(onSubmit).toHaveBeenCalled();
     });
   });
 
@@ -127,28 +113,26 @@ describe('MetadataSourceForm', () => {
     });
 
     test('delete modal is present', async () => {
-      await userEvent.click(screen.getByText('Delete'));
-      expect(document.getElementById('delete-source-confirmation')).toBeInTheDocument();
-      expect(screen.getByText('Do you really want to delete Cambridge University Press Journals?')).toBeInTheDocument();
+      await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
+      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete Cambridge University Press Journals?/ });
+      expect(confirmationModal).toBeInTheDocument();
     });
 
     test('click cancel', async () => {
-      await userEvent.click(screen.getByText('Delete'));
-      const cancel = screen.getByRole('button', {
-        name: 'Cancel',
-        id: 'clickable-delete-source-confirmation-cancel',
-      });
-      await userEvent.click(cancel);
+      await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
+      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete Cambridge University Press Journals?/ });
+
+      const cancelButton = within(confirmationModal).getByRole('button', { name: 'Cancel' });
+      await userEvent.click(cancelButton);
       expect(onDelete).not.toHaveBeenCalled();
     });
 
     test('click submit', async () => {
-      await userEvent.click(screen.getByText('Delete'));
-      const submit = screen.getByRole('button', {
-        name: 'Submit',
-        id: 'clickable-delete-source-confirmation-confirm',
-      });
-      await userEvent.click(submit);
+      await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
+      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete Cambridge University Press Journals?/ });
+
+      const submitButton = within(confirmationModal).getByRole('button', { name: 'Submit' });
+      await userEvent.click(submitButton);
       expect(onDelete).toHaveBeenCalled();
     });
   });
