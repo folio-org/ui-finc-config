@@ -1,8 +1,8 @@
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
-import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
-import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
+import { render, screen, within } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
 import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
@@ -14,7 +14,7 @@ const onClose = jest.fn();
 const handleSubmit = jest.fn();
 const onSubmit = jest.fn();
 
-const renderEmptyMetadataCollectionForm = (stripes, initialValues = {}) => {
+const renderEmptyMetadataCollectionForm = (stripes, initialValues = { solrMegaCollections: [''] }) => {
   return render(withIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
@@ -70,50 +70,32 @@ describe('MetadataCollectionForm', () => {
     });
 
     test('should display accordions', () => {
-      expect(document.querySelector('#editCollectionInfo')).toBeInTheDocument();
-      expect(document.querySelector('#editCollectionManagement')).toBeInTheDocument();
-      expect(document.querySelector('#editCollectionTechnical')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Icon General' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Icon Management' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Icon Technical' })).toBeInTheDocument();
     });
 
     test('should display all fields', () => {
-      expect(document.querySelector('#addcollection_label')).toBeInTheDocument();
-      expect(document.querySelector('#addcollection_description')).toBeInTheDocument();
-      expect(document.querySelector('#addcollection_mdSource')).toBeInTheDocument();
+      expect(screen.getByRole('textbox', { name: 'Name' })).toBeInTheDocument();
+      expect(screen.getByRole('textbox', { name: 'Description' })).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('Please add a metadata source')).toBeInTheDocument();
     });
 
-    describe('select metadata available', () => {
-      beforeEach(async () => {
-        await userEvent.selectOptions(
-          screen.getByLabelText('Metadata available'), ['yes']
-        );
-      });
-
-      test('test required fields', async () => {
-        await userEvent.click(screen.getByText('Save & close'));
-        // TODO: Required! of RequiredRepeatableField is not considered yet
-        // expect(screen.getAllByText('Required!')).toHaveLength(4);
-        // expect(screen.getAllByText(/required/i)).toHaveLength(5);
-        expect(screen.getAllByText('Required!', { exact: false })).toHaveLength(4);
-        expect(screen.getByText('Metadata source required!')).toBeInTheDocument();
-        expect(onSubmit).not.toHaveBeenCalled();
-      });
+    test('if select metadata available and click save is showing required fields', async () => {
+      await userEvent.selectOptions(screen.getByRole('combobox', { name: /Metadata available/ }), 'yes');
+      await userEvent.click(screen.getByRole('button', { name: 'Save & close' }));
+      expect(screen.getAllByText('Required!').length).toEqual(4);
+      expect(screen.getByText('Metadata source required!')).toBeInTheDocument();
+      expect(onSubmit).not.toHaveBeenCalled();
     });
 
     test('permittedFor textField should NOT be visible', async () => {
-      expect(document.getElementById('permittedFor[0]')).not.toBeInTheDocument();
+      expect(screen.queryByRole('textbox', { name: /Permitted for/ })).not.toBeInTheDocument();
     });
 
-    describe('select usageRestricted yes', () => {
-      beforeEach(async () => {
-        await userEvent.selectOptions(
-          screen.getByLabelText('Usage restricted', { exact: false }), ['yes']
-        );
-      });
-
-      test('permittedFor textField should be visible', async () => {
-        await waitFor(() => expect(document.getElementById('permittedFor[0]')).toBeInTheDocument());
-        expect(screen.getByPlaceholderText('Enter one ISIL for an insititution with permitted metadata usage')).toBeInTheDocument();
-      });
+    test('if select usageRestricted is adding permittedFor textField', async () => {
+      await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Usage restricted' }), 'yes');
+      expect(screen.getByPlaceholderText('Enter one ISIL for an insititution with permitted metadata usage')).toBeInTheDocument();
     });
   });
 
@@ -126,17 +108,10 @@ describe('MetadataCollectionForm', () => {
       expect(screen.getByDisplayValue('This is a test metadata collection 2')).toBeInTheDocument();
     });
 
-    describe('select metadata available no', () => {
-      beforeEach(async () => {
-        await userEvent.selectOptions(
-          screen.getByLabelText('Metadata available'), ['no']
-        );
-      });
-
-      test('click save should call onSubmit function', async () => {
-        await userEvent.click(screen.getByText('Save & close'));
-        expect(onSubmit).toHaveBeenCalled();
-      });
+    test('if select metadata available and click save is calling onSubmit function', async () => {
+      await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Metadata available' }), 'no');
+      await userEvent.click(screen.getByRole('button', { name: 'Save & close' }));
+      expect(onSubmit).toHaveBeenCalled();
     });
 
     test('permittedFor fields should be visible', async () => {
@@ -144,19 +119,16 @@ describe('MetadataCollectionForm', () => {
       expect(document.getElementById('permittedFor[1]')).toBeInTheDocument();
     });
 
-    describe('select usageRestricted no', () => {
-      beforeEach(async () => {
-        await userEvent.selectOptions(
-          screen.getByLabelText('Usage restricted', { exact: false }), ['no']
-        );
-      });
+    test('if select usageRestricted is clearing permittedFor', async () => {
+      await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Usage restricted' }), 'no');
 
-      test('clear permittedFor', async () => {
-        expect(screen.getByText('Clear permitted for?')).toBeInTheDocument();
-        expect(screen.getByText('Do you want to clear permitted for when changing usage restricted?')).toBeInTheDocument();
-        await userEvent.click(screen.getByText('Clear permitted for'));
-        expect(document.getElementById('permittedFor[0]')).not.toBeInTheDocument();
-      });
+      const confirmationModal = screen.getByRole('dialog', { name: /Do you want to clear permitted for when changing usage restricted?/ });
+      expect(confirmationModal).toBeInTheDocument();
+
+      expect(within(confirmationModal).getByRole('heading', { name: 'Clear permitted for?' })).toBeInTheDocument();
+      const clearButton = within(confirmationModal).getByRole('button', { name: 'Clear permitted for' });
+      await userEvent.click(clearButton);
+      expect(document.getElementById('permittedFor[0]')).not.toBeInTheDocument();
     });
   });
 
@@ -166,28 +138,24 @@ describe('MetadataCollectionForm', () => {
     });
 
     test('delete modal is present', async () => {
-      await userEvent.click(screen.getByText('Delete'));
-      expect(document.getElementById('delete-collection-confirmation')).toBeInTheDocument();
-      expect(screen.getByText('Do you really want to delete 21st Century Political Science Association?')).toBeInTheDocument();
+      await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
+      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete 21st Century Political Science Association?/ });
+      expect(confirmationModal).toBeInTheDocument();
     });
 
     test('click cancel', async () => {
-      await userEvent.click(screen.getByText('Delete'));
-      const cancel = screen.getByRole('button', {
-        name: 'Cancel',
-        id: 'clickable-delete-collection-confirmation-cancel',
-      });
-      await userEvent.click(cancel);
+      await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
+      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete 21st Century Political Science Association?/ });
+      const cancelButton = within(confirmationModal).getByRole('button', { name: 'Cancel' });
+      await userEvent.click(cancelButton);
       expect(onDelete).not.toHaveBeenCalled();
     });
 
     test('click submit', async () => {
-      await userEvent.click(screen.getByText('Delete'));
-      const submit = screen.getByRole('button', {
-        name: 'Submit',
-        id: 'clickable-delete-collection-confirmation-confirm',
-      });
-      await userEvent.click(submit);
+      await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
+      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete 21st Century Political Science Association?/ });
+      const submitButton = within(confirmationModal).getByRole('button', { name: 'Submit' });
+      await userEvent.click(submitButton);
       expect(onDelete).toHaveBeenCalled();
     });
   });
