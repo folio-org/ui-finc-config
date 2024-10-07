@@ -1,21 +1,39 @@
-import _ from 'lodash';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
+import { useFieldArray } from 'react-final-form-arrays';
 
 import {
   Button,
   Headline,
 } from '@folio/stripes/components';
-import { EditCard } from '@folio/stripes-erm-components';
-import { useKiwtFieldArray } from '@k-int/stripes-kint-components';
 
+import EditCard from './EditCard';
 import ContactField from './ContactField';
 
 const ContactFieldArray = ({
   fields: { name },
 }) => {
-  const { items, onAddField, onDeleteField, onUpdateField } = useKiwtFieldArray(name);
+  const { fields } = useFieldArray(name);
+
+  const onMarkForDeletion = (field) => {
+    if (field?.id) {
+      fields.push({ id: field.id, _delete: true });
+    }
+  };
+
+  const onUpdateField = (index, field) => {
+    fields.update(index, {
+      ...fields.value[index],
+      ...field,
+    });
+  };
+
+  const onDeleteField = (index, field) => {
+    fields.remove(index);
+    onMarkForDeletion(field);
+  };
 
   const handleContactSelected = (index, selectedContact) => {
     let cName = '';
@@ -26,13 +44,13 @@ const ContactFieldArray = ({
       // receiving name from contact-plugin
       // just get the first object of returning array
       cPlugin = 'contact';
-      cId = _.get(selectedContact[0], 'id', '');
-      cName = _.get(selectedContact[0], 'lastName', '') + ', ' + _.get(selectedContact[0], 'firstName', '');
-    } else if (_.get(selectedContact.personal, 'lastName', '') !== '') {
+      cId = get(selectedContact[0], 'id', '');
+      cName = get(selectedContact[0], 'lastName', '') + ', ' + get(selectedContact[0], 'firstName', '');
+    } else if (get(selectedContact.personal, 'lastName', '') !== '') {
       // receiving name from user-plugin
       cPlugin = 'user';
-      cId = _.get(selectedContact, 'id', '');
-      cName = _.get(selectedContact.personal, 'lastName', '') + ', ' + _.get(selectedContact.personal, 'firstName', '');
+      cId = get(selectedContact, 'id', '');
+      cName = get(selectedContact.personal, 'lastName', '') + ', ' + get(selectedContact.personal, 'firstName', '');
     }
 
     onUpdateField(index, {
@@ -43,12 +61,12 @@ const ContactFieldArray = ({
   };
 
   const renderContact = () => {
-    return items.map((contact, index) => (
+    return fields.map((contact, index) => (
       <EditCard
         data-test-source-contact-number={index}
         deleteButtonTooltipText={<FormattedMessage id="ui-finc-config.source.contact.remove" />}
         header={<FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount: index + 1 }} />}
-        key={index}
+        key={`${name}[${index}]`}
         onDelete={() => onDeleteField(index, contact)}
       >
         <Field
@@ -69,7 +87,7 @@ const ContactFieldArray = ({
       <div id="source-form-contacts">
         {renderContact()}
       </div>
-      <Button id="add-contact-button" onClick={() => onAddField()}>
+      <Button id="add-contact-button" onClick={() => fields.push({})}>
         <FormattedMessage id="ui-finc-config.source.contact.add" />
       </Button>
     </div>
@@ -77,7 +95,6 @@ const ContactFieldArray = ({
 };
 
 ContactFieldArray.propTypes = {
-  name: PropTypes.string,
   fields: PropTypes.shape({
     name: PropTypes.string,
   }),
