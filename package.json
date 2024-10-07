@@ -32,8 +32,6 @@
     "react-router-dom": "^5.2.0"
   },
   "dependencies": {
-    "@folio/stripes-erm-components": "^9.0.0",
-    "@k-int/stripes-kint-components": "^5.0.0",
     "final-form": "^4.18.7",
     "final-form-arrays": "^3.0.2",
     "lodash": "^4.17.4",
@@ -72,9 +70,6 @@
       "organizations-storage.contacts": "2.0",
       "users": "15.0 16.0"
     },
-    "stripesDeps": [
-      "@folio/stripes-erm-components"
-    ],
     "permissionSets": [
       {
         "permissionName": "module.finc-config.enabled",
