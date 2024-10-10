@@ -9,31 +9,18 @@ import {
   Headline,
 } from '@folio/stripes/components';
 
-import EditCard from './EditCard';
+import EditCard from './EditCard/EditCard';
+import {
+  onAddField,
+  onDeleteField,
+  onUpdateField,
+} from './EditCard/editcard-util';
 import ContactField from './ContactField';
 
 const ContactFieldArray = ({
   fields: { name },
 }) => {
   const { fields } = useFieldArray(name);
-
-  const onMarkForDeletion = (field) => {
-    if (field?.id) {
-      fields.push({ id: field.id, _delete: true });
-    }
-  };
-
-  const onUpdateField = (index, field) => {
-    fields.update(index, {
-      ...fields.value[index],
-      ...field,
-    });
-  };
-
-  const onDeleteField = (index, field) => {
-    fields.remove(index);
-    onMarkForDeletion(field);
-  };
 
   const handleContactSelected = (index, selectedContact) => {
     let cName = '';
@@ -53,7 +40,7 @@ const ContactFieldArray = ({
       cName = get(selectedContact.personal, 'lastName', '') + ', ' + get(selectedContact.personal, 'firstName', '');
     }
 
-    onUpdateField(index, {
+    onUpdateField(fields, index, {
       externalId: cId,
       name: cName,
       type: cPlugin,
@@ -67,7 +54,7 @@ const ContactFieldArray = ({
         deleteButtonTooltipText={<FormattedMessage id="ui-finc-config.source.contact.remove" />}
         header={<FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount: index + 1 }} />}
         key={`${name}[${index}]`}
-        onDelete={() => onDeleteField(index, contact)}
+        onDelete={() => onDeleteField(fields, index, contact)}
       >
         <Field
           component={ContactField}
@@ -87,7 +74,7 @@ const ContactFieldArray = ({
       <div id="source-form-contacts">
         {renderContact()}
       </div>
-      <Button id="add-contact-button" onClick={() => fields.push({})}>
+      <Button id="add-contact-button" onClick={() => onAddField(fields)}>
         <FormattedMessage id="ui-finc-config.source.contact.add" />
       </Button>
     </div>
