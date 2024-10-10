@@ -1,7 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
+import { render, screen, within } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import { StripesContext, useStripes } from '@folio/stripes/core';
@@ -12,9 +12,7 @@ import SourceManagementForm from './SourceManagementForm';
 const onToggle = jest.fn();
 const setOrganization = jest.fn();
 
-const organization = {};
-
-const renderSourceManagementForm = (stripes, initialValues = { organization }) => {
+const renderSourceManagementForm = (stripes, initialValues = {}) => {
   return render(withIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
@@ -48,15 +46,27 @@ describe('SourceManagementForm', () => {
     renderSourceManagementForm(stripes);
   });
 
-  it('add contact button should be visible', () => {
-    expect(document.querySelector('#add-contact-button')).toBeInTheDocument();
-    expect(screen.getByText('Add contact')).toBeInTheDocument();
+  it('should be visible the add contact button', () => {
+    expect(screen.getByRole('button', { name: 'Add contact' })).toBeInTheDocument();
   });
 
-  test('contact form with fields should be visible after click add button ', async () => {
-    await userEvent.click(await screen.findByText('Add contact'));
+  test('clicking add contact button and remove contact button', async () => {
+    const managementAccordion = screen.getByRole('region', { name: 'Icon Management' });
+    expect(managementAccordion).toBeInTheDocument();
+    expect(within(managementAccordion).queryByRole('textbox', { name: 'Name Icon' })).not.toBeInTheDocument();
+    expect(within(managementAccordion).queryByRole('combobox', { name: 'Role' })).not.toBeInTheDocument();
+
+    const addContactButton = screen.getByRole('button', { name: 'Add contact' });
+    expect(addContactButton).toBeInTheDocument();
+    await userEvent.click(addContactButton);
     expect(document.querySelector('#source-form-contacts')).toBeInTheDocument();
-    expect(document.querySelector('#contact-name-0')).toBeInTheDocument();
-    expect(document.querySelector('#contact-role-0')).toBeInTheDocument();
+    expect(within(managementAccordion).getByRole('textbox', { name: 'Name Icon' })).toBeInTheDocument();
+    expect(within(managementAccordion).getByRole('combobox', { name: 'Role' })).toBeInTheDocument();
+
+    const removeContactButton = screen.getByRole('button', { name: 'Remove contact' });
+    expect(removeContactButton).toBeInTheDocument();
+    await userEvent.click(removeContactButton);
+    expect(within(managementAccordion).queryByRole('textbox', { name: 'Name Icon' })).not.toBeInTheDocument();
+    expect(within(managementAccordion).queryByRole('combobox', { name: 'Role' })).not.toBeInTheDocument();
   });
 });
