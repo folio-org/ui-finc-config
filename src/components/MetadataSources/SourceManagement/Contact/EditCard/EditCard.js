@@ -17,12 +17,13 @@ const EditCard = ({
     return (
       deleteButtonTooltipText ?
         <Tooltip
-          id={uniqueId('editcard')}
+          id={uniqueId('delete-contact')}
           text={deleteButtonTooltipText}
         >
           {({ ref, ariaIds }) => (
             <IconButton
               ref={ref}
+              aria-label="delete-contact"
               aria-labelledby={ariaIds.text}
               icon="trash"
               onClick={onDelete}
@@ -31,6 +32,7 @@ const EditCard = ({
         </Tooltip>
         :
         <IconButton
+          aria-label="delete-contact"
           icon="trash"
           onClick={onDelete}
         />
