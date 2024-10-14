@@ -37,7 +37,7 @@ const renderContactFieldArray = (stripes) => {
 
 jest.unmock('react-intl');
 
-describe('ContactFieldArray - handleContactSelected', () => {
+describe('ContactFieldArray', () => {
   let stripes;
 
   beforeEach(() => {

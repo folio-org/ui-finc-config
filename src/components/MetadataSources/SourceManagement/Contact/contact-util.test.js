@@ -19,7 +19,7 @@ jest.mock('./EditCard/editcard-util', () => ({
   onUpdateField: jest.fn(),
 }));
 
-describe('handleContactSelected', () => {
+describe('contact-util - handleContactSelected', () => {
   let fields;
 
   beforeEach(() => {
