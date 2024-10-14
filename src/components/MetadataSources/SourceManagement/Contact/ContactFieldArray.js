@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { useFieldArray } from 'react-final-form-arrays';
@@ -13,39 +12,14 @@ import EditCard from './EditCard/EditCard';
 import {
   onAddField,
   onDeleteField,
-  onUpdateField,
 } from './EditCard/editcard-util';
 import ContactField from './ContactField';
+import { handleContactSelected } from './contact-util';
 
 const ContactFieldArray = ({
   fields: { name },
 }) => {
   const { fields } = useFieldArray(name);
-
-  const handleContactSelected = (index, selectedContact) => {
-    let cName = '';
-    let cId = '';
-    let cPlugin = '';
-
-    if (Array.isArray(selectedContact)) {
-      // receiving name from contact-plugin
-      // just get the first object of returning array
-      cPlugin = 'contact';
-      cId = get(selectedContact[0], 'id', '');
-      cName = get(selectedContact[0], 'lastName', '') + ', ' + get(selectedContact[0], 'firstName', '');
-    } else if (get(selectedContact.personal, 'lastName', '') !== '') {
-      // receiving name from user-plugin
-      cPlugin = 'user';
-      cId = get(selectedContact, 'id', '');
-      cName = get(selectedContact.personal, 'lastName', '') + ', ' + get(selectedContact.personal, 'firstName', '');
-    }
-
-    onUpdateField(fields, index, {
-      externalId: cId,
-      name: cName,
-      type: cPlugin,
-    });
-  };
 
   const renderContact = () => {
     return fields.map((contact, index) => (
@@ -60,7 +34,7 @@ const ContactFieldArray = ({
           component={ContactField}
           index={index}
           name={`${name}[${index}]`}
-          selectContact={selectedContact => handleContactSelected(index, selectedContact)}
+          selectContact={selectedContact => handleContactSelected(fields, index, selectedContact)}
         />
       </EditCard>
     ));
