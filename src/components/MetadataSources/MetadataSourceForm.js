@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { isEqual } from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -80,7 +81,7 @@ const MetadataSourceForm = ({
   };
 
   const getLastMenu = () => {
-    const isEditing = initialValues && initialValues.id;
+    const isEditing = initialValues?.id;
 
     return (
       <PaneMenu>
@@ -170,9 +171,8 @@ const MetadataSourceForm = ({
                   />
                 </Col>
               </Row>
-              {initialValues.metadata &&
-                initialValues.metadata.createdDate && (
-                  <ViewMetaData metadata={initialValues.metadata} />
+              {initialValues.metadata?.createdDate && (
+                <ViewMetaData metadata={initialValues.metadata} />
               )}
               <SourceInfoForm
                 accordionId="editSourceInfo"
@@ -223,6 +223,7 @@ MetadataSourceForm.propTypes = {
 };
 
 export default stripesFinalForm({
+  initialValuesEqual: (a, b) => isEqual(a, b),
   // the form will reinitialize every time the initialValues prop changes
   enableReinitialize: true,
   // set navigationCheck true for confirming changes
