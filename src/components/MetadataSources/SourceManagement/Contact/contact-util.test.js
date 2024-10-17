@@ -1,5 +1,4 @@
 import { handleContactSelected } from './contact-util';
-import { onUpdateField } from './EditCard/editcard-util';
 
 const selectedContactViaContactsPlugin = [{
   id: 'user-1',
@@ -15,9 +14,7 @@ const selectedContactViaUsersPlugin = {
   }
 };
 
-jest.mock('./EditCard/editcard-util', () => ({
-  onUpdateField: jest.fn(),
-}));
+const doUpdate = jest.fn();
 
 describe('contact-util - handleContactSelected', () => {
   let fields;
@@ -28,7 +25,7 @@ describe('contact-util - handleContactSelected', () => {
         { externalId: 'old-id', name: 'old-name', type: 'old-type' },
         { externalId: '', name: '', type: '' },
       ],
-      update: jest.fn(),
+      update: doUpdate
     };
 
     jest.clearAllMocks();
@@ -37,7 +34,7 @@ describe('contact-util - handleContactSelected', () => {
   it('should handle contact data from contact-plugin correctly', () => {
     handleContactSelected(fields, 0, selectedContactViaContactsPlugin);
 
-    expect(onUpdateField).toHaveBeenCalledWith(fields, 0, {
+    expect(doUpdate).toHaveBeenCalledWith(0, {
       externalId: 'user-1',
       name: 'Smith, Anna',
       type: 'contact',
@@ -47,7 +44,7 @@ describe('contact-util - handleContactSelected', () => {
   it('should handle contact data from user-plugin correctly', () => {
     handleContactSelected(fields, 1, selectedContactViaUsersPlugin);
 
-    expect(onUpdateField).toHaveBeenCalledWith(fields, 1, {
+    expect(doUpdate).toHaveBeenCalledWith(1, {
       externalId: 'user-2',
       name: 'Smith, Anna',
       type: 'user',

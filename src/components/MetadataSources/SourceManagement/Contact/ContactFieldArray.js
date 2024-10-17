@@ -8,11 +8,7 @@ import {
   Headline,
 } from '@folio/stripes/components';
 
-import EditCard from './EditCard/EditCard';
-import {
-  onAddField,
-  onDeleteField,
-} from './EditCard/editcard-util';
+import EditCard from '../../../DisplayUtils/EditCard/EditCard';
 import ContactField from './ContactField';
 import { handleContactSelected } from './contact-util';
 
@@ -27,8 +23,8 @@ const ContactFieldArray = ({
         data-test-source-contact-number={index}
         deleteButtonTooltipText={<FormattedMessage id="ui-finc-config.source.contact.remove" />}
         header={<FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount: index + 1 }} />}
-        key={`${name}[${index}]`}
-        onDelete={() => onDeleteField(fields, index, contact)}
+        key={index}
+        onDelete={() => fields.remove(index)}
       >
         <Field
           component={ContactField}
@@ -48,7 +44,7 @@ const ContactFieldArray = ({
       <div id="source-form-contacts">
         {renderContact()}
       </div>
-      <Button id="add-contact-button" onClick={() => onAddField(fields)}>
+      <Button id="add-contact-button" onClick={() => fields.push({})}>
         <FormattedMessage id="ui-finc-config.source.contact.add" />
       </Button>
     </div>
