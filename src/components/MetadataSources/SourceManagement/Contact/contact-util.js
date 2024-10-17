@@ -18,18 +18,6 @@ export const handleContactSelected = (fields, index, selectedContact) => {
     cName = get(selectedContact.personal, 'lastName', '') + ', ' + get(selectedContact.personal, 'firstName', '');
   }
 
-  // onUpdateField(fields, index, {
-  //   externalId: cId,
-  //   name: cName,
-  //   type: cPlugin,
-  // });
-
-  // const field = {
-  //   externalId: cId,
-  //   name: cName,
-  //   type: cPlugin,
-  // };
-
   fields.update(index, {
     ...fields.value[index],
     ...{
