@@ -1,5 +1,5 @@
 import { MemoryRouter } from 'react-router-dom';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -7,27 +7,19 @@ import userEvent from '@testing-library/user-event';
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
 import ContactFieldArray from './ContactFieldArray';
-import FindContact from '../FindContact/FindContact';
-import FindUser from '../FindUser/FindUser';
 import withIntlConfiguration from '../../../../../test/jest/helpers/withIntlConfiguration';
-
-const selectedContact = jest.fn();
 
 const renderContactFieldArray = (stripes) => {
   return render(withIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
-          onSubmit={jest.fn}
+          onSubmit={jest.fn()}
           mutators={{
-            selectedContact,
             ...arrayMutators,
           }}
-          render={() => withIntlConfiguration(
-            <ContactFieldArray fields={{ name: 'contacts' }}>
-              <FindContact index={1} selectContact />
-              <Field component={FindUser} index={1} selectContact name="contacts" />
-            </ContactFieldArray>
+          render={() => (
+            <ContactFieldArray fields={{ name: 'contacts' }} />
           )}
         />
       </MemoryRouter>
