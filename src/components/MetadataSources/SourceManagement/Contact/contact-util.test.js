@@ -22,7 +22,7 @@ describe('contact-util - handleContactSelected', () => {
   beforeEach(() => {
     fields = {
       value: [
-        { externalId: 'old-id', name: 'old-name', type: 'old-type' },
+        { externalId: 'old-id', name: 'old-name', type: 'old-type', role: 'librarian' },
         { externalId: '', name: '', type: '' },
       ],
       update: doUpdate
@@ -38,6 +38,7 @@ describe('contact-util - handleContactSelected', () => {
       externalId: 'user-1',
       name: 'Smith, Anna',
       type: 'contact',
+      role: 'librarian',
     });
   });
 

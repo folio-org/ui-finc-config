@@ -20,10 +20,8 @@ export const handleContactSelected = (fields, index, selectedContact) => {
 
   fields.update(index, {
     ...fields.value[index],
-    ...{
-      externalId: cId,
-      name: cName,
-      type: cPlugin,
-    },
+    externalId: cId,
+    name: cName,
+    type: cPlugin,
   });
 };
