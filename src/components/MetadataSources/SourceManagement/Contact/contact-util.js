@@ -1,7 +1,5 @@
 import { get } from 'lodash';
 
-import { onUpdateField } from './EditCard/editcard-util';
-
 export const handleContactSelected = (fields, index, selectedContact) => {
   let cName = '';
   let cId = '';
@@ -20,7 +18,8 @@ export const handleContactSelected = (fields, index, selectedContact) => {
     cName = get(selectedContact.personal, 'lastName', '') + ', ' + get(selectedContact.personal, 'firstName', '');
   }
 
-  onUpdateField(fields, index, {
+  fields.update(index, {
+    ...fields.value[index],
     externalId: cId,
     name: cName,
     type: cPlugin,
