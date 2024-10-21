@@ -17,17 +17,15 @@ const selectedContactViaUsersPlugin = {
 const doUpdate = jest.fn();
 
 describe('contact-util - handleContactSelected', () => {
-  let fields;
+  const fields = {
+    value: [
+      { externalId: 'old-id', name: 'old-name', type: 'old-type', role: 'librarian' },
+      { externalId: '', name: '', type: '' },
+    ],
+    update: doUpdate
+  };
 
   beforeEach(() => {
-    fields = {
-      value: [
-        { externalId: 'old-id', name: 'old-name', type: 'old-type', role: 'librarian' },
-        { externalId: '', name: '', type: '' },
-      ],
-      update: doUpdate
-    };
-
     jest.clearAllMocks();
   });
 
