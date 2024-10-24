@@ -1,6 +1,6 @@
 {
   "name": "@folio/finc-config",
-  "version": "6.1.0",
+  "version": "7.0.0",
   "description": "Index configuration of finc catalogues",
   "main": "src/index.js",
   "repository": "folio-org/ui-finc-config",
@@ -63,9 +63,9 @@
     "home": "/finc-config/metadata-sources?filters=status.active,status.implementation",
     "queryResource": "query",
     "okapiInterfaces": {
-      "finc-config/metadata-sources": "3.0",
-      "finc-config/metadata-collections": "2.0",
-      "finc-config/isils": "1.0",
+      "finc-config-metadata-sources": "1.0",
+      "finc-config-metadata-collections": "1.0",
+      "finc-config-isils": "1.0",
       "organizations-storage.organizations": "3.0",
       "organizations-storage.contacts": "2.0",
       "users": "15.0 16.0"
