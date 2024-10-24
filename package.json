@@ -119,10 +119,12 @@
         "description": "Can view metadatasources and metadatacollections",
         "subPermissions": [
           "module.finc-config.enabled",
+          "finc-config.contacts.collection.get",
           "finc-config.metadata-collections.collection.get",
           "finc-config.metadata-collections.item.get",
           "finc-config.metadata-sources.collection.get",
           "finc-config.metadata-sources.item.get",
+          "finc-config.tiny-metadata-sources.collection.get",
           "organizations-storage.organizations.collection.get",
           "organizations-storage.organizations.item.get",
           "organizations-storage.contacts.collection.get",
