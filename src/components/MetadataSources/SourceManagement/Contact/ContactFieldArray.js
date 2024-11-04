@@ -10,7 +10,7 @@ import {
 
 import EditCard from '../../../DisplayUtils/EditCard/EditCard';
 import ContactField from './ContactField';
-import { handleContactSelected } from './contact-util';
+import handleContactSelected from './contact-util';
 
 const ContactFieldArray = ({
   fields: { name },

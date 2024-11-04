@@ -1,6 +1,8 @@
 # Change history for ui-finc-config
 
-## [7.0.0] (IN PROGRESS)
+## [7.1.0] (IN PROGRESS)
+
+## [7.0.0](https://github.com/folio-org/ui-finc-config/tree/v7.0.0) (2024-11-04)
 * React v19: refactor away from default props for functional components([UIFC-355](https://folio-org.atlassian.net/browse/UIFC-355))
 * Fix update resources bug for MetadataSources and MetadataCollections([UIFC-375](https://folio-org.atlassian.net/browse/UIFC-375))
 * Fix tests and add mocks local ([UIFC-378](https://folio-org.atlassian.net/browse/UIFC-378))
