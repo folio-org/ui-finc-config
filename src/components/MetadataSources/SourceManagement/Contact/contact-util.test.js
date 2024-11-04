@@ -1,4 +1,4 @@
-import { handleContactSelected } from './contact-util';
+import handleContactSelected from './contact-util';
 
 const selectedContactViaContactsPlugin = [{
   id: 'user-1',

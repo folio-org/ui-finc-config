@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 
-export const handleContactSelected = (fields, index, selectedContact) => {
+const handleContactSelected = (fields, index, selectedContact) => {
   let cName = '';
   let cId = '';
   let cPlugin = '';
@@ -25,3 +25,5 @@ export const handleContactSelected = (fields, index, selectedContact) => {
     type: cPlugin,
   });
 };
+
+export default handleContactSelected;
