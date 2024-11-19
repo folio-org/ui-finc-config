@@ -46,7 +46,7 @@
     "collection.form.selectedUsageRestricted.clearModalHeading": "Limpar o permitido para?",
     "collection.form.selectedUsageRestricted.confirmClearLabel": "Limpar o permitido para",
     "collection.form.selectedUsageRestricted.confirmClearMessage": "Você quer limpar o permitido para quando o uso é restrito?",
-    "searchInputLabel": "Pesquisa",
+    "searchInputLabel": "Buscar",
     "edit": "Editar",
     "form.create": "Criar",
     "form.delete": "Excluir",
