@@ -9,7 +9,7 @@ const urls = {
   collectionEdit: id => `/finc-config/metadata-collections/${id}/edit`,
   collectionCreate: () => '/finc-config/metadata-collections/create',
 
-  showAllCollections: (sourceId) => `/finc-config/metadata-collections?filters=mdSource.${sourceId},metadataAvailable.yes,metadataAvailable.no,metadataAvailable.undetermined,usageRestricted.yes,usageRestricted.no,freeContent.yes,freeContent.no,freeContent.undetermined,&query=`,
+  showAllCollections: (sourceId) => `/finc-config/metadata-collections?filters=mdSource.${sourceId}`,
 
   organizationView: id => `/organizations/view/${id}`,
   contactView: id => `/organizations/contacts/details/${id}/view`,
