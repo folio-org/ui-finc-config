@@ -1,11 +1,11 @@
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
 
-import { render, screen, within } from '@folio/jest-config-stripes/testing-library/react';
+import { screen, within } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
-import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
+import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import MetadataSourceForm from './MetadataSourceForm';
 import SOURCE from '../../../test/fixtures/metadatasource';
 
@@ -15,7 +15,7 @@ const handleSubmit = jest.fn();
 const onSubmit = jest.fn();
 
 const renderEmptyMetadataSourceForm = (stripes, initialValues = {}) => {
-  return render(withIntlConfiguration(
+  return renderWithIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
@@ -31,11 +31,11 @@ const renderEmptyMetadataSourceForm = (stripes, initialValues = {}) => {
         />
       </MemoryRouter>
     </StripesContext.Provider>
-  ));
+  );
 };
 
 const renderMetadataSourceForm = (stripes, initialValues = SOURCE) => {
-  return render(withIntlConfiguration(
+  return renderWithIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
@@ -52,7 +52,7 @@ const renderMetadataSourceForm = (stripes, initialValues = SOURCE) => {
         />
       </MemoryRouter>
     </StripesContext.Provider>
-  ));
+  );
 };
 
 jest.unmock('react-intl');

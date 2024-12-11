@@ -1,15 +1,14 @@
 import { noop } from 'lodash';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { MemoryRouter } from 'react-router-dom';
 import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query';
 
-import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
-
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
-import withIntlConfiguration from '../test/jest/helpers/withIntlConfiguration';
+
+import renderWithIntlConfiguration from '../test/jest/helpers/renderWithIntlConfiguration';
 import CollectionsRoute from './routes/CollectionsRoute';
 import SourcesRoute from './routes/SourcesRoute';
 import SourceCreateRoute from './routes/SourceCreateRoute';
@@ -97,18 +96,15 @@ const match = {
 
 const queryClient = new QueryClient();
 
-const renderWithRouter = (component) => {
-  const history = createMemoryHistory();
-  return {
-    ...render(withIntlConfiguration(
-      <QueryClientProvider client={queryClient}>
-        <Router history={history}>
-          {component}
-        </Router>
-      </QueryClientProvider>
-    ))
-  };
-};
+const renderWithRouter = (component) => (
+  renderWithIntlConfiguration(
+    <QueryClientProvider client={queryClient}>
+      <MemoryRouter>
+        {component}
+      </MemoryRouter>
+    </QueryClientProvider>
+  )
+);
 
 jest.unmock('react-intl');
 

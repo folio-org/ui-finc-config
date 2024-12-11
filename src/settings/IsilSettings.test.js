@@ -1,21 +1,17 @@
-import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import { ControlledVocab } from '@folio/stripes/smart-components';
 
-import withIntlConfiguration from '../../test/jest/helpers/withIntlConfiguration';
+import renderWithIntlConfiguration from '../../test/jest/helpers/renderWithIntlConfiguration';
 import IsilSettings from './IsilSettings';
 
-const renderIsilSettings = () => render(
-  withIntlConfiguration(
-    <IsilSettings stripes={{ connect: (Component) => Component, hasPerm: () => true }} />
-  )
+const renderIsilSettings = () => renderWithIntlConfiguration(
+  <IsilSettings stripes={{ connect: (Component) => Component, hasPerm: () => true }} />
 );
 
 jest.unmock('react-intl');
 jest.mock('@folio/stripes/smart-components', () => ({
   ControlledVocab: jest.fn(({ label }) => (
-    <>
-      <span>{label}</span>
-    </>
+    <span>{label}</span>
   )),
 }));
 

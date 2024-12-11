@@ -1,19 +1,19 @@
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { render, screen, within } from '@folio/jest-config-stripes/testing-library/react';
+import { screen, within } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
-import withIntlConfiguration from '../../../../test/jest/helpers/withIntlConfiguration';
+import renderWithIntlConfiguration from '../../../../test/jest/helpers/renderWithIntlConfiguration';
 import SourceManagementForm from './SourceManagementForm';
 
 const onToggle = jest.fn();
 const setOrganization = jest.fn();
 
 const renderSourceManagementForm = (stripes, initialValues = {}) => {
-  return render(withIntlConfiguration(
+  return renderWithIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
@@ -33,7 +33,7 @@ const renderSourceManagementForm = (stripes, initialValues = {}) => {
         />
       </MemoryRouter>
     </StripesContext.Provider>
-  ));
+  );
 };
 
 jest.unmock('react-intl');
