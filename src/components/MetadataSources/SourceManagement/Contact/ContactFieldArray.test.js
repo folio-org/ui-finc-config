@@ -1,16 +1,16 @@
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
 import ContactFieldArray from './ContactFieldArray';
-import withIntlConfiguration from '../../../../../test/jest/helpers/withIntlConfiguration';
+import renderWithIntlConfiguration from '../../../../../test/jest/helpers/renderWithIntlConfiguration';
 
 const renderContactFieldArray = (stripes) => {
-  return render(withIntlConfiguration(
+  return renderWithIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
@@ -24,7 +24,7 @@ const renderContactFieldArray = (stripes) => {
         />
       </MemoryRouter>
     </StripesContext.Provider>
-  ));
+  );
 };
 
 jest.unmock('react-intl');

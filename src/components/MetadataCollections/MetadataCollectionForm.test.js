@@ -1,11 +1,11 @@
 import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
 
-import { render, screen, within } from '@folio/jest-config-stripes/testing-library/react';
+import { screen, within } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
-import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
+import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import MetadataCollectionForm from './MetadataCollectionForm';
 import COLLECTION from '../../../test/fixtures/metadatacollection';
 
@@ -15,7 +15,7 @@ const handleSubmit = jest.fn();
 const onSubmit = jest.fn();
 
 const renderEmptyMetadataCollectionForm = (stripes, initialValues = { solrMegaCollections: [''] }) => {
-  return render(withIntlConfiguration(
+  return renderWithIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
@@ -31,11 +31,11 @@ const renderEmptyMetadataCollectionForm = (stripes, initialValues = { solrMegaCo
         />
       </MemoryRouter>
     </StripesContext.Provider>
-  ));
+  );
 };
 
 const renderMetadataCollectionForm = (stripes, initialValues = COLLECTION) => {
-  return render(withIntlConfiguration(
+  return renderWithIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
@@ -52,7 +52,7 @@ const renderMetadataCollectionForm = (stripes, initialValues = COLLECTION) => {
         />
       </MemoryRouter>
     </StripesContext.Provider>
-  ));
+  );
 };
 
 jest.unmock('react-intl');

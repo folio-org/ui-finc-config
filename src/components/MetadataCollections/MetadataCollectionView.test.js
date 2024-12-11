@@ -1,9 +1,9 @@
 import { MemoryRouter } from 'react-router-dom';
-import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
-import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
+import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import COLLECTION from '../../../test/fixtures/metadatacollection';
 import MetadataCollectionView from './MetadataCollectionView';
 
@@ -12,19 +12,17 @@ const handlers = {
   onEdit: jest.fn,
 };
 
-const renderMetadateCollectionView = (stripes, record = COLLECTION) => (
-  render(withIntlConfiguration(
-    <MemoryRouter>
-      <StripesContext.Provider value={stripes}>
-        <MetadataCollectionView
-          canEdit
-          handlers={handlers}
-          isLoading={false}
-          record={record}
-        />
-      </StripesContext.Provider>
-    </MemoryRouter>
-  ))
+const renderMetadataCollectionView = (stripes, record = COLLECTION) => renderWithIntlConfiguration(
+  <MemoryRouter>
+    <StripesContext.Provider value={stripes}>
+      <MetadataCollectionView
+        canEdit
+        handlers={handlers}
+        isLoading={false}
+        record={record}
+      />
+    </StripesContext.Provider>
+  </MemoryRouter>
 );
 
 jest.unmock('react-intl');
@@ -34,7 +32,7 @@ describe('MetadataCollectionView', () => {
 
   beforeEach(() => {
     stripes = useStripes();
-    renderMetadateCollectionView(stripes, COLLECTION);
+    renderMetadataCollectionView(stripes, COLLECTION);
   });
 
   it('edit button should be present', () => {

@@ -294,7 +294,7 @@ const MetadataCollections = ({
                   <Pane
                     data-test-collection-pane-filter
                     defaultWidth="18%"
-                    id="pane-collectionfilter"
+                    id="pane-collection-filter"
                     renderHeader={renderFilterPaneHeader}
                   >
                     <form onSubmit={onSubmitSearch}>
@@ -352,7 +352,7 @@ const MetadataCollections = ({
                 <Pane
                   data-test-collection-pane-results
                   defaultWidth="fill"
-                  id="pane-collectionresults"
+                  id="pane-collection-results"
                   padContent={false}
                   renderHeader={() => renderResultsPaneHeader(activeFilters, collection)}
                 >

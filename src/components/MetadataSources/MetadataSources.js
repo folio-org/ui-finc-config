@@ -275,7 +275,7 @@ const MetadataSources = ({
                   <Pane
                     data-test-source-pane-filter
                     defaultWidth="18%"
-                    id="pane-sourcefilter"
+                    id="pane-source-filter"
                     renderHeader={renderFilterPaneHeader}
                   >
                     <form onSubmit={onSubmitSearch}>
@@ -333,7 +333,7 @@ const MetadataSources = ({
                 <Pane
                   data-test-source-pane-results
                   defaultWidth="fill"
-                  id="pane-sourceresults"
+                  id="pane-source-results"
                   padContent={false}
                   renderHeader={() => renderResultsPaneHeader(activeFilters, source)}
                 >

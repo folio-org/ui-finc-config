@@ -4,10 +4,10 @@ import {
   QueryClientProvider,
 } from 'react-query';
 
-import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import { StripesContext, useStripes } from '@folio/stripes/core';
 
-import withIntlConfiguration from '../../../test/jest/helpers/withIntlConfiguration';
+import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import SOURCE from '../../../test/fixtures/metadatasource';
 import MetadataSourceView from './MetadataSourceView';
 
@@ -18,21 +18,19 @@ const handlers = {
 
 const queryClient = new QueryClient();
 
-const renderMetadataSourceView = (stripes, record = SOURCE) => (
-  render(withIntlConfiguration(
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter>
-        <StripesContext.Provider value={stripes}>
-          <MetadataSourceView
-            canEdit
-            handlers={handlers}
-            isLoading={false}
-            record={record}
-          />
-        </StripesContext.Provider>
-      </MemoryRouter>
-    </QueryClientProvider>
-  ))
+const renderMetadataSourceView = (stripes, record = SOURCE) => renderWithIntlConfiguration(
+  <QueryClientProvider client={queryClient}>
+    <MemoryRouter>
+      <StripesContext.Provider value={stripes}>
+        <MetadataSourceView
+          canEdit
+          handlers={handlers}
+          isLoading={false}
+          record={record}
+        />
+      </StripesContext.Provider>
+    </MemoryRouter>
+  </QueryClientProvider>
 );
 
 jest.unmock('react-intl');
