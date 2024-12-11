@@ -12,7 +12,7 @@ const handlers = {
   onEdit: jest.fn,
 };
 
-const renderMetadateCollectionView = (stripes, record = COLLECTION) => renderWithIntlConfiguration(
+const renderMetadataCollectionView = (stripes, record = COLLECTION) => renderWithIntlConfiguration(
   <MemoryRouter>
     <StripesContext.Provider value={stripes}>
       <MetadataCollectionView
@@ -32,7 +32,7 @@ describe('MetadataCollectionView', () => {
 
   beforeEach(() => {
     stripes = useStripes();
-    renderMetadateCollectionView(stripes, COLLECTION);
+    renderMetadataCollectionView(stripes, COLLECTION);
   });
 
   it('edit button should be present', () => {
