@@ -10,6 +10,50 @@
     "jest": true
   },
   "rules": {
-    "import/no-extraneous-dependencies": "off"
+    "array-bracket-newline": ["error", { "multiline": true }],
+    "func-name-matching": ["warn", "always"],
+    "function-paren-newline": ["error", "consistent"],
+    "key-spacing": [
+      "error",
+      {
+        "beforeColon": false,
+        "afterColon": true,
+        "mode": "strict"
+      }
+    ],
+    "max-len": ["warn", { "code": 140 }],
+    "newline-per-chained-call": ["warn", { "ignoreChainWithDepth": 2 }],
+    "no-multiple-empty-lines": "error",
+    "no-nested-ternary": "error",
+    "no-plusplus": ["warn", { "allowForLoopAfterthoughts": true }],
+    "no-restricted-imports": ["error", "@folio/stripes-acq-components", "@folio/stripes-erm-components", "@k-int/stripes-kint-components"],
+    "no-underscore-dangle": "warn",
+    "no-unused-vars": "error",
+    "nonblock-statement-body-position": ["error", "below"],
+    "operator-linebreak": ["error", "none"],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "import", "next": "*" },
+      { "blankLine": "any", "prev": "import", "next": "import" },
+      { "blankLine": "always", "prev": "*", "next": "export" },
+      { "blankLine": "always", "prev": "block-like", "next": "*" },
+      { "blankLine": "always", "prev": "*", "next": "block-like" }
+    ],
+    "prefer-object-spread": "error",
+    "prefer-template": "warn",
+    "quote-props": ["error", "as-needed"],
+    "react/sort-prop-types": "error",
+    "switch-colon-spacing": ["error", {"after": true, "before": false}],
+    "template-tag-spacing": ["error", "always"]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["fixtures", "./test/fixtures"],
+          ["helpers", "./test/jest/helpers"]
+        ]
+      }
+    }
   }
 }
