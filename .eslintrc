@@ -58,15 +58,5 @@
     ],
     "quote-props": ["error", "as-needed"],
     "react/sort-prop-types": "error"
-  },
-  "settings": {
-    "import/resolver": {
-      "alias": {
-        "map": [
-          ["fixtures", "./test/fixtures"],
-          ["helpers", "./test/jest/helpers"]
-        ]
-      }
-    }
   }
 }
