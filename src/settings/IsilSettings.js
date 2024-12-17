@@ -11,15 +11,18 @@ const propTypes = {
 
 const IsilSettings = ({ stripes }) => {
   const ConnectedControlledVocab = stripes.connect(ControlledVocab);
+
   const setRequiredValidation = (values) => {
     const errors = {};
 
     if (!values.isil) {
       errors.isil = <FormattedMessage id="ui-finc-config.settings.isils.isilIsEmpty" />;
     }
+
     if (!values.tenant) {
       errors.tenant = <FormattedMessage id="ui-finc-config.settings.isils.tenantIsEmpty" />;
     }
+
     return errors;
   };
 

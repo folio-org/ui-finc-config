@@ -1,10 +1,13 @@
 import { MemoryRouter } from 'react-router-dom';
+
 import { screen } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  StripesContext,
+  useStripes,
+} from '@folio/stripes/core';
 
-import { StripesContext, useStripes } from '@folio/stripes/core';
-
-import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import COLLECTION from '../../../test/fixtures/metadatacollection';
+import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import MetadataCollectionView from './MetadataCollectionView';
 
 const handlers = {

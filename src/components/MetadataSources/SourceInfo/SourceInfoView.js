@@ -14,6 +14,7 @@ const SourceInfoView = ({
 }) => {
   const getDataLable = (field) => {
     const fieldValue = _.get(metadataSource, field, '');
+
     if (fieldValue !== '') {
       return <FormattedMessage id={`ui-finc-config.dataOption.${fieldValue}`} />;
     } else {
@@ -24,28 +25,26 @@ const SourceInfoView = ({
   const implementationStatusLabel = getDataLable('status');
 
   return (
-    <>
-      <div id={id}>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.source.label" />}
-            value={_.get(metadataSource, 'label', <NoValue />)}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.source.description" />}
-            value={_.get(metadataSource, 'description', <NoValue />)}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.source.status" />}
-            value={implementationStatusLabel}
-          />
-        </Row>
-      </div>
-    </>
+    <div id={id}>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.source.label" />}
+          value={_.get(metadataSource, 'label', <NoValue />)}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.source.description" />}
+          value={_.get(metadataSource, 'description', <NoValue />)}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.source.status" />}
+          value={implementationStatusLabel}
+        />
+      </Row>
+    </div>
   );
 };
 

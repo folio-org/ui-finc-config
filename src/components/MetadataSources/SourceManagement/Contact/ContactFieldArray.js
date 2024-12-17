@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { useFieldArray } from 'react-final-form-arrays';
+import { FormattedMessage } from 'react-intl';
 
 import {
   Button,
@@ -9,8 +9,8 @@ import {
 } from '@folio/stripes/components';
 
 import EditCard from '../../../DisplayUtils/EditCard/EditCard';
-import ContactField from './ContactField';
 import handleContactSelected from './contact-util';
+import ContactField from './ContactField';
 
 const ContactFieldArray = ({
   fields: { name },
@@ -20,10 +20,10 @@ const ContactFieldArray = ({
   const renderContact = () => {
     return fields.map((contact, index) => (
       <EditCard
+        key={index}
         data-test-source-contact-number={index}
         deleteButtonTooltipText={<FormattedMessage id="ui-finc-config.source.contact.remove" />}
         header={<FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount: index + 1 }} />}
-        key={index}
         onDelete={() => fields.remove(index)}
       >
         <Field

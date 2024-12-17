@@ -1,19 +1,23 @@
 import _ from 'lodash';
-import { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import {
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { stripesConnect } from '@folio/stripes/core';
 import { Layout } from '@folio/stripes/components';
+import { stripesConnect } from '@folio/stripes/core';
 import {
   makeQueryFunction,
-  StripesConnectedSource
+  StripesConnectedSource,
 } from '@folio/stripes/smart-components';
 
-import MetadataSources from '../components/MetadataSources/MetadataSources';
-import filterConfig from '../components/MetadataSources/filterConfigData';
 import urls from '../components/DisplayUtils/urls';
 import usePrevious from '../components/hooks/usePrevious';
+import filterConfig from '../components/MetadataSources/filterConfigData';
+import MetadataSources from '../components/MetadataSources/MetadataSources';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -94,15 +98,15 @@ const SourcesRoute = ({
     <MetadataSources
       contentData={_.get(resources, 'sources.records', [])}
       filterData={{ contacts: _.get(resources, 'contacts.records', []) }}
+      onChangeIndex={onChangeIndex}
       onNeedMoreData={handleNeedMoreData}
       queryGetter={queryGetter}
       querySetter={querySetter}
+      searchField={searchField}
       searchString={location.search}
       selectedRecordId={match.params.id}
-      searchField={searchField}
-      source={source}
       // add values for search-selectbox
-      onChangeIndex={onChangeIndex}
+      source={source}
     >
       {children}
     </MetadataSources>
@@ -122,9 +126,9 @@ SourcesRoute.manifest = Object.freeze({
           'cql.allRecords=1',
           '(label="%{query.query}*" or description="%{query.query}*" or sourceId="%{query.query}*")',
           {
-            'label': 'label',
-            'description': 'description',
-            'sourceId': 'sourceId/number',
+            label: 'label',
+            description: 'description',
+            sourceId: 'sourceId/number',
           },
           filterConfig,
           2,

@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { isEqual } from 'lodash';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -18,14 +18,14 @@ import {
   Paneset,
   Row,
 } from '@folio/stripes/components';
-import { ViewMetaData } from '@folio/stripes/smart-components';
 import { IfPermission } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
+import { ViewMetaData } from '@folio/stripes/smart-components';
 
+import BasicStyle from '../BasicStyle.css';
 import CollectionInfoForm from './CollectionInfo/CollectionInfoForm';
 import CollectionManagementForm from './CollectionManagement/CollectionManagementForm';
 import CollectionTechnicalForm from './CollectionTechnical/CollectionTechnicalForm';
-import BasicStyle from '../BasicStyle.css';
 
 const MetadataCollectionForm = ({
   handlers: { onClose },
@@ -81,7 +81,7 @@ const MetadataCollectionForm = ({
   };
 
   const getLastMenu = () => {
-    const isEditing = initialValues && initialValues.id;
+    const isEditing = initialValues?.id;
 
     return (
       <PaneMenu>
@@ -132,7 +132,7 @@ const MetadataCollectionForm = ({
       </Button>
     );
 
-    return <PaneFooter renderStart={startButton} renderEnd={endButton} />;
+    return <PaneFooter renderEnd={endButton} renderStart={startButton} />;
   };
 
   const renderFormPaneHeader = () => (
@@ -172,9 +172,8 @@ const MetadataCollectionForm = ({
                   />
                 </Col>
               </Row>
-              {initialValues.metadata &&
-                initialValues.metadata.createdDate && (
-                  <ViewMetaData metadata={initialValues.metadata} />
+              {initialValues.metadata?.createdDate && (
+                <ViewMetaData metadata={initialValues.metadata} />
               )}
               <CollectionInfoForm
                 accordionId="editCollectionInfo"

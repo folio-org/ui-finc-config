@@ -1,8 +1,10 @@
 import { noop } from 'lodash';
 import { MemoryRouter } from 'react-router-dom';
 
-import renderWithIntlConfiguration from '../../test/jest/helpers/renderWithIntlConfiguration';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
+
 import sources from '../../test/fixtures/metadatasources';
+import renderWithIntlConfiguration from '../../test/jest/helpers/renderWithIntlConfiguration';
 import SourcesRoute from './SourcesRoute';
 
 const routeProps = {
@@ -18,16 +20,15 @@ const routeProps = {
   mutator: {
     query: { update: noop },
   },
-  resources: { sources }
+  resources: { sources },
 };
 
 jest.unmock('react-intl');
 
 describe('SourcesRoute', () => {
   describe('rendering the route with permissions', () => {
-    let renderComponent;
     beforeEach(() => {
-      renderComponent = renderWithIntlConfiguration(
+      renderWithIntlConfiguration(
         <MemoryRouter>
           <SourcesRoute
             {...routeProps}
@@ -38,15 +39,13 @@ describe('SourcesRoute', () => {
     });
 
     test('renders the sources component', () => {
-      const { getByTestId } = renderComponent;
-      expect(getByTestId('sources')).toBeInTheDocument();
+      expect(screen.getByTestId('sources')).toBeInTheDocument();
     });
   });
 
   describe('rendering with no permissions', () => {
-    let renderComponent;
     beforeEach(() => {
-      renderComponent = renderWithIntlConfiguration(
+      renderWithIntlConfiguration(
         <MemoryRouter>
           <SourcesRoute
             {...routeProps}
@@ -57,8 +56,7 @@ describe('SourcesRoute', () => {
     });
 
     test('displays the permission error', () => {
-      const { getByText } = renderComponent;
-      expect(getByText('Permission error')).toBeInTheDocument();
+      expect(screen.getByText('Permission error')).toBeInTheDocument();
     });
   });
 });

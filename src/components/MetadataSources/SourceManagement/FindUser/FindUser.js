@@ -14,7 +14,7 @@ const FindUser = ({
   selectContact,
 }) => {
   const disableRecordCreation = true;
-  const buttonProps = { 'marginBottom0': true };
+  const buttonProps = { marginBottom0: true };
   const pluggable =
     <Pluggable
       aria-haspopup="true"

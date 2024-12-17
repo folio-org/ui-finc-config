@@ -20,36 +20,32 @@ const CollectionInfoView = ({
   const sourceName = _.get(metadataCollection, 'mdSource.name', <NoValue />);
   // set the complete source link with name and status
   const sourceLink = (
-    <>
-      <Link to={{ pathname: `${urls.sourceView(sourceId)}` }}>
-        {sourceName}
-      </Link>
-    </>
+    <Link to={{ pathname: `${urls.sourceView(sourceId)}` }}>
+      {sourceName}
+    </Link>
   );
 
   return (
-    <>
-      <div id={id}>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.collection.label" />}
-            value={_.get(metadataCollection, 'label', <NoValue />)}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.collection.description" />}
-            value={_.get(metadataCollection, 'description', <NoValue />)}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.collection.mdSource" />}
-            value={sourceLink}
-          />
-        </Row>
-      </div>
-    </>
+    <div id={id}>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.collection.label" />}
+          value={_.get(metadataCollection, 'label', <NoValue />)}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.collection.description" />}
+          value={_.get(metadataCollection, 'description', <NoValue />)}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.collection.mdSource" />}
+          value={sourceLink}
+        />
+      </Row>
+    </div>
   );
 };
 

@@ -1,10 +1,9 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
-import { useOkapiKy } from '@folio/stripes/core';
 import {
   Button,
   Col,
@@ -13,11 +12,12 @@ import {
   NoValue,
   Row,
 } from '@folio/stripes/components';
+import { useOkapiKy } from '@folio/stripes/core';
 
 import BasicCss from '../../BasicStyle.css';
-import css from './SourceManagement.css';
 import urls from '../../DisplayUtils/urls';
 import DisplayContactsArray from './Contact/DisplayContactsArray';
+import css from './SourceManagement.css';
 
 const SourceManagementView = ({
   id,
@@ -57,62 +57,58 @@ const SourceManagementView = ({
       }
     } else {
       orgValue = (
-        <>
-          <Link to={{ pathname: `${urls.organizationView(organization.id)}` }}>
-            {sourcesOrganization.name}
-          </Link>
-        </>
+        <Link to={{ pathname: `${urls.organizationView(organization.id)}` }}>
+          {sourcesOrganization.name}
+        </Link>
       );
     }
   }
 
   return (
-    <>
-      <div id={id}>
-        <Row>
-          <Col xs={6}>
-            <Button
-              buttonStyle="primary"
-              id="showAllCollections"
-              to={urls.showAllCollections(sourceId)}
-            >
-              <FormattedMessage id="ui-finc-config.source.button.showAllCollections" />
-            </Button>
-          </Col>
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.source.organization" />}
-            value={orgValue}
-          />
-        </Row>
-        <Row>
-          <Headline
-            className={BasicCss.styleForViewHeadline}
-            size="medium"
+    <div id={id}>
+      <Row>
+        <Col xs={6}>
+          <Button
+            buttonStyle="primary"
+            id="showAllCollections"
+            to={urls.showAllCollections(sourceId)}
           >
-            <FormattedMessage id="ui-finc-config.source.contact.title" />
-          </Headline>
-        </Row>
-        <Row className={css.addMarginForContacts}>
-          <DisplayContactsArray
-            metadataSource={metadataSource}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.source.indexingLevel" />}
-            value={_.get(metadataSource, 'indexingLevel', <NoValue />)}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.source.generalNotes" />}
-            value={_.get(metadataSource, 'generalNotes', <NoValue />)}
-          />
-        </Row>
-      </div>
-    </>
+            <FormattedMessage id="ui-finc-config.source.button.showAllCollections" />
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.source.organization" />}
+          value={orgValue}
+        />
+      </Row>
+      <Row>
+        <Headline
+          className={BasicCss.styleForViewHeadline}
+          size="medium"
+        >
+          <FormattedMessage id="ui-finc-config.source.contact.title" />
+        </Headline>
+      </Row>
+      <Row className={css.addMarginForContacts}>
+        <DisplayContactsArray
+          metadataSource={metadataSource}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.source.indexingLevel" />}
+          value={_.get(metadataSource, 'indexingLevel', <NoValue />)}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.source.generalNotes" />}
+          value={_.get(metadataSource, 'generalNotes', <NoValue />)}
+        />
+      </Row>
+    </div>
   );
 };
 

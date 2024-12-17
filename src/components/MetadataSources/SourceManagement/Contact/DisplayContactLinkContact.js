@@ -1,10 +1,10 @@
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
-import { useOkapiKy } from '@folio/stripes/core';
 import { NoValue } from '@folio/stripes/components';
+import { useOkapiKy } from '@folio/stripes/core';
 
 import urls from '../../../DisplayUtils/urls';
 
@@ -39,11 +39,9 @@ const DisplayContactLinkContact = ({
       contactNameWithLink = contact.name;
     } else {
       contactNameWithLink = (
-        <>
-          <Link to={{ pathname: `${urls.contactView(contactId)}` }}>
-            {contact.name}
-          </Link>
-        </>
+        <Link to={{ pathname: `${urls.contactView(contactId)}` }}>
+          {contact.name}
+        </Link>
       );
     }
   }

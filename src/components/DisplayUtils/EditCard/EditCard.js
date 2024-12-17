@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
+import PropTypes from 'prop-types';
 
 import {
   Card,
-  Tooltip,
   IconButton,
+  Tooltip,
 } from '@folio/stripes/components';
 
 const EditCard = ({

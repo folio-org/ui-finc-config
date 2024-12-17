@@ -1,31 +1,34 @@
 import { noop } from 'lodash';
-import { MemoryRouter } from 'react-router-dom';
 import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query';
+import { MemoryRouter } from 'react-router-dom';
 
-import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  screen,
+  waitFor,
+} from '@folio/jest-config-stripes/testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
 
-import renderWithIntlConfiguration from '../test/jest/helpers/renderWithIntlConfiguration';
-import CollectionsRoute from './routes/CollectionsRoute';
-import SourcesRoute from './routes/SourcesRoute';
-import SourceCreateRoute from './routes/SourceCreateRoute';
-import CollectionCreateRoute from './routes/CollectionCreateRoute';
-import CollectionEditRoute from './routes/CollectionEditRoute';
-import SourceEditRoute from './routes/SourceEditRoute';
-import CollectionViewRoute from './routes/CollectionViewRoute';
-import SourceViewRoute from './routes/SourceViewRoute';
 import collection from '../test/fixtures/metadatacollection';
 import collections from '../test/fixtures/metadatacollections';
 import source from '../test/fixtures/metadatasource';
 import sources from '../test/fixtures/metadatasources';
+import renderWithIntlConfiguration from '../test/jest/helpers/renderWithIntlConfiguration';
 import FincConfig from './index';
+import CollectionCreateRoute from './routes/CollectionCreateRoute';
+import CollectionEditRoute from './routes/CollectionEditRoute';
+import CollectionsRoute from './routes/CollectionsRoute';
+import CollectionViewRoute from './routes/CollectionViewRoute';
+import SourceCreateRoute from './routes/SourceCreateRoute';
+import SourceEditRoute from './routes/SourceEditRoute';
+import SourcesRoute from './routes/SourcesRoute';
+import SourceViewRoute from './routes/SourceViewRoute';
 
 const routeProps = {
   history: {
-    push: () => jest.fn()
+    push: () => jest.fn(),
   },
   match: {
     params: {
@@ -36,7 +39,7 @@ const routeProps = {
   mutator: {
     query: { update: noop },
   },
-  resources: { collections, sources }
+  resources: { collections, sources },
 };
 
 const createRouteProps = {
@@ -50,7 +53,7 @@ const createRouteProps = {
 
 const editRouteProps = {
   history: {
-    push: () => jest.fn()
+    push: () => jest.fn(),
   },
   location: {
     search: '',
@@ -85,7 +88,7 @@ const viewRouteProps = {
   match: {
     params: {
       id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
-    }
+    },
   },
 };
 

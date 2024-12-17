@@ -28,8 +28,8 @@ const CollectionManagementView = ({
       return (
         <List
           isEmptyMessage={isEmptyMessage}
-          items={valueItems}
           itemFormatter={valueFormatter}
+          items={valueItems}
         />
       );
     }
@@ -37,6 +37,7 @@ const CollectionManagementView = ({
 
   const getDataLable = (field) => {
     const fieldValue = _.get(metadataCollection, field, '');
+
     if (fieldValue !== '') {
       return <FormattedMessage id={`ui-finc-config.dataOption.${fieldValue}`} />;
     } else {
@@ -50,68 +51,66 @@ const CollectionManagementView = ({
   const lodPublicationLabel = getDataLable('lod.publication');
 
   return (
-    <>
-      <div id={id}>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.collection.metadataAvailable" />}
-            value={metadataAvailableLabel}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.collection.usageRestricted" />}
-            value={usageRestrictedLabel}
-          />
-        </Row>
-        <Row>
-          <Headline
-            className={BasicCss.styleForViewHeadline}
-            size="medium"
-          >
-            <FormattedMessage id="ui-finc-config.collection.permittedFor" />
-          </Headline>
-        </Row>
-        <Row>
-          { renderList('permittedFor') }
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.collection.freeContent" />}
-            value={freeContentLabel}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.collection.lod.publication" />}
-            value={lodPublicationLabel}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.collection.lod.note" />}
-            value={_.get(metadataCollection, 'lod.note', <NoValue />)}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.collection.generalNotes" />}
-            value={_.get(metadataCollection, 'generalNotes', <NoValue />)}
-          />
-        </Row>
-        <Row>
-          <Headline
-            className={BasicCss.styleForViewHeadline}
-            size="medium"
-          >
-            <FormattedMessage id="ui-finc-config.collection.selectedBy" />
-          </Headline>
-        </Row>
-        <Row>
-          { renderList('selectedBy') }
-        </Row>
-      </div>
-    </>
+    <div id={id}>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.collection.metadataAvailable" />}
+          value={metadataAvailableLabel}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.collection.usageRestricted" />}
+          value={usageRestrictedLabel}
+        />
+      </Row>
+      <Row>
+        <Headline
+          className={BasicCss.styleForViewHeadline}
+          size="medium"
+        >
+          <FormattedMessage id="ui-finc-config.collection.permittedFor" />
+        </Headline>
+      </Row>
+      <Row>
+        { renderList('permittedFor') }
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.collection.freeContent" />}
+          value={freeContentLabel}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.collection.lod.publication" />}
+          value={lodPublicationLabel}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.collection.lod.note" />}
+          value={_.get(metadataCollection, 'lod.note', <NoValue />)}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.collection.generalNotes" />}
+          value={_.get(metadataCollection, 'generalNotes', <NoValue />)}
+        />
+      </Row>
+      <Row>
+        <Headline
+          className={BasicCss.styleForViewHeadline}
+          size="medium"
+        >
+          <FormattedMessage id="ui-finc-config.collection.selectedBy" />
+        </Headline>
+      </Row>
+      <Row>
+        { renderList('selectedBy') }
+      </Row>
+    </div>
   );
 };
 

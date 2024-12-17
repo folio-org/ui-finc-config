@@ -1,23 +1,26 @@
-import { MemoryRouter } from 'react-router-dom';
-import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { Form } from 'react-final-form';
+import { MemoryRouter } from 'react-router-dom';
 
-import { StripesContext, useStripes } from '@folio/stripes/core';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
+import {
+  StripesContext,
+  useStripes,
+} from '@folio/stripes/core';
 
-import ContactFieldArray from './ContactFieldArray';
 import renderWithIntlConfiguration from '../../../../../test/jest/helpers/renderWithIntlConfiguration';
+import ContactFieldArray from './ContactFieldArray';
 
 const renderContactFieldArray = (stripes) => {
   return renderWithIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
-          onSubmit={jest.fn()}
           mutators={{
             ...arrayMutators,
           }}
+          onSubmit={jest.fn()}
           render={() => (
             <ContactFieldArray fields={{ name: 'contacts' }} />
           )}

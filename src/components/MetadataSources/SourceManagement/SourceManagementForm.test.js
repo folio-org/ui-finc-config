@@ -1,10 +1,16 @@
-import { MemoryRouter } from 'react-router-dom';
-import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { screen, within } from '@folio/jest-config-stripes/testing-library/react';
-import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
+import { Form } from 'react-final-form';
+import { MemoryRouter } from 'react-router-dom';
 
-import { StripesContext, useStripes } from '@folio/stripes/core';
+import {
+  screen,
+  within,
+} from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
+import {
+  StripesContext,
+  useStripes,
+} from '@folio/stripes/core';
 
 import renderWithIntlConfiguration from '../../../../test/jest/helpers/renderWithIntlConfiguration';
 import SourceManagementForm from './SourceManagementForm';
@@ -17,11 +23,11 @@ const renderSourceManagementForm = (stripes, initialValues = {}) => {
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
         <Form
-          onSubmit={jest.fn}
           mutators={{
             setOrganization,
             ...arrayMutators,
           }}
+          onSubmit={jest.fn}
           render={() => (
             <SourceManagementForm
               accordionId="editSourceManagement"

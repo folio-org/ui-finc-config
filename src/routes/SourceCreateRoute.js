@@ -3,10 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { useMutation } from 'react-query';
 import { v4 as uuidv4 } from 'uuid';
 
-import { useOkapiKy, useStripes } from '@folio/stripes/core';
+import {
+  useOkapiKy,
+  useStripes,
+} from '@folio/stripes/core';
 
-import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm';
 import urls from '../components/DisplayUtils/urls';
+import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm';
 
 const SourceCreateRoute = ({
   history,

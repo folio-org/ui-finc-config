@@ -1,9 +1,11 @@
 import _ from 'lodash';
-import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import {
+  useRef,
+  useState,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { useStripes } from '@folio/stripes/core';
 import {
   Accordion,
   AccordionSet,
@@ -18,6 +20,7 @@ import {
   PaneMenu,
   Row,
 } from '@folio/stripes/components';
+import { useStripes } from '@folio/stripes/core';
 import { ViewMetaData } from '@folio/stripes/smart-components';
 
 import SourceInfoView from './SourceInfo/SourceInfoView';
@@ -103,60 +106,58 @@ const MetadataSourceView = ({
   if (isLoading) return renderLoadingPane();
 
   return (
-    <>
-      <Pane
-        data-test-source-pane-details
-        defaultWidth="40%"
-        id="pane-sourcedetails"
-        renderHeader={() => renderDetailsPanePaneHeader(label)}
-      >
-        <AccordionSet>
-          <ViewMetaData
-            metadata={_.get(record, 'metadata', {})}
+    <Pane
+      data-test-source-pane-details
+      defaultWidth="40%"
+      id="pane-sourcedetails"
+      renderHeader={() => renderDetailsPanePaneHeader(label)}
+    >
+      <AccordionSet>
+        <ViewMetaData
+          metadata={_.get(record, 'metadata', {})}
+          stripes={stripes}
+        />
+        <SourceInfoView
+          id="sourceInfo"
+          metadataSource={record}
+          stripes={stripes}
+        />
+        <Row end="xs">
+          <Col xs>
+            <ExpandAllButton
+              accordionStatus={accordionsState}
+              onToggle={handleExpandAll}
+              setStatus={null}
+            />
+          </Col>
+        </Row>
+        <Accordion
+          id="managementAccordion"
+          label={<FormattedMessage id="ui-finc-config.source.managementAccordion" />}
+          onToggle={handleAccordionToggle}
+          open={accordionsState.managementAccordion}
+        >
+          <SourceManagementView
+            id="sourceManagement"
+            metadataSource={record}
+            organizationId={organizationId}
             stripes={stripes}
           />
-          <SourceInfoView
-            id="sourceInfo"
+        </Accordion>
+        <Accordion
+          id="technicalAccordion"
+          label={<FormattedMessage id="ui-finc-config.source.technicalAccordion" />}
+          onToggle={handleAccordionToggle}
+          open={accordionsState.technicalAccordion}
+        >
+          <SourceTechnicalView
+            id="sourceTechnical"
             metadataSource={record}
             stripes={stripes}
           />
-          <Row end="xs">
-            <Col xs>
-              <ExpandAllButton
-                accordionStatus={accordionsState}
-                onToggle={handleExpandAll}
-                setStatus={null}
-              />
-            </Col>
-          </Row>
-          <Accordion
-            id="managementAccordion"
-            label={<FormattedMessage id="ui-finc-config.source.managementAccordion" />}
-            onToggle={handleAccordionToggle}
-            open={accordionsState.managementAccordion}
-          >
-            <SourceManagementView
-              id="sourceManagement"
-              metadataSource={record}
-              organizationId={organizationId}
-              stripes={stripes}
-            />
-          </Accordion>
-          <Accordion
-            id="technicalAccordion"
-            label={<FormattedMessage id="ui-finc-config.source.technicalAccordion" />}
-            onToggle={handleAccordionToggle}
-            open={accordionsState.technicalAccordion}
-          >
-            <SourceTechnicalView
-              id="sourceTechnical"
-              metadataSource={record}
-              stripes={stripes}
-            />
-          </Accordion>
-        </AccordionSet>
-      </Pane>
-    </>
+        </Accordion>
+      </AccordionSet>
+    </Pane>
   );
 };
 

@@ -1,21 +1,19 @@
-import { useState } from 'react';
+import {
+  get,
+  isEqual,
+  noop,
+} from 'lodash';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import {
+  FormattedMessage,
+  injectIntl,
+} from 'react-intl';
 import {
   Link,
   withRouter,
 } from 'react-router-dom';
-import {
-  injectIntl,
-  FormattedMessage
-} from 'react-intl';
-import { noop, get, isEqual } from 'lodash';
 
-import {
-  CollapseFilterPaneButton,
-  ExpandFilterPaneButton,
-  SearchAndSortQuery,
-  SearchAndSortNoResultsMessage as NoResultsMessage,
-} from '@folio/stripes/smart-components';
 import {
   Button,
   Icon,
@@ -29,15 +27,25 @@ import {
 } from '@folio/stripes/components';
 import {
   AppIcon,
-  IfPermission
+  IfPermission,
 } from '@folio/stripes/core';
+import {
+  CollapseFilterPaneButton,
+  ExpandFilterPaneButton,
+  SearchAndSortNoResultsMessage as NoResultsMessage,
+  SearchAndSortQuery,
+} from '@folio/stripes/smart-components';
 
 import urls from '../DisplayUtils/urls';
-import CollectionFilters from './CollectionFilters';
 import FincNavigation from '../Navigation/FincNavigation';
+import CollectionFilters from './CollectionFilters';
 
 const rawSearchableIndexes = [
-  { label: 'all', value: '', makeQuery: term => `(label="${term}*" or description="${term}*" or collectionId="${term}*")` },
+  {
+    label: 'all',
+    value: '',
+    makeQuery: term => `(label="${term}*" or description="${term}*" or collectionId="${term}*")`
+  },
   { label: 'label', value: 'label', makeQuery: term => `(label="${term}*")` },
   { label: 'description', value: 'description', makeQuery: term => `(description="${term}*")` },
   { label: 'collectionId', value: 'collectionId', makeQuery: term => `(collectionId="${term}*")` },
@@ -55,15 +63,15 @@ const MetadataCollections = ({
   disableRecordCreation,
   filterData = {},
   intl,
+  // add values for search-selectbox
+  onChangeIndex,
   onNeedMoreData,
   onSelectRow,
   queryGetter,
   querySetter,
+  searchField,
   searchString = '',
   selectedRecordId,
-  searchField,
-  // add values for search-selectbox
-  onChangeIndex,
 }) => {
   const [filterPaneIsVisible, setFilterPaneIsVisible] = useState(true);
 
@@ -102,12 +110,10 @@ const MetadataCollections = ({
 
     return (
       <RowComponent
+        key={`row-${rowIndex}`}
         aria-rowindex={rowIndex + 2}
         className={rowClass}
-        data-label={[
-          rowData.name,
-        ]}
-        key={`row-${rowIndex}`}
+        data-label={[rowData.name]}
         role="row"
         {...rowProps}
       >
@@ -124,6 +130,7 @@ const MetadataCollections = ({
   // fade in / out the filter menu
   const renderResultsFirstMenu = (filters) => {
     const filterCount = filters.string !== '' ? filters.string.split(',').length : 0;
+
     if (filterPaneIsVisible) {
       return null;
     }
@@ -189,9 +196,9 @@ const MetadataCollections = ({
     return (
       <div data-test-udps-no-results-message>
         <NoResultsMessage
-          source={source}
-          searchTerm={query.query || ''}
           filterPaneIsVisible
+          searchTerm={query.query || ''}
+          source={source}
           toggleFilterPane={noop}
         />
       </div>
@@ -237,8 +244,8 @@ const MetadataCollections = ({
       appIcon={<AppIcon app="finc-config" />}
       firstMenu={renderResultsFirstMenu(activeFilters)}
       lastMenu={renderResultsLastMenu()}
-      paneTitle={<FormattedMessage id="ui-finc-config.collections.title" />}
       paneSub={renderResultsPaneSubtitle(col)}
+      paneTitle={<FormattedMessage id="ui-finc-config.collections.title" />}
     />
   );
 
@@ -262,11 +269,11 @@ const MetadataCollections = ({
         initialSortState={defaultSort}
         queryGetter={queryGetter}
         querySetter={querySetter}
-        setQueryOnMount
         searchParamsMapping={{
           query: (q) => ({ query: q }),
           qindex: (q) => ({ qindex: q }),
         }}
+        setQueryOnMount
       >
         {
           ({
@@ -314,12 +321,12 @@ const MetadataCollections = ({
                               getSearchHandlers().reset();
                             }
                           }}
-                          onClear={getSearchHandlers().reset}
-                          value={searchValue.query}
-                          // add values for search-selectbox
                           onChangeIndex={doChangeIndex}
+                          onClear={getSearchHandlers().reset}
+                          // add values for search-selectbox
                           searchableIndexes={searchableIndexes}
                           selectedIndex={searchValue.qindex}
+                          value={searchValue.query}
                         />
                         <Button
                           buttonStyle="primary"
@@ -388,6 +395,7 @@ const MetadataCollections = ({
 };
 
 MetadataCollections.propTypes = {
+  activeFilters: PropTypes.object,
   children: PropTypes.object,
   collection: PropTypes.object,
   contentData: PropTypes.arrayOf(PropTypes.object),
@@ -398,16 +406,15 @@ MetadataCollections.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired,
   }),
+  // add values for search-selectbox
+  onChangeIndex: PropTypes.func,
   onNeedMoreData: PropTypes.func,
   onSelectRow: PropTypes.func,
   queryGetter: PropTypes.func,
   querySetter: PropTypes.func,
+  searchField: PropTypes.object,
   searchString: PropTypes.string,
   selectedRecordId: PropTypes.string,
-  searchField: PropTypes.object,
-  // add values for search-selectbox
-  onChangeIndex: PropTypes.func,
-  activeFilters: PropTypes.object,
 };
 
 export default injectIntl(withRouter(MetadataCollections));

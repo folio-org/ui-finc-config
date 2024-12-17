@@ -1,13 +1,19 @@
-import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
+import { MemoryRouter } from 'react-router-dom';
 
-import { screen, within } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  screen,
+  within,
+} from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
-import { StripesContext, useStripes } from '@folio/stripes/core';
+import {
+  StripesContext,
+  useStripes,
+} from '@folio/stripes/core';
 
+import SOURCE from '../../../test/fixtures/metadatasource';
 import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import MetadataSourceForm from './MetadataSourceForm';
-import SOURCE from '../../../test/fixtures/metadatasource';
 
 const onDelete = jest.fn();
 const onClose = jest.fn();
@@ -22,9 +28,9 @@ const renderEmptyMetadataSourceForm = (stripes, initialValues = {}) => {
           onSubmit={jest.fn}
           render={() => (
             <MetadataSourceForm
-              initialValues={initialValues}
               handlers={{ onClose, onDelete }}
               handleSubmit={handleSubmit}
+              initialValues={initialValues}
               onSubmit={onSubmit}
             />
           )}
@@ -42,11 +48,11 @@ const renderMetadataSourceForm = (stripes, initialValues = SOURCE) => {
           onSubmit={jest.fn}
           render={() => (
             <MetadataSourceForm
-              initialValues={initialValues}
               handlers={{ onClose, onDelete }}
               handleSubmit={handleSubmit}
-              onSubmit={onSubmit}
+              initialValues={initialValues}
               onDelete={onDelete}
+              onSubmit={onSubmit}
             />
           )}
         />
@@ -114,13 +120,15 @@ describe('MetadataSourceForm', () => {
 
     test('delete modal is present', async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
-      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete Cambridge University Press Journals?/ });
+      const confirmationModal =
+        screen.getByRole('dialog', { name: /Do you really want to delete Cambridge University Press Journals?/ });
       expect(confirmationModal).toBeInTheDocument();
     });
 
     test('click cancel', async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
-      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete Cambridge University Press Journals?/ });
+      const confirmationModal =
+        screen.getByRole('dialog', { name: /Do you really want to delete Cambridge University Press Journals?/ });
 
       const cancelButton = within(confirmationModal).getByRole('button', { name: 'Cancel' });
       await userEvent.click(cancelButton);
@@ -129,7 +137,8 @@ describe('MetadataSourceForm', () => {
 
     test('click submit', async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
-      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete Cambridge University Press Journals?/ });
+      const confirmationModal =
+        screen.getByRole('dialog', { name: /Do you really want to delete Cambridge University Press Journals?/ });
 
       const submitButton = within(confirmationModal).getByRole('button', { name: 'Submit' });
       await userEvent.click(submitButton);

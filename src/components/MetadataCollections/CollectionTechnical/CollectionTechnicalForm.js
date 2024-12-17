@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
+  FormattedMessage,
   injectIntl,
-  FormattedMessage
 } from 'react-intl';
 
 import {
@@ -14,11 +14,10 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-import { Required } from '../../DisplayUtils/Validate';
-import RequiredRepeatableField from '../../DisplayUtils/RequiredRepeatableField';
-import RepeatableFieldValidUrl from '../../DisplayUtils/RepeatableFieldValidUrl';
-
 import BasicCss from '../../BasicStyle.css';
+import RepeatableFieldValidUrl from '../../DisplayUtils/RepeatableFieldValidUrl';
+import RequiredRepeatableField from '../../DisplayUtils/RequiredRepeatableField';
+import { Required } from '../../DisplayUtils/Validate';
 
 const CollectionTechnicalForm = ({
   accordionId,

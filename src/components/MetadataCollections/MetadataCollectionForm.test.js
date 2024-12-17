@@ -1,13 +1,19 @@
-import { MemoryRouter } from 'react-router-dom';
 import { Form } from 'react-final-form';
+import { MemoryRouter } from 'react-router-dom';
 
-import { screen, within } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  screen,
+  within,
+} from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
-import { StripesContext, useStripes } from '@folio/stripes/core';
+import {
+  StripesContext,
+  useStripes,
+} from '@folio/stripes/core';
 
+import COLLECTION from '../../../test/fixtures/metadatacollection';
 import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import MetadataCollectionForm from './MetadataCollectionForm';
-import COLLECTION from '../../../test/fixtures/metadatacollection';
 
 const onDelete = jest.fn();
 const onClose = jest.fn();
@@ -22,9 +28,9 @@ const renderEmptyMetadataCollectionForm = (stripes, initialValues = { solrMegaCo
           onSubmit={jest.fn}
           render={() => (
             <MetadataCollectionForm
-              initialValues={initialValues}
               handlers={{ onClose, onDelete }}
               handleSubmit={handleSubmit}
+              initialValues={initialValues}
               onSubmit={onSubmit}
             />
           )}
@@ -42,11 +48,11 @@ const renderMetadataCollectionForm = (stripes, initialValues = COLLECTION) => {
           onSubmit={jest.fn}
           render={() => (
             <MetadataCollectionForm
-              initialValues={initialValues}
               handlers={{ onClose, onDelete }}
               handleSubmit={handleSubmit}
-              onSubmit={onSubmit}
+              initialValues={initialValues}
               onDelete={onDelete}
+              onSubmit={onSubmit}
             />
           )}
         />
@@ -95,7 +101,9 @@ describe('MetadataCollectionForm', () => {
 
     test('if select usageRestricted is adding permittedFor textField', async () => {
       await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Usage restricted' }), 'yes');
-      expect(screen.getByPlaceholderText('Enter one ISIL for an insititution with permitted metadata usage')).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText('Enter one ISIL for an insititution with permitted metadata usage')
+      ).toBeInTheDocument();
     });
   });
 
@@ -122,7 +130,8 @@ describe('MetadataCollectionForm', () => {
     test('if select usageRestricted is clearing permittedFor', async () => {
       await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Usage restricted' }), 'no');
 
-      const confirmationModal = screen.getByRole('dialog', { name: /Do you want to clear permitted for when changing usage restricted?/ });
+      const confirmationModal =
+        screen.getByRole('dialog', { name: /Do you want to clear permitted for when changing usage restricted?/ });
       expect(confirmationModal).toBeInTheDocument();
 
       expect(within(confirmationModal).getByRole('heading', { name: 'Clear permitted for?' })).toBeInTheDocument();
@@ -139,13 +148,21 @@ describe('MetadataCollectionForm', () => {
 
     test('delete modal is present', async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
-      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete 21st Century Political Science Association?/ });
+      const confirmationModal =
+        screen.getByRole(
+          'dialog',
+          { name: /Do you really want to delete 21st Century Political Science Association?/ }
+        );
       expect(confirmationModal).toBeInTheDocument();
     });
 
     test('click cancel', async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
-      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete 21st Century Political Science Association?/ });
+      const confirmationModal =
+        screen.getByRole(
+          'dialog',
+          { name: /Do you really want to delete 21st Century Political Science Association?/ }
+        );
       const cancelButton = within(confirmationModal).getByRole('button', { name: 'Cancel' });
       await userEvent.click(cancelButton);
       expect(onDelete).not.toHaveBeenCalled();
@@ -153,7 +170,11 @@ describe('MetadataCollectionForm', () => {
 
     test('click submit', async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
-      const confirmationModal = screen.getByRole('dialog', { name: /Do you really want to delete 21st Century Political Science Association?/ });
+      const confirmationModal =
+        screen.getByRole(
+          'dialog',
+          { name: /Do you really want to delete 21st Century Political Science Association?/ }
+        );
       const submitButton = within(confirmationModal).getByRole('button', { name: 'Submit' });
       await userEvent.click(submitButton);
       expect(onDelete).toHaveBeenCalled();

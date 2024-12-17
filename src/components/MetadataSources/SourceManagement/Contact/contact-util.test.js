@@ -1,10 +1,12 @@
 import handleContactSelected from './contact-util';
 
-const selectedContactViaContactsPlugin = [{
-  id: 'user-1',
-  lastName: 'Smith',
-  firstName: 'Anna',
-}];
+const selectedContactViaContactsPlugin = [
+  {
+    id: 'user-1',
+    lastName: 'Smith',
+    firstName: 'Anna',
+  }
+];
 
 const selectedContactViaUsersPlugin = {
   id: 'user-2',

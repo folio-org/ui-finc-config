@@ -1,12 +1,18 @@
 import { cloneDeep } from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { useMutation, useQuery } from 'react-query';
+import {
+  useMutation,
+  useQuery,
+} from 'react-query';
 
-import { useOkapiKy, useStripes } from '@folio/stripes/core';
+import {
+  useOkapiKy,
+  useStripes,
+} from '@folio/stripes/core';
 
-import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
 import urls from '../components/DisplayUtils/urls';
+import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
 
 const CollectionEditRoute = ({
   history,

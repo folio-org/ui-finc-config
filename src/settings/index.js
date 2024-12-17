@@ -29,9 +29,9 @@ const FincConfigSettings = ({
       data-test-settings-finc-config
       location={location}
       match={match}
-      stripes={stripes}
       pages={pages}
       paneTitle={<FormattedMessage id="ui-finc-config.meta.title" />}
+      stripes={stripes}
     />
   );
 };

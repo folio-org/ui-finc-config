@@ -1,14 +1,17 @@
-import { MemoryRouter } from 'react-router-dom';
 import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query';
+import { MemoryRouter } from 'react-router-dom';
 
 import { screen } from '@folio/jest-config-stripes/testing-library/react';
-import { StripesContext, useStripes } from '@folio/stripes/core';
+import {
+  StripesContext,
+  useStripes,
+} from '@folio/stripes/core';
 
-import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import SOURCE from '../../../test/fixtures/metadatasource';
+import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import MetadataSourceView from './MetadataSourceView';
 
 const handlers = {
@@ -57,7 +60,10 @@ describe('MetadataSourceView', () => {
   });
 
   it('should display description', () => {
-    expect(screen.getByText('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore.')).toBeInTheDocument();
+    expect(
+      // eslint-disable-next-line
+      screen.getByText('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore.')
+    ).toBeInTheDocument();
   });
 
   it('should display solr shard', () => {
