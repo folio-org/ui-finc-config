@@ -7,22 +7,6 @@
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended"
   ],
-  "overrides": [
-    {
-      "files": ["**/*.test.js", "test/jest/**/*"],
-      "rules": {
-        "testing-library/no-await-sync-events": [
-          "error",
-          { "eventModules": ["fire-event"] }
-        ],
-        "testing-library/no-render-in-lifecycle": [
-          "error",
-          { "allowTestingFrameworkSetupHook": "beforeEach" }
-        ],
-        "testing-library/no-node-access": "off"
-      }
-    }
-  ],
   "parser": "@babel/eslint-parser",
   "plugins": ["canonical"],
   "rules": {
@@ -74,7 +58,16 @@
     "quote-props": ["error", "as-needed"],
     "react/jsx-sort-props": "error",
     "react/sort-prop-types": "error",
-    "sort-imports": ["error", { "ignoreCase": true, "ignoreDeclarationSort": true }]
+    "sort-imports": ["error", { "ignoreCase": true, "ignoreDeclarationSort": true }],
+    "testing-library/no-await-sync-events": [
+      "error",
+      { "eventModules": ["fire-event"] }
+    ],
+    "testing-library/no-node-access": "off",
+    "testing-library/no-render-in-lifecycle": [
+      "error",
+      { "allowTestingFrameworkSetupHook": "beforeEach" }
+    ]
   },
   "settings": {
     "react": {
