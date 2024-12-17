@@ -2,10 +2,25 @@
   "env": {
     "jest": true
   },
-  "extends": "@folio/eslint-config-stripes",
+  "extends": [
+    "@folio/eslint-config-stripes", 
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
+  ],
   "overrides": [
     {
-      "files": ["**/*.test.js", "test/jest/**/*"]
+      "files": ["**/*.test.js", "test/jest/**/*"],
+      "rules": {
+        "testing-library/no-await-sync-events": [
+          "error",
+          { "eventModules": ["fire-event"] }
+        ],
+        "testing-library/no-render-in-lifecycle": [
+          "error",
+          { "allowTestingFrameworkSetupHook": "beforeEach" }
+        ],
+        "testing-library/no-node-access": "off"
+      }
     }
   ],
   "parser": "@babel/eslint-parser",
