@@ -131,7 +131,7 @@ CollectionsRoute.manifest = Object.freeze({
             collectionId: 'collectionId',
           },
           filterConfig,
-          2,
+          2
         ),
       },
       staticFallback: { params: {} },
@@ -141,7 +141,7 @@ CollectionsRoute.manifest = Object.freeze({
     type: 'okapi',
     records: 'tinyMetadataSources',
     path: 'finc-config/tiny-metadata-sources',
-    resourceShouldRefresh: true
+    resourceShouldRefresh: true,
   },
   query: { initialValue: {} },
   resultCount: { initialValue: INITIAL_RESULT_COUNT },

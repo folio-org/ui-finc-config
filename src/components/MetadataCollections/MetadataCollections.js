@@ -44,7 +44,7 @@ const rawSearchableIndexes = [
   {
     label: 'all',
     value: '',
-    makeQuery: term => `(label="${term}*" or description="${term}*" or collectionId="${term}*")`
+    makeQuery: term => `(label="${term}*" or description="${term}*" or collectionId="${term}*")`,
   },
   { label: 'label', value: 'label', makeQuery: term => `(label="${term}*")` },
   { label: 'description', value: 'description', makeQuery: term => `(description="${term}*")` },

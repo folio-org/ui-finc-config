@@ -34,7 +34,7 @@ const CollectionCreateRoute = ({
         .then(() => {
           history.push(`${urls.collectionView(id)}${location.search}`);
         });
-    }
+    },
   });
 
   const getInitialSolrMegaCollection = () => {

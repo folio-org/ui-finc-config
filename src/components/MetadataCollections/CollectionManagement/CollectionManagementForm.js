@@ -3,12 +3,12 @@ import { useState } from 'react';
 import {
   Field,
   useForm,
-  useFormState
+  useFormState,
 } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
   FormattedMessage,
-  injectIntl
+  injectIntl,
 } from 'react-intl';
 
 import {

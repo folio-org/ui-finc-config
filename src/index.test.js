@@ -44,7 +44,7 @@ const routeProps = {
 
 const createRouteProps = {
   history: {
-    push: () => jest.fn()
+    push: () => jest.fn(),
   },
   location: {
     search: '',
@@ -61,7 +61,7 @@ const editRouteProps = {
   match: {
     params: {
       id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
-    }
+    },
   },
 };
 
@@ -102,7 +102,7 @@ const match = {
 const queryClient = new QueryClient();
 
 useOkapiKy.mockReturnValue({
-  get: jest.fn(() => ({ json: () => source }))
+  get: jest.fn(() => ({ json: () => source })),
 });
 
 const renderWithRouter = (component) => (
@@ -122,7 +122,7 @@ jest.mock('./index', () => {
 });
 
 useOkapiKy.mockReturnValue({
-  get: jest.fn(() => ({ json: () => jest.fn() }))
+  get: jest.fn(() => ({ json: () => jest.fn() })),
 });
 
 it('should render CollectionsRoute', () => {
@@ -165,7 +165,7 @@ it('should render CollectionEditRoute', async () => {
 
 it('should render SourceViewRoute', async () => {
   useOkapiKy.mockReturnValue({
-    get: jest.fn(() => ({ json: () => source }))
+    get: jest.fn(() => ({ json: () => source })),
   });
 
   renderWithRouter(<SourceViewRoute {...viewRouteProps} />);
@@ -175,7 +175,7 @@ it('should render SourceViewRoute', async () => {
 
 it('should render CollectionViewRoute', async () => {
   useOkapiKy.mockReturnValue({
-    get: jest.fn(() => ({ json: () => collection }))
+    get: jest.fn(() => ({ json: () => collection })),
   });
 
   renderWithRouter(<CollectionViewRoute {...viewRouteProps} />);

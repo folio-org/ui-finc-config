@@ -27,7 +27,7 @@ const CollectionViewRoute = ({
       [COLLECTION_API, collectionId],
       () => ky.get(`${COLLECTION_API}/${collectionId}`).json(),
       // The query will not execute until the id exists
-      { enabled: Boolean(collectionId) },
+      { enabled: Boolean(collectionId) }
     );
 
     return ({

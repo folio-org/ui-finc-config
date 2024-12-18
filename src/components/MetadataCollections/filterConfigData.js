@@ -32,7 +32,7 @@ const filterConfig = [
     cql: 'mdSource.id',
     operator: '==',
     values: [],
-  }
+  },
 ];
 
 export default filterConfig;

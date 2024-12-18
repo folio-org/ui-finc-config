@@ -15,7 +15,7 @@ import { ValidateUrl } from './Validate';
 const RepeatableFieldValidUrl = ({
   ariaLabel,
   fields,
-  placeholder
+  placeholder,
 }) => {
   return (
     <Row>

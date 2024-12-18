@@ -24,7 +24,7 @@ const filterData = { contacts: [
   {
     externalId: '01771c0a-a890-4488-b5e9-366aa697bd93',
     name: 'Doe, Jane',
-  }
+  },
 ] };
 
 const renderMetadataSources = (stripes, data) => renderWithIntlConfiguration(

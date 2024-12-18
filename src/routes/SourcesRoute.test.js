@@ -9,7 +9,7 @@ import SourcesRoute from './SourcesRoute';
 
 const routeProps = {
   history: {
-    push: () => jest.fn()
+    push: () => jest.fn(),
   },
   match: {
     params: {

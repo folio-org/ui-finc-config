@@ -31,7 +31,7 @@ const filterConfig = [
     cql: 'contacts=/@externalId',
     operator: ' ',
     values: [],
-  }
+  },
 ];
 
 export default filterConfig;

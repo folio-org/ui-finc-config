@@ -21,7 +21,7 @@ const FincConfigSettings = ({
       component: IsilSettings,
       label: <FormattedMessage id="ui-finc-config.settings.isils.label" />,
       route: 'isils',
-    }
+    },
   ];
 
   return (

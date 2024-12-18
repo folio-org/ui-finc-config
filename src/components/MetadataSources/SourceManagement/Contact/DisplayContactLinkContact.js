@@ -21,13 +21,13 @@ const DisplayContactLinkContact = ({
       [CONTACTS_API, contactId],
       () => ky.get(`${CONTACTS_API}/${contactId}`).json(),
       // The query will not execute until the id exists
-      { enabled: Boolean(contactId) },
+      { enabled: Boolean(contactId) }
     );
 
     return ({
       isLoading,
       organizationsContact,
-      ...rest
+      ...rest,
     });
   };
 

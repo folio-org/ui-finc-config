@@ -27,7 +27,7 @@ const SourceViewRoute = ({
       [SOURCE_API, sourceId],
       () => ky.get(`${SOURCE_API}/${sourceId}`).json(),
       // The query will not execute until the id exists
-      { enabled: Boolean(sourceId) },
+      { enabled: Boolean(sourceId) }
     );
 
     return ({

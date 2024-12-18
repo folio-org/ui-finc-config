@@ -34,7 +34,7 @@ const SourceCreateRoute = ({
         .then(() => {
           history.push(`${urls.sourceView(id)}${location.search}`);
         });
-    }
+    },
   });
 
   if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;

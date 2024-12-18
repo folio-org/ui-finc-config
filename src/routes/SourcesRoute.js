@@ -131,7 +131,7 @@ SourcesRoute.manifest = Object.freeze({
             sourceId: 'sourceId/number',
           },
           filterConfig,
-          2,
+          2
         ),
       },
       staticFallback: { params: {} },
@@ -141,14 +141,14 @@ SourcesRoute.manifest = Object.freeze({
     type: 'okapi',
     records: 'contacts',
     path: 'finc-config/contacts',
-    resourceShouldRefresh: true
+    resourceShouldRefresh: true,
   },
   query: {
     initialValue: {
       query: '',
       filters: 'status.active,status.implementation',
-      sort: 'label'
-    }
+      sort: 'label',
+    },
   },
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
 });

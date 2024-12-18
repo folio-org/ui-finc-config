@@ -5,7 +5,7 @@ const selectedContactViaContactsPlugin = [
     id: 'user-1',
     lastName: 'Smith',
     firstName: 'Anna',
-  }
+  },
 ];
 
 const selectedContactViaUsersPlugin = {
@@ -13,7 +13,7 @@ const selectedContactViaUsersPlugin = {
   personal: {
     lastName: 'Smith',
     firstName: 'Anna',
-  }
+  },
 };
 
 const doUpdate = jest.fn();
@@ -24,7 +24,7 @@ describe('contact-util - handleContactSelected', () => {
       { externalId: 'old-id', name: 'old-name', type: 'old-type', role: 'librarian' },
       { externalId: '', name: '', type: '' },
     ],
-    update: doUpdate
+    update: doUpdate,
   };
 
   beforeEach(() => {

@@ -32,13 +32,13 @@ const SourceManagementView = ({
     const { isLoading, data: organization = {}, ...rest } = useQuery(
       [ORGANIZATIONS_API, organizationId],
       () => ky.get(`${ORGANIZATIONS_API}/${organizationId}`).json(),
-      { enabled: Boolean(organizationId) },
+      { enabled: Boolean(organizationId) }
     );
 
     return ({
       isLoading,
       organization,
-      ...rest
+      ...rest,
     });
   };
 

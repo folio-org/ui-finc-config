@@ -9,7 +9,7 @@ import CollectionsRoute from './CollectionsRoute';
 
 const routeProps = {
   history: {
-    push: () => jest.fn()
+    push: () => jest.fn(),
   },
   match: {
     params: {
