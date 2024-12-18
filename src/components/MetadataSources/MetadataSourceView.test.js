@@ -60,10 +60,10 @@ describe('MetadataSourceView', () => {
   });
 
   it('should display description', () => {
-    expect(
-      // eslint-disable-next-line
-      screen.getByText('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore.')
-    ).toBeInTheDocument();
+    expect(screen.getByText(
+      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ' +
+      'invidunt ut labore et dolore.'
+    )).toBeInTheDocument();
   });
 
   it('should display solr shard', () => {
