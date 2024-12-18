@@ -11,9 +11,7 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
 
-import collection from '../test/fixtures/metadatacollection';
 import collections from '../test/fixtures/metadatacollections';
-import source from '../test/fixtures/metadatasource';
 import sources from '../test/fixtures/metadatasources';
 import renderWithIntlConfiguration from '../test/jest/helpers/renderWithIntlConfiguration';
 import FincConfig from './index';
@@ -101,10 +99,6 @@ const match = {
 
 const queryClient = new QueryClient();
 
-useOkapiKy.mockReturnValue({
-  get: jest.fn(() => ({ json: () => source })),
-});
-
 const renderWithRouter = (component) => (
   renderWithIntlConfiguration(
     <QueryClientProvider client={queryClient}>
@@ -164,20 +158,12 @@ it('should render CollectionEditRoute', async () => {
 });
 
 it('should render SourceViewRoute', async () => {
-  useOkapiKy.mockReturnValue({
-    get: jest.fn(() => ({ json: () => source })),
-  });
-
   renderWithRouter(<SourceViewRoute {...viewRouteProps} />);
 
   await waitFor(() => expect(document.querySelector('#pane-sourcedetails')).toBeInTheDocument());
 });
 
 it('should render CollectionViewRoute', async () => {
-  useOkapiKy.mockReturnValue({
-    get: jest.fn(() => ({ json: () => collection })),
-  });
-
   renderWithRouter(<CollectionViewRoute {...viewRouteProps} />);
 
   await waitFor(() => expect(document.querySelector('#pane-collectiondetails')).toBeInTheDocument());
