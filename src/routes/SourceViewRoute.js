@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
-import ReactRouterPropTypes from 'react-router-prop-types';
 import { useQuery } from 'react-query';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
-import { useOkapiKy, useStripes } from '@folio/stripes/core';
+import {
+  useOkapiKy,
+  useStripes,
+} from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataSourceView from '../components/MetadataSources/MetadataSourceView';
@@ -24,7 +27,7 @@ const SourceViewRoute = ({
       [SOURCE_API, sourceId],
       () => ky.get(`${SOURCE_API}/${sourceId}`).json(),
       // The query will not execute until the id exists
-      { enabled: Boolean(sourceId) },
+      { enabled: Boolean(sourceId) }
     );
 
     return ({

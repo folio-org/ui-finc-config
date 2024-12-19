@@ -21,28 +21,26 @@ const DisplayContact = ({
   const getContactLink = () => {
     if (contact.type === 'user') {
       return (
-        <>
-          <DisplayContactLinkUser
-            contact={contact}
-            contactId={contactId}
-          />
-        </>
+        <DisplayContactLinkUser
+          contact={contact}
+          contactId={contactId}
+        />
       );
     } else if (contact.type === 'contact') {
       return (
-        <>
-          <DisplayContactLinkContact
-            contact={contact}
-            contactId={contactId}
-          />
-        </>
+        <DisplayContactLinkContact
+          contact={contact}
+          contactId={contactId}
+        />
       );
     }
+
     return null;
   };
 
   const getDataLable = (field) => {
     const fieldValue = _.get(contact, field, '');
+
     if (fieldValue !== '') {
       return <FormattedMessage id={`ui-finc-config.dataOption.${fieldValue}`} />;
     } else {
@@ -56,7 +54,11 @@ const DisplayContact = ({
     <Card
       cardStyle="positive"
       data-test-contact-card
-      headerStart={<span><FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount : contactIndex + 1 }} /></span>}
+      headerStart={
+        <span>
+          <FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount: contactIndex + 1 }} />
+        </span>
+      }
       id={`contact-${parseInt(contactIndex + 1, 10)}`}
       roundedBorder
     >

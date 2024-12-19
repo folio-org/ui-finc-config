@@ -3,10 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { useMutation } from 'react-query';
 import { v4 as uuidv4 } from 'uuid';
 
-import { useOkapiKy, useStripes } from '@folio/stripes/core';
+import {
+  useOkapiKy,
+  useStripes,
+} from '@folio/stripes/core';
 
-import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
 import urls from '../components/DisplayUtils/urls';
+import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
 
 const CollectionCreateRoute = ({
   history,
@@ -31,7 +34,7 @@ const CollectionCreateRoute = ({
         .then(() => {
           history.push(`${urls.collectionView(id)}${location.search}`);
         });
-    }
+    },
   });
 
   const getInitialSolrMegaCollection = () => {

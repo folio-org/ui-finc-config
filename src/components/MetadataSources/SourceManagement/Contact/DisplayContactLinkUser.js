@@ -1,10 +1,10 @@
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
-import { useOkapiKy } from '@folio/stripes/core';
 import { NoValue } from '@folio/stripes/components';
+import { useOkapiKy } from '@folio/stripes/core';
 
 import urls from '../../../DisplayUtils/urls';
 
@@ -21,13 +21,13 @@ const DisplayContactLinkUser = ({
       [USERS_API, contactId],
       () => ky.get(`${USERS_API}/${contactId}`).json(),
       // The query will not execute until the id exists
-      { enabled: Boolean(contactId) },
+      { enabled: Boolean(contactId) }
     );
 
     return ({
       isLoading,
       user,
-      ...rest
+      ...rest,
     });
   };
 
@@ -39,11 +39,9 @@ const DisplayContactLinkUser = ({
       contactNameWithLink = contact.name;
     } else {
       contactNameWithLink = (
-        <>
-          <Link to={{ pathname: `${urls.userView(contactId)}` }}>
-            {contact.name}
-          </Link>
-        </>
+        <Link to={{ pathname: `${urls.userView(contactId)}` }}>
+          {contact.name}
+        </Link>
       );
     }
   }

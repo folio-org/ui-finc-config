@@ -1,23 +1,23 @@
-import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 import { Switch } from 'react-router-dom';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
 import { Route } from '@folio/stripes/core';
 
-import SourcesRoute from './routes/SourcesRoute';
-import SourceEditRoute from './routes/SourceEditRoute';
-import SourceCreateRoute from './routes/SourceCreateRoute';
-import SourceViewRoute from './routes/SourceViewRoute';
-import CollectionsRoute from './routes/CollectionsRoute';
-import CollectionViewRoute from './routes/CollectionViewRoute';
 import CollectionCreateRoute from './routes/CollectionCreateRoute';
 import CollectionEditRoute from './routes/CollectionEditRoute';
+import CollectionsRoute from './routes/CollectionsRoute';
+import CollectionViewRoute from './routes/CollectionViewRoute';
+import SourceCreateRoute from './routes/SourceCreateRoute';
+import SourceEditRoute from './routes/SourceEditRoute';
+import SourcesRoute from './routes/SourcesRoute';
+import SourceViewRoute from './routes/SourceViewRoute';
 import Settings from './settings';
 
 const FincConfig = ({
+  location,
   match,
   showSettings,
-  location,
   stripes,
 }) => {
   if (showSettings) {
@@ -32,24 +32,24 @@ const FincConfig = ({
 
   return (
     <Switch>
-      <Route path={`${match.path}/metadata-sources/create`} component={SourceCreateRoute} />
-      <Route path={`${match.path}/metadata-sources/:id/edit`} component={SourceEditRoute} />
-      <Route path={`${match.path}/metadata-sources/:id?`} component={SourcesRoute}>
-        <Route path={`${match.path}/metadata-sources/:id`} component={SourceViewRoute} />
+      <Route component={SourceCreateRoute} path={`${match.path}/metadata-sources/create`} />
+      <Route component={SourceEditRoute} path={`${match.path}/metadata-sources/:id/edit`} />
+      <Route component={SourcesRoute} path={`${match.path}/metadata-sources/:id?`}>
+        <Route component={SourceViewRoute} path={`${match.path}/metadata-sources/:id`} />
       </Route>
-      <Route path={`${match.path}/metadata-collections/create`} component={CollectionCreateRoute} />
-      <Route path={`${match.path}/metadata-collections/:id/edit`} component={CollectionEditRoute} />
-      <Route path={`${match.path}/metadata-collections/:id?`} component={CollectionsRoute}>
-        <Route path={`${match.path}/metadata-collections/:id`} component={CollectionViewRoute} />
+      <Route component={CollectionCreateRoute} path={`${match.path}/metadata-collections/create`} />
+      <Route component={CollectionEditRoute} path={`${match.path}/metadata-collections/:id/edit`} />
+      <Route component={CollectionsRoute} path={`${match.path}/metadata-collections/:id?`}>
+        <Route component={CollectionViewRoute} path={`${match.path}/metadata-collections/:id`} />
       </Route>
     </Switch>
   );
 };
 
 FincConfig.propTypes = {
+  location: PropTypes.object.isRequired,
   match: ReactRouterPropTypes.match.isRequired,
   showSettings: PropTypes.bool,
-  location: PropTypes.object.isRequired,
   stripes: PropTypes.object.isRequired,
 };
 

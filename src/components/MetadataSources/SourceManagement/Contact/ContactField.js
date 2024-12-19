@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
+import { FormattedMessage } from 'react-intl';
 
 import {
   Col,
@@ -10,10 +10,10 @@ import {
 } from '@folio/stripes/components';
 import { IntlConsumer } from '@folio/stripes/core';
 
+import { contactRoleOptions } from '../../../DataOptions/dataOptions';
+import { Required } from '../../../DisplayUtils/Validate';
 import FindContact from '../FindContact/FindContact';
 import FindUser from '../FindUser/FindUser';
-import { Required } from '../../../DisplayUtils/Validate';
-import { contactRoleOptions } from '../../../DataOptions/dataOptions';
 
 const ContactField = ({
   index,

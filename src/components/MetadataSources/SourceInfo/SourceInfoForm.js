@@ -11,8 +11,8 @@ import {
 } from '@folio/stripes/components';
 import { IntlConsumer } from '@folio/stripes/core';
 
-import { Required } from '../../DisplayUtils/Validate';
 import { implementationStatusOptions } from '../../DataOptions/dataOptions';
+import { Required } from '../../DisplayUtils/Validate';
 
 const getDataOptions = (intl, field) => {
   return field.map((item) => ({
@@ -28,10 +28,10 @@ const SourceInfoForm = ({
 }) => {
   return (
     <Accordion
+      id={accordionId}
       label={<FormattedMessage id="ui-finc-config.source.generalAccordion" />}
       onToggle={onToggle}
       open={expanded}
-      id={accordionId}
     >
       <Row>
         <Col xs={8}>

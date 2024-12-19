@@ -1,24 +1,30 @@
 import { MemoryRouter } from 'react-router-dom';
 
-import { StripesContext, useStripes } from '@folio/stripes/core';
-import { screen, within } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  screen,
+  within,
+} from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
+import {
+  StripesContext,
+  useStripes,
+} from '@folio/stripes/core';
 
-import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import metadatasources from '../../../test/fixtures/metadatasources';
+import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import MetadataSources from './MetadataSources';
 
 jest.mock('react-virtualized-auto-sizer', () => ({ children }) => children({ width: 1920, height: 1080 }));
 
 const filterData = { contacts: [
   {
-    'externalId': 'fcfaca0b-12e7-467e-b503-d44a44d60a62',
-    'name': 'Doe, John',
+    externalId: 'fcfaca0b-12e7-467e-b503-d44a44d60a62',
+    name: 'Doe, John',
   },
   {
-    'externalId': '01771c0a-a890-4488-b5e9-366aa697bd93',
-    'name': 'Doe, Jane',
-  }
+    externalId: '01771c0a-a890-4488-b5e9-366aa697bd93',
+    name: 'Doe, Jane',
+  },
 ] };
 
 const renderMetadataSources = (stripes, data) => renderWithIntlConfiguration(

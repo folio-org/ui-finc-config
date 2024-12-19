@@ -10,9 +10,9 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
+import BasicCss from '../../BasicStyle.css';
 import ContactFieldArray from './Contact/ContactFieldArray';
 import FindOrganization from './FindOrganization/FindOrganization';
-import BasicCss from '../../BasicStyle.css';
 
 const SourceManagementForm = ({
   accordionId,

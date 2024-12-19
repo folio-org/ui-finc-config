@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import {
+  useEffect,
+  useState,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -36,6 +39,7 @@ const CollectionFilters = ({
     filterConfig.forEach((filter) => {
       const newValues = [];
       let values = {};
+
       if (filter === 'mdSource') {
         // get filter values from okapi
         values = filterData[filter] || [];
@@ -47,8 +51,8 @@ const CollectionFilters = ({
       values.forEach((key) => {
         let newValue = {};
         newValue = {
-          'value': key.cql,
-          'label': key.name,
+          value: key.cql,
+          label: key.name,
         };
         newValues.push(newValue);
       });

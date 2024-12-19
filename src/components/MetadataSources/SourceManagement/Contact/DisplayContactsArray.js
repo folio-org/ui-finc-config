@@ -17,10 +17,10 @@ const DisplayContactsArray = ({ metadataSource }) => {
       <>
         {fields.map((elem, index) => (
           <DisplayContact
+            key={index}
             contact={elem}
             contactId={elem.externalId}
             contactIndex={index}
-            key={index}
           />
         ))}
       </>

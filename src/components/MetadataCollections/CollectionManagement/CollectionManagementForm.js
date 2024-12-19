@@ -1,16 +1,20 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useForm, useFormState, Field } from 'react-final-form';
+import { useState } from 'react';
+import {
+  Field,
+  useForm,
+  useFormState,
+} from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
   FormattedMessage,
-  injectIntl
+  injectIntl,
 } from 'react-intl';
 
 import {
   Accordion,
-  ConfirmationModal,
   Col,
+  ConfirmationModal,
   Label,
   Row,
   Select,
@@ -18,15 +22,15 @@ import {
 } from '@folio/stripes/components';
 import { IntlConsumer } from '@folio/stripes/core';
 
-import { Required } from '../../DisplayUtils/Validate';
-import PermittedForField from '../../DisplayUtils/PermittedForField';
+import BasicCss from '../../BasicStyle.css';
 import {
+  freeContentOptions,
+  lodPublicationOptions,
   metadataAvailableOptions,
   usageRestrictedOptions,
-  freeContentOptions,
-  lodPublicationOptions
 } from '../../DataOptions/dataOptions';
-import BasicCss from '../../BasicStyle.css';
+import PermittedForField from '../../DisplayUtils/PermittedForField';
+import { Required } from '../../DisplayUtils/Validate';
 
 let permittedIsRequired;
 
@@ -68,6 +72,7 @@ const CollectionManagementForm = ({
     } else {
       change('usageRestricted', 'yes');
     }
+
     setConfirmClear(false);
   };
 
@@ -88,7 +93,14 @@ const CollectionManagementForm = ({
     permittedIsRequired = false;
   }
 
-  const permittedForLabel = (permittedIsRequired ? <Label className={BasicCss.styleForFormLabel} required><FormattedMessage id="ui-finc-config.collection.permittedFor" /></Label> : <Label className={BasicCss.styleForFormLabel}><FormattedMessage id="ui-finc-config.collection.permittedFor" /></Label>);
+  const permittedForLabel =
+    permittedIsRequired ?
+      <Label className={BasicCss.styleForFormLabel} required>
+        <FormattedMessage id="ui-finc-config.collection.permittedFor" />
+      </Label> :
+      <Label className={BasicCss.styleForFormLabel}>
+        <FormattedMessage id="ui-finc-config.collection.permittedFor" />
+      </Label>;
 
   return (
     <Accordion
@@ -208,7 +220,9 @@ const CollectionManagementForm = ({
         </Col>
       </Row>
       <ConfirmationModal
-        confirmLabel={<FormattedMessage id="ui-finc-config.collection.form.selectedUsageRestricted.confirmClearLabel" />}
+        confirmLabel={
+          <FormattedMessage id="ui-finc-config.collection.form.selectedUsageRestricted.confirmClearLabel" />
+        }
         heading={<FormattedMessage id="ui-finc-config.collection.form.selectedUsageRestricted.clearModalHeading" />}
         id="clear-permitted-for-confirmation"
         message={confirmationMessage}

@@ -15,7 +15,7 @@ const FincNavigation = ({
   const sourcesSearchString = localStorage.getItem('finc-config-sources-search-string') || '';
 
   return (
-    <ButtonGroup fullWidth data-test-navigation>
+    <ButtonGroup data-test-navigation fullWidth>
       <Button
         buttonStyle={id === 'source' ? 'primary' : 'default'}
         data-test-navigation-source

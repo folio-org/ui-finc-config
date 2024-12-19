@@ -3,7 +3,6 @@ const config = require('@folio/jest-config-stripes');
 
 const esModules = [
   '@folio',
-  '@k-int',
   'ky',
   'uuid'
 ].join('|');

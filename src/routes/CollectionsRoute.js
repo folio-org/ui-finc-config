@@ -1,19 +1,23 @@
 import _ from 'lodash';
-import { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import {
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { stripesConnect } from '@folio/stripes/core';
 import { Layout } from '@folio/stripes/components';
+import { stripesConnect } from '@folio/stripes/core';
 import {
   makeQueryFunction,
-  StripesConnectedSource
+  StripesConnectedSource,
 } from '@folio/stripes/smart-components';
 
-import MetadataCollections from '../components/MetadataCollections/MetadataCollections';
-import filterConfig from '../components/MetadataCollections/filterConfigData';
 import urls from '../components/DisplayUtils/urls';
 import usePrevious from '../components/hooks/usePrevious';
+import filterConfig from '../components/MetadataCollections/filterConfigData';
+import MetadataCollections from '../components/MetadataCollections/MetadataCollections';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -92,17 +96,17 @@ const CollectionsRoute = ({
 
   return (
     <MetadataCollections
-      contentData={_.get(resources, 'collections.records', [])}
       collection={source}
+      contentData={_.get(resources, 'collections.records', [])}
       filterData={{ mdSources: _.get(resources, 'mdSources.records', []) }}
+      onChangeIndex={onChangeIndex}
       onNeedMoreData={handleNeedMoreData}
       queryGetter={queryGetter}
       querySetter={querySetter}
-      searchString={location.search}
-      selectedRecordId={match.params.id}
       searchField={searchField}
+      searchString={location.search}
       // add values for search-selectbox
-      onChangeIndex={onChangeIndex}
+      selectedRecordId={match.params.id}
     >
       {children}
     </MetadataCollections>
@@ -122,12 +126,12 @@ CollectionsRoute.manifest = Object.freeze({
           'cql.allRecords=1',
           '(label="%{query.query}*" or description="%{query.query}*" or collectionId="%{query.query}*")',
           {
-            'label': 'label',
-            'description': 'description',
-            'collectionId': 'collectionId',
+            label: 'label',
+            description: 'description',
+            collectionId: 'collectionId',
           },
           filterConfig,
-          2,
+          2
         ),
       },
       staticFallback: { params: {} },
@@ -137,7 +141,7 @@ CollectionsRoute.manifest = Object.freeze({
     type: 'okapi',
     records: 'tinyMetadataSources',
     path: 'finc-config/tiny-metadata-sources',
-    resourceShouldRefresh: true
+    resourceShouldRefresh: true,
   },
   query: { initialValue: {} },
   resultCount: { initialValue: INITIAL_RESULT_COUNT },

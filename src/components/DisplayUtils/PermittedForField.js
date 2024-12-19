@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import { Field } from 'react-final-form';
 import {
+  FormattedMessage,
   injectIntl,
-  FormattedMessage
 } from 'react-intl';
 
 import {
@@ -14,8 +14,8 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-import { Required } from './Validate';
 import usePrevious from '../hooks/usePrevious';
+import { Required } from './Validate';
 
 const PermittedForField = ({
   addPermittedForField,
@@ -64,7 +64,9 @@ const PermittedForField = ({
         ))}
       </Col>
       <Col xs={4}>
-        <Button onClick={() => fields.push('')} disabled={disable}><FormattedMessage id="ui-finc-config.form.button.add" /></Button>
+        <Button disabled={disable} onClick={() => fields.push('')}>
+          <FormattedMessage id="ui-finc-config.form.button.add" />
+        </Button>
       </Col>
     </Row>
   );

@@ -1,17 +1,19 @@
 import handleContactSelected from './contact-util';
 
-const selectedContactViaContactsPlugin = [{
-  id: 'user-1',
-  lastName: 'Smith',
-  firstName: 'Anna',
-}];
+const selectedContactViaContactsPlugin = [
+  {
+    id: 'user-1',
+    lastName: 'Smith',
+    firstName: 'Anna',
+  },
+];
 
 const selectedContactViaUsersPlugin = {
   id: 'user-2',
   personal: {
     lastName: 'Smith',
     firstName: 'Anna',
-  }
+  },
 };
 
 const doUpdate = jest.fn();
@@ -22,7 +24,7 @@ describe('contact-util - handleContactSelected', () => {
       { externalId: 'old-id', name: 'old-name', type: 'old-type', role: 'librarian' },
       { externalId: '', name: '', type: '' },
     ],
-    update: doUpdate
+    update: doUpdate,
   };
 
   beforeEach(() => {

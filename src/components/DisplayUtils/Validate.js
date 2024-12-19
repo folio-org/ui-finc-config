@@ -6,9 +6,8 @@ const Required = value => {
 };
 
 const ValidateUrl = value => {
-  // http not required:
-  // const urlRegex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
   // http required:
+  // eslint-disable-next-line
   const urlRegex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,})/;
 
   if (!value || urlRegex.test(value)) return undefined;
@@ -27,4 +26,9 @@ const IntRequired = value => {
   return <FormattedMessage id="ui-finc-config.form.validate.intRequired" />;
 };
 
-export { IntRequired, Required, MdSourceRequired, ValidateUrl };
+export {
+  IntRequired,
+  Required,
+  MdSourceRequired,
+  ValidateUrl,
+};

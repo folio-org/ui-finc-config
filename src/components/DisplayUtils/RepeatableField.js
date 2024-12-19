@@ -12,7 +12,7 @@ import {
 
 const RepeatableField = ({
   ariaLabel,
-  fields
+  fields,
 }) => {
   return (
     <Row>

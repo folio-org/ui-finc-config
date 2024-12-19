@@ -28,8 +28,8 @@ const SourceTechnicalView = ({
       return (
         <List
           isEmptyMessage={isEmptyMessage}
-          items={valueItems}
           itemFormatter={valueFormatter}
+          items={valueItems}
         />
       );
     }
@@ -42,104 +42,107 @@ const SourceTechnicalView = ({
       return isEmptyMessage;
     } else {
       const valueItems = metadataSource[values];
-      const valueFormatter = (valueItem) => (<li key={valueItem}><a href={valueItem} target="_blank" rel="noopener noreferrer">{valueItem}</a></li>);
+      const valueFormatter = (valueItem) => (
+        <li key={valueItem}><a href={valueItem} rel="noopener noreferrer" target="_blank">{valueItem}</a></li>
+      );
 
       return (
         <List
-          items={valueItems}
-          itemFormatter={valueFormatter}
           isEmptyMessage={isEmptyMessage}
+          itemFormatter={valueFormatter}
+          items={valueItems}
         />
       );
     }
   };
 
   const accessUrlValue = _.get(metadataSource, 'accessUrl', <NoValue />);
-  const accessUrlValueFormatter = <a href={accessUrlValue} target="_blank" rel="noopener noreferrer">{accessUrlValue}</a>;
+  const accessUrlValueFormatter =
+    <a href={accessUrlValue} rel="noopener noreferrer" target="_blank">
+      {accessUrlValue}
+    </a>;
 
   return (
-    <>
-      <div id={id}>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.source.lastProcessed" />}
-            value={_.get(metadataSource, 'lastProcessed', <NoValue />)}
-          />
-        </Row>
-        {/* TICKET is repeatable */}
-        <Row>
-          <Headline
-            className={BasicCss.styleForViewHeadline}
-            size="medium"
-          >
-            <FormattedMessage id="ui-finc-config.source.tickets" />
-          </Headline>
-        </Row>
-        <Row>
-          { renderUrlList('tickets') }
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.source.accessUrl" />}
-            value={accessUrlValueFormatter}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.source.id" />}
-            value={_.get(metadataSource, 'sourceId', <NoValue />)}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.source.solrShard" />}
-            value={_.get(metadataSource, 'solrShard', <NoValue />)}
-          />
-        </Row>
-        {/* DELIVERYMETHODS is repeatable */}
-        <Row>
-          <Headline
-            className={BasicCss.styleForViewHeadline}
-            size="medium"
-          >
-            <FormattedMessage id="ui-finc-config.source.deliveryMethods" />
-          </Headline>
-        </Row>
-        <Row>
-          { renderList('deliveryMethods') }
-        </Row>
-        {/* FORMATS is repeatable */}
-        <Row>
-          <Headline
-            className={BasicCss.styleForViewHeadline}
-            size="medium"
-          >
-            <FormattedMessage id="ui-finc-config.source.formats" />
-          </Headline>
-        </Row>
-        <Row>
-          { renderList('formats') }
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.source.updateRhythm" />}
-            value={_.get(metadataSource, 'updateRhythm', <NoValue />)}
-          />
-        </Row>
-        {/* INFERIORTO is repeatable */}
-        <Row>
-          <Headline
-            className={BasicCss.styleForViewHeadline}
-            size="medium"
-          >
-            <FormattedMessage id="ui-finc-config.source.inferiorTo" />
-          </Headline>
-        </Row>
-        <Row>
-          { renderList('inferiorTo') }
-        </Row>
-      </div>
-    </>
+    <div id={id}>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.source.lastProcessed" />}
+          value={_.get(metadataSource, 'lastProcessed', <NoValue />)}
+        />
+      </Row>
+      {/* TICKET is repeatable */}
+      <Row>
+        <Headline
+          className={BasicCss.styleForViewHeadline}
+          size="medium"
+        >
+          <FormattedMessage id="ui-finc-config.source.tickets" />
+        </Headline>
+      </Row>
+      <Row>
+        { renderUrlList('tickets') }
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.source.accessUrl" />}
+          value={accessUrlValueFormatter}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.source.id" />}
+          value={_.get(metadataSource, 'sourceId', <NoValue />)}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.source.solrShard" />}
+          value={_.get(metadataSource, 'solrShard', <NoValue />)}
+        />
+      </Row>
+      {/* DELIVERYMETHODS is repeatable */}
+      <Row>
+        <Headline
+          className={BasicCss.styleForViewHeadline}
+          size="medium"
+        >
+          <FormattedMessage id="ui-finc-config.source.deliveryMethods" />
+        </Headline>
+      </Row>
+      <Row>
+        { renderList('deliveryMethods') }
+      </Row>
+      {/* FORMATS is repeatable */}
+      <Row>
+        <Headline
+          className={BasicCss.styleForViewHeadline}
+          size="medium"
+        >
+          <FormattedMessage id="ui-finc-config.source.formats" />
+        </Headline>
+      </Row>
+      <Row>
+        { renderList('formats') }
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.source.updateRhythm" />}
+          value={_.get(metadataSource, 'updateRhythm', <NoValue />)}
+        />
+      </Row>
+      {/* INFERIORTO is repeatable */}
+      <Row>
+        <Headline
+          className={BasicCss.styleForViewHeadline}
+          size="medium"
+        >
+          <FormattedMessage id="ui-finc-config.source.inferiorTo" />
+        </Headline>
+      </Row>
+      <Row>
+        { renderList('inferiorTo') }
+      </Row>
+    </div>
   );
 };
 

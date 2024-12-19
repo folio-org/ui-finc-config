@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { isEqual } from 'lodash';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -18,14 +18,14 @@ import {
   Paneset,
   Row,
 } from '@folio/stripes/components';
-import { ViewMetaData } from '@folio/stripes/smart-components';
 import { IfPermission } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
+import { ViewMetaData } from '@folio/stripes/smart-components';
 
+import BasicStyle from '../BasicStyle.css';
 import SourceInfoForm from './SourceInfo/SourceInfoForm';
 import SourceManagementForm from './SourceManagement/SourceManagementForm';
 import SourceTechnicalForm from './SourceTechnical/SourceTechnicalForm';
-import BasicStyle from '../BasicStyle.css';
 
 const MetadataSourceForm = ({
   handlers: { onClose },
@@ -42,7 +42,7 @@ const MetadataSourceForm = ({
   const [accordionsState, setAccordionsState] = useState({
     editSourceInfo: true,
     editSourceManagement: true,
-    editSourceTechnical: true
+    editSourceTechnical: true,
   });
 
   const handleExpandAll = (obj) => {
@@ -132,7 +132,7 @@ const MetadataSourceForm = ({
       </Button>
     );
 
-    return <PaneFooter renderStart={startButton} renderEnd={endButton} />;
+    return <PaneFooter renderEnd={endButton} renderStart={startButton} />;
   };
 
   const renderFormPaneHeader = () => (
@@ -182,8 +182,8 @@ const MetadataSourceForm = ({
               <SourceManagementForm
                 accordionId="editSourceManagement"
                 expanded={accordionsState.editSourceManagement}
-                onToggle={handleAccordionToggle}
                 initialValues={initialValues}
+                onToggle={handleAccordionToggle}
               />
               <SourceTechnicalForm
                 accordionId="editSourceTechnical"

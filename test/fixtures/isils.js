@@ -6,7 +6,7 @@ const isils = [
     'tenant' : 'ubl',
     'metadata' : {
       'createdDate' : '2020-12-22T14:00:17.920+00:00',
-      'updatedDate' : '2020-12-22T14:00:17.920+00:00'
+      'updatedDate' : '2020-12-22T14:00:17.920+00:00',
     }
   },
   {
@@ -16,7 +16,7 @@ const isils = [
     'tenant' : 'diku',
     'metadata' : {
       'createdDate' : '2020-12-22T14:00:17.932+00:00',
-      'updatedDate' : '2020-12-22T14:00:17.932+00:00'
+      'updatedDate' : '2020-12-22T14:00:17.932+00:00',
     }
   },
   {
@@ -26,7 +26,7 @@ const isils = [
     'tenant' : 'slub',
     'metadata' : {
       'createdDate' : '2020-12-22T14:00:17.942+00:00',
-      'updatedDate' : '2020-12-22T14:00:17.942+00:00'
+      'updatedDate' : '2020-12-22T14:00:17.942+00:00',
     }
   }
 ];

@@ -10,7 +10,7 @@ const filterConfig = [
       { name: <FormattedMessage id="ui-finc-config.dataOption.request" />, cql: 'request' },
       { name: <FormattedMessage id="ui-finc-config.dataOption.implementation" />, cql: 'implementation' },
       { name: <FormattedMessage id="ui-finc-config.dataOption.closed" />, cql: 'closed' },
-      { name: <FormattedMessage id="ui-finc-config.dataOption.impossible" />, cql: 'impossible' }
+      { name: <FormattedMessage id="ui-finc-config.dataOption.impossible" />, cql: 'impossible' },
     ],
   },
   {
@@ -22,7 +22,7 @@ const filterConfig = [
       { name: 'UBL ai', cql: 'UBL ai' },
       { name: 'UBL DNB', cql: 'UBL DNB' },
       { name: 'SLUB dswarm', cql: 'SLUB dswarm' },
-      { name: 'SLUB DBoD', cql: 'SLUB DBoD' }
+      { name: 'SLUB DBoD', cql: 'SLUB DBoD' },
     ],
   },
   {
@@ -31,7 +31,7 @@ const filterConfig = [
     cql: 'contacts=/@externalId',
     operator: ' ',
     values: [],
-  }
+  },
 ];
 
 export default filterConfig;

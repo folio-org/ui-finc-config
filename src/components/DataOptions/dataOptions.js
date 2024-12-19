@@ -2,12 +2,12 @@ const metadataAvailableOptions = [
   { value: '' },
   { value: 'yes' },
   { value: 'no' },
-  { value: 'undetermined' }
+  { value: 'undetermined' },
 ];
 
 const usageRestrictedOptions = [
   { value: 'yes' },
-  { value: 'no' }
+  { value: 'no' },
 ];
 
 const freeContentOptions = [
@@ -21,7 +21,7 @@ const lodPublicationOptions = [
   { value: '' },
   { value: 'yes' },
   { value: 'no' },
-  { value: 'undetermined' }
+  { value: 'undetermined' },
 ];
 
 const implementationStatusOptions = [
@@ -29,14 +29,14 @@ const implementationStatusOptions = [
   { value: 'request' },
   { value: 'implementation' },
   { value: 'closed' },
-  { value: 'impossible' }
+  { value: 'impossible' },
 ];
 
 const contactRoleOptions = [
   { value: 'subject specialist' },
   { value: 'librarian' },
   { value: 'technical' },
-  { value: 'vendor' }
+  { value: 'vendor' },
 ];
 
 const solrShardOptions = [
@@ -45,7 +45,7 @@ const solrShardOptions = [
   { value: 'UBL ai' },
   { value: 'UBL DNB' },
   { value: 'SLUB dswarm' },
-  { value: 'SLUB DBoD' }
+  { value: 'SLUB DBoD' },
 ];
 
 export {

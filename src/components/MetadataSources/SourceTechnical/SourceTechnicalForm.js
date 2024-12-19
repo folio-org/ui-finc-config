@@ -9,17 +9,17 @@ import {
   Label,
   Row,
   Select,
-  TextField
+  TextField,
 } from '@folio/stripes/components';
 
-import {
-  IntRequired,
-  ValidateUrl
-} from '../../DisplayUtils/Validate';
+import BasicCss from '../../BasicStyle.css';
+import { solrShardOptions } from '../../DataOptions/dataOptions';
 import RepeatableField from '../../DisplayUtils/RepeatableField';
 import RepeatableFieldValidUrl from '../../DisplayUtils/RepeatableFieldValidUrl';
-import { solrShardOptions } from '../../DataOptions/dataOptions';
-import BasicCss from '../../BasicStyle.css';
+import {
+  IntRequired,
+  ValidateUrl,
+} from '../../DisplayUtils/Validate';
 
 const getDataOptions = (field) => {
   return field.map((item) => ({

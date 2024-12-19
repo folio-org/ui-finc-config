@@ -1,10 +1,13 @@
-import { useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 import {
+  Field,
+  useForm,
+} from 'react-final-form';
+import {
+  FormattedMessage,
   injectIntl,
-  FormattedMessage
 } from 'react-intl';
-import { useForm, Field } from 'react-final-form';
 
 import {
   Col,
@@ -37,7 +40,7 @@ const FindSource = ({
     id: 'SourceId',
   };
   const disableRecordCreation = true;
-  const buttonProps = { 'marginBottom0': true };
+  const buttonProps = { marginBottom0: true };
   const pluggable =
     <Pluggable
       aria-haspopup="true"

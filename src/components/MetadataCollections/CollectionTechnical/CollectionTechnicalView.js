@@ -28,8 +28,8 @@ const CollectionTechnicalView = ({
       return (
         <List
           isEmptyMessage={isEmptyMessage}
-          items={valueItems}
           itemFormatter={valueFormatter}
+          items={valueItems}
         />
       );
     }
@@ -42,68 +42,68 @@ const CollectionTechnicalView = ({
       return isEmptyMessage;
     } else {
       const valueItems = metadataCollection[values];
-      const valueFormatter = (valueItem) => (<li key={valueItem}><a href={valueItem} target="_blank" rel="noopener noreferrer">{valueItem}</a></li>);
+      const valueFormatter = (valueItem) => (
+        <li key={valueItem}><a href={valueItem} rel="noopener noreferrer" target="_blank">{valueItem}</a></li>
+      );
 
       return (
         <List
           isEmptyMessage={isEmptyMessage}
-          items={valueItems}
           itemFormatter={valueFormatter}
+          items={valueItems}
         />
       );
     }
   };
 
   return (
-    <>
-      <div id={id}>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.collection.id" />}
-            value={_.get(metadataCollection, 'collectionId', <NoValue />)}
-          />
-        </Row>
-        <Row>
-          <KeyValue
-            label={<FormattedMessage id="ui-finc-config.collection.productIsil" />}
-            value={_.get(metadataCollection, 'productIsil', <NoValue />)}
-          />
-        </Row>
-        <Row>
-          <Headline
-            className={BasicCss.styleForViewHeadline}
-            size="medium"
-          >
-            <FormattedMessage id="ui-finc-config.collection.tickets" />
-          </Headline>
-        </Row>
-        <Row>
-          { renderUrlList('tickets') }
-        </Row>
-        <Row>
-          <Headline
-            className={BasicCss.styleForViewHeadline}
-            size="medium"
-          >
-            <FormattedMessage id="ui-finc-config.collection.contentFiles" />
-          </Headline>
-        </Row>
-        <Row>
-          { renderUrlList('contentFiles') }
-        </Row>
-        <Row>
-          <Headline
-            className={BasicCss.styleForViewHeadline}
-            size="medium"
-          >
-            <FormattedMessage id="ui-finc-config.collection.solrMegaCollections" />
-          </Headline>
-        </Row>
-        <Row>
-          { renderList('solrMegaCollections') }
-        </Row>
-      </div>
-    </>
+    <div id={id}>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.collection.id" />}
+          value={_.get(metadataCollection, 'collectionId', <NoValue />)}
+        />
+      </Row>
+      <Row>
+        <KeyValue
+          label={<FormattedMessage id="ui-finc-config.collection.productIsil" />}
+          value={_.get(metadataCollection, 'productIsil', <NoValue />)}
+        />
+      </Row>
+      <Row>
+        <Headline
+          className={BasicCss.styleForViewHeadline}
+          size="medium"
+        >
+          <FormattedMessage id="ui-finc-config.collection.tickets" />
+        </Headline>
+      </Row>
+      <Row>
+        { renderUrlList('tickets') }
+      </Row>
+      <Row>
+        <Headline
+          className={BasicCss.styleForViewHeadline}
+          size="medium"
+        >
+          <FormattedMessage id="ui-finc-config.collection.contentFiles" />
+        </Headline>
+      </Row>
+      <Row>
+        { renderUrlList('contentFiles') }
+      </Row>
+      <Row>
+        <Headline
+          className={BasicCss.styleForViewHeadline}
+          size="medium"
+        >
+          <FormattedMessage id="ui-finc-config.collection.solrMegaCollections" />
+        </Headline>
+      </Row>
+      <Row>
+        { renderList('solrMegaCollections') }
+      </Row>
+    </div>
   );
 };
 

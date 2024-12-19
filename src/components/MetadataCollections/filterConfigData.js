@@ -7,7 +7,7 @@ const filterConfig = [
     values: [
       { name: <FormattedMessage id="ui-finc-config.dataOption.yes" />, cql: 'yes' },
       { name: <FormattedMessage id="ui-finc-config.dataOption.no" />, cql: 'no' },
-      { name: <FormattedMessage id="ui-finc-config.dataOption.undetermined" />, cql: 'undetermined' }
+      { name: <FormattedMessage id="ui-finc-config.dataOption.undetermined" />, cql: 'undetermined' },
     ],
   },
   {
@@ -15,7 +15,7 @@ const filterConfig = [
     cql: 'usageRestricted',
     values: [
       { name: <FormattedMessage id="ui-finc-config.dataOption.yes" />, cql: 'yes' },
-      { name: <FormattedMessage id="ui-finc-config.dataOption.no" />, cql: 'no' }
+      { name: <FormattedMessage id="ui-finc-config.dataOption.no" />, cql: 'no' },
     ],
   },
   {
@@ -24,7 +24,7 @@ const filterConfig = [
     values: [
       { name: <FormattedMessage id="ui-finc-config.dataOption.yes" />, cql: 'yes' },
       { name: <FormattedMessage id="ui-finc-config.dataOption.no" />, cql: 'no' },
-      { name: <FormattedMessage id="ui-finc-config.dataOption.undetermined" />, cql: 'undetermined' }
+      { name: <FormattedMessage id="ui-finc-config.dataOption.undetermined" />, cql: 'undetermined' },
     ],
   },
   {
@@ -32,7 +32,7 @@ const filterConfig = [
     cql: 'mdSource.id',
     operator: '==',
     values: [],
-  }
+  },
 ];
 
 export default filterConfig;

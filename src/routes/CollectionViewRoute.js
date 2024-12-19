@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
-import ReactRouterPropTypes from 'react-router-prop-types';
 import { useQuery } from 'react-query';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
-import { useOkapiKy, useStripes } from '@folio/stripes/core';
+import {
+  useOkapiKy,
+  useStripes,
+} from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionView from '../components/MetadataCollections/MetadataCollectionView';
@@ -24,7 +27,7 @@ const CollectionViewRoute = ({
       [COLLECTION_API, collectionId],
       () => ky.get(`${COLLECTION_API}/${collectionId}`).json(),
       // The query will not execute until the id exists
-      { enabled: Boolean(collectionId) },
+      { enabled: Boolean(collectionId) }
     );
 
     return ({
