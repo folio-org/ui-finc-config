@@ -82,7 +82,7 @@
     "settings.isils.isilIsEmpty": "请填写isil以继续",
     "settings.isils.tenantIsEmpty": "请填写租户以继续",
     "permission.module.enabled": "Finc配置：模块已启用",
-    "permission.settings.manage": "设置（Finc配置）：可以查看和编辑设置",
+    "permission.settings.manage": "設定 ( Finc 設置 ) : 可以查看和編輯設定",
     "permission.all": "Finc配置：所有权限",
     "permission.view": "Finc配置：可以查看元数据来源和元数据集合",
     "source.search.all": "所有",
