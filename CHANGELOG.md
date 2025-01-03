@@ -1,6 +1,10 @@
 # Change history for ui-finc-config
 
 ## [7.1.0] (IN PROGRESS)
+* Restructure SASQ and localStorage ([UIFC-400](https://folio-org.atlassian.net/browse/UIFC-400))
+* Add tests for SASQ, adapt renderWithIntlConfiguration ([UIFC-401](https://folio-org.atlassian.net/browse/UIFC-401))
+* Add rules for eslint ([UIFC-396](https://folio-org.atlassian.net/browse/UIFC-396))
+* Adapt tests for index.js and routes ([UIFC-402](https://folio-org.atlassian.net/browse/UIFC-402))
 
 ## [7.0.0](https://github.com/folio-org/ui-finc-config/tree/v7.0.0) (2024-11-04)
 * React v19: refactor away from default props for functional components([UIFC-355](https://folio-org.atlassian.net/browse/UIFC-355))
@@ -11,9 +15,6 @@
 * Refine EditCard ([UIFC-381](https://folio-org.atlassian.net/browse/UIFC-381))
 * Update required interfaces ([UIFC-384](https://folio-org.atlassian.net/browse/UIFC-384))
 * Update permissions ([UIFC-394](https://folio-org.atlassian.net/browse/UIFC-394))
-* Restructure SASQ and localStorage ([UIFC-400](https://folio-org.atlassian.net/browse/UIFC-400))
-* Add tests for SASQ, adapt renderWithIntlConfiguration ([UIFC-401](https://folio-org.atlassian.net/browse/UIFC-401))
-* Add rules for eslint ([UIFC-396](https://folio-org.atlassian.net/browse/UIFC-396))
 
 ## [6.1.0](https://github.com/folio-org/ui-finc-config/tree/v6.1.0) (2024-03-20)
 * Remove deprecated pane properties ([UIFC-337](https://issues.folio.org/browse/UIFC-337))
