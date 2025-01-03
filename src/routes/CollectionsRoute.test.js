@@ -1,4 +1,3 @@
-import { noop } from 'lodash';
 import { MemoryRouter } from 'react-router-dom';
 
 import { screen } from '@folio/jest-config-stripes/testing-library/react';
@@ -18,7 +17,7 @@ const routeProps = {
   },
   location: {},
   mutator: {
-    query: { update: noop },
+    query: { update: jest.fn() },
   },
   resources: { collections },
 };
@@ -27,7 +26,7 @@ jest.unmock('react-intl');
 
 describe('CollectionsRoute', () => {
   describe('rendering the route with permissions', () => {
-    beforeEach(() => {
+    it('should render the collections component', () => {
       renderWithIntlConfiguration(
         <MemoryRouter>
           <CollectionsRoute
@@ -36,15 +35,14 @@ describe('CollectionsRoute', () => {
           />
         </MemoryRouter>
       );
-    });
 
-    test('renders the collections component', () => {
       expect(screen.getByTestId('collections')).toBeInTheDocument();
+      expect(screen.getByText('Metadata collections')).toBeInTheDocument();
     });
   });
 
   describe('rendering with no permissions', () => {
-    beforeEach(() => {
+    it('should render the permission error', () => {
       renderWithIntlConfiguration(
         <MemoryRouter>
           <CollectionsRoute
@@ -53,9 +51,7 @@ describe('CollectionsRoute', () => {
           />
         </MemoryRouter>
       );
-    });
 
-    test('displays the permission error', () => {
       expect(screen.getByText('Permission error')).toBeInTheDocument();
     });
   });

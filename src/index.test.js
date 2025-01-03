@@ -22,18 +22,25 @@ jest.mock('./routes/SourcesRoute', () => ({ children }) => (
 jest.mock('./routes/SourceViewRoute', () => () => <div>SourceViewRoute</div>);
 jest.mock('./settings', () => () => <div>Settings</div>);
 
+const match = {
+  isExact: false,
+  params: {},
+  path: '/finc-config',
+  url: '/finc-config',
+};
+
 const renderComponent = (showSettings, testPath) => render(
   <MemoryRouter initialEntries={[testPath]}>
     <FincConfig
       location={{}}
-      match={{ path: '/finc-config' }}
+      match={match}
       showSettings={showSettings}
       stripes={{}}
     />
   </MemoryRouter>
 );
 
-describe('FincConfig settings', () => {
+describe('render FincConfig settings', () => {
   it('should render <Settings> when showSettings is true', () => {
     renderComponent(true, '/finc-config');
     expect(screen.getByText('Settings')).toBeInTheDocument();
@@ -45,7 +52,7 @@ describe('FincConfig settings', () => {
   });
 });
 
-describe('FincConfig routes', () => {
+describe('render FincConfig routes', () => {
   it('should render <SourceCreateRoute>', () => {
     renderComponent(false, '/finc-config/metadata-sources/create');
     expect(screen.getByText('SourceCreateRoute')).toBeInTheDocument();
