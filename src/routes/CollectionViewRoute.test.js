@@ -5,7 +5,9 @@ import {
 import { MemoryRouter } from 'react-router-dom';
 
 import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
+import { useOkapiKy } from '@folio/stripes/core';
 
+import collection from '../../test/fixtures/metadatacollection';
 import renderWithIntlConfiguration from '../../test/jest/helpers/renderWithIntlConfiguration';
 import CollectionViewRoute from './CollectionViewRoute';
 
@@ -41,6 +43,10 @@ const queryClient = new QueryClient();
 jest.unmock('react-intl');
 
 describe('render CollectionViewRoute', () => {
+  useOkapiKy.mockReturnValue({
+    get: jest.fn(() => ({ json: () => collection })),
+  });
+
   test('should render the details-id', async () => {
     renderWithIntlConfiguration(
       <QueryClientProvider client={queryClient}>
