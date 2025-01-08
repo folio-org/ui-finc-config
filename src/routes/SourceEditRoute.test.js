@@ -4,37 +4,26 @@ import {
 } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
 
-import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  render,
+  screen,
+} from '@folio/jest-config-stripes/testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
 
-import renderWithIntlConfiguration from '../../test/jest/helpers/renderWithIntlConfiguration';
+import routeProps from '../../test/fixtures/routeProps';
 import SourceEditRoute from './SourceEditRoute';
 
-const routeProps = {
-  history: {
-    push: () => jest.fn(),
-  },
-  location: {
-    search: '',
-  },
-  match: {
-    params: {
-      id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
-    },
-  },
-};
-
 const queryClient = new QueryClient();
-
-jest.unmock('react-intl');
 
 useOkapiKy.mockReturnValue({
   get: jest.fn(() => ({ json: () => jest.fn() })),
 });
 
+jest.mock('../components/MetadataSources/MetadataSourceForm', () => () => <div>MetadataSourceForm</div>);
+
 describe('render SourceEditRoute', () => {
-  test('should render form-id', async () => {
-    renderWithIntlConfiguration(
+  it('should render MetadataSourceForm', async () => {
+    render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <SourceEditRoute {...routeProps} />
@@ -42,6 +31,6 @@ describe('render SourceEditRoute', () => {
       </QueryClientProvider>
     );
 
-    await waitFor(() => expect(document.querySelector('#form-source')).toBeInTheDocument());
+    await expect(screen.findByText('MetadataSourceForm')).resolves.toBeInTheDocument();
   });
 });

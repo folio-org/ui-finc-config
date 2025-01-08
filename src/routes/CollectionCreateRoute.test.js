@@ -4,27 +4,21 @@ import {
 } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
 
-import { screen } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  render,
+  screen,
+} from '@folio/jest-config-stripes/testing-library/react';
 
-import renderWithIntlConfiguration from '../../test/jest/helpers/renderWithIntlConfiguration';
+import routeProps from '../../test/fixtures/routeProps';
 import CollectionCreateRoute from './CollectionCreateRoute';
-
-const routeProps = {
-  history: {
-    push: () => jest.fn(),
-  },
-  location: {
-    search: '',
-  },
-};
 
 const queryClient = new QueryClient();
 
-jest.unmock('react-intl');
+jest.mock('../components/MetadataCollections/MetadataCollectionForm', () => () => <div>MetadataCollectionForm</div>);
 
 describe('render CollectionCreateRoute', () => {
-  it('should render form-id and create-title', () => {
-    renderWithIntlConfiguration(
+  it('should render MetadataCollectionForm', () => {
+    render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <CollectionCreateRoute {...routeProps} />
@@ -32,7 +26,6 @@ describe('render CollectionCreateRoute', () => {
       </QueryClientProvider>
     );
 
-    expect(document.querySelector('#form-collection')).toBeInTheDocument();
-    expect(screen.getByText('Create')).toBeInTheDocument();
+    expect(screen.getByText('MetadataCollectionForm')).toBeInTheDocument();
   });
 });

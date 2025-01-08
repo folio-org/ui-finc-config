@@ -4,27 +4,21 @@ import {
 } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
 
-import { screen } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  render,
+  screen,
+} from '@folio/jest-config-stripes/testing-library/react';
 
-import renderWithIntlConfiguration from '../../test/jest/helpers/renderWithIntlConfiguration';
+import routeProps from '../../test/fixtures/routeProps';
 import SourceCreateRoute from './SourceCreateRoute';
-
-const routeProps = {
-  history: {
-    push: () => jest.fn(),
-  },
-  location: {
-    search: '',
-  },
-};
 
 const queryClient = new QueryClient();
 
-jest.unmock('react-intl');
+jest.mock('../components/MetadataSources/MetadataSourceForm', () => () => <div>MetadataSourceForm</div>);
 
 describe('render SourceCreateRoute', () => {
-  it('should render form-id and create-title', () => {
-    renderWithIntlConfiguration(
+  it('should render MetadataSourceForm', () => {
+    render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <SourceCreateRoute {...routeProps} />
@@ -32,7 +26,6 @@ describe('render SourceCreateRoute', () => {
       </QueryClientProvider>
     );
 
-    expect(document.querySelector('#form-source')).toBeInTheDocument();
-    expect(screen.getByText('Create')).toBeInTheDocument();
+    expect(screen.getByText('MetadataSourceForm')).toBeInTheDocument();
   });
 });
