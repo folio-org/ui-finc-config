@@ -16,10 +16,16 @@ import SourceViewRoute from './SourceViewRoute';
 
 const queryClient = new QueryClient();
 
+jest.mock('react-query', () => ({
+  ...jest.requireActual('react-query'),
+  useQuery: jest.fn().mockReturnValue({}),
+  useMutation: jest.fn().mockReturnValue({}),
+}));
+
 jest.mock('../components/MetadataSources/MetadataSourceView', () => () => <div>MetadataSourceView</div>);
 
 describe('render SourceViewRoute', () => {
-  it('should render MetadataSourceView', async () => {
+  it('should render MetadataSourceView', () => {
     useOkapiKy.mockReturnValue({
       get: jest.fn(() => ({ json: () => metadatasource })),
     });
@@ -28,12 +34,13 @@ describe('render SourceViewRoute', () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <SourceViewRoute
+            stripes={{ user: { perms: 'finc-config.metadata-sources.item.put' } }}
             {...routeProps}
           />
         </MemoryRouter>
       </QueryClientProvider>
     );
 
-    await expect(screen.findByText('MetadataSourceView')).resolves.toBeInTheDocument();
+    expect(screen.getByText('MetadataSourceView')).toBeInTheDocument();
   });
 });

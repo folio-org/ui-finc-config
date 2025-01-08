@@ -16,6 +16,12 @@ import CollectionViewRoute from './CollectionViewRoute';
 
 const queryClient = new QueryClient();
 
+jest.mock('react-query', () => ({
+  ...jest.requireActual('react-query'),
+  useQuery: jest.fn().mockReturnValue({}),
+  useMutation: jest.fn().mockReturnValue({}),
+}));
+
 jest.mock('../components/MetadataCollections/MetadataCollectionView', () => () => <div>MetadataCollectionView</div>);
 
 describe('render CollectionViewRoute', () => {
@@ -23,17 +29,18 @@ describe('render CollectionViewRoute', () => {
     get: jest.fn(() => ({ json: () => metadatacollection })),
   });
 
-  it('should render MetadataCollectionView', async () => {
+  it('should render MetadataCollectionView', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <CollectionViewRoute
+            stripes={{ user: { perms: 'finc-config.metadata-collections.item.put' } }}
             {...routeProps}
           />
         </MemoryRouter>
       </QueryClientProvider>
     );
 
-    await expect(screen.findByText('MetadataCollectionView')).resolves.toBeInTheDocument();
+    expect(screen.getByText('MetadataCollectionView')).toBeInTheDocument();
   });
 });

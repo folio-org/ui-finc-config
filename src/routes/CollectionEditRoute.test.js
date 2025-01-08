@@ -19,10 +19,16 @@ useOkapiKy.mockReturnValue({
   get: jest.fn(() => ({ json: () => jest.fn() })),
 });
 
+jest.mock('react-query', () => ({
+  ...jest.requireActual('react-query'),
+  useQuery: jest.fn().mockReturnValue({}),
+  useMutation: jest.fn().mockReturnValue({}),
+}));
+
 jest.mock('../components/MetadataCollections/MetadataCollectionForm', () => () => <div>MetadataCollectionForm</div>);
 
 describe('render CollectionEditRoute', () => {
-  it('should render MetadataCollectionForm', async () => {
+  it('should render MetadataCollectionForm', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -31,6 +37,6 @@ describe('render CollectionEditRoute', () => {
       </QueryClientProvider>
     );
 
-    await expect(screen.findByText('MetadataCollectionForm')).resolves.toBeInTheDocument();
+    expect(screen.getByText('MetadataCollectionForm')).toBeInTheDocument();
   });
 });
