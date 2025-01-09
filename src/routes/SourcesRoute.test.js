@@ -5,7 +5,6 @@ import {
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
 
-import metadatasources from '../../test/fixtures/metadatasources';
 import routeProps from '../../test/fixtures/routeProps';
 import SourcesRoute from './SourcesRoute';
 
@@ -17,7 +16,6 @@ describe('SourcesRoute', () => {
       render(
         <MemoryRouter>
           <SourcesRoute
-            resources={{ metadatasources }}
             stripes={{ hasPerm: () => true, logger: { log: () => jest.fn() } }}
             {...routeProps}
           />
@@ -33,7 +31,6 @@ describe('SourcesRoute', () => {
       render(
         <MemoryRouter>
           <SourcesRoute
-            resources={{ metadatasources }}
             stripes={{ hasPerm: () => false, logger: { log: () => jest.fn() } }}
             {...routeProps}
           />

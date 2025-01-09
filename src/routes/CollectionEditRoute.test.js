@@ -8,16 +8,11 @@ import {
   render,
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
-import { useOkapiKy } from '@folio/stripes/core';
 
 import routeProps from '../../test/fixtures/routeProps';
 import CollectionEditRoute from './CollectionEditRoute';
 
 const queryClient = new QueryClient();
-
-useOkapiKy.mockReturnValue({
-  get: jest.fn(() => ({ json: () => jest.fn() })),
-});
 
 jest.mock('react-query', () => ({
   ...jest.requireActual('react-query'),

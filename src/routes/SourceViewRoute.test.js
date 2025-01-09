@@ -8,9 +8,7 @@ import {
   render,
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
-import { useOkapiKy } from '@folio/stripes/core';
 
-import metadatasource from '../../test/fixtures/metadatasource';
 import routeProps from '../../test/fixtures/routeProps';
 import SourceViewRoute from './SourceViewRoute';
 
@@ -26,17 +24,10 @@ jest.mock('../components/MetadataSources/MetadataSourceView', () => () => <div>M
 
 describe('render SourceViewRoute', () => {
   it('should render MetadataSourceView', () => {
-    useOkapiKy.mockReturnValue({
-      get: jest.fn(() => ({ json: () => metadatasource })),
-    });
-
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <SourceViewRoute
-            stripes={{ user: { perms: 'finc-config.metadata-sources.item.put' } }}
-            {...routeProps}
-          />
+          <SourceViewRoute {...routeProps} />
         </MemoryRouter>
       </QueryClientProvider>
     );

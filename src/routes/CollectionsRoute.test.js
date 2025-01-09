@@ -5,7 +5,6 @@ import {
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
 
-import metadatacollections from '../../test/fixtures/metadatacollections';
 import routeProps from '../../test/fixtures/routeProps';
 import CollectionsRoute from './CollectionsRoute';
 
@@ -17,7 +16,6 @@ describe('CollectionsRoute', () => {
       render(
         <MemoryRouter>
           <CollectionsRoute
-            resources={{ metadatacollections }}
             stripes={{ hasPerm: () => true, logger: { log: () => jest.fn() } }}
             {...routeProps}
           />
@@ -33,7 +31,6 @@ describe('CollectionsRoute', () => {
       render(
         <MemoryRouter>
           <CollectionsRoute
-            resources={{ metadatacollections }}
             stripes={{ hasPerm: () => false, logger: { log: () => jest.fn() } }}
             {...routeProps}
           />
