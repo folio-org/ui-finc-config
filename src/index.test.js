@@ -1,94 +1,26 @@
-import { noop } from 'lodash';
-import {
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query';
+import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import {
+  render,
   screen,
-  waitFor,
 } from '@folio/jest-config-stripes/testing-library/react';
-import { useOkapiKy } from '@folio/stripes/core';
 
-import collections from '../test/fixtures/metadatacollections';
-import sources from '../test/fixtures/metadatasources';
-import renderWithIntlConfiguration from '../test/jest/helpers/renderWithIntlConfiguration';
 import FincConfig from './index';
-import CollectionCreateRoute from './routes/CollectionCreateRoute';
-import CollectionEditRoute from './routes/CollectionEditRoute';
-import CollectionsRoute from './routes/CollectionsRoute';
-import CollectionViewRoute from './routes/CollectionViewRoute';
-import SourceCreateRoute from './routes/SourceCreateRoute';
-import SourceEditRoute from './routes/SourceEditRoute';
-import SourcesRoute from './routes/SourcesRoute';
-import SourceViewRoute from './routes/SourceViewRoute';
 
-const routeProps = {
-  history: {
-    push: () => jest.fn(),
-  },
-  match: {
-    params: {
-      id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
-    },
-  },
-  location: {},
-  mutator: {
-    query: { update: noop },
-  },
-  resources: { collections, sources },
-};
-
-const createRouteProps = {
-  history: {
-    push: () => jest.fn(),
-  },
-  location: {
-    search: '',
-  },
-};
-
-const editRouteProps = {
-  history: {
-    push: () => jest.fn(),
-  },
-  location: {
-    search: '',
-  },
-  match: {
-    params: {
-      id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
-    },
-  },
-};
-
-const viewRouteProps = {
-  history: {
-    action: 'PUSH',
-    block: jest.fn(),
-    createHref: jest.fn(),
-    go: jest.fn(),
-    listen: jest.fn(),
-    location: {
-      hash: '',
-      pathname: '',
-      search: '',
-    },
-    push: () => jest.fn(),
-    replace: () => jest.fn(),
-  },
-  location: {
-    hash: '',
-    pathname: '',
-    search: '',
-  },
-  match: {
-    params: {
-      id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
-    },
-  },
-};
+jest.mock('./routes/CollectionCreateRoute', () => () => <div>CollectionCreateRoute</div>);
+jest.mock('./routes/CollectionEditRoute', () => () => <div>CollectionEditRoute</div>);
+jest.mock('./routes/CollectionsRoute', () => ({ children }) => (
+  <div>CollectionsRoute {children}</div>
+));
+jest.mock('./routes/CollectionViewRoute', () => () => <div>CollectionViewRoute</div>);
+jest.mock('./routes/SourceCreateRoute', () => () => <div>SourceCreateRoute</div>);
+jest.mock('./routes/SourceEditRoute', () => () => <div>SourceEditRoute</div>);
+jest.mock('./routes/SourcesRoute', () => ({ children }) => (
+  <div>SourcesRoute {children}</div>
+));
+jest.mock('./routes/SourceViewRoute', () => () => <div>SourceViewRoute</div>);
+jest.mock('./settings', () => () => <div>Settings</div>);
 
 const match = {
   isExact: false,
@@ -97,82 +29,59 @@ const match = {
   url: '/finc-config',
 };
 
-const queryClient = new QueryClient();
-
-const renderWithRouter = (component) => (
-  renderWithIntlConfiguration(
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter>
-        {component}
-      </MemoryRouter>
-    </QueryClientProvider>
-  )
+const renderComponent = (showSettings, testPath) => render(
+  <MemoryRouter initialEntries={[testPath]}>
+    <FincConfig
+      location={{}}
+      match={match}
+      showSettings={showSettings}
+      stripes={{}}
+    />
+  </MemoryRouter>
 );
 
-jest.unmock('react-intl');
+describe('render FincConfig settings', () => {
+  it('should render <Settings> when showSettings is true', () => {
+    renderComponent(true, '/finc-config');
+    expect(screen.getByText('Settings')).toBeInTheDocument();
+  });
 
-jest.mock('./index', () => {
-  return () => <span>FincConfig</span>;
+  it('should not render <Settings> when showSettings is false', () => {
+    renderComponent(false, '/finc-config');
+    expect(screen.queryByText('Settings')).not.toBeInTheDocument();
+  });
 });
 
-useOkapiKy.mockReturnValue({
-  get: jest.fn(() => ({ json: () => jest.fn() })),
-});
+describe('render FincConfig routes', () => {
+  it('should render <SourceCreateRoute>', () => {
+    renderComponent(false, '/finc-config/metadata-sources/create');
+    expect(screen.getByText('SourceCreateRoute')).toBeInTheDocument();
+  });
 
-it('should render CollectionsRoute', () => {
-  renderWithRouter(<CollectionsRoute {...routeProps} />);
+  it('should render <SourceEditRoute>', () => {
+    renderComponent(false, '/finc-config/metadata-sources/50304b4b-cca1-49a8-8caa-318f0a07efa4/edit');
+    expect(screen.getByText('SourceEditRoute')).toBeInTheDocument();
+  });
 
-  expect(screen.getByTestId('collections')).toBeInTheDocument();
-  expect(screen.getByText('Metadata collections')).toBeInTheDocument();
-});
+  it('should render <SourcesRoute> and <SourceViewRoute>', () => {
+    renderComponent(false, '/finc-config/metadata-sources/50304b4b-cca1-49a8-8caa-318f0a07efa4');
+    expect(screen.getByText('SourcesRoute')).toBeInTheDocument();
+    expect(screen.getByText('SourceViewRoute')).toBeInTheDocument();
+  });
 
-it('should render SourcesRoute', () => {
-  renderWithRouter(<SourcesRoute {...routeProps} />);
+  it('should render <CollectionCreateRoute>', () => {
+    renderComponent(false, '/finc-config/metadata-collections/create');
+    expect(screen.getByText('CollectionCreateRoute')).toBeInTheDocument();
+  });
 
-  expect(screen.getByTestId('sources')).toBeInTheDocument();
-  expect(screen.getByText('Metadata sources')).toBeInTheDocument();
-});
+  it('should render <CollectionEditRoute>', () => {
+    renderComponent(false, '/finc-config/metadata-collections/50304b4b-cca1-49a8-8caa-318f0a07efa4/edit');
+    expect(screen.getByText('CollectionEditRoute')).toBeInTheDocument();
+  });
 
-it('should render SourceCreateRoute', () => {
-  renderWithRouter(<SourceCreateRoute {...createRouteProps} />);
-
-  expect(document.querySelector('#form-source')).toBeInTheDocument();
-  expect(screen.getByText('Create')).toBeInTheDocument();
-});
-
-it('should render CollectionCreateRoute', () => {
-  renderWithRouter(<CollectionCreateRoute {...createRouteProps} />);
-
-  expect(document.querySelector('#form-collection')).toBeInTheDocument();
-  expect(screen.getByText('Create')).toBeInTheDocument();
-});
-
-it('should render SourceEditRoute', async () => {
-  renderWithRouter(<SourceEditRoute {...editRouteProps} />);
-  await waitFor(() => expect(document.querySelector('#form-source')).toBeInTheDocument());
-});
-
-it('should render CollectionEditRoute', async () => {
-  renderWithRouter(<CollectionEditRoute {...editRouteProps} />);
-  await waitFor(() => expect(document.querySelector('#form-collection')).toBeInTheDocument());
-});
-
-it('should render SourceViewRoute', async () => {
-  renderWithRouter(<SourceViewRoute {...viewRouteProps} />);
-
-  await waitFor(() => expect(document.querySelector('#pane-sourcedetails')).toBeInTheDocument());
-});
-
-it('should render CollectionViewRoute', async () => {
-  renderWithRouter(<CollectionViewRoute {...viewRouteProps} />);
-
-  await waitFor(() => expect(document.querySelector('#pane-collectiondetails')).toBeInTheDocument());
-});
-
-describe('Application root', () => {
-  it('should render without crashing', () => {
-    renderWithRouter(<FincConfig match={match} />);
-
-    expect(screen.getByText('FincConfig')).toBeInTheDocument();
+  it('should render <CollectionsRoute> and <CollectionViewRoute>', () => {
+    renderComponent(false, '/finc-config/metadata-collections/50304b4b-cca1-49a8-8caa-318f0a07efa4');
+    expect(screen.getByText('CollectionsRoute')).toBeInTheDocument();
+    expect(screen.getByText('CollectionViewRoute')).toBeInTheDocument();
   });
 });

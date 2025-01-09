@@ -1,62 +1,44 @@
-import { noop } from 'lodash';
 import { MemoryRouter } from 'react-router-dom';
 
-import { screen } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  render,
+  screen,
+} from '@folio/jest-config-stripes/testing-library/react';
 
-import collections from '../../test/fixtures/metadatacollections';
-import renderWithIntlConfiguration from '../../test/jest/helpers/renderWithIntlConfiguration';
+import routeProps from '../../test/fixtures/routeProps';
 import CollectionsRoute from './CollectionsRoute';
 
-const routeProps = {
-  history: {
-    push: () => jest.fn(),
-  },
-  match: {
-    params: {
-      id: '9a2427cd-4110-4bd9-b6f9-e3475631bbac',
-    },
-  },
-  location: {},
-  mutator: {
-    query: { update: noop },
-  },
-  resources: { collections },
-};
-
-jest.unmock('react-intl');
+jest.mock('../components/MetadataCollections/MetadataCollections', () => () => <div>MetadataCollections</div>);
 
 describe('CollectionsRoute', () => {
   describe('rendering the route with permissions', () => {
-    beforeEach(() => {
-      renderWithIntlConfiguration(
+    it('should render MetadataCollections', () => {
+      render(
         <MemoryRouter>
           <CollectionsRoute
-            {...routeProps}
             stripes={{ hasPerm: () => true, logger: { log: () => jest.fn() } }}
+            {...routeProps}
           />
         </MemoryRouter>
       );
-    });
 
-    test('renders the collections component', () => {
-      expect(screen.getByTestId('collections')).toBeInTheDocument();
+      expect(screen.getByText('MetadataCollections')).toBeInTheDocument();
     });
   });
 
   describe('rendering with no permissions', () => {
-    beforeEach(() => {
-      renderWithIntlConfiguration(
+    it('should render the permission error', () => {
+      render(
         <MemoryRouter>
           <CollectionsRoute
-            {...routeProps}
             stripes={{ hasPerm: () => false, logger: { log: () => jest.fn() } }}
+            {...routeProps}
           />
         </MemoryRouter>
       );
-    });
 
-    test('displays the permission error', () => {
-      expect(screen.getByText('Permission error')).toBeInTheDocument();
+      expect(screen.queryByText('MetadataCollections')).not.toBeInTheDocument();
+      expect(screen.getByText('stripes-smart-components.permissionError')).toBeInTheDocument();
     });
   });
 });
