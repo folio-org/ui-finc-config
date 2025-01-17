@@ -22,6 +22,7 @@ import MetadataCollections from '../components/MetadataCollections/MetadataColle
 // const INITIAL_RESULT_COUNT = 30;
 // const RESULT_COUNT_INCREMENT = 30;
 const LIMIT = 30;
+const defaultFilter = { metadataAvailable: ['yes'] };
 
 const CollectionsRoute = ({
   children,
@@ -37,13 +38,9 @@ const CollectionsRoute = ({
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(0);
 
-  const [activeFilters, setActiveFilters] = useState({});
+  const [activeFilters, setActiveFilters] = useState(defaultFilter);
   const [activeIndex, setActiveIndex] = useState('');
   const [activeSearch, setActiveSearch] = useState('');
-
-  const [pendingFilters, setPendingFilters] = useState({});
-  const [pendingSearch, setPendingSearch] = useState('');
-  const [pendingIndex, setPendingIndex] = useState('');
 
   useEffect(() => {
     if (searchField.current) {
@@ -51,13 +48,7 @@ const CollectionsRoute = ({
     }
   }, []);
 
-  useEffect(() => {
-    setActiveFilters(pendingFilters);
-    setActiveSearch(pendingSearch);
-    setActiveIndex(pendingIndex);
-  }, [pendingFilters, pendingSearch, pendingIndex]);
-
-  const locationQuerySetter = ({ location, history, nsValues }) => {
+  const locationQuerySetter = ({ nsValues }) => {
     const { pathname, search } = location;
     const url = buildUrl(location, nsValues);
 
@@ -72,7 +63,7 @@ const CollectionsRoute = ({
 
   const querySetter = ({ nsValues }) => {
     setQuery({ ...query, ...nsValues, activeIndex });
-    locationQuerySetter({ location, history, nsValues });
+    locationQuerySetter({ nsValues });
   };
 
   const MDSOURCES_API = 'finc-config/tiny-metadata-sources';
@@ -116,7 +107,9 @@ const CollectionsRoute = ({
           filterQueries.push(`(${filterConfig.find(f => f.name === key).cql}=="${values[0]}")`);
         } else {
           // For multi-select filters, join the values with 'OR'
-          const filterCql = values.map(value => `(${filterConfig.find(f => f.name === key).cql}=="${value}")`).join(' OR ');
+          const filterCql = values.map(
+            value => `(${filterConfig.find(f => f.name === key).cql}=="${value}")`
+          ).join(' OR ');
           filterQueries.push(`(${filterCql})`);
         }
       }
@@ -127,13 +120,13 @@ const CollectionsRoute = ({
   };
 
   const handleFilterChange = (filters, searchValue) => {
-    setPendingFilters(filters);
-    setPendingSearch(searchValue);
+    setActiveFilters(filters);
+    setActiveSearch(searchValue);
   };
 
   // add update if search-selectbox is changing
   const onChangeIndex = (qindex) => {
-    setPendingIndex(qindex);
+    setActiveIndex(qindex);
   };
 
   const {
@@ -200,13 +193,13 @@ const CollectionsRoute = ({
   return (
     <>
       <div>
-        <button disabled={offset === 0} onClick={handlePrevPage}>
+        <button disabled={offset === 0} onClick={handlePrevPage} type="button">
           Previous
         </button>
         <span>
           Page {Math.ceil(offset / LIMIT) + 1} of {Math.ceil(total / LIMIT)}
         </span>
-        <button disabled={offset + LIMIT >= total} onClick={handleNextPage}>
+        <button disabled={offset + LIMIT >= total} onClick={handleNextPage} type="button">
           Next
         </button>
       </div>
@@ -242,6 +235,7 @@ CollectionsRoute.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   location: PropTypes.shape({
+    pathname: PropTypes.string,
     search: PropTypes.string,
   }).isRequired,
   match: PropTypes.shape({

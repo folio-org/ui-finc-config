@@ -149,9 +149,8 @@ const MetadataCollections = ({
   };
 
   // counting records of result list
-  const renderResultsPaneSubtitle = (col) => {
-    if (col) {
-      const count = col ? col.totalCount() : 0;
+  const renderResultsPaneSubtitle = () => {
+    if (count) {
       return <FormattedMessage id="stripes-smart-components.searchResultsCountHeader" values={{ count }} />;
     }
 
@@ -191,7 +190,7 @@ const MetadataCollections = ({
     />
   );
 
-  const renderIsEmptyMessage = (query, source) => {
+  const renderIsEmptyMessage = () => {
     if (!source) {
       return <FormattedMessage id="ui-finc-config.noSourceYet" />;
     }
@@ -242,12 +241,12 @@ const MetadataCollections = ({
     />
   );
 
-  const renderResultsPaneHeader = (activeFilters, col) => (
+  const renderResultsPaneHeader = (activeFilters) => (
     <PaneHeader
       appIcon={<AppIcon app="finc-config" />}
       firstMenu={renderResultsFirstMenu(activeFilters)}
       lastMenu={renderResultsLastMenu()}
-      paneSub={renderResultsPaneSubtitle(col)}
+      paneSub={renderResultsPaneSubtitle()}
       paneTitle={<FormattedMessage id="ui-finc-config.collections.title" />}
     />
   );
@@ -369,7 +368,7 @@ const MetadataCollections = ({
                   defaultWidth="fill"
                   id="pane-collection-results"
                   padContent={false}
-                  renderHeader={() => renderResultsPaneHeader(activeFilters, source)}
+                  renderHeader={() => renderResultsPaneHeader(activeFilters)}
                 >
                   <MultiColumnList
                     autosize
@@ -377,7 +376,7 @@ const MetadataCollections = ({
                     contentData={contentData}
                     formatter={resultsFormatter}
                     id="list-collections"
-                    isEmptyMessage={renderIsEmptyMessage(query, source)}
+                    isEmptyMessage={renderIsEmptyMessage()}
                     isSelected={({ item }) => item.id === selectedRecordId}
                     onHeaderClick={onSort}
                     // onNeedMoreData={onNeedMoreData}
@@ -415,6 +414,7 @@ MetadataCollections.propTypes = {
   }),
   // add values for search-selectbox
   onChangeIndex: PropTypes.func,
+  onFilterChange: PropTypes.func,
   onNeedMoreData: PropTypes.func,
   onSelectRow: PropTypes.func,
   queryGetter: PropTypes.func,
@@ -423,7 +423,6 @@ MetadataCollections.propTypes = {
   searchString: PropTypes.string,
   selectedRecordId: PropTypes.string,
   source: PropTypes.object,
-  onFilterChange: PropTypes.func,
 };
 
 export default injectIntl(withRouter(MetadataCollections));
