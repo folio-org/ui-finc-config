@@ -1,6 +1,5 @@
 import {
   get,
-  isEqual,
   noop,
 } from 'lodash';
 import PropTypes from 'prop-types';
@@ -58,22 +57,26 @@ const defaultSort = { sort: 'label' };
 
 const MetadataCollections = ({
   children,
-  collection,
-  contentData = { mdSources: [] },
+  contentData = { },
   disableRecordCreation,
-  filterData = {},
+  filterData = { mdSources: [] },
   intl,
   // add values for search-selectbox
   onChangeIndex,
-  onNeedMoreData,
+  // onNeedMoreData,
   onSelectRow,
   queryGetter,
   querySetter,
   searchField,
   searchString = '',
   selectedRecordId,
+  source,
+  onFilterChange,
 }) => {
   const [filterPaneIsVisible, setFilterPaneIsVisible] = useState(true);
+
+  const count = source?.totalCount() ?? 0;
+  const query = queryGetter() ?? {};
 
   const getDataLabel = (fieldValue) => {
     if (fieldValue !== '') {
@@ -249,8 +252,6 @@ const MetadataCollections = ({
     />
   );
 
-  const count = collection ? collection.totalCount() : 0;
-  const query = queryGetter() || {};
   const sortOrder = query.sort || '';
   const visibleColumns = getVisibleColumns();
   const columnMapping = getColumnMapping();
@@ -284,14 +285,21 @@ const MetadataCollections = ({
             onSubmitSearch,
             resetAll,
             searchValue,
+            filterChanged,
+            searchChanged,
           }) => {
             const doChangeIndex = (e) => {
               onChangeIndex(e.target.value);
               getSearchHandlers().query(e);
             };
 
-            const filterChanged = !isEqual(activeFilters.state, defaultFilter);
-            const searchChanged = searchValue.query && !isEqual(searchValue, defaultSearch);
+            // const filterChanged = !isEqual(activeFilters.state, defaultFilter);
+            // const searchChanged = searchValue.query && !isEqual(searchValue, defaultSearch);
+
+            if (filterChanged || searchChanged) {
+              // Notify the parent component when filters change
+              onFilterChange(activeFilters.state, searchValue.query);
+            }
 
             storeSearchString();
 
@@ -361,7 +369,7 @@ const MetadataCollections = ({
                   defaultWidth="fill"
                   id="pane-collection-results"
                   padContent={false}
-                  renderHeader={() => renderResultsPaneHeader(activeFilters, collection)}
+                  renderHeader={() => renderResultsPaneHeader(activeFilters, source)}
                 >
                   <MultiColumnList
                     autosize
@@ -369,10 +377,10 @@ const MetadataCollections = ({
                     contentData={contentData}
                     formatter={resultsFormatter}
                     id="list-collections"
-                    isEmptyMessage={renderIsEmptyMessage(query, collection)}
+                    isEmptyMessage={renderIsEmptyMessage(query, source)}
                     isSelected={({ item }) => item.id === selectedRecordId}
                     onHeaderClick={onSort}
-                    onNeedMoreData={onNeedMoreData}
+                    // onNeedMoreData={onNeedMoreData}
                     onRowClick={onSelectRow}
                     rowFormatter={rowFormatter}
                     sortDirection={
@@ -397,7 +405,6 @@ const MetadataCollections = ({
 MetadataCollections.propTypes = {
   activeFilters: PropTypes.object,
   children: PropTypes.object,
-  collection: PropTypes.object,
   contentData: PropTypes.arrayOf(PropTypes.object),
   disableRecordCreation: PropTypes.bool,
   filterData: PropTypes.shape({
@@ -415,6 +422,8 @@ MetadataCollections.propTypes = {
   searchField: PropTypes.object,
   searchString: PropTypes.string,
   selectedRecordId: PropTypes.string,
+  source: PropTypes.object,
+  onFilterChange: PropTypes.func,
 };
 
 export default injectIntl(withRouter(MetadataCollections));
