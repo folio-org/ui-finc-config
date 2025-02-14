@@ -1,10 +1,11 @@
 # Change history for ui-finc-config
 
-## [7.1.0] (IN PROGRESS)
+## [8.0.0] (IN PROGRESS)
 * Restructure SASQ and localStorage ([UIFC-400](https://folio-org.atlassian.net/browse/UIFC-400))
 * Add tests for SASQ, adapt renderWithIntlConfiguration ([UIFC-401](https://folio-org.atlassian.net/browse/UIFC-401))
 * Add rules for eslint ([UIFC-396](https://folio-org.atlassian.net/browse/UIFC-396))
 * Adapt tests for index.js and routes ([UIFC-402](https://folio-org.atlassian.net/browse/UIFC-402))
+* Migrate react-intl to v7 ([UIFC-410](https://folio-org.atlassian.net/browse/UIFC-410))
 
 ## [7.0.0](https://github.com/folio-org/ui-finc-config/tree/v7.0.0) (2024-11-04)
 * React v19: refactor away from default props for functional components([UIFC-355](https://folio-org.atlassian.net/browse/UIFC-355))
