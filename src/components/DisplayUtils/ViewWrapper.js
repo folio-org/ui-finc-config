@@ -25,7 +25,7 @@ import {
 import { useStripes } from '@folio/stripes/core';
 import { ViewMetaData } from '@folio/stripes/smart-components';
 
-const DetailView = ({
+const ViewWrapper = ({
   additionalProps,
   canEdit,
   handlers,
@@ -153,7 +153,7 @@ const DetailView = ({
   );
 };
 
-DetailView.propTypes = {
+ViewWrapper.propTypes = {
   accordionConfig: PropTypes.arrayOf(PropTypes.shape({
     Component: PropTypes.elementType.isRequired,
     id: PropTypes.string.isRequired,
@@ -172,4 +172,4 @@ DetailView.propTypes = {
   recordPropKey: PropTypes.string.isRequired,
 };
 
-export default DetailView;
+export default ViewWrapper;
