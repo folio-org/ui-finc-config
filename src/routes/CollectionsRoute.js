@@ -5,15 +5,14 @@ import {
   useRef,
   useState,
 } from 'react';
-import { FormattedMessage } from 'react-intl';
 
-import { Layout } from '@folio/stripes/components';
 import { stripesConnect } from '@folio/stripes/core';
 import {
   makeQueryFunction,
   StripesConnectedSource,
 } from '@folio/stripes/smart-components';
 
+import NoPermissionsMessage from '../components/DisplayUtils/NoPermissionsMessage';
 import urls from '../components/DisplayUtils/urls';
 import usePrevious from '../components/hooks/usePrevious';
 import filterConfig from '../components/MetadataCollections/filterConfigData';
@@ -61,9 +60,7 @@ const CollectionsRoute = ({
   }, [count, records]);
 
   useEffect(() => {
-    if (searchField.current) {
-      searchField.current.focus();
-    }
+    searchField.current?.focus();
   }, []);
 
   const querySetter = ({ nsValues }) => {
@@ -86,12 +83,7 @@ const CollectionsRoute = ({
   };
 
   if (!hasPerms) {
-    return (
-      <Layout className="textCentered">
-        <h2><FormattedMessage id="stripes-smart-components.permissionError" /></h2>
-        <p><FormattedMessage id="stripes-smart-components.permissionsDoNotAllowAccess" /></p>
-      </Layout>
-    );
+    return <NoPermissionsMessage />;
   }
 
   return (
