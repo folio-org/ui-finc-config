@@ -45,7 +45,6 @@ const CollectionsRoute = ({
     source.update({ resources, mutator }, 'collections');
     setCount(source.totalCount());
     setRecords(source.records());
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resources, mutator]);
 
