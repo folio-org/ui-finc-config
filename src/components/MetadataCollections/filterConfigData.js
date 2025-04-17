@@ -4,6 +4,7 @@ const filterConfig = [
   {
     name: 'metadataAvailable',
     cql: 'metadataAvailable',
+    operator: '=',
     values: [
       { name: <FormattedMessage id="ui-finc-config.dataOption.yes" />, cql: 'yes' },
       { name: <FormattedMessage id="ui-finc-config.dataOption.no" />, cql: 'no' },
@@ -13,6 +14,7 @@ const filterConfig = [
   {
     name: 'usageRestricted',
     cql: 'usageRestricted',
+    operator: '=',
     values: [
       { name: <FormattedMessage id="ui-finc-config.dataOption.yes" />, cql: 'yes' },
       { name: <FormattedMessage id="ui-finc-config.dataOption.no" />, cql: 'no' },
@@ -21,6 +23,7 @@ const filterConfig = [
   {
     name: 'freeContent',
     cql: 'freeContent',
+    operator: '=',
     values: [
       { name: <FormattedMessage id="ui-finc-config.dataOption.yes" />, cql: 'yes' },
       { name: <FormattedMessage id="ui-finc-config.dataOption.no" />, cql: 'no' },
