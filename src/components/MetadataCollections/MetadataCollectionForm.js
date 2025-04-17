@@ -2,7 +2,7 @@ import { isEqual } from 'lodash';
 
 import stripesFinalForm from '@folio/stripes/final-form';
 
-import FormWrapper from '../DisplayUtils/FormWrapper';
+import FormContainer from '../DisplayUtils/FormContainer';
 import CollectionInfoForm from './CollectionInfo/CollectionInfoForm';
 import CollectionManagementForm from './CollectionManagement/CollectionManagementForm';
 import CollectionTechnicalForm from './CollectionTechnical/CollectionTechnicalForm';
@@ -18,7 +18,7 @@ const formConfig = {
   ],
 };
 
-const WrappedForm = (props) => <FormWrapper {...props} {...formConfig} />;
+const WrappedForm = (props) => <FormContainer {...props} {...formConfig} />;
 
 export default stripesFinalForm({
   initialValuesEqual: (a, b) => isEqual(a, b),

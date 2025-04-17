@@ -25,7 +25,7 @@ import {
 import { useStripes } from '@folio/stripes/core';
 import { ViewMetaData } from '@folio/stripes/smart-components';
 
-const ViewWrapper = ({
+const ViewContainer = ({
   additionalProps,
   canEdit,
   handlers,
@@ -153,7 +153,7 @@ const ViewWrapper = ({
   );
 };
 
-ViewWrapper.propTypes = {
+ViewContainer.propTypes = {
   accordionConfig: PropTypes.arrayOf(PropTypes.shape({
     Component: PropTypes.elementType.isRequired,
     id: PropTypes.string.isRequired,
@@ -172,4 +172,4 @@ ViewWrapper.propTypes = {
   recordPropKey: PropTypes.string.isRequired,
 };
 
-export default ViewWrapper;
+export default ViewContainer;

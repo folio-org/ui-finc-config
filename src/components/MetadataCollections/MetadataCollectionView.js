@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import ViewWrapper from '../DisplayUtils/ViewWrapper';
+import ViewContainer from '../DisplayUtils/ViewContainer';
 import CollectionInfoView from './CollectionInfo/CollectionInfoView';
 import CollectionManagementView from './CollectionManagement/CollectionManagementView';
 import CollectionTechnicalView from './CollectionTechnical/CollectionTechnicalView';
@@ -20,7 +20,7 @@ const MetadataCollectionView = (props) => {
   ];
 
   return (
-    <ViewWrapper
+    <ViewContainer
       accordionConfig={accordionConfig}
       idPrefix="collection"
       infoComponent={CollectionInfoView}

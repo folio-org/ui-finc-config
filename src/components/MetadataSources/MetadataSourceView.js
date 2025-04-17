@@ -1,7 +1,7 @@
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
 
-import ViewWrapper from '../DisplayUtils/ViewWrapper';
+import ViewContainer from '../DisplayUtils/ViewContainer';
 import SourceInfoView from './SourceInfo/SourceInfoView';
 import SourceManagementView from './SourceManagement/SourceManagementView';
 import SourceTechnicalView from './SourceTechnical/SourceTechnicalView';
@@ -24,7 +24,7 @@ const MetadataSourceView = (props) => {
   ];
 
   return (
-    <ViewWrapper
+    <ViewContainer
       accordionConfig={accordionConfig}
       additionalProps={{ organizationId }}
       idPrefix="source"

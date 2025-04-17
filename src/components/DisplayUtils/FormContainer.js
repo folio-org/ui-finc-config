@@ -22,7 +22,7 @@ import { ViewMetaData } from '@folio/stripes/smart-components';
 
 import BasicStyle from '../BasicStyle.css';
 
-const FormWrapper = ({
+const FormContainer = ({
   accordionComponents,
   deletePermission,
   formId,
@@ -185,7 +185,7 @@ const FormWrapper = ({
   );
 };
 
-FormWrapper.propTypes = {
+FormContainer.propTypes = {
   accordionComponents: PropTypes.arrayOf(PropTypes.shape({
     Component: PropTypes.elementType.isRequired,
     id: PropTypes.string.isRequired,
@@ -203,4 +203,4 @@ FormWrapper.propTypes = {
   submitting: PropTypes.bool,
 };
 
-export default FormWrapper;
+export default FormContainer;
