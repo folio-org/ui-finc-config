@@ -31,6 +31,7 @@ const renderEmptyMetadataSourceForm = (stripes, initialValues = {}) => {
               handlers={{ onClose, onDelete }}
               handleSubmit={handleSubmit}
               initialValues={initialValues}
+              onDelete={onDelete}
               onSubmit={onSubmit}
             />
           )}

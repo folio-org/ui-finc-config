@@ -31,6 +31,7 @@ const renderEmptyMetadataCollectionForm = (stripes, initialValues = { solrMegaCo
               handlers={{ onClose, onDelete }}
               handleSubmit={handleSubmit}
               initialValues={initialValues}
+              onDelete={onDelete}
               onSubmit={onSubmit}
             />
           )}
