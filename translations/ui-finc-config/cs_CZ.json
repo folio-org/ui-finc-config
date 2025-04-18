@@ -26,7 +26,7 @@
     "source.tickets": "Lístky",
     "source.accessUrl": "Přístupová URL",
     "source.deliveryMethods": "Způsoby doručení",
-    "source.formats": "Formát",
+    "source.formats": "Typ média -- Typ nosiče",
     "source.updateRhythm": "Rytmus aktualizace",
     "source.inferiorTo": "Nižší než",
     "collection.description": "Popis",
