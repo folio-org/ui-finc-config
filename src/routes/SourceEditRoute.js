@@ -22,7 +22,7 @@ const SourceEditRoute = ({
   const stripes = useStripes();
   const ky = useOkapiKy();
 
-  const hasPerms = stripes.hasPerm('finc-config.metadata-sources.item.put');
+  const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const SOURCE_API = `finc-config/metadata-sources/${match.params.id}`;
 

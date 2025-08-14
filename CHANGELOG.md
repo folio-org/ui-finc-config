@@ -3,6 +3,7 @@
 ## [8.1.0] (IN PROGRESS)
 * Support `finc-config-isils 2.0` interface ([UIFC-429](https://folio-org.atlassian.net/browse/UIFC-429))
 * Change filters to trigger a full-text search ([UIFC-432](https://folio-org.atlassian.net/browse/UIFC-432))
+* Fix use of permissions ([UIFC-435](https://folio-org.atlassian.net/browse/UIFC-435))
 
 ## [8.0.0](https://github.com/folio-org/ui-finc-config/tree/v8.0.0) (2025-03-13)
 * Restructure SASQ and localStorage ([UIFC-400](https://folio-org.atlassian.net/browse/UIFC-400))

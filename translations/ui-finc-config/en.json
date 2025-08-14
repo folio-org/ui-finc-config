@@ -119,8 +119,13 @@
   "settings.isils.isilIsEmpty": "Please fill isil to continue",
   "settings.isils.tenantIsEmpty": "Please fill tenant to continue",
 
-  "permission.module.enabled": "Finc config: module is enabled",
+  "permission.module.finc-config.enabled": "Finc config: module is enabled",
+  "permission.settings.finc-config.enabled": "Settings (Finc config): Display list of settings pages",
   "permission.settings.manage": "Settings (Finc config): Can view and edit settings",
   "permission.all": "Finc config: All permissions",
-  "permission.view": "Finc config: Can view metadatasources and metadatacollections"
+  "permission.view": "Finc config: Can view metadatasources and metadatacollections",
+  "permission.create": "Finc config: Can create metadatasources and metadatacollections",
+  "permission.edit": "Finc config: Can edit metadatasources and metadatacollections",
+  "permission.create-edit": "Finc config: Can create and edit metadatasources and metadatacollections",
+  "permission.delete": "Finc config: Can delete metadatasources and metadatacollections"
 }

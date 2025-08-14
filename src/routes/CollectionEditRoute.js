@@ -22,7 +22,7 @@ const CollectionEditRoute = ({
   const stripes = useStripes();
   const ky = useOkapiKy();
 
-  const hasPerms = stripes.hasPerm('finc-config.metadata-collections.item.put');
+  const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const COLLECTION_API = `finc-config/metadata-collections/${match.params.id}`;
 
