@@ -108,8 +108,7 @@
         "subPermissions": [
           "ui-finc-config.settings.manage",
           "ui-finc-config.view",
-          "ui-finc-config.create",
-          "ui-finc-config.edit",
+          "ui-finc-config.create-edit",
           "ui-finc-config.delete"
         ],
         "visible": true
