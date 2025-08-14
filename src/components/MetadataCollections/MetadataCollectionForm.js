@@ -10,7 +10,7 @@ import CollectionTechnicalForm from './CollectionTechnical/CollectionTechnicalFo
 const formConfig = {
   formId: 'form-collection',
   testIdPrefix: 'collection',
-  deletePermission: 'finc-config.metadata-collections.item.delete',
+  deletePermission: 'ui-finc-config.delete',
   accordionComponents: [
     { Component: CollectionInfoForm, id: 'editCollectionInfo' },
     { Component: CollectionManagementForm, id: 'editCollectionManagement' },

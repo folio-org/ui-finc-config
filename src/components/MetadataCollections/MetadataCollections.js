@@ -197,7 +197,7 @@ const MetadataCollections = ({
                   disableRecordCreation,
                   filterPaneIsVisible,
                   paneTitleId: 'ui-finc-config.collections.title',
-                  permission: 'finc-config.metadata-collections.item.post',
+                  permission: 'ui-finc-config.create',
                   result: collection,
                   toggleFilterPane,
                 })}

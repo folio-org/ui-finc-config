@@ -17,7 +17,7 @@ const CollectionCreateRoute = ({
 }) => {
   const ky = useOkapiKy();
   const stripes = useStripes();
-  const hasPerms = stripes.hasPerm('finc-config.metadata-collections.item.post');
+  const hasPerms = stripes.hasPerm('ui-finc-config.create');
 
   const COLLECTION_API = 'finc-config/metadata-collections';
 

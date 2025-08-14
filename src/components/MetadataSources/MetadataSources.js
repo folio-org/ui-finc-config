@@ -196,7 +196,7 @@ const MetadataSources = ({
                   disableRecordCreation,
                   filterPaneIsVisible,
                   paneTitleId: 'ui-finc-config.sources.title',
-                  permission: 'finc-config.metadata-sources.item.post',
+                  permission: 'ui-finc-config.create',
                   result: source,
                   toggleFilterPane,
                 })}

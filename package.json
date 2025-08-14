@@ -108,12 +108,9 @@
         "subPermissions": [
           "ui-finc-config.settings.manage",
           "ui-finc-config.view",
-          "finc-config.metadata-collections.item.post",
-          "finc-config.metadata-collections.item.put",
-          "finc-config.metadata-collections.item.delete",
-          "finc-config.metadata-sources.item.post",
-          "finc-config.metadata-sources.item.put",
-          "finc-config.metadata-sources.item.delete"
+          "ui-finc-config.create",
+          "ui-finc-config.edit",
+          "ui-finc-config.delete"
         ],
         "visible": true
       },
@@ -133,6 +130,46 @@
           "organizations-storage.organizations.item.get",
           "organizations-storage.contacts.collection.get",
           "organizations-storage.contacts.item.get"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-finc-config.create",
+        "displayName": "Finc config: Can create metadatasources and metadatacollections",
+        "description": "Can create metadatasources and metadatacollections",
+        "subPermissions": [
+          "finc-config.metadata-collections.item.post",
+          "finc-config.metadata-sources.item.post"
+        ],
+        "visible": false
+      },
+      {
+        "permissionName": "ui-finc-config.edit",
+        "displayName": "Finc config: Can edit metadatasources and metadatacollections",
+        "description": "Can edit metadatasources and metadatacollections",
+        "subPermissions": [
+          "finc-config.metadata-collections.item.put",
+          "finc-config.metadata-sources.item.put"
+        ],
+        "visible": false
+      },
+      {
+        "permissionName": "ui-finc-config.create-edit",
+        "displayName": "Finc config: Can create and edit metadatasources and metadatacollections",
+        "description": "Can create and edit metadatasources and metadatacollections",
+        "subPermissions": [
+          "ui-finc-config.create",
+          "ui-finc-config.edit"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-finc-config.delete",
+        "displayName": "Finc config: Can delete metadatasources and metadatacollections",
+        "description": "Can delete metadatasources and metadatacollections",
+        "subPermissions": [
+          "finc-config.metadata-collections.item.delete",
+          "finc-config.metadata-sources.item.delete"
         ],
         "visible": true
       }
