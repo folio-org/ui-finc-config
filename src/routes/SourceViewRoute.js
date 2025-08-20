@@ -16,7 +16,7 @@ const SourceViewRoute = ({
   match: { params: { id: sourceId } },
 }) => {
   const stripes = useStripes();
-  const hasPerms = stripes.hasPerm('finc-config.metadata-sources.item.put');
+  const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const SOURCE_API = 'finc-config/metadata-sources';
 

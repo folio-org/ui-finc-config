@@ -17,7 +17,7 @@ const SourceCreateRoute = ({
 }) => {
   const ky = useOkapiKy();
   const stripes = useStripes();
-  const hasPerms = stripes.hasPerm('finc-config.metadata-sources.item.post');
+  const hasPerms = stripes.hasPerm('ui-finc-config.create');
 
   const SOURCE_API = 'finc-config/metadata-sources';
 

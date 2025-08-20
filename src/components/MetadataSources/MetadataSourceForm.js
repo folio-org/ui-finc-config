@@ -10,7 +10,7 @@ import SourceTechnicalForm from './SourceTechnical/SourceTechnicalForm';
 const formConfig = {
   formId: 'form-source',
   testIdPrefix: 'source',
-  deletePermission: 'finc-config.metadata-sources.item.delete',
+  deletePermission: 'ui-finc-config.delete',
   accordionComponents: [
     { Component: SourceInfoForm, id: 'editSourceInfo' },
     { Component: SourceManagementForm, id: 'editSourceManagement' },
