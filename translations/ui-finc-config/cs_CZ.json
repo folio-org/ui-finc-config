@@ -81,7 +81,6 @@
     "navigation.collections": "Kolekce",
     "settings.isils.isilIsEmpty": "Pro pokračování prosím vyplňte isil",
     "settings.isils.tenantIsEmpty": "Pro pokračování vyplňte nájemce",
-    "permission.module.enabled": "Konfigurace Financí: modul je povolen",
     "permission.settings.manage": "Nastavení (konf. Fin.): Může zobrazit a upravit nastavení",
     "permission.all": "Konfigurace Financí: Všechna oprávnění",
     "permission.view": "Konfigurace Financí: Může zobrazit zdroje metadat a kolekce metadat",
@@ -108,5 +107,11 @@
     "collection.placeholder.mdSource": "Přidejte prosím zdroj metadat",
     "collection.placeholder.permittedFor": "Zadat jeden ISIL pro instituci s povoleným využitím metadat.",
     "collection.placeholder.tickets": "Zadat URL souvisejícího vydání",
-    "collection.placeholder.contentFiles": "Zadat adresu URL souborového serveru"
+    "collection.placeholder.contentFiles": "Zadat adresu URL souborového serveru",
+    "permission.module.finc-config.enabled": "Finc config: module is enabled",
+    "permission.settings.finc-config.enabled": "Settings (Finc config): Display list of settings pages",
+    "permission.create": "Finc config: Can create metadatasources and metadatacollections",
+    "permission.edit": "Finc config: Can edit metadatasources and metadatacollections",
+    "permission.create-edit": "Finc config: Can create and edit metadatasources and metadatacollections",
+    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections"
 }

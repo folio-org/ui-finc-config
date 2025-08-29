@@ -81,7 +81,6 @@
     "navigation.collections": "Kollektionen",
     "settings.isils.isilIsEmpty": "Zum Fortfahren ISIL eingeben",
     "settings.isils.tenantIsEmpty": "Zum Fortfahren Mandant eingeben",
-    "permission.module.enabled": "Finc Config: Modul ist aktiviert",
     "permission.settings.manage": "Einstellungen (Finc Config): Kann Einstellungen anzeigen und bearbeiten",
     "permission.all": "Finc Config: Alle Berechtigungen",
     "permission.view": "Finc Config: Kann Metadatenquellen und -kollektionen anzeigen",
@@ -108,5 +107,11 @@
     "collection.placeholder.mdSource": "Metadatenquelle hinzufügen",
     "collection.placeholder.permittedFor": "ISIL eingeben für Institution mit Nutzungsrechten",
     "collection.placeholder.tickets": "URL zu verwandtem Ticket eingeben",
-    "collection.placeholder.contentFiles": "URL zu einem Fileserver eingeben"
+    "collection.placeholder.contentFiles": "URL zu einem Fileserver eingeben",
+    "permission.module.finc-config.enabled": "Finc config: module is enabled",
+    "permission.settings.finc-config.enabled": "Settings (Finc config): Display list of settings pages",
+    "permission.create": "Finc config: Can create metadatasources and metadatacollections",
+    "permission.edit": "Finc config: Can edit metadatasources and metadatacollections",
+    "permission.create-edit": "Finc config: Can create and edit metadatasources and metadatacollections",
+    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections"
 }
