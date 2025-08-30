@@ -81,7 +81,6 @@
     "navigation.collections": "مجموعات",
     "settings.isils.isilIsEmpty": "يرجى ملء isil  للمتابعة",
     "settings.isils.tenantIsEmpty": "يرجى ملء المستأجر للمتابعة",
-    "permission.module.enabled": "تهيئة Finc: تم تفعيل الوحدة",
     "permission.settings.manage": "الإعدادات (تهيئة Finc): إمكانية عرض وتحرير الإعدادات",
     "permission.all": "تهيئة Finc: كل الصلاحيات",
     "permission.view": "تهيئة Finc: إمكانية عرض مصادر الميتاداتا ومجموعات الميتاداتا",
@@ -108,5 +107,11 @@
     "collection.placeholder.mdSource": "يرجى إضافة مصدر ميتاداتا",
     "collection.placeholder.permittedFor": "قم بإدخال ISIL واحد للمؤسسة باستخدام الميتاداتا المسموح بها",
     "collection.placeholder.tickets": "قم بإدخال عنوان URL لموضوع ذو صلة",
-    "collection.placeholder.contentFiles": "قم بإدخال عنوان URL لخادم الملف"
+    "collection.placeholder.contentFiles": "قم بإدخال عنوان URL لخادم الملف",
+    "permission.module.finc-config.enabled": "Finc config: module is enabled",
+    "permission.settings.finc-config.enabled": "Settings (Finc config): Display list of settings pages",
+    "permission.create": "Finc config: Can create metadatasources and metadatacollections",
+    "permission.edit": "Finc config: Can edit metadatasources and metadatacollections",
+    "permission.create-edit": "Finc config: Can create and edit metadatasources and metadatacollections",
+    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections"
 }

@@ -81,7 +81,6 @@
     "navigation.collections": "Collecties",
     "settings.isils.isilIsEmpty": "Vul isil in om verder te gaan",
     "settings.isils.tenantIsEmpty": "Vul Tenant in om verder te gaan",
-    "permission.module.enabled": "Finc config: module is ingeschakeld",
     "permission.settings.manage": "Instellingen (Finc config): Kan instellingen bekijken en bewerken",
     "permission.all": "Finc config: Alle rechten",
     "permission.view": "Finc config: Kan metadatabronnen en metadatacollecties bekijken",
@@ -108,5 +107,11 @@
     "collection.placeholder.mdSource": "Bron metadata toevoegen",
     "collection.placeholder.permittedFor": "Voer één ISIL in voor een instelling met toegestaan gebruik van metadata",
     "collection.placeholder.tickets": "Voer een URL in naar een gerelateerd nummer",
-    "collection.placeholder.contentFiles": "Voer een URL naar een bestandsserver in"
+    "collection.placeholder.contentFiles": "Voer een URL naar een bestandsserver in",
+    "permission.module.finc-config.enabled": "Finc config: module is ingeschakeld",
+    "permission.settings.finc-config.enabled": "Instellingen (Finc config): Lijst met instellingenpagina's weergeven",
+    "permission.create": "Finc config: Kan metadatabronnen en metadatacollecties aanmaken",
+    "permission.edit": "Finc config: Kan metadatabronnen en metadatacollecties bewerken",
+    "permission.create-edit": "Finc config: Kan metadatabronnen en metadatacollecties aanmaken en bewerken",
+    "permission.delete": "Finc config: Kan metadatabronnen en metadatacollecties verwijderen"
 }

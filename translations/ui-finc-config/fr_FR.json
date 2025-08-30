@@ -81,7 +81,6 @@
     "navigation.collections": "Collections",
     "settings.isils.isilIsEmpty": "Veuillez remplir isil pour continuer",
     "settings.isils.tenantIsEmpty": "Please fill tenant to continue",
-    "permission.module.enabled": "Finc config: module is enabled",
     "permission.settings.manage": "Settings (Finc config): Can view and edit settings",
     "permission.all": "Finc config: All permissions",
     "permission.view": "Finc config: Can view metadatasources and metadatacollections",
@@ -108,5 +107,11 @@
     "collection.placeholder.mdSource": "Veuillez ajouter une source de métadonnées",
     "collection.placeholder.permittedFor": "Entrez un ISIL pour une institution avec une utilisation de métadonnées autorisée",
     "collection.placeholder.tickets": "Entrez une URL vers un problème connexe",
-    "collection.placeholder.contentFiles": "Entrez une URL vers un serveur de fichiers"
+    "collection.placeholder.contentFiles": "Entrez une URL vers un serveur de fichiers",
+    "permission.module.finc-config.enabled": "Finc config: module is enabled",
+    "permission.settings.finc-config.enabled": "Settings (Finc config): Display list of settings pages",
+    "permission.create": "Finc config: Can create metadatasources and metadatacollections",
+    "permission.edit": "Finc config: Can edit metadatasources and metadatacollections",
+    "permission.create-edit": "Finc config: Can create and edit metadatasources and metadatacollections",
+    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections"
 }

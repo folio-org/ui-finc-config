@@ -81,7 +81,6 @@
     "navigation.collections": "Колекції",
     "settings.isils.isilIsEmpty": "Заповніть, будь ласка, isil, щоб продовжити",
     "settings.isils.tenantIsEmpty": "Будь ласка, заповніть інформацію про клієнта, щоб продовжити",
-    "permission.module.enabled": "Finc config: модуль увімкнено",
     "permission.settings.manage": "Налаштування (конфігурація для Finc): Перегляд та редагування налаштувань",
     "permission.all": "Finc config: Всі дозволи",
     "permission.view": "Конфігурація Finc: Перегляд джерел метаданих та колекцій метаданих",
@@ -108,5 +107,11 @@
     "collection.placeholder.mdSource": "Додайте джерело метаданих, будь ласка",
     "collection.placeholder.permittedFor": "Введіть один ISIL для інституції з дозволеним використанням метаданих",
     "collection.placeholder.tickets": "Введіть URL-адресу пов'язаного випуску",
-    "collection.placeholder.contentFiles": "Введіть URL-адресу файлового сервера"
+    "collection.placeholder.contentFiles": "Введіть URL-адресу файлового сервера",
+    "permission.module.finc-config.enabled": "Finc config: модуль увімкнено",
+    "permission.settings.finc-config.enabled": "Налаштування (конфігурація Finc): Відображення списку сторінок налаштувань",
+    "permission.create": "Finc config: Can create metadatasources and metadatacollections",
+    "permission.edit": "Конфігурація Finc: Редагування джерел метаданих та колекцій метаданих",
+    "permission.create-edit": "Конфігурація Finc: Створення та редагування джерел метаданих та колекцій метаданих",
+    "permission.delete": "Конфігурація Finc: Видалення джерел метаданих та колекцій метаданих"
 }
