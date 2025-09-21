@@ -110,7 +110,7 @@
     "collection.placeholder.contentFiles": "Введіть URL-адресу файлового сервера",
     "permission.module.finc-config.enabled": "Finc config: модуль увімкнено",
     "permission.settings.finc-config.enabled": "Налаштування (конфігурація Finc): Відображення списку сторінок налаштувань",
-    "permission.create": "Finc config: Can create metadatasources and metadatacollections",
+    "permission.create": "Конфігурація Finc: Створення джерел метаданих та колекцій метаданих",
     "permission.edit": "Конфігурація Finc: Редагування джерел метаданих та колекцій метаданих",
     "permission.create-edit": "Конфігурація Finc: Створення та редагування джерел метаданих та колекцій метаданих",
     "permission.delete": "Конфігурація Finc: Видалення джерел метаданих та колекцій метаданих"
