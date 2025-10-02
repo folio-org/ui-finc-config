@@ -2,13 +2,13 @@
   "env": {
     "jest": true
   },
-  "extends": [
-    "@folio/eslint-config-stripes", 
-    "plugin:testing-library/react",
-    "plugin:jest-dom/recommended"
-  ],
+  "extends": "@folio/eslint-config-stripes",
   "parser": "@babel/eslint-parser",
-  "plugins": ["canonical"],
+  "plugins": [
+    "canonical",
+    "testing-library",
+    "jest-dom"
+  ],
   "rules": {
     "array-bracket-newline": ["error", { "multiline": true }],
     "canonical/export-specifier-newline": "error",
@@ -84,7 +84,8 @@
     "testing-library/no-render-in-lifecycle": [
       "error",
       { "allowTestingFrameworkSetupHook": "beforeEach" }
-    ]
+    ],
+    "testing-library/prefer-user-event": "warn"
   },
   "settings": {
     "react": {
