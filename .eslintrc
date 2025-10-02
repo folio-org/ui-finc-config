@@ -2,12 +2,14 @@
   "env": {
     "jest": true
   },
-  "extends": "@folio/eslint-config-stripes",
+  "extends": [
+    "@folio/eslint-config-stripes",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
+  ],
   "parser": "@babel/eslint-parser",
   "plugins": [
-    "canonical",
-    "testing-library",
-    "jest-dom"
+    "canonical"
   ],
   "rules": {
     "array-bracket-newline": ["error", { "multiline": true }],
