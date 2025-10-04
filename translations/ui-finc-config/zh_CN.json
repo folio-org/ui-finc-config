@@ -108,10 +108,10 @@
     "collection.placeholder.permittedFor": "为允许使用元数据的机构输入一个ISIL",
     "collection.placeholder.tickets": "输入相关问题的URL",
     "collection.placeholder.contentFiles": "输入文件服务器的URL",
-    "permission.module.finc-config.enabled": "Finc config: module is enabled",
-    "permission.settings.finc-config.enabled": "Settings (Finc config): Display list of settings pages",
-    "permission.create": "Finc config: Can create metadatasources and metadatacollections",
-    "permission.edit": "Finc config: Can edit metadatasources and metadatacollections",
-    "permission.create-edit": "Finc config: Can create and edit metadatasources and metadatacollections",
-    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections"
+    "permission.module.finc-config.enabled": "Finc配置 : 模块已启用",
+    "permission.settings.finc-config.enabled": "设置（Finc 配置）：显示设置页面列表",
+    "permission.create": "Finc配置 : 可以创建元数据来源和元数据集合",
+    "permission.edit": "Finc 配置：可以编辑元数据源和元数据集合",
+    "permission.create-edit": "Finc 配置：可以创建和编辑元数据源和元数据集合",
+    "permission.delete": "Finc 配置：可以删除元数据源和元数据集合"
 }
