@@ -17,6 +17,10 @@ import urls from '../components/DisplayUtils/urls';
 import usePrevious from '../components/hooks/usePrevious';
 import filterConfig from '../components/MetadataSources/filterConfigData';
 import MetadataSources from '../components/MetadataSources/MetadataSources';
+import {
+  CONTACTS_API,
+  SOURCES_API,
+} from '../util/constants';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -110,7 +114,7 @@ SourcesRoute.manifest = Object.freeze({
     records: 'fincConfigMetadataSources',
     recordsRequired: '%{resultCount}',
     perRequest: 30,
-    path: 'finc-config/metadata-sources',
+    path: SOURCES_API,
     GET: {
       params: {
         query: makeQueryFunction(
@@ -131,7 +135,7 @@ SourcesRoute.manifest = Object.freeze({
   contacts: {
     type: 'okapi',
     records: 'contacts',
-    path: 'finc-config/contacts',
+    path: CONTACTS_API,
     resourceShouldRefresh: true,
   },
   query: {

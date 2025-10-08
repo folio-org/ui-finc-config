@@ -10,6 +10,7 @@ import {
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
+import { COLLECTIONS_API } from '../util/constants';
 
 const CollectionCreateRoute = ({
   history,
@@ -18,8 +19,6 @@ const CollectionCreateRoute = ({
   const ky = useOkapiKy();
   const stripes = useStripes();
   const hasPerms = stripes.hasPerm('ui-finc-config.create');
-
-  const COLLECTION_API = 'finc-config/metadata-collections';
 
   const handleClose = () => {
     history.push(`${urls.collections()}${location.search}`);
@@ -30,7 +29,7 @@ const CollectionCreateRoute = ({
       const id = uuidv4();
       const newPayload = { ...payload, id };
 
-      ky.post(COLLECTION_API, { json: newPayload })
+      ky.post(COLLECTIONS_API, { json: newPayload })
         .then(() => {
           history.push(`${urls.collectionView(id)}${location.search}`);
         });

@@ -6,19 +6,18 @@ import { Link } from 'react-router-dom';
 import { NoValue } from '@folio/stripes/components';
 import { useOkapiKy } from '@folio/stripes/core';
 
+import { USERS_API } from '../../../../util/constants';
 import urls from '../../../DisplayUtils/urls';
 
 const DisplayContactLinkUser = ({
   contact,
   contactId,
 }) => {
-  const USERS_API = 'users';
-
   const useUser = () => {
     const ky = useOkapiKy();
 
     const { isLoading, data: user = {}, ...rest } = useQuery(
-      [USERS_API, contactId],
+      ['getContact', contactId],
       () => ky.get(`${USERS_API}/${contactId}`).json(),
       // The query will not execute until the id exists
       { enabled: Boolean(contactId) }
