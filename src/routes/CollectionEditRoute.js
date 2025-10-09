@@ -13,22 +13,24 @@ import {
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
+import {
+  API_COLLECTIONS,
+  QK_COLLECTIONS,
+} from '../util/constants';
 
 const CollectionEditRoute = ({
   history,
   location,
-  match,
+  match: { params: { id: collectionId } },
 }) => {
   const stripes = useStripes();
   const ky = useOkapiKy();
 
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
-  const COLLECTION_API = `finc-config/metadata-collections/${match.params.id}`;
-
   const { data: collection = {}, isLoading: isCollectionLoading } = useQuery(
-    [COLLECTION_API, 'getCollection'],
-    () => ky.get(COLLECTION_API).json()
+    [QK_COLLECTIONS, collectionId],
+    () => ky.get(`${API_COLLECTIONS}/${collectionId}`).json()
   );
 
   const getInitialValues = () => {
@@ -38,20 +40,20 @@ const CollectionEditRoute = ({
   };
 
   const handleClose = () => {
-    history.push(`${urls.collectionView(match.params.id)}${location.search}`);
+    history.push(`${urls.collectionView(collectionId)}${location.search}`);
   };
 
   const { mutateAsync: putCollection } = useMutation(
-    [COLLECTION_API, 'putCollection'],
-    (payload) => ky.put(COLLECTION_API, { json: payload })
+    [QK_COLLECTIONS, collectionId],
+    (payload) => ky.put(`${API_COLLECTIONS}/${collectionId}`, { json: payload })
       .then(() => {
         handleClose();
       })
   );
 
   const { mutateAsync: deleteCollection } = useMutation(
-    [COLLECTION_API, 'deleteCollection'],
-    () => ky.delete(COLLECTION_API)
+    [QK_COLLECTIONS, collectionId],
+    () => ky.delete(`${API_COLLECTIONS}/${collectionId}`)
       .then(() => {
         history.push(`${urls.collections()}${location.search}`);
       })

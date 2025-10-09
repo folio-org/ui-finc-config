@@ -9,6 +9,10 @@ import {
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionView from '../components/MetadataCollections/MetadataCollectionView';
+import {
+  API_COLLECTIONS,
+  QK_COLLECTIONS,
+} from '../util/constants';
 
 const CollectionViewRoute = ({
   history,
@@ -18,14 +22,12 @@ const CollectionViewRoute = ({
   const stripes = useStripes();
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
-  const COLLECTION_API = 'finc-config/metadata-collections';
-
   const useCollection = () => {
     const ky = useOkapiKy();
 
     const { isLoading, data: collection = {} } = useQuery(
-      [COLLECTION_API, collectionId],
-      () => ky.get(`${COLLECTION_API}/${collectionId}`).json(),
+      [QK_COLLECTIONS, collectionId],
+      () => ky.get(`${API_COLLECTIONS}/${collectionId}`).json(),
       // The query will not execute until the id exists
       { enabled: Boolean(collectionId) }
     );

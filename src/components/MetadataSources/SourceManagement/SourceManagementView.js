@@ -14,6 +14,10 @@ import {
 } from '@folio/stripes/components';
 import { useOkapiKy } from '@folio/stripes/core';
 
+import {
+  API_ORGANIZATIONS,
+  QK_ORGANIZATIONS,
+} from '../../../util/constants';
 import BasicCss from '../../BasicStyle.css';
 import urls from '../../DisplayUtils/urls';
 import DisplayContactsArray from './Contact/DisplayContactsArray';
@@ -24,14 +28,12 @@ const SourceManagementView = ({
   metadataSource,
   organizationId,
 }) => {
-  const ORGANIZATIONS_API = 'organizations-storage/organizations';
-
   const useOrganization = () => {
     const ky = useOkapiKy();
 
     const { isLoading, data: organization = {}, ...rest } = useQuery(
-      [ORGANIZATIONS_API, organizationId],
-      () => ky.get(`${ORGANIZATIONS_API}/${organizationId}`).json(),
+      [QK_ORGANIZATIONS, organizationId],
+      () => ky.get(`${API_ORGANIZATIONS}/${organizationId}`).json(),
       { enabled: Boolean(organizationId) }
     );
 

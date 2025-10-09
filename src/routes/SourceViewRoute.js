@@ -9,6 +9,10 @@ import {
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataSourceView from '../components/MetadataSources/MetadataSourceView';
+import {
+  API_SOURCES,
+  QK_SOURCES,
+} from '../util/constants';
 
 const SourceViewRoute = ({
   history,
@@ -18,14 +22,12 @@ const SourceViewRoute = ({
   const stripes = useStripes();
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
-  const SOURCE_API = 'finc-config/metadata-sources';
-
   const useSource = () => {
     const ky = useOkapiKy();
 
     const { isLoading, data: source = {} } = useQuery(
-      [SOURCE_API, sourceId],
-      () => ky.get(`${SOURCE_API}/${sourceId}`).json(),
+      [QK_SOURCES, sourceId],
+      () => ky.get(`${API_SOURCES}/${sourceId}`).json(),
       // The query will not execute until the id exists
       { enabled: Boolean(sourceId) }
     );

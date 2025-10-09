@@ -13,22 +13,24 @@ import {
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm';
+import {
+  API_SOURCES,
+  QK_SOURCES,
+} from '../util/constants';
 
 const SourceEditRoute = ({
   history,
   location,
-  match,
+  match: { params: { id: sourceId } },
 }) => {
   const stripes = useStripes();
   const ky = useOkapiKy();
 
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
-  const SOURCE_API = `finc-config/metadata-sources/${match.params.id}`;
-
   const { data: source = {}, isLoading: isSourceLoading } = useQuery(
-    [SOURCE_API, 'getSource'],
-    () => ky.get(SOURCE_API).json()
+    [QK_SOURCES, sourceId],
+    () => ky.get(`${API_SOURCES}/${sourceId}`).json()
   );
 
   const getInitialValues = () => {
@@ -38,20 +40,20 @@ const SourceEditRoute = ({
   };
 
   const handleClose = () => {
-    history.push(`${urls.sourceView(match.params.id)}${location.search}`);
+    history.push(`${urls.sourceView(sourceId)}${location.search}`);
   };
 
   const { mutateAsync: putSource } = useMutation(
-    [SOURCE_API, 'putSource'],
-    (payload) => ky.put(SOURCE_API, { json: payload })
+    [QK_SOURCES, sourceId],
+    (payload) => ky.put(`${API_SOURCES}/${sourceId}`, { json: payload })
       .then(() => {
         handleClose();
       })
   );
 
   const { mutateAsync: deleteSource } = useMutation(
-    [SOURCE_API, 'deleteSource'],
-    () => ky.delete(SOURCE_API)
+    [QK_SOURCES, sourceId],
+    () => ky.delete(`${API_SOURCES}/${sourceId}`)
       .then(() => {
         history.push(`${urls.sources()}${location.search}`);
       })

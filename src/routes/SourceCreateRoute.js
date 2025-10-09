@@ -10,6 +10,7 @@ import {
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm';
+import { API_SOURCES } from '../util/constants';
 
 const SourceCreateRoute = ({
   history,
@@ -18,8 +19,6 @@ const SourceCreateRoute = ({
   const ky = useOkapiKy();
   const stripes = useStripes();
   const hasPerms = stripes.hasPerm('ui-finc-config.create');
-
-  const SOURCE_API = 'finc-config/metadata-sources';
 
   const handleClose = () => {
     history.push(`${urls.sources()}${location.search}`);
@@ -30,7 +29,7 @@ const SourceCreateRoute = ({
       const id = uuidv4();
       const newPayload = { ...payload, id };
 
-      ky.post(SOURCE_API, { json: newPayload })
+      ky.post(API_SOURCES, { json: newPayload })
         .then(() => {
           history.push(`${urls.sourceView(id)}${location.search}`);
         });
