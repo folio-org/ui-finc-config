@@ -12,7 +12,7 @@ import MetadataSourceView from '../components/MetadataSources/MetadataSourceView
 import {
   API_SOURCES,
   QK_SOURCES,
- } from '../util/constants';
+} from '../util/constants';
 
 const SourceViewRoute = ({
   history,

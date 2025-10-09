@@ -17,7 +17,7 @@ import { useOkapiKy } from '@folio/stripes/core';
 import {
   API_ORGANIZATIONS,
   QK_ORGANIZATIONS,
- } from '../../../util/constants';
+} from '../../../util/constants';
 import BasicCss from '../../BasicStyle.css';
 import urls from '../../DisplayUtils/urls';
 import DisplayContactsArray from './Contact/DisplayContactsArray';
