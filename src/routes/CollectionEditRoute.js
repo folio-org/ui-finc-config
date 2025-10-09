@@ -13,7 +13,10 @@ import {
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
-import { COLLECTIONS_API } from '../util/constants';
+import {
+  API_COLLECTIONS,
+  QK_COLLECTIONS,
+} from '../util/constants';
 
 const CollectionEditRoute = ({
   history,
@@ -26,8 +29,8 @@ const CollectionEditRoute = ({
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const { data: collection = {}, isLoading: isCollectionLoading } = useQuery(
-    ['collection', collectionId],
-    () => ky.get(`${COLLECTIONS_API}/${collectionId}`).json()
+    [QK_COLLECTIONS, collectionId],
+    () => ky.get(`${API_COLLECTIONS}/${collectionId}`).json()
   );
 
   const getInitialValues = () => {
@@ -41,16 +44,16 @@ const CollectionEditRoute = ({
   };
 
   const { mutateAsync: putCollection } = useMutation(
-    ['collection', collectionId],
-    (payload) => ky.put(`${COLLECTIONS_API}/${collectionId}`, { json: payload })
+    [QK_COLLECTIONS, collectionId],
+    (payload) => ky.put(`${API_COLLECTIONS}/${collectionId}`, { json: payload })
       .then(() => {
         handleClose();
       })
   );
 
   const { mutateAsync: deleteCollection } = useMutation(
-    ['collection', collectionId],
-    () => ky.delete(`${COLLECTIONS_API}/${collectionId}`)
+    [QK_COLLECTIONS, collectionId],
+    () => ky.delete(`${API_COLLECTIONS}/${collectionId}`)
       .then(() => {
         history.push(`${urls.collections()}${location.search}`);
       })

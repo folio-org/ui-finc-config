@@ -9,7 +9,10 @@ import {
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionView from '../components/MetadataCollections/MetadataCollectionView';
-import { COLLECTIONS_API } from '../util/constants';
+import {
+  API_COLLECTIONS,
+  QK_COLLECTIONS,
+} from '../util/constants';
 
 const CollectionViewRoute = ({
   history,
@@ -23,8 +26,8 @@ const CollectionViewRoute = ({
     const ky = useOkapiKy();
 
     const { isLoading, data: collection = {} } = useQuery(
-      ['collection', collectionId],
-      () => ky.get(`${COLLECTIONS_API}/${collectionId}`).json(),
+      [QK_COLLECTIONS, collectionId],
+      () => ky.get(`${API_COLLECTIONS}/${collectionId}`).json(),
       // The query will not execute until the id exists
       { enabled: Boolean(collectionId) }
     );

@@ -6,7 +6,10 @@ import { Link } from 'react-router-dom';
 import { NoValue } from '@folio/stripes/components';
 import { useOkapiKy } from '@folio/stripes/core';
 
-import { USERS_API } from '../../../../util/constants';
+import {
+  API_USERS,
+  QK_USERS,
+} from '../../../../util/constants';
 import urls from '../../../DisplayUtils/urls';
 
 const DisplayContactLinkUser = ({
@@ -17,8 +20,8 @@ const DisplayContactLinkUser = ({
     const ky = useOkapiKy();
 
     const { isLoading, data: user = {}, ...rest } = useQuery(
-      ['user', contactId],
-      () => ky.get(`${USERS_API}/${contactId}`).json(),
+      [QK_USERS, contactId],
+      () => ky.get(`${API_USERS}/${contactId}`).json(),
       // The query will not execute until the id exists
       { enabled: Boolean(contactId) }
     );

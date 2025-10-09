@@ -18,8 +18,8 @@ import usePrevious from '../components/hooks/usePrevious';
 import filterConfig from '../components/MetadataCollections/filterConfigData';
 import MetadataCollections from '../components/MetadataCollections/MetadataCollections';
 import {
-  COLLECTIONS_API,
-  TINY_SOURCES_API,
+  API_COLLECTIONS,
+  API_TINY_SOURCES,
 } from '../util/constants';
 
 const INITIAL_RESULT_COUNT = 30;
@@ -114,7 +114,7 @@ CollectionsRoute.manifest = Object.freeze({
     records: 'fincConfigMetadataCollections',
     recordsRequired: '%{resultCount}',
     perRequest: 30,
-    path: COLLECTIONS_API,
+    path: API_COLLECTIONS,
     GET: {
       params: {
         query: makeQueryFunction(
@@ -135,7 +135,7 @@ CollectionsRoute.manifest = Object.freeze({
   mdSources: {
     type: 'okapi',
     records: 'tinyMetadataSources',
-    path: TINY_SOURCES_API,
+    path: API_TINY_SOURCES,
     resourceShouldRefresh: true,
   },
   query: { initialValue: {} },

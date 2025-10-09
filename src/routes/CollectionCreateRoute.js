@@ -10,7 +10,7 @@ import {
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
-import { COLLECTIONS_API } from '../util/constants';
+import { API_COLLECTIONS } from '../util/constants';
 
 const CollectionCreateRoute = ({
   history,
@@ -29,7 +29,7 @@ const CollectionCreateRoute = ({
       const id = uuidv4();
       const newPayload = { ...payload, id };
 
-      ky.post(COLLECTIONS_API, { json: newPayload })
+      ky.post(API_COLLECTIONS, { json: newPayload })
         .then(() => {
           history.push(`${urls.collectionView(id)}${location.search}`);
         });

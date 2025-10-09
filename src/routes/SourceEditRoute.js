@@ -13,7 +13,10 @@ import {
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm';
-import { SOURCES_API } from '../util/constants';
+import {
+  API_SOURCES,
+  QK_SOURCES,
+} from '../util/constants';
 
 const SourceEditRoute = ({
   history,
@@ -26,8 +29,8 @@ const SourceEditRoute = ({
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const { data: source = {}, isLoading: isSourceLoading } = useQuery(
-    ['source', sourceId],
-    () => ky.get(`${SOURCES_API}/${sourceId}`).json()
+    [QK_SOURCES, sourceId],
+    () => ky.get(`${API_SOURCES}/${sourceId}`).json()
   );
 
   const getInitialValues = () => {
@@ -41,16 +44,16 @@ const SourceEditRoute = ({
   };
 
   const { mutateAsync: putSource } = useMutation(
-    ['source', sourceId],
-    (payload) => ky.put(`${SOURCES_API}/${sourceId}`, { json: payload })
+    [QK_SOURCES, sourceId],
+    (payload) => ky.put(`${API_SOURCES}/${sourceId}`, { json: payload })
       .then(() => {
         handleClose();
       })
   );
 
   const { mutateAsync: deleteSource } = useMutation(
-    ['source', sourceId],
-    () => ky.delete(`${SOURCES_API}/${sourceId}`)
+    [QK_SOURCES, sourceId],
+    () => ky.delete(`${API_SOURCES}/${sourceId}`)
       .then(() => {
         history.push(`${urls.sources()}${location.search}`);
       })
