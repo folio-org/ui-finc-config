@@ -17,7 +17,7 @@ const DisplayContactLinkUser = ({
     const ky = useOkapiKy();
 
     const { isLoading, data: user = {}, ...rest } = useQuery(
-      ['getContact', contactId],
+      ['user', contactId],
       () => ky.get(`${USERS_API}/${contactId}`).json(),
       // The query will not execute until the id exists
       { enabled: Boolean(contactId) }

@@ -26,7 +26,7 @@ const SourceEditRoute = ({
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const { data: source = {}, isLoading: isSourceLoading } = useQuery(
-    ['getSource', sourceId],
+    ['source', sourceId],
     () => ky.get(`${SOURCES_API}/${sourceId}`).json()
   );
 
@@ -41,7 +41,7 @@ const SourceEditRoute = ({
   };
 
   const { mutateAsync: putSource } = useMutation(
-    ['putSource', sourceId],
+    ['source', sourceId],
     (payload) => ky.put(`${SOURCES_API}/${sourceId}`, { json: payload })
       .then(() => {
         handleClose();
@@ -49,7 +49,7 @@ const SourceEditRoute = ({
   );
 
   const { mutateAsync: deleteSource } = useMutation(
-    ['deleteSource', sourceId],
+    ['source', sourceId],
     () => ky.delete(`${SOURCES_API}/${sourceId}`)
       .then(() => {
         history.push(`${urls.sources()}${location.search}`);

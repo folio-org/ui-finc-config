@@ -29,7 +29,7 @@ const SourceManagementView = ({
     const ky = useOkapiKy();
 
     const { isLoading, data: organization = {}, ...rest } = useQuery(
-      ['getOrganization', organizationId],
+      ['organization', organizationId],
       () => ky.get(`${ORGANIZATIONS_API}/${organizationId}`).json(),
       { enabled: Boolean(organizationId) }
     );

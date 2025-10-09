@@ -26,7 +26,7 @@ const CollectionEditRoute = ({
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const { data: collection = {}, isLoading: isCollectionLoading } = useQuery(
-    ['getCollection', collectionId],
+    ['collection', collectionId],
     () => ky.get(`${COLLECTIONS_API}/${collectionId}`).json()
   );
 
@@ -41,7 +41,7 @@ const CollectionEditRoute = ({
   };
 
   const { mutateAsync: putCollection } = useMutation(
-    ['putCollection', collectionId],
+    ['collection', collectionId],
     (payload) => ky.put(`${COLLECTIONS_API}/${collectionId}`, { json: payload })
       .then(() => {
         handleClose();
@@ -49,7 +49,7 @@ const CollectionEditRoute = ({
   );
 
   const { mutateAsync: deleteCollection } = useMutation(
-    ['deleteCollection', collectionId],
+    ['collection', collectionId],
     () => ky.delete(`${COLLECTIONS_API}/${collectionId}`)
       .then(() => {
         history.push(`${urls.collections()}${location.search}`);

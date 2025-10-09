@@ -23,7 +23,7 @@ const SourceViewRoute = ({
     const ky = useOkapiKy();
 
     const { isLoading, data: source = {} } = useQuery(
-      ['getSource', sourceId],
+      ['source', sourceId],
       () => ky.get(`${SOURCES_API}/${sourceId}`).json(),
       // The query will not execute until the id exists
       { enabled: Boolean(sourceId) }

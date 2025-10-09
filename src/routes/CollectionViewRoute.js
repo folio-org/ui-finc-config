@@ -23,7 +23,7 @@ const CollectionViewRoute = ({
     const ky = useOkapiKy();
 
     const { isLoading, data: collection = {} } = useQuery(
-      ['getCollection', collectionId],
+      ['collection', collectionId],
       () => ky.get(`${COLLECTIONS_API}/${collectionId}`).json(),
       // The query will not execute until the id exists
       { enabled: Boolean(collectionId) }
