@@ -1,11 +1,10 @@
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
-import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
 import { NoValue } from '@folio/stripes/components';
-import { useOkapiKy } from '@folio/stripes/core';
 
+import { useOkapiKyQuery } from '../../../../hooks';
 import {
   API_USERS,
   QK_USERS,
@@ -16,25 +15,8 @@ const DisplayContactLinkUser = ({
   contact,
   contactId,
 }) => {
-  const useUser = () => {
-    const ky = useOkapiKy();
-
-    const { isLoading, data: user = {}, ...rest } = useQuery(
-      [QK_USERS, contactId],
-      () => ky.get(`${API_USERS}/${contactId}`).json(),
-      // The query will not execute until the id exists
-      { enabled: Boolean(contactId) }
-    );
-
-    return ({
-      isLoading,
-      user,
-      ...rest,
-    });
-  };
-
   let contactNameWithLink = <NoValue />;
-  const { user, isLoading: isLoadingUser, isError } = useUser();
+  const { user, isLoading: isLoadingUser, isError } = useOkapiKyQuery(QK_USERS, contactId, API_USERS);
 
   if (!isEmpty(contactId) && !isLoadingUser) {
     if (contact.type === 'user' && user && isError && contact.name) {

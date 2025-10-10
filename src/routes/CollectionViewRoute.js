@@ -1,14 +1,11 @@
 import PropTypes from 'prop-types';
-import { useQuery } from 'react-query';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
-import {
-  useOkapiKy,
-  useStripes,
-} from '@folio/stripes/core';
+import { useStripes } from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionView from '../components/MetadataCollections/MetadataCollectionView';
+import { useOkapiKyQuery } from '../hooks';
 import {
   API_COLLECTIONS,
   QK_COLLECTIONS,
@@ -22,23 +19,7 @@ const CollectionViewRoute = ({
   const stripes = useStripes();
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
-  const useCollection = () => {
-    const ky = useOkapiKy();
-
-    const { isLoading, data: collection = {} } = useQuery(
-      [QK_COLLECTIONS, collectionId],
-      () => ky.get(`${API_COLLECTIONS}/${collectionId}`).json(),
-      // The query will not execute until the id exists
-      { enabled: Boolean(collectionId) }
-    );
-
-    return ({
-      isLoading,
-      collection,
-    });
-  };
-
-  const { collection, isLoading: isCollectionLoading } = useCollection();
+  const { data: collection, isLoading: isCollectionLoading } = useOkapiKyQuery(QK_COLLECTIONS, collectionId, API_COLLECTIONS);
 
   const handleClose = () => {
     history.push(`${urls.collections()}${location.search}`);
