@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useUpdatedFilters = ({
+export const useUpdatedFilters = ({
   dynamicKey,
   filterConfig,
   filterData,
@@ -46,5 +46,3 @@ const useUpdatedFilters = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterData, filterState, dynamicKey]);
 };
-
-export default useUpdatedFilters;
