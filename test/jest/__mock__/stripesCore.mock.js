@@ -72,7 +72,12 @@ jest.mock('@folio/stripes/core', () => {
       return <Component {...rest} mutator={fakeMutator} resources={fakeResources} stripes={fakeStripes} />;
     },
 
-    useOkapiKy: jest.fn(),
+    useOkapiKy: jest.fn(() => ({
+      get: jest.fn(() => Promise.resolve({})),
+      post: jest.fn(() => Promise.resolve({})),
+      put: jest.fn(() => Promise.resolve({})),
+      delete: jest.fn(() => Promise.resolve({})),
+    })),
 
     useNamespace: jest.fn().mockReturnValue(['module-namespace']),
 
