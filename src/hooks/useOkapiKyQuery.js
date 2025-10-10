@@ -9,6 +9,7 @@ export const useOkapiKyQuery = (queryKey, id, api, options = {}) => {
     [queryKey, id],
     () => ky.get(`${api}/${id}`).json(),
     {
+      // The query will not execute until the id exists
       enabled: !!id,
       ...options,
     }
