@@ -16,11 +16,18 @@ describe('useOkapiKyMutation', () => {
   const queryKy = 'QK_SOURCES';
   const id = '123';
   let queryClient;
-  const mockRequest = jest.fn(() => Promise.resolve());
+  let mockRequest;
 
   const wrapper = ({ children }) => (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
+
+  const doMockRequest = (method) => {
+    mockRequest = jest.fn(() => Promise.resolve());
+    useOkapiKy.mockReturnValue({
+      [method]: mockRequest,
+    });
+  };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -28,9 +35,7 @@ describe('useOkapiKyMutation', () => {
   });
 
   it('should call POST with correct payload', async () => {
-    useOkapiKy.mockReturnValue({
-      post: mockRequest,
-    });
+    doMockRequest('post');
 
     const { result } = renderHook(
       () => useOkapiKyMutation(queryKy, id, api, 'POST'),
@@ -50,9 +55,7 @@ describe('useOkapiKyMutation', () => {
   });
 
   it('should call PUT with correct payload and URL', async () => {
-    useOkapiKy.mockReturnValue({
-      put: mockRequest,
-    });
+    doMockRequest('put');
 
     const { result } = renderHook(
       () => useOkapiKyMutation(queryKy, id, api, 'PUT'),
@@ -72,9 +75,7 @@ describe('useOkapiKyMutation', () => {
   });
 
   it('should call DELETE with correct URL', async () => {
-    useOkapiKy.mockReturnValue({
-      delete: mockRequest,
-    });
+    doMockRequest('delete');
 
     const { result } = renderHook(
       () => useOkapiKyMutation(queryKy, id, api, 'DELETE'),
