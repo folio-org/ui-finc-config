@@ -40,7 +40,7 @@ describe('useOkapiKyMutation', () => {
     );
 
     const payload = { name: 'Test Source' };
-    await result.current.mutateAsync(payload);
+    result.current.mutateAsync(payload);
 
     await waitFor(() => {
       expect(mockRequest).toHaveBeenCalledTimes(1);
@@ -62,7 +62,7 @@ describe('useOkapiKyMutation', () => {
     );
 
     const payload = { name: 'Updated Source' };
-    await result.current.mutateAsync(payload);
+    result.current.mutateAsync(payload);
 
     await waitFor(() => {
       expect(mockRequest).toHaveBeenCalledTimes(1);
@@ -83,7 +83,7 @@ describe('useOkapiKyMutation', () => {
       { wrapper }
     );
 
-    await result.current.mutateAsync();
+    result.current.mutateAsync();
 
     await waitFor(() => {
       expect(mockRequest).toHaveBeenCalledTimes(1);
