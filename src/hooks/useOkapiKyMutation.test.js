@@ -11,8 +11,6 @@ import { useOkapiKy } from '@folio/stripes/core';
 
 import { useOkapiKyMutation } from './useOkapiKyMutation';
 
-jest.mock('@folio/stripes/core'); // Wichtiger Schritt, damit wir den zentralen Mock nutzen
-
 describe('useOkapiKyMutation', () => {
   const api = '/api/sources';
   const queryKy = 'QK_SOURCES';
