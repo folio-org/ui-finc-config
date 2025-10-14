@@ -18,6 +18,7 @@ describe('useOkapiKyMutation', () => {
   const queryKy = 'QK_SOURCES';
   const id = '123';
   let queryClient;
+  const mockRequest = jest.fn(() => Promise.resolve());
 
   const wrapper = ({ children }) => (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
@@ -29,9 +30,8 @@ describe('useOkapiKyMutation', () => {
   });
 
   it('should call POST with correct payload', async () => {
-    const mockPost = jest.fn(() => Promise.resolve());
     useOkapiKy.mockReturnValue({
-      post: mockPost,
+      post: mockRequest,
     });
 
     const { result } = renderHook(
@@ -43,18 +43,17 @@ describe('useOkapiKyMutation', () => {
     await result.current.mutateAsync(payload);
 
     await waitFor(() => {
-      expect(mockPost).toHaveBeenCalledTimes(1);
+      expect(mockRequest).toHaveBeenCalledTimes(1);
     });
 
     await waitFor(() => {
-      expect(mockPost).toHaveBeenCalledWith(api, { json: { ...payload, id } });
+      expect(mockRequest).toHaveBeenCalledWith(api, { json: { ...payload, id } });
     });
   });
 
   it('should call PUT with correct payload and URL', async () => {
-    const mockPut = jest.fn(() => Promise.resolve());
     useOkapiKy.mockReturnValue({
-      put: mockPut,
+      put: mockRequest,
     });
 
     const { result } = renderHook(
@@ -66,18 +65,17 @@ describe('useOkapiKyMutation', () => {
     await result.current.mutateAsync(payload);
 
     await waitFor(() => {
-      expect(mockPut).toHaveBeenCalledTimes(1);
+      expect(mockRequest).toHaveBeenCalledTimes(1);
     });
 
     await waitFor(() => {
-      expect(mockPut).toHaveBeenCalledWith(`${api}/${id}`, { json: payload });
+      expect(mockRequest).toHaveBeenCalledWith(`${api}/${id}`, { json: payload });
     });
   });
 
   it('should call DELETE with correct URL', async () => {
-    const mockDelete = jest.fn(() => Promise.resolve());
     useOkapiKy.mockReturnValue({
-      delete: mockDelete,
+      delete: mockRequest,
     });
 
     const { result } = renderHook(
@@ -88,11 +86,11 @@ describe('useOkapiKyMutation', () => {
     await result.current.mutateAsync();
 
     await waitFor(() => {
-      expect(mockDelete).toHaveBeenCalledTimes(1);
+      expect(mockRequest).toHaveBeenCalledTimes(1);
     });
 
     await waitFor(() => {
-      expect(mockDelete).toHaveBeenCalledWith(`${api}/${id}`);
+      expect(mockRequest).toHaveBeenCalledWith(`${api}/${id}`);
     });
   });
 });

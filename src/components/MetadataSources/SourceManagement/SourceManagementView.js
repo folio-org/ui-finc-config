@@ -30,7 +30,11 @@ const SourceManagementView = ({
   let orgValue;
   const sourceId = _.get(metadataSource, 'id', <NoValue />);
 
-  const { organization, isLoading: isLoadingOrganization, isError } = useOkapiKyQuery(QK_ORGANIZATIONS, organizationId, API_ORGANIZATIONS);
+  const {
+    data: organization,
+    isLoading: isLoadingOrganization,
+    isError,
+  } = useOkapiKyQuery(QK_ORGANIZATIONS, organizationId, API_ORGANIZATIONS);
   const sourcesOrganization = _.get(metadataSource, 'organization', <NoValue />);
 
   if (!_.isEmpty(organizationId) && !isLoadingOrganization) {

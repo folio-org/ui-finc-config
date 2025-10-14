@@ -19,7 +19,10 @@ const CollectionViewRoute = ({
   const stripes = useStripes();
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
-  const { data: collection, isLoading: isCollectionLoading } = useOkapiKyQuery(QK_COLLECTIONS, collectionId, API_COLLECTIONS);
+  const {
+    data: collection,
+    isLoading: isCollectionLoading,
+  } = useOkapiKyQuery(QK_COLLECTIONS, collectionId, API_COLLECTIONS);
 
   const handleClose = () => {
     history.push(`${urls.collections()}${location.search}`);
