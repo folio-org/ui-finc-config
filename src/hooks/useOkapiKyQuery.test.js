@@ -11,8 +11,6 @@ import { useOkapiKy } from '@folio/stripes/core';
 
 import { useOkapiKyQuery } from './useOkapiKyQuery';
 
-jest.mock('@folio/stripes/core');
-
 describe('useOkapiKyQuery', () => {
   const api = '/api/sources';
   const queryKey = 'QK_SOURCES';
