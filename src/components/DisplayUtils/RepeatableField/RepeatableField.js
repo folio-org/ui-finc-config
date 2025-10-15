@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-import { Required } from './Validate';
+import { Required } from '../Validate';
 
 const RepeatableField = ({
   ariaLabel,
