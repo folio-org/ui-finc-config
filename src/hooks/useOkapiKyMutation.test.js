@@ -35,7 +35,7 @@ describe('useOkapiKyMutation', () => {
     queryClient = new QueryClient();
   });
 
-  it('should call POST with correct payload', async () => {
+  it('should call POST with id and correct payload', async () => {
     doMockRequest('post');
 
     const { result } = renderHook(
@@ -52,6 +52,22 @@ describe('useOkapiKyMutation', () => {
 
     await waitFor(() => {
       expect(mockRequest).toHaveBeenCalledWith(api, { json: { ...payload, id } });
+    });
+  });
+
+  it('should call POST without id, but correct payload', async () => {
+    doMockRequest('post');
+
+    const { result } = renderHook(
+      () => useOkapiKyMutation(queryKey, undefined, api, HTTP_METHODS.POST),
+      { wrapper }
+    );
+
+    const payload = { name: 'Test Source' };
+    result.current.mutateAsync(payload);
+
+    await waitFor(() => {
+      expect(mockRequest).toHaveBeenCalledWith(api, { json: payload });
     });
   });
 

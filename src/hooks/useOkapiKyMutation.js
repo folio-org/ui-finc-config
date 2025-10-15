@@ -10,7 +10,7 @@ export const useOkapiKyMutation = (queryKey, id, api, method = HTTP_METHODS.POST
   return useMutation({
     mutationKey: [queryKey],
     mutationFn: (payload) => {
-      if (method === HTTP_METHODS.POST) return ky.post(api, { json: { ...payload, id } });
+      if (method === HTTP_METHODS.POST) return ky.post(api, { json: id ? { ...payload, id } : payload });
       if (method === HTTP_METHODS.PUT) return ky.put(`${api}/${id}`, { json: payload });
       if (method === HTTP_METHODS.DELETE) return ky.delete(`${api}/${id}`);
       throw new Error(`Unsupported API method: ${method}`);
