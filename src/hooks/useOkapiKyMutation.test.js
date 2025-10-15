@@ -13,7 +13,7 @@ import { useOkapiKyMutation } from './useOkapiKyMutation';
 
 describe('useOkapiKyMutation', () => {
   const api = '/api/sources';
-  const queryKy = 'QK_SOURCES';
+  const queryKey = 'QK_SOURCES';
   const id = '123';
   let queryClient;
   let mockRequest;
@@ -38,7 +38,7 @@ describe('useOkapiKyMutation', () => {
     doMockRequest('post');
 
     const { result } = renderHook(
-      () => useOkapiKyMutation(queryKy, id, api, 'POST'),
+      () => useOkapiKyMutation(queryKey, id, api, 'POST'),
       { wrapper }
     );
 
@@ -58,7 +58,7 @@ describe('useOkapiKyMutation', () => {
     doMockRequest('put');
 
     const { result } = renderHook(
-      () => useOkapiKyMutation(queryKy, id, api, 'PUT'),
+      () => useOkapiKyMutation(queryKey, id, api, 'PUT'),
       { wrapper }
     );
 
@@ -78,7 +78,7 @@ describe('useOkapiKyMutation', () => {
     doMockRequest('delete');
 
     const { result } = renderHook(
-      () => useOkapiKyMutation(queryKy, id, api, 'DELETE'),
+      () => useOkapiKyMutation(queryKey, id, api, 'DELETE'),
       { wrapper }
     );
 
