@@ -9,6 +9,7 @@ import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm
 import { useOkapiKyMutation } from '../hooks';
 import {
   API_SOURCES,
+  HTTP_METHODS,
   QK_SOURCES,
 } from '../util/constants';
 
@@ -24,7 +25,7 @@ const SourceCreateRoute = ({
   };
 
   const id = uuidv4();
-  const { mutateAsync: createSource } = useOkapiKyMutation(QK_SOURCES, id, API_SOURCES, 'POST');
+  const { mutateAsync: createSource } = useOkapiKyMutation(QK_SOURCES, id, API_SOURCES, HTTP_METHODS.POST);
 
   const handleSubmit = async (values) => {
     await createSource(values);

@@ -13,3 +13,9 @@ export const QK_ORG_CONTACTS = 'organization-contacts';
 export const QK_SOURCES = 'sources';
 export const QK_TINY_SOURCES = 'tiny-sources';
 export const QK_USERS = 'users';
+
+export const HTTP_METHODS = {
+  POST: 'POST',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
+};

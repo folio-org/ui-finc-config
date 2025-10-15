@@ -9,6 +9,7 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
 
+import { HTTP_METHODS } from '../util/constants';
 import { useOkapiKyMutation } from './useOkapiKyMutation';
 
 describe('useOkapiKyMutation', () => {
@@ -38,7 +39,7 @@ describe('useOkapiKyMutation', () => {
     doMockRequest('post');
 
     const { result } = renderHook(
-      () => useOkapiKyMutation(queryKey, id, api, 'POST'),
+      () => useOkapiKyMutation(queryKey, id, api, HTTP_METHODS.POST),
       { wrapper }
     );
 
@@ -58,7 +59,7 @@ describe('useOkapiKyMutation', () => {
     doMockRequest('put');
 
     const { result } = renderHook(
-      () => useOkapiKyMutation(queryKey, id, api, 'PUT'),
+      () => useOkapiKyMutation(queryKey, id, api, HTTP_METHODS.PUT),
       { wrapper }
     );
 
@@ -78,7 +79,7 @@ describe('useOkapiKyMutation', () => {
     doMockRequest('delete');
 
     const { result } = renderHook(
-      () => useOkapiKyMutation(queryKey, id, api, 'DELETE'),
+      () => useOkapiKyMutation(queryKey, id, api, HTTP_METHODS.DELETE),
       { wrapper }
     );
 
@@ -91,5 +92,15 @@ describe('useOkapiKyMutation', () => {
     await waitFor(() => {
       expect(mockRequest).toHaveBeenCalledWith(`${api}/${id}`);
     });
+  });
+
+  it('should throw an error for unsupported HTTP method', async () => {
+    const { result } = renderHook(
+      () => useOkapiKyMutation(queryKey, id, api, 'PATCH'),
+      { wrapper }
+    );
+
+    // promis will be rejected with error
+    await expect(result.current.mutateAsync({})).rejects.toThrow('Unsupported API method: PATCH');
   });
 });

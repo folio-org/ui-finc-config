@@ -9,6 +9,7 @@ import MetadataCollectionForm from '../components/MetadataCollections/MetadataCo
 import { useOkapiKyMutation } from '../hooks';
 import {
   API_COLLECTIONS,
+  HTTP_METHODS,
   QK_COLLECTIONS,
 } from '../util/constants';
 
@@ -24,7 +25,7 @@ const CollectionCreateRoute = ({
   };
 
   const id = uuidv4();
-  const { mutateAsync: createCollection } = useOkapiKyMutation(QK_COLLECTIONS, id, API_COLLECTIONS, 'POST');
+  const { mutateAsync: createCollection } = useOkapiKyMutation(QK_COLLECTIONS, id, API_COLLECTIONS, HTTP_METHODS.POST);
 
   const handleSubmit = async (values) => {
     await createCollection(values);

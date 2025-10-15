@@ -12,6 +12,7 @@ import {
 } from '../hooks';
 import {
   API_COLLECTIONS,
+  HTTP_METHODS,
   QK_COLLECTIONS,
 } from '../util/constants';
 
@@ -28,8 +29,12 @@ const CollectionEditRoute = ({
     data: collection = {},
     isLoading: isCollectionLoading,
   } = useOkapiKyQuery(QK_COLLECTIONS, collectionId, API_COLLECTIONS);
-  const { mutateAsync: putCollection } = useOkapiKyMutation(QK_COLLECTIONS, collectionId, API_COLLECTIONS, 'PUT');
-  const { mutateAsync: deleteCollection } = useOkapiKyMutation(QK_COLLECTIONS, collectionId, API_COLLECTIONS, 'DELETE');
+  const {
+    mutateAsync: putCollection,
+  } = useOkapiKyMutation(QK_COLLECTIONS, collectionId, API_COLLECTIONS, HTTP_METHODS.PUT);
+  const {
+    mutateAsync: deleteCollection,
+  } = useOkapiKyMutation(QK_COLLECTIONS, collectionId, API_COLLECTIONS, HTTP_METHODS.DELETE);
 
   const getInitialValues = () => {
     const initialValues = cloneDeep(collection);

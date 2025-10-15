@@ -12,6 +12,7 @@ import {
 } from '../hooks';
 import {
   API_SOURCES,
+  HTTP_METHODS,
   QK_SOURCES,
 } from '../util/constants';
 
@@ -24,8 +25,8 @@ const SourceEditRoute = ({
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const { data: source = {}, isLoading: isSourceLoading } = useOkapiKyQuery(QK_SOURCES, sourceId, API_SOURCES);
-  const { mutateAsync: putSource } = useOkapiKyMutation(QK_SOURCES, sourceId, API_SOURCES, 'PUT');
-  const { mutateAsync: deleteSource } = useOkapiKyMutation(QK_SOURCES, sourceId, API_SOURCES, 'DELETE');
+  const { mutateAsync: putSource } = useOkapiKyMutation(QK_SOURCES, sourceId, API_SOURCES, HTTP_METHODS.PUT);
+  const { mutateAsync: deleteSource } = useOkapiKyMutation(QK_SOURCES, sourceId, API_SOURCES, HTTP_METHODS.DELETE);
 
   const getInitialValues = () => {
     const initialValues = cloneDeep(source);
