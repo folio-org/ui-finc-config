@@ -45,25 +45,17 @@ const CollectionEditRoute = ({
     history.push(`${urls.collectionView(collectionId)}${location.search}`);
   };
 
-  const deleteCollection = useDelete({
+  const { mutateAsync: deleteCollection } = useDelete({
     onSuccess: () => {
       history.push(`${urls.collections()}${location.search}`);
     },
   });
 
-  const handleDelete = async () => {
-    await deleteCollection.mutateAsync();
-  };
-
-  const putCollection = useUpdate({
+  const { mutateAsync: putCollection } = useUpdate({
     onSuccess: () => {
       handleClose();
     },
   });
-
-  const handleSubmit = async (values) => {
-    await putCollection.mutateAsync(values);
-  };
 
   if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
 
@@ -72,8 +64,8 @@ const CollectionEditRoute = ({
       handlers={{ onClose: handleClose }}
       initialValues={getInitialValues()}
       isLoading={isCollectionLoading}
-      onDelete={handleDelete}
-      onSubmit={handleSubmit}
+      onDelete={deleteCollection}
+      onSubmit={putCollection}
     />
   );
 };

@@ -30,22 +30,18 @@ const SourceCreateRoute = ({
     api: API_SOURCES,
   });
 
-  const createSource = useCreate({
+  const { mutateAsync: createSource } = useCreate({
     onSuccess: () => {
       history.push(`${urls.sourceView(id)}${location.search}`);
     },
   });
-
-  const handleSubmit = async (values) => {
-    await createSource.mutateAsync(values);
-  };
 
   if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
 
   return (
     <MetadataSourceForm
       handlers={{ onClose: handleClose }}
-      onSubmit={handleSubmit}
+      onSubmit={createSource}
     />
   );
 };

@@ -30,15 +30,11 @@ const CollectionCreateRoute = ({
     api: API_COLLECTIONS,
   });
 
-  const createCollection = useCreate({
+  const { mutateAsync: createCollection } = useCreate({
     onSuccess: () => {
       history.push(`${urls.collectionView(id)}${location.search}`);
     },
   });
-
-  const handleSubmit = async (values) => {
-    await createCollection.mutateAsync(values);
-  };
 
   const getInitialSolrMegaCollection = () => {
     // add first field for required repeatable field
@@ -53,7 +49,7 @@ const CollectionCreateRoute = ({
     <MetadataCollectionForm
       handlers={{ onClose: handleClose }}
       initialValues={getInitialSolrMegaCollection()}
-      onSubmit={handleSubmit}
+      onSubmit={createCollection}
     />
   );
 };

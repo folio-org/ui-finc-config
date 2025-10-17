@@ -41,25 +41,17 @@ const SourceEditRoute = ({
     history.push(`${urls.sourceView(sourceId)}${location.search}`);
   };
 
-  const putSource = useUpdate({
+  const { mutateAsync: putSource } = useUpdate({
     onSuccess: () => {
       handleClose();
     },
   });
 
-  const handleSubmit = async (values) => {
-    await putSource.mutateAsync(values);
-  };
-
-  const deleteSource = useDelete({
+  const { mutateAsync: deleteSource } = useDelete({
     onSuccess: () => {
       history.push(`${urls.sources()}${location.search}`);
     },
   });
-
-  const handleDelete = async () => {
-    await deleteSource.mutateAsync();
-  };
 
   if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
 
@@ -68,8 +60,8 @@ const SourceEditRoute = ({
       handlers={{ onClose: handleClose }}
       initialValues={getInitialValues()}
       isLoading={isSourceLoading}
-      onDelete={handleDelete}
-      onSubmit={handleSubmit}
+      onDelete={deleteSource}
+      onSubmit={putSource}
     />
   );
 };
