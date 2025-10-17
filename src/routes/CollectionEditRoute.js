@@ -12,7 +12,6 @@ import {
 } from '../hooks';
 import {
   API_COLLECTIONS,
-  HTTP_METHODS,
   QK_COLLECTIONS,
 } from '../util/constants';
 
@@ -29,17 +28,11 @@ const CollectionEditRoute = ({
     data: collection = {},
     isLoading: isCollectionLoading,
   } = useOkapiKyQuery(QK_COLLECTIONS, collectionId, API_COLLECTIONS);
-  const { mutateAsync: putCollection } = useOkapiKyMutation({
+
+  const { useUpdate, useDelete } = useOkapiKyMutation({
     queryKey: QK_COLLECTIONS,
     id: collectionId,
     api: API_COLLECTIONS,
-    method: HTTP_METHODS.PUT,
-  });
-  const { mutateAsync: deleteCollection } = useOkapiKyMutation({
-    queryKey: QK_COLLECTIONS,
-    id: collectionId,
-    api: API_COLLECTIONS,
-    method: HTTP_METHODS.DELETE,
   });
 
   const getInitialValues = () => {
@@ -52,14 +45,24 @@ const CollectionEditRoute = ({
     history.push(`${urls.collectionView(collectionId)}${location.search}`);
   };
 
+  const deleteCollection = useDelete({
+    onSuccess: () => {
+      history.push(`${urls.collections()}${location.search}`);
+    },
+  });
+
   const handleDelete = async () => {
-    await deleteCollection();
-    history.push(`${urls.collections()}${location.search}`);
+    await deleteCollection.mutateAsync();
   };
 
+  const putCollection = useUpdate({
+    onSuccess: () => {
+      handleClose();
+    },
+  });
+
   const handleSubmit = async (values) => {
-    await putCollection(values);
-    handleClose();
+    await putCollection.mutateAsync(values);
   };
 
   if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;

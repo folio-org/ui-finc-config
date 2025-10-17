@@ -12,7 +12,6 @@ import {
 } from '../hooks';
 import {
   API_SOURCES,
-  HTTP_METHODS,
   QK_SOURCES,
 } from '../util/constants';
 
@@ -25,17 +24,11 @@ const SourceEditRoute = ({
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const { data: source = {}, isLoading: isSourceLoading } = useOkapiKyQuery(QK_SOURCES, sourceId, API_SOURCES);
-  const { mutateAsync: putSource } = useOkapiKyMutation({
+
+  const { useUpdate, useDelete } = useOkapiKyMutation({
     queryKey: QK_SOURCES,
     id: sourceId,
     api: API_SOURCES,
-    method: HTTP_METHODS.PUT,
-  });
-  const { mutateAsync: deleteSource } = useOkapiKyMutation({
-    queryKey: QK_SOURCES,
-    id: sourceId,
-    api: API_SOURCES,
-    method: HTTP_METHODS.DELETE,
   });
 
   const getInitialValues = () => {
@@ -48,14 +41,24 @@ const SourceEditRoute = ({
     history.push(`${urls.sourceView(sourceId)}${location.search}`);
   };
 
+  const putSource = useUpdate({
+    onSuccess: () => {
+      handleClose();
+    },
+  });
+
   const handleSubmit = async (values) => {
-    await putSource(values);
-    handleClose();
+    await putSource.mutateAsync(values);
   };
 
+  const deleteSource = useDelete({
+    onSuccess: () => {
+      history.push(`${urls.sources()}${location.search}`);
+    },
+  });
+
   const handleDelete = async () => {
-    await deleteSource();
-    history.push(`${urls.sources()}${location.search}`);
+    await deleteSource.mutateAsync();
   };
 
   if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;

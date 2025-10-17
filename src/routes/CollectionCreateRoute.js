@@ -9,7 +9,6 @@ import MetadataCollectionForm from '../components/MetadataCollections/MetadataCo
 import { useOkapiKyMutation } from '../hooks';
 import {
   API_COLLECTIONS,
-  HTTP_METHODS,
   QK_COLLECTIONS,
 } from '../util/constants';
 
@@ -25,16 +24,20 @@ const CollectionCreateRoute = ({
   };
 
   const id = uuidv4();
-  const { mutateAsync: createCollection } = useOkapiKyMutation({
+  const { useCreate } = useOkapiKyMutation({
     queryKey: QK_COLLECTIONS,
     id,
     api: API_COLLECTIONS,
-    method: HTTP_METHODS.POST,
+  });
+
+  const createCollection = useCreate({
+    onSuccess: () => {
+      history.push(`${urls.collectionView(id)}${location.search}`);
+    },
   });
 
   const handleSubmit = async (values) => {
-    await createCollection(values);
-    history.push(`${urls.collectionView(id)}${location.search}`);
+    await createCollection.mutateAsync(values);
   };
 
   const getInitialSolrMegaCollection = () => {

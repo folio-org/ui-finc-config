@@ -9,7 +9,6 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
 
-import { HTTP_METHODS } from '../util/constants';
 import { useOkapiKyMutation } from './useOkapiKyMutation';
 
 describe('useOkapiKyMutation', () => {
@@ -38,10 +37,12 @@ describe('useOkapiKyMutation', () => {
   it('should call POST with id and correct payload', async () => {
     doMockRequest('post');
 
-    const { result } = renderHook(
-      () => useOkapiKyMutation({ queryKey, id, api, method: HTTP_METHODS.POST }),
+    const { result: requestResult } = renderHook(
+      () => useOkapiKyMutation({ queryKey, id, api }),
       { wrapper }
     );
+
+    const { result } = renderHook(() => requestResult.current.useCreate(), { wrapper });
 
     const payload = { name: 'Test Source' };
     result.current.mutateAsync(payload);
@@ -58,10 +59,12 @@ describe('useOkapiKyMutation', () => {
   it('should call POST without id, but correct payload', async () => {
     doMockRequest('post');
 
-    const { result } = renderHook(
-      () => useOkapiKyMutation({ queryKey, id: undefined, api, method: HTTP_METHODS.POST }),
+    const { result: requestResult } = renderHook(
+      () => useOkapiKyMutation({ queryKey, id: undefined, api }),
       { wrapper }
     );
+
+    const { result } = renderHook(() => requestResult.current.useCreate(), { wrapper });
 
     const payload = { name: 'Test Source' };
     result.current.mutateAsync(payload);
@@ -74,10 +77,12 @@ describe('useOkapiKyMutation', () => {
   it('should call PUT with correct payload and URL', async () => {
     doMockRequest('put');
 
-    const { result } = renderHook(
-      () => useOkapiKyMutation({ queryKey, id, api, method: HTTP_METHODS.PUT }),
+    const { result: requestResult } = renderHook(
+      () => useOkapiKyMutation({ queryKey, id, api }),
       { wrapper }
     );
+
+    const { result } = renderHook(() => requestResult.current.useUpdate(), { wrapper });
 
     const payload = { name: 'Updated Source' };
     result.current.mutateAsync(payload);
@@ -94,10 +99,12 @@ describe('useOkapiKyMutation', () => {
   it('should call DELETE with correct URL', async () => {
     doMockRequest('delete');
 
-    const { result } = renderHook(
-      () => useOkapiKyMutation({ queryKey, id, api, method: HTTP_METHODS.DELETE }),
+    const { result: requestResult } = renderHook(
+      () => useOkapiKyMutation({ queryKey, id, api }),
       { wrapper }
     );
+
+    const { result } = renderHook(() => requestResult.current.useDelete(), { wrapper });
 
     result.current.mutateAsync();
 
@@ -108,15 +115,5 @@ describe('useOkapiKyMutation', () => {
     await waitFor(() => {
       expect(mockRequest).toHaveBeenCalledWith(`${api}/${id}`);
     });
-  });
-
-  it('should throw an error for unsupported HTTP method', async () => {
-    const { result } = renderHook(
-      () => useOkapiKyMutation({ queryKey, id, api, method: 'PATCH' }),
-      { wrapper }
-    );
-
-    // promis will be rejected with error
-    await expect(result.current.mutateAsync({})).rejects.toThrow('Unsupported HTTP method: PATCH');
   });
 });

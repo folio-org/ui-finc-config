@@ -9,7 +9,6 @@ import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm
 import { useOkapiKyMutation } from '../hooks';
 import {
   API_SOURCES,
-  HTTP_METHODS,
   QK_SOURCES,
 } from '../util/constants';
 
@@ -25,16 +24,20 @@ const SourceCreateRoute = ({
   };
 
   const id = uuidv4();
-  const { mutateAsync: createSource } = useOkapiKyMutation({
+  const { useCreate } = useOkapiKyMutation({
     queryKey: QK_SOURCES,
     id,
     api: API_SOURCES,
-    method: HTTP_METHODS.POST,
+  });
+
+  const createSource = useCreate({
+    onSuccess: () => {
+      history.push(`${urls.sourceView(id)}${location.search}`);
+    },
   });
 
   const handleSubmit = async (values) => {
-    await createSource(values);
-    history.push(`${urls.sourceView(id)}${location.search}`);
+    await createSource.mutateAsync(values);
   };
 
   if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
