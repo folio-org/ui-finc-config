@@ -24,10 +24,11 @@ const CollectionEditRoute = ({
 
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
-  const {
-    data: collection = {},
-    isLoading: isCollectionLoading,
-  } = useOkapiKyQuery(QK_COLLECTIONS, collectionId, API_COLLECTIONS);
+  const { data: collection = {}, isLoading: isCollectionLoading } = useOkapiKyQuery({
+    queryKey: QK_COLLECTIONS,
+    id: collectionId,
+    api: API_COLLECTIONS,
+  });
 
   const { useUpdate, useDelete } = useOkapiKyMutation({
     queryKey: QK_COLLECTIONS,

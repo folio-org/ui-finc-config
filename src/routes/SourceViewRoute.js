@@ -19,7 +19,11 @@ const SourceViewRoute = ({
   const stripes = useStripes();
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
-  const { data: source = {}, isLoading: isSourceLoading } = useOkapiKyQuery(QK_SOURCES, sourceId, API_SOURCES);
+  const { data: source = {}, isLoading: isSourceLoading } = useOkapiKyQuery({
+    queryKey: QK_SOURCES,
+    id: sourceId,
+    api: API_SOURCES,
+  });
 
   const handleClose = () => {
     history.push(`${urls.sources()}${location.search}`);

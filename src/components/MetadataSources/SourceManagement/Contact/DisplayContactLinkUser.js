@@ -16,7 +16,11 @@ const DisplayContactLinkUser = ({
   contactId,
 }) => {
   let contactNameWithLink = <NoValue />;
-  const { user, isLoading: isLoadingUser, isError } = useOkapiKyQuery(QK_USERS, contactId, API_USERS);
+  const { user, isLoading: isLoadingUser, isError } = useOkapiKyQuery({
+    queryKey: QK_USERS,
+    id: contactId,
+    api: API_USERS,
+  });
 
   if (!isEmpty(contactId) && !isLoadingUser) {
     if (contact.type === 'user' && user && isError && contact.name) {

@@ -34,7 +34,7 @@ describe('useOkapiKyQuery', () => {
 
   it('should fetch data correctly when id is provided', async () => {
     const { result } = renderHook(
-      () => useOkapiKyQuery(queryKey, id, api),
+      () => useOkapiKyQuery({ queryKey, id, api }),
       { wrapper }
     );
 
@@ -46,7 +46,7 @@ describe('useOkapiKyQuery', () => {
 
   it('should not fetch if id is undefined', async () => {
     const { result } = renderHook(
-      () => useOkapiKyQuery(queryKey, undefined, api),
+      () => useOkapiKyQuery({ queryKey, undefined, api }),
       { wrapper }
     );
 

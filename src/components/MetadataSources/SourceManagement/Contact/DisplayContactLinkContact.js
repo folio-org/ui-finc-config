@@ -20,7 +20,11 @@ const DisplayContactLinkContact = ({
     data: organizationsContact,
     isLoading: isLoadingContact,
     isError,
-  } = useOkapiKyQuery(QK_ORG_CONTACTS, contactId, API_ORG_CONTACTS);
+  } = useOkapiKyQuery({
+    queryKey: QK_ORG_CONTACTS,
+    id: contactId,
+    api: API_ORG_CONTACTS,
+  });
 
   if (!isEmpty(contactId) && !isLoadingContact) {
     if (contact.type === 'contact' && organizationsContact && isError && contact.name) {
