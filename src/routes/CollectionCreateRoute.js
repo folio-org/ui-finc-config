@@ -25,7 +25,7 @@ const CollectionCreateRoute = ({
 
   const id = uuidv4();
   const { useCreate } = useOkapiKyMutation({
-    queryKey: QK_COLLECTIONS,
+    queryKey: [QK_COLLECTIONS, id],
     id,
     api: API_COLLECTIONS,
   });

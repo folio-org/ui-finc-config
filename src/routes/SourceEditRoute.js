@@ -30,7 +30,7 @@ const SourceEditRoute = ({
   });
 
   const { useUpdate, useDelete } = useOkapiKyMutation({
-    queryKey: QK_SOURCES,
+    queryKey: [QK_SOURCES, sourceId],
     id: sourceId,
     api: API_SOURCES,
   });
