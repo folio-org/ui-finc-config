@@ -39,7 +39,7 @@ describe('useOkapiKyMutation', () => {
     doMockRequest('post');
 
     const { result } = renderHook(
-      () => useOkapiKyMutation(queryKey, id, api, HTTP_METHODS.POST),
+      () => useOkapiKyMutation({ queryKey, id, api, method: HTTP_METHODS.POST }),
       { wrapper }
     );
 
@@ -59,7 +59,7 @@ describe('useOkapiKyMutation', () => {
     doMockRequest('post');
 
     const { result } = renderHook(
-      () => useOkapiKyMutation(queryKey, undefined, api, HTTP_METHODS.POST),
+      () => useOkapiKyMutation({ queryKey, id: undefined, api, method: HTTP_METHODS.POST }),
       { wrapper }
     );
 
@@ -75,7 +75,7 @@ describe('useOkapiKyMutation', () => {
     doMockRequest('put');
 
     const { result } = renderHook(
-      () => useOkapiKyMutation(queryKey, id, api, HTTP_METHODS.PUT),
+      () => useOkapiKyMutation({ queryKey, id, api, method: HTTP_METHODS.PUT }),
       { wrapper }
     );
 
@@ -95,7 +95,7 @@ describe('useOkapiKyMutation', () => {
     doMockRequest('delete');
 
     const { result } = renderHook(
-      () => useOkapiKyMutation(queryKey, id, api, HTTP_METHODS.DELETE),
+      () => useOkapiKyMutation({ queryKey, id, api, method: HTTP_METHODS.DELETE }),
       { wrapper }
     );
 
@@ -112,11 +112,11 @@ describe('useOkapiKyMutation', () => {
 
   it('should throw an error for unsupported HTTP method', async () => {
     const { result } = renderHook(
-      () => useOkapiKyMutation(queryKey, id, api, 'PATCH'),
+      () => useOkapiKyMutation({ queryKey, id, api, method: 'PATCH' }),
       { wrapper }
     );
 
     // promis will be rejected with error
-    await expect(result.current.mutateAsync({})).rejects.toThrow('Unsupported API method: PATCH');
+    await expect(result.current.mutateAsync({})).rejects.toThrow('Unsupported HTTP method: PATCH');
   });
 });

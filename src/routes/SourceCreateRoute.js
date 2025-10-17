@@ -25,7 +25,12 @@ const SourceCreateRoute = ({
   };
 
   const id = uuidv4();
-  const { mutateAsync: createSource } = useOkapiKyMutation(QK_SOURCES, id, API_SOURCES, HTTP_METHODS.POST);
+  const { mutateAsync: createSource } = useOkapiKyMutation({
+    queryKey: QK_SOURCES,
+    id,
+    api: API_SOURCES,
+    method: HTTP_METHODS.POST,
+  });
 
   const handleSubmit = async (values) => {
     await createSource(values);

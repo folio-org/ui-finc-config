@@ -29,12 +29,18 @@ const CollectionEditRoute = ({
     data: collection = {},
     isLoading: isCollectionLoading,
   } = useOkapiKyQuery(QK_COLLECTIONS, collectionId, API_COLLECTIONS);
-  const {
-    mutateAsync: putCollection,
-  } = useOkapiKyMutation(QK_COLLECTIONS, collectionId, API_COLLECTIONS, HTTP_METHODS.PUT);
-  const {
-    mutateAsync: deleteCollection,
-  } = useOkapiKyMutation(QK_COLLECTIONS, collectionId, API_COLLECTIONS, HTTP_METHODS.DELETE);
+  const { mutateAsync: putCollection } = useOkapiKyMutation({
+    queryKey: QK_COLLECTIONS,
+    id: collectionId,
+    api: API_COLLECTIONS,
+    method: HTTP_METHODS.PUT,
+  });
+  const { mutateAsync: deleteCollection } = useOkapiKyMutation({
+    queryKey: QK_COLLECTIONS,
+    id: collectionId,
+    api: API_COLLECTIONS,
+    method: HTTP_METHODS.DELETE,
+  });
 
   const getInitialValues = () => {
     const initialValues = cloneDeep(collection);

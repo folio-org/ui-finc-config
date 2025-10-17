@@ -25,7 +25,12 @@ const CollectionCreateRoute = ({
   };
 
   const id = uuidv4();
-  const { mutateAsync: createCollection } = useOkapiKyMutation(QK_COLLECTIONS, id, API_COLLECTIONS, HTTP_METHODS.POST);
+  const { mutateAsync: createCollection } = useOkapiKyMutation({
+    queryKey: QK_COLLECTIONS,
+    id,
+    api: API_COLLECTIONS,
+    method: HTTP_METHODS.POST,
+  });
 
   const handleSubmit = async (values) => {
     await createCollection(values);
