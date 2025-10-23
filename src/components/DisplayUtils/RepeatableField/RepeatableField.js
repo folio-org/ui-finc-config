@@ -32,10 +32,10 @@ const RepeatableField = ({
     <Row>
       <Col xs={12}>
         {fields.map((elem, index) => (
-          <Row key={index}>
+          <Row key={elem}>
             <Col xs={8}>
               <Field
-                ariaLabel={`${ariaLabel} #${parseInt(index + 1, 10)}`}
+                ariaLabel={`${ariaLabel} #${Number.parseInt(index + 1, 10)}`}
                 component={TextField}
                 fullWidth
                 id={elem}
