@@ -15,9 +15,11 @@ import {
 } from '@folio/stripes/components';
 
 import BasicCss from '../../BasicStyle.css';
-import RepeatableFieldValidUrl from '../../DisplayUtils/RepeatableFieldValidUrl';
-import RequiredRepeatableField from '../../DisplayUtils/RequiredRepeatableField';
-import { Required } from '../../DisplayUtils/Validate';
+import RepeatableField from '../../DisplayUtils/RepeatableField';
+import {
+  Required,
+  ValidateUrl,
+} from '../../DisplayUtils/Validate';
 
 const CollectionTechnicalForm = ({
   accordionId,
@@ -66,7 +68,8 @@ const CollectionTechnicalForm = ({
         <Row>
           <Col xs={12}>
             <FieldArray
-              component={RepeatableFieldValidUrl}
+              component={RepeatableField}
+              fieldValidate={ValidateUrl}
               id="display_tickets"
               name="tickets"
               placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.tickets' })}
@@ -84,7 +87,8 @@ const CollectionTechnicalForm = ({
         <Row>
           <Col xs={12}>
             <FieldArray
-              component={RepeatableFieldValidUrl}
+              component={RepeatableField}
+              fieldValidate={ValidateUrl}
               id="display_contentFiles"
               name="contentFiles"
               placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.contentFiles' })}
@@ -102,8 +106,9 @@ const CollectionTechnicalForm = ({
         <Row>
           <Col xs={12}>
             <FieldArray
-              component={RequiredRepeatableField}
+              component={RepeatableField}
               id="display_solrMegaCollections"
+              isFirstFieldRequired
               name="solrMegaCollections"
             />
           </Col>

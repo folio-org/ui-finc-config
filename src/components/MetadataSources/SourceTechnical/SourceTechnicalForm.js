@@ -15,7 +15,6 @@ import {
 import BasicCss from '../../BasicStyle.css';
 import { solrShardOptions } from '../../DataOptions/dataOptions';
 import RepeatableField from '../../DisplayUtils/RepeatableField';
-import RepeatableFieldValidUrl from '../../DisplayUtils/RepeatableFieldValidUrl';
 import {
   IntRequired,
   ValidateUrl,
@@ -50,7 +49,8 @@ const SourceTechnicalForm = ({
         <Row>
           <Col xs={12}>
             <FieldArray
-              component={RepeatableFieldValidUrl}
+              component={RepeatableField}
+              fieldValidate={ValidateUrl}
               id="display_tickets"
               name="tickets"
               placeholder=""

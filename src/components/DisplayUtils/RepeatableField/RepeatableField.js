@@ -10,29 +10,48 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
+import { Required } from '../Validate';
+
 const RepeatableField = ({
   ariaLabel,
+  isFirstFieldRequired = false,
   fields,
+  placeholder = '',
+  fieldValidate = () => {},
 }) => {
+  const getValidate = (index) => (value) => {
+    if (isFirstFieldRequired && index === 0) {
+      const requiredError = Required(value);
+      if (requiredError) return requiredError;
+    }
+
+    return fieldValidate(value);
+  };
+
   return (
     <Row>
       <Col xs={12}>
         {fields.map((elem, index) => (
-          <Row key={index}>
+          <Row key={elem}>
             <Col xs={8}>
               <Field
-                ariaLabel={`${ariaLabel} #${parseInt(index + 1, 10)}`}
+                ariaLabel={`${ariaLabel} #${Number.parseInt(index + 1, 10)}`}
                 component={TextField}
                 fullWidth
                 id={elem}
                 name={elem}
+                placeholder={placeholder}
+                required={isFirstFieldRequired && index === 0}
+                validate={getValidate(index)}
               />
             </Col>
             <Col xs={1}>
+              {/* no trash icon if first field is required */}
+              {(!isFirstFieldRequired || index !== 0) &&
               <IconButton
                 icon="trash"
                 onClick={() => fields.remove(index)}
-              />
+              />}
             </Col>
           </Row>
         ))}
@@ -47,6 +66,9 @@ const RepeatableField = ({
 RepeatableField.propTypes = {
   ariaLabel: PropTypes.string,
   fields: PropTypes.object,
+  fieldValidate: PropTypes.func,
+  isFirstFieldRequired: PropTypes.bool,
+  placeholder: PropTypes.string,
 };
 
 export default RepeatableField;
