@@ -13,7 +13,7 @@ import { useOkapiKyQuery } from './useOkapiKyQuery';
 
 describe('useOkapiKyQuery', () => {
   const api = '/api/sources';
-  const queryKey = 'QK_SOURCES';
+  const queryKey = ['QK_SOURCES'];
   const id = '123';
   let queryClient;
 

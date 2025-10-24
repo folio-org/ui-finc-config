@@ -9,7 +9,7 @@ export const useOkapiKyMutation = ({ queryKey, id, api } = {}) => {
 
   const useMutationRequest = (method, { usePayload = true, ...options } = {}) => {
     return useMutation({
-      ...(queryKey && { mutationKey: Array.isArray(queryKey) ? queryKey : [queryKey] }),
+      ...(queryKey && { mutationKey: [queryKey] }),
       mutationFn: async (payload) => {
         switch (method) {
           case 'post':

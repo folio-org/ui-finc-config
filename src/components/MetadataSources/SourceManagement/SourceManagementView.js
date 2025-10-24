@@ -31,7 +31,7 @@ const SourceManagementView = ({
   const sourceId = _.get(metadataSource, 'id', <NoValue />);
 
   const { data: organization, isLoading: isLoadingOrganization, isError } = useOkapiKyQuery({
-    queryKey: QK_ORGANIZATIONS,
+    queryKey: [QK_ORGANIZATIONS],
     id: organizationId,
     api: API_ORGANIZATIONS,
   });
