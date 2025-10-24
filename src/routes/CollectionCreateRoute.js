@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -23,7 +24,7 @@ const CollectionCreateRoute = ({
     history.push(`${urls.collections()}${location.search}`);
   };
 
-  const id = uuidv4();
+  const id = useMemo(() => uuidv4(), []);
   const { useCreate } = useOkapiKyMutation({
     queryKey: [QK_COLLECTIONS, id],
     id,
