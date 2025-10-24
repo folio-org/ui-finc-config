@@ -5,7 +5,7 @@ import {
 
 // A hook which holds a previous value.
 // Useful to hold props from a previous render.
-const usePrevious = value => {
+export const usePrevious = value => {
   const ref = useRef();
 
   useEffect(() => {
@@ -14,5 +14,3 @@ const usePrevious = value => {
 
   return ref.current;
 };
-
-export default usePrevious;

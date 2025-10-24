@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useUpdatedFilters = ({
+export const useUpdatedFilters = ({
   dynamicKey,
   filterConfig,
   filterData,
@@ -11,7 +11,7 @@ const useUpdatedFilters = ({
     const newState = {};
     const arr = [];
 
-    filterConfig.forEach((filter) => {
+    for (const filter of filterConfig) {
       const newValues = [];
       let values = {};
 
@@ -23,12 +23,12 @@ const useUpdatedFilters = ({
         values = filter.values;
       }
 
-      values.forEach((key) => {
+      for (const key of values) {
         newValues.push({
           value: key.cql,
           label: key.name,
         });
-      });
+      }
 
       arr[filter.name] = newValues;
 
@@ -38,7 +38,7 @@ const useUpdatedFilters = ({
       ) {
         newState[filter.name] = arr[filter.name];
       }
-    });
+    }
 
     if (Object.keys(newState).length) {
       setFilterState((prevState) => ({ ...prevState, ...newState }));
@@ -46,5 +46,3 @@ const useUpdatedFilters = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterData, filterState, dynamicKey]);
 };
-
-export default useUpdatedFilters;
