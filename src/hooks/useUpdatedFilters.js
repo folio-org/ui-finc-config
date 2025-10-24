@@ -11,7 +11,7 @@ export const useUpdatedFilters = ({
     const newState = {};
     const arr = [];
 
-    filterConfig.forEach((filter) => {
+    for (const filter of filterConfig) {
       const newValues = [];
       let values = {};
 
@@ -23,12 +23,12 @@ export const useUpdatedFilters = ({
         values = filter.values;
       }
 
-      values.forEach((key) => {
+      for (const key of values) {
         newValues.push({
           value: key.cql,
           label: key.name,
         });
-      });
+      }
 
       arr[filter.name] = newValues;
 
@@ -38,7 +38,7 @@ export const useUpdatedFilters = ({
       ) {
         newState[filter.name] = arr[filter.name];
       }
-    });
+    }
 
     if (Object.keys(newState).length) {
       setFilterState((prevState) => ({ ...prevState, ...newState }));
