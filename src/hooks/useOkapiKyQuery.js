@@ -6,7 +6,7 @@ export const useOkapiKyQuery = ({ queryKey, id, api, options = {} }) => {
   const ky = useOkapiKy();
 
   return useQuery(
-    [...(queryKey ? (Array.isArray(queryKey) ? queryKey : [queryKey]) : []), id],
+    [...(Array.isArray(queryKey) ? queryKey : [queryKey])],
     () => ky.get(`${api}/${id}`).json(),
     {
       // The query will not execute until the id exists

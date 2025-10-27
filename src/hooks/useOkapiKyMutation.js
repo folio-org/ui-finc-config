@@ -12,16 +12,28 @@ export const useOkapiKyMutation = ({ mutationKey, id, api } = {}) => {
       ...(mutationKey && { mutationKey: Array.isArray(mutationKey) ? mutationKey : [mutationKey] }),
       mutationFn: async (payload) => {
         switch (method) {
-          case 'post':
-            return ky.post(api, { json: id ? { ...payload, id } : payload });
+          case 'post': {
+            const response = await ky.post(api, { json: id ? { ...payload, id } : payload });
+            return response.json();
+          }
+
           case 'put':
             if (!id) throw new Error('PUT requires an "id"');
-            return ky.put(`${api}/${id}`, { json: payload });
+            await ky.put(`${api}/${id}`, { json: payload });
+
+            return null;
+
           case 'delete':
             if (!id) throw new Error('DELETE requires an "id"');
-            return usePayload
-              ? ky.delete(`${api}/${id}`, { json: payload })
-              : ky.delete(`${api}/${id}`);
+
+            if (usePayload) {
+              await ky.delete(`${api}/${id}`, { json: payload });
+            } else {
+              await ky.delete(`${api}/${id}`);
+            }
+
+            return null;
+
           default:
             throw new Error(`Unsupported HTTP method: ${method}`);
         }

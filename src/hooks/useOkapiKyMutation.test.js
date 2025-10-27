@@ -23,7 +23,14 @@ describe('useOkapiKyMutation', () => {
   );
 
   const doMockRequest = (method) => {
-    mockRequest = jest.fn(() => Promise.resolve());
+    if (method === 'post') {
+      mockRequest = jest.fn(() => Promise.resolve({
+        json: jest.fn(() => Promise.resolve({ id: '123456' })),
+      }));
+    } else {
+      mockRequest = jest.fn(() => Promise.resolve());
+    }
+
     useOkapiKy.mockReturnValue({
       [method]: mockRequest,
     });
