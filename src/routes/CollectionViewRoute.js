@@ -20,7 +20,7 @@ const CollectionViewRoute = ({
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const { data: collection, isLoading: isCollectionLoading } = useOkapiKyQuery({
-    queryKey: [QK_COLLECTIONS],
+    queryKey: [QK_COLLECTIONS, collectionId],
     id: collectionId,
     api: API_COLLECTIONS,
   });

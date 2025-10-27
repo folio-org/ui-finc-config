@@ -24,13 +24,13 @@ const SourceEditRoute = ({
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const { data: source = {}, isLoading: isSourceLoading } = useOkapiKyQuery({
-    queryKey: [QK_SOURCES],
+    queryKey: [QK_SOURCES, sourceId],
     id: sourceId,
     api: API_SOURCES,
   });
 
   const { useUpdate, useDelete } = useOkapiKyMutation({
-    queryKey: [QK_SOURCES, sourceId],
+    mutationKey: [QK_SOURCES, sourceId],
     id: sourceId,
     api: API_SOURCES,
   });

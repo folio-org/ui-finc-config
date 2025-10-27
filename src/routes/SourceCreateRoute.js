@@ -26,7 +26,7 @@ const SourceCreateRoute = ({
 
   const id = useMemo(() => uuidv4(), []);
   const { useCreate } = useOkapiKyMutation({
-    queryKey: [QK_SOURCES, id],
+    mutationKey: [QK_SOURCES, id],
     id,
     api: API_SOURCES,
   });

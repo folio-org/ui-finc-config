@@ -17,7 +17,7 @@ const DisplayContactLinkContact = ({
 }) => {
   let contactNameWithLink = <NoValue />;
   const { data: organizationsContact, isLoading: isLoadingContact, isError } = useOkapiKyQuery({
-    queryKey: [QK_ORG_CONTACTS],
+    queryKey: [QK_ORG_CONTACTS, contactId],
     id: contactId,
     api: API_ORG_CONTACTS,
   });

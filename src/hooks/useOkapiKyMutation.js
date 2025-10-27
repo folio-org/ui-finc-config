@@ -2,14 +2,14 @@ import { useMutation } from 'react-query';
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-export const useOkapiKyMutation = ({ queryKey, id, api } = {}) => {
+export const useOkapiKyMutation = ({ mutationKey, id, api } = {}) => {
   if (!api) throw new Error('useOkapiKyMutation requires an "api" parameter');
 
   const ky = useOkapiKy();
 
   const useMutationRequest = (method, { usePayload = true, ...options } = {}) => {
     return useMutation({
-      ...(queryKey && { mutationKey: [queryKey] }),
+      ...(mutationKey && { mutationKey: Array.isArray(mutationKey) ? mutationKey : [mutationKey] }),
       mutationFn: async (payload) => {
         switch (method) {
           case 'post':
