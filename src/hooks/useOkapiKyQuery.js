@@ -12,9 +12,6 @@ export const useOkapiKyQuery = ({ queryKey, id, api, params = {}, options = {} }
 
       return ky.get(url, { searchParams: params }).json();
     },
-    {
-      enabled: id ? !!id : (options.enabled !== undefined ? options.enabled : true),
-      ...options,
-    }
+    options
   );
 };
