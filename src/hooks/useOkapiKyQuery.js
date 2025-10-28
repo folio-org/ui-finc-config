@@ -2,15 +2,18 @@ import { useQuery } from 'react-query';
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-export const useOkapiKyQuery = ({ queryKey, id, api, options = {} }) => {
+export const useOkapiKyQuery = ({ queryKey, id, api, params = {}, options = {} }) => {
   const ky = useOkapiKy();
 
   return useQuery(
     [...(Array.isArray(queryKey) ? queryKey : [queryKey])],
-    () => ky.get(`${api}/${id}`).json(),
+    () => {
+      const url = id ? `${api}/${id}` : api;
+
+      return ky.get(url, { searchParams: params }).json();
+    },
     {
-      // The query will not execute until the id exists
-      enabled: !!id,
+      enabled: id ? !!id : (options.enabled !== undefined ? options.enabled : true),
       ...options,
     }
   );

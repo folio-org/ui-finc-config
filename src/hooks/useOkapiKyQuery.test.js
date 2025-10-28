@@ -18,9 +18,15 @@ describe('useOkapiKyQuery', () => {
   let queryClient;
 
   const mockData = { name: 'Test Source', id };
-  const mockGet = jest.fn(() => ({
-    json: async () => mockData,
+  const mockListData = [
+    { name: 'Test Source 1', id: '111' },
+    { name: 'Test Source 2', id: '222' },
+  ];
+
+  const mockGet = jest.fn((url) => ({
+    json: async () => (url.includes(id) ? mockData : mockListData),
   }));
+
   useOkapiKy.mockReturnValue({ get: mockGet });
 
   beforeEach(() => {
@@ -40,17 +46,29 @@ describe('useOkapiKyQuery', () => {
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
-    expect(mockGet).toHaveBeenCalledWith(`${api}/${id}`);
+    expect(mockGet).toHaveBeenCalledWith(`${api}/${id}`, { searchParams: {} });
     expect(result.current.data).toEqual(mockData);
   });
 
   it('should not fetch if id is undefined', async () => {
     const { result } = renderHook(
-      () => useOkapiKyQuery({ queryKey, undefined, api }),
+      () => useOkapiKyQuery({ queryKey, id: undefined, api, options: { enabled: false } }),
       { wrapper }
     );
 
     await waitFor(() => expect(result.current.isIdle).toBe(true));
     expect(mockGet).not.toHaveBeenCalled();
+  });
+
+  it('should fetch list of resources when id is not provided', async () => {
+    const { result } = renderHook(
+      () => useOkapiKyQuery({ queryKey, api }),
+      { wrapper }
+    );
+
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+
+    expect(mockGet).toHaveBeenCalledWith(api, { searchParams: {} });
+    expect(result.current.data).toEqual(mockListData);
   });
 });
