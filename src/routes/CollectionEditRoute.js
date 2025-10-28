@@ -1,18 +1,15 @@
 import { cloneDeep } from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import {
-  useMutation,
-  useQuery,
-} from 'react-query';
 
-import {
-  useOkapiKy,
-  useStripes,
-} from '@folio/stripes/core';
+import { useStripes } from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
+import {
+  useOkapiKyMutation,
+  useOkapiKyQuery,
+} from '../hooks';
 import {
   API_COLLECTIONS,
   QK_COLLECTIONS,
@@ -24,14 +21,20 @@ const CollectionEditRoute = ({
   match: { params: { id: collectionId } },
 }) => {
   const stripes = useStripes();
-  const ky = useOkapiKy();
 
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
-  const { data: collection = {}, isLoading: isCollectionLoading } = useQuery(
-    [QK_COLLECTIONS, collectionId],
-    () => ky.get(`${API_COLLECTIONS}/${collectionId}`).json()
-  );
+  const { data: collection = {}, isLoading: isCollectionLoading } = useOkapiKyQuery({
+    queryKey: [QK_COLLECTIONS, collectionId],
+    id: collectionId,
+    api: API_COLLECTIONS,
+  });
+
+  const { useUpdate, useDelete } = useOkapiKyMutation({
+    mutationKey: [QK_COLLECTIONS, collectionId],
+    id: collectionId,
+    api: API_COLLECTIONS,
+  });
 
   const getInitialValues = () => {
     const initialValues = cloneDeep(collection);
@@ -43,25 +46,17 @@ const CollectionEditRoute = ({
     history.push(`${urls.collectionView(collectionId)}${location.search}`);
   };
 
-  const { mutateAsync: putCollection } = useMutation(
-    [QK_COLLECTIONS, collectionId],
-    (payload) => ky.put(`${API_COLLECTIONS}/${collectionId}`, { json: payload })
-      .then(() => {
-        handleClose();
-      })
-  );
+  const { mutateAsync: deleteCollection } = useDelete({
+    onSuccess: () => {
+      history.push(`${urls.collections()}${location.search}`);
+    },
+  });
 
-  const { mutateAsync: deleteCollection } = useMutation(
-    [QK_COLLECTIONS, collectionId],
-    () => ky.delete(`${API_COLLECTIONS}/${collectionId}`)
-      .then(() => {
-        history.push(`${urls.collections()}${location.search}`);
-      })
-  );
-
-  const handleSubmit = (values) => {
-    return putCollection(values);
-  };
+  const { mutateAsync: putCollection } = useUpdate({
+    onSuccess: () => {
+      handleClose();
+    },
+  });
 
   if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
 
@@ -71,7 +66,7 @@ const CollectionEditRoute = ({
       initialValues={getInitialValues()}
       isLoading={isCollectionLoading}
       onDelete={deleteCollection}
-      onSubmit={handleSubmit}
+      onSubmit={putCollection}
     />
   );
 };

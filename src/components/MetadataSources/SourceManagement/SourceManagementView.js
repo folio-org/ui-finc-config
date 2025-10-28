@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
 import {
@@ -12,8 +11,8 @@ import {
   NoValue,
   Row,
 } from '@folio/stripes/components';
-import { useOkapiKy } from '@folio/stripes/core';
 
+import { useOkapiKyQuery } from '../../../hooks';
 import {
   API_ORGANIZATIONS,
   QK_ORGANIZATIONS,
@@ -28,26 +27,14 @@ const SourceManagementView = ({
   metadataSource,
   organizationId,
 }) => {
-  const useOrganization = () => {
-    const ky = useOkapiKy();
-
-    const { isLoading, data: organization = {}, ...rest } = useQuery(
-      [QK_ORGANIZATIONS, organizationId],
-      () => ky.get(`${API_ORGANIZATIONS}/${organizationId}`).json(),
-      { enabled: Boolean(organizationId) }
-    );
-
-    return ({
-      isLoading,
-      organization,
-      ...rest,
-    });
-  };
-
   let orgValue;
   const sourceId = _.get(metadataSource, 'id', <NoValue />);
 
-  const { organization, isLoading: isLoadingOrganization, isError } = useOrganization();
+  const { data: organization, isLoading: isLoadingOrganization, isError } = useOkapiKyQuery({
+    queryKey: [QK_ORGANIZATIONS, organizationId],
+    id: organizationId,
+    api: API_ORGANIZATIONS,
+  });
   const sourcesOrganization = _.get(metadataSource, 'organization', <NoValue />);
 
   if (!_.isEmpty(organizationId) && !isLoadingOrganization) {
