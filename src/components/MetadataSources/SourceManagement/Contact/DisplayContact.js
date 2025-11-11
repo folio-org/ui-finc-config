@@ -1,5 +1,8 @@
-import _ from 'lodash';
 import PropTypes from 'prop-types';
+import {
+  get,
+  upperFirst,
+} from 'lodash';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -39,7 +42,7 @@ const DisplayContact = ({
   };
 
   const getDataLable = (field) => {
-    const fieldValue = _.get(contact, field, '');
+    const fieldValue = get(contact, field, '');
 
     if (fieldValue !== '') {
       return <FormattedMessage id={`ui-finc-config.dataOption.${fieldValue}`} />;
@@ -53,7 +56,6 @@ const DisplayContact = ({
   return (
     <Card
       cardStyle="positive"
-      data-test-contact-card
       headerStart={
         <span>
           <FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount: contactIndex + 1 }} />
@@ -65,23 +67,17 @@ const DisplayContact = ({
       <Row>
         <Col xs={3}>
           <KeyValue label={<FormattedMessage id="ui-finc-config.source.contact.type" />}>
-            <span data-test-contact-type>
-              {_.upperFirst(contact.type)}
-            </span>
+            <span>{upperFirst(contact.type)}</span>
           </KeyValue>
         </Col>
         <Col xs={3}>
           <KeyValue label={<FormattedMessage id="ui-finc-config.source.contact.role" />}>
-            <span data-test-contact-role>
-              {contactRoleLabel}
-            </span>
+            <span>{contactRoleLabel}</span>
           </KeyValue>
         </Col>
         <Col xs={6}>
           <KeyValue label={<FormattedMessage id="ui-finc-config.source.contact.name" />}>
-            <span data-test-contact-name>
-              {getContactLink()}
-            </span>
+            <span>{getContactLink()}</span>
           </KeyValue>
         </Col>
       </Row>

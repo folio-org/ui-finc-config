@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-import { FieldArray } from 'react-final-form-arrays';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -29,8 +28,7 @@ const SourceManagementForm = ({
       <div className={BasicCss.addMarginBottom}>
         <FindOrganization />
       </div>
-      <FieldArray
-        component={ContactFieldArray}
+      <ContactFieldArray
         name="contacts"
       />
       <Row>
