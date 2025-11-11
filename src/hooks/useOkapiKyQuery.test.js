@@ -50,7 +50,7 @@ describe('useOkapiKyQuery', () => {
     expect(result.current.data).toEqual(mockData);
   });
 
-  it('should not fetch if id is undefined', async () => {
+  it('should not fetch if query is disabled', async () => {
     const { result } = renderHook(
       () => useOkapiKyQuery({ queryKey, id: undefined, api, options: { enabled: false } }),
       { wrapper }
@@ -70,5 +70,16 @@ describe('useOkapiKyQuery', () => {
 
     expect(mockGet).toHaveBeenCalledWith(api, { searchParams: {} });
     expect(result.current.data).toEqual(mockListData);
+  });
+
+  it('should call GET with correct params', async () => {
+    const params = { limit: 10, offset: 5 };
+
+    renderHook(
+      () => useOkapiKyQuery({ queryKey, id, api, params }),
+      { wrapper }
+    );
+
+    await waitFor(() => expect(mockGet).toHaveBeenCalledWith(`${api}/${id}`, { searchParams: params }));
   });
 });
