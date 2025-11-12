@@ -14,9 +14,9 @@ import {
 
 import NoPermissionsMessage from '../components/DisplayUtils/NoPermissionsMessage';
 import urls from '../components/DisplayUtils/urls';
-import usePrevious from '../components/hooks/usePrevious';
 import filterConfig from '../components/MetadataSources/filterConfigData';
 import MetadataSources from '../components/MetadataSources/MetadataSources';
+import { usePrevious } from '../hooks';
 import {
   API_CONTACTS,
   API_SOURCES,

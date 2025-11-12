@@ -1,14 +1,11 @@
 import PropTypes from 'prop-types';
-import { useQuery } from 'react-query';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
-import {
-  useOkapiKy,
-  useStripes,
-} from '@folio/stripes/core';
+import { useStripes } from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataSourceView from '../components/MetadataSources/MetadataSourceView';
+import { useOkapiKyQuery } from '../hooks';
 import {
   API_SOURCES,
   QK_SOURCES,
@@ -22,23 +19,11 @@ const SourceViewRoute = ({
   const stripes = useStripes();
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
-  const useSource = () => {
-    const ky = useOkapiKy();
-
-    const { isLoading, data: source = {} } = useQuery(
-      [QK_SOURCES, sourceId],
-      () => ky.get(`${API_SOURCES}/${sourceId}`).json(),
-      // The query will not execute until the id exists
-      { enabled: Boolean(sourceId) }
-    );
-
-    return ({
-      isLoading,
-      source,
-    });
-  };
-
-  const { source, isLoading: isSourceLoading } = useSource();
+  const { data: source = {}, isLoading: isSourceLoading } = useOkapiKyQuery({
+    queryKey: [QK_SOURCES, sourceId],
+    id: sourceId,
+    api: API_SOURCES,
+  });
 
   const handleClose = () => {
     history.push(`${urls.sources()}${location.search}`);
