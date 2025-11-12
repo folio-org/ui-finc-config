@@ -7,7 +7,7 @@ export const useOkapiKyQuery = ({ queryKey, id, api, params = {}, options = {} }
 
   const ky = useOkapiKy();
   const url = id ? `${api}/${id}` : api;
-  const key = Array.isArray(queryKey) ? queryKey : [queryKey ?? url];
+  const key = Array.isArray(queryKey) ? queryKey : [queryKey ?? url, params];
 
   return useQuery(
     key,
