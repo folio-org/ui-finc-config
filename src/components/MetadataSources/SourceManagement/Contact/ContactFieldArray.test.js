@@ -15,7 +15,7 @@ import {
 import renderWithIntlConfiguration from '../../../../../test/jest/helpers/renderWithIntlConfiguration';
 import ContactFieldArray from './ContactFieldArray';
 
-const renderContactFieldArray = (stripes, contactsMock) => {
+const renderContactFieldArray = (stripes, contactsMock = {}) => {
   return renderWithIntlConfiguration(
     <StripesContext.Provider value={stripes}>
       <MemoryRouter>
@@ -44,11 +44,7 @@ describe('ContactFieldArray', () => {
   });
 
   test('adding EditCards for contacts', async () => {
-    const contactMock = {
-      contacts: [],
-    };
-
-    renderContactFieldArray(stripes, contactMock);
+    renderContactFieldArray(stripes);
 
     const addContactButton = screen.getByRole('button', { name: 'Add contact' });
 

@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import {
   get,
   upperFirst,
 } from 'lodash';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {

@@ -6,11 +6,11 @@ import {
   useIntl,
 } from 'react-intl';
 
+import { EditCard } from '@folio/stripes-leipzig-components';
 import {
   Button,
   Headline,
 } from '@folio/stripes/components';
-import { EditCard } from '@folio/stripes-leipzig-components';
 
 import handleContactSelected from './contact-util';
 import ContactField from './ContactField';
@@ -22,6 +22,7 @@ const ContactFieldArray = ({ name }) => {
   const renderContact = () => {
     return fields.map((field, index) => (
       <EditCard
+        key={field}
         deleteButtonTooltipText={formatMessage(
           { id: 'ui-finc-config.source.contact.delete' },
           { amount: index + 1 }
@@ -30,7 +31,6 @@ const ContactFieldArray = ({ name }) => {
           { id: 'ui-finc-config.source.contact.title.singular' },
           { amount: index + 1 }
         )}
-        key={field}
         onDelete={() => fields.remove(index)}
       >
         <Field
