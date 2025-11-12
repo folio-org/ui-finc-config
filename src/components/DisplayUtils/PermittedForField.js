@@ -14,7 +14,7 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-import usePrevious from '../hooks/usePrevious';
+import { usePrevious } from '../../hooks';
 import { Required } from './Validate';
 
 const PermittedForField = ({

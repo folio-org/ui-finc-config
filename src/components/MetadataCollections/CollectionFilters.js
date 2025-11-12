@@ -10,7 +10,7 @@ import {
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
-import useUpdatedFilters from '../hooks/useUpdatedFilters';
+import { useUpdatedFilters } from '../../hooks';
 import filterConfig from './filterConfigData';
 
 const CollectionFilters = ({
