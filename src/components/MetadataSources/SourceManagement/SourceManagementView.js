@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 
+import { useOkapiKyQuery } from '@folio/stripes-leipzig-components';
 import {
   Button,
   Col,
@@ -12,7 +13,6 @@ import {
   Row,
 } from '@folio/stripes/components';
 
-import { useOkapiKyQuery } from '../../../hooks';
 import {
   API_ORGANIZATIONS,
   QK_ORGANIZATIONS,
