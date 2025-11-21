@@ -69,7 +69,7 @@ describe('SourceManagementForm', () => {
     expect(within(managementAccordion).getByRole('textbox', { name: 'Name Icon' })).toBeInTheDocument();
     expect(within(managementAccordion).getByRole('combobox', { name: 'Role' })).toBeInTheDocument();
 
-    const removeContactButton = screen.getByRole('button', { name: 'Remove contact' });
+    const removeContactButton = screen.getByRole('button', { name: 'Delete contact #1' });
     expect(removeContactButton).toBeInTheDocument();
     await userEvent.click(removeContactButton);
     expect(within(managementAccordion).queryByRole('textbox', { name: 'Name Icon' })).not.toBeInTheDocument();

@@ -1,35 +1,42 @@
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 import { useFieldArray } from 'react-final-form-arrays';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage,
+  useIntl,
+} from 'react-intl';
 
+import { EditCard } from '@folio/stripes-leipzig-components';
 import {
   Button,
   Headline,
 } from '@folio/stripes/components';
 
-import EditCard from '../../../DisplayUtils/EditCard/EditCard';
 import handleContactSelected from './contact-util';
 import ContactField from './ContactField';
 
-const ContactFieldArray = ({
-  fields: { name },
-}) => {
+const ContactFieldArray = ({ name }) => {
   const { fields } = useFieldArray(name);
+  const { formatMessage } = useIntl();
 
   const renderContact = () => {
-    return fields.map((contact, index) => (
+    return fields.map((field, index) => (
       <EditCard
-        key={index}
-        data-test-source-contact-number={index}
-        deleteButtonTooltipText={<FormattedMessage id="ui-finc-config.source.contact.remove" />}
-        header={<FormattedMessage id="ui-finc-config.source.contact.title.singular" values={{ amount: index + 1 }} />}
+        key={field}
+        deleteButtonTooltipText={formatMessage(
+          { id: 'ui-finc-config.source.contact.delete' },
+          { amount: index + 1 }
+        )}
+        header={formatMessage(
+          { id: 'ui-finc-config.source.contact.title.singular' },
+          { amount: index + 1 }
+        )}
         onDelete={() => fields.remove(index)}
       >
         <Field
           component={ContactField}
           index={index}
-          name={`${name}[${index}]`}
+          name={field}
           selectContact={selectedContact => handleContactSelected(fields, index, selectedContact)}
         />
       </EditCard>
@@ -52,9 +59,7 @@ const ContactFieldArray = ({
 };
 
 ContactFieldArray.propTypes = {
-  fields: PropTypes.shape({
-    name: PropTypes.string,
-  }),
+  name: PropTypes.string.isRequired,
 };
 
 export default ContactFieldArray;
