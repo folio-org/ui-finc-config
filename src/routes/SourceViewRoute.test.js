@@ -14,12 +14,6 @@ import SourceViewRoute from './SourceViewRoute';
 
 const queryClient = new QueryClient();
 
-jest.mock('react-query', () => ({
-  ...jest.requireActual('react-query'),
-  useQuery: jest.fn().mockReturnValue({}),
-  useMutation: jest.fn().mockReturnValue({}),
-}));
-
 jest.mock('../components/MetadataSources/MetadataSourceView', () => () => <div>MetadataSourceView</div>);
 
 describe('render SourceViewRoute', () => {

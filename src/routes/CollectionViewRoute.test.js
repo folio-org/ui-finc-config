@@ -14,12 +14,6 @@ import CollectionViewRoute from './CollectionViewRoute';
 
 const queryClient = new QueryClient();
 
-jest.mock('react-query', () => ({
-  ...jest.requireActual('react-query'),
-  useQuery: jest.fn().mockReturnValue({}),
-  useMutation: jest.fn().mockReturnValue({}),
-}));
-
 jest.mock('../components/MetadataCollections/MetadataCollectionView', () => () => <div>MetadataCollectionView</div>);
 
 describe('render CollectionViewRoute', () => {
