@@ -8,6 +8,7 @@
 * Use constants for APIs ([UIFC-438](https://folio-org.atlassian.net/browse/UIFC-438))
 * Adapt RepeatableField and add validation and required props ([UIFC-448](https://folio-org.atlassian.net/browse/UIFC-448))
 * Create generic hooks ([UIFC-447](https://folio-org.atlassian.net/browse/UIFC-447))
+* Use EditCard from stripes-leipzig-components ([UIFC-450](https://folio-org.atlassian.net/browse/UIFC-450))
 * Move generic hook to stripes-leipzig-components ([UIFC-454](https://folio-org.atlassian.net/browse/UIFC-454))
 
 ## [8.0.0](https://github.com/folio-org/ui-finc-config/tree/v8.0.0) (2025-03-13)

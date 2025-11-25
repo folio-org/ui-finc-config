@@ -29,7 +29,7 @@ const ContactField = ({
 
   return (
     <div>
-      <Row data-test-find-contact-row>
+      <Row>
         <Col xs={5}>
           <Field
             component={FindContact}

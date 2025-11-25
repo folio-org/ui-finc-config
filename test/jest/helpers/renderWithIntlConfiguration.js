@@ -2,6 +2,7 @@ import { IntlProvider } from 'react-intl';
 
 import { render } from '@folio/jest-config-stripes/testing-library/react';
 import stripesComponentsTranslations from '@folio/stripes-components/translations/stripes-components/en';
+import stripesLeipzigComponentsTranslations from '@folio/stripes-leipzig-components/translations/stripes-leipzig-components/en';
 import stripesSmartComponentsTranslations from '@folio/stripes-smart-components/translations/stripes-smart-components/en';
 
 import localTranslations from '../../../translations/ui-finc-config/en';
@@ -18,6 +19,10 @@ const translationSets = [
   {
     prefix: 'stripes-smart-components',
     translations: stripesSmartComponentsTranslations,
+  },
+  {
+    prefix: 'stripes-leipzig-components',
+    translations: stripesLeipzigComponentsTranslations,
   },
 ];
 

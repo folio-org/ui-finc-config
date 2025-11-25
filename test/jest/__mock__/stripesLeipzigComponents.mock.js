@@ -1,4 +1,16 @@
 jest.mock('@folio/stripes-leipzig-components', () => ({
+  EditCard: ({ children, header, onDelete, deleteButtonTooltipText }) => (
+    <div>
+      <h3>{header}</h3>
+      <button
+        aria-label={deleteButtonTooltipText}
+        onClick={onDelete}
+      >
+        Delete
+      </button>
+      {children}
+    </div>
+  ),
   useOkapiKyMutation: jest.fn(() => ({
     useCreate: jest.fn(() => ({
       mutate: jest.fn(),
