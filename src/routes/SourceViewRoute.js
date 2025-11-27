@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
+import { useOkapiKyQuery } from '@folio/stripes-leipzig-components';
 import { useStripes } from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataSourceView from '../components/MetadataSources/MetadataSourceView';
-import { useOkapiKyQuery } from '../hooks';
 import {
   API_SOURCES,
   QK_SOURCES,

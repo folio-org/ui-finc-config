@@ -2,9 +2,9 @@ import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import { useOkapiKyQuery } from '@folio/stripes-leipzig-components';
 import { NoValue } from '@folio/stripes/components';
 
-import { useOkapiKyQuery } from '../../../../hooks';
 import {
   API_ORG_CONTACTS,
   QK_ORG_CONTACTS,

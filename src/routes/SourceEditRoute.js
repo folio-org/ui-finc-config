@@ -2,14 +2,14 @@ import { cloneDeep } from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
+import {
+  useOkapiKyMutation,
+  useOkapiKyQuery,
+} from '@folio/stripes-leipzig-components';
 import { useStripes } from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm';
-import {
-  useOkapiKyMutation,
-  useOkapiKyQuery,
-} from '../hooks';
 import {
   API_SOURCES,
   QK_SOURCES,

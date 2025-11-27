@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
 
+import { useOkapiKyMutation } from '@folio/stripes-leipzig-components';
 import { useStripes } from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
-import { useOkapiKyMutation } from '../hooks';
 import {
   API_COLLECTIONS,
   QK_COLLECTIONS,
