@@ -61,7 +61,6 @@
     "source.contact.title": "Contactos",
     "source.contact.title.singular": "Contacto n.º {amount}",
     "source.contact.add": "Agregar contacto",
-    "source.contact.remove": "Remover contacto",
     "source.contact.or": "o",
     "noPermission": "No hay permiso",
     "renderList.isEmpty": "No hay ítems que mostrar",
@@ -113,5 +112,6 @@
     "permission.create": "Finc config: Can create metadatasources and metadatacollections",
     "permission.edit": "Finc config: Can edit metadatasources and metadatacollections",
     "permission.create-edit": "Finc config: Can create and edit metadatasources and metadatacollections",
-    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections"
+    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections",
+    "source.contact.delete": "Delete contact #{amount}"
 }

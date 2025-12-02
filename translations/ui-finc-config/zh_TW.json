@@ -61,7 +61,6 @@
     "source.contact.title": "联系人",
     "source.contact.title.singular": "联系人＃ {amount}",
     "source.contact.add": "添加联系人",
-    "source.contact.remove": "移除联系人",
     "source.contact.or": "或",
     "noPermission": "没有权限",
     "renderList.isEmpty": "没有可显示的单件",
@@ -113,5 +112,6 @@
     "permission.create": "Finc config: Can create metadatasources and metadatacollections",
     "permission.edit": "Finc config: Can edit metadatasources and metadatacollections",
     "permission.create-edit": "Finc config: Can create and edit metadatasources and metadatacollections",
-    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections"
+    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections",
+    "source.contact.delete": "Delete contact #{amount}"
 }

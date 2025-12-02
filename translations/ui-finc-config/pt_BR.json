@@ -61,7 +61,6 @@
     "source.contact.title": "Contatos",
     "source.contact.title.singular": "Contato # {amount}",
     "source.contact.add": "Adicionar contato",
-    "source.contact.remove": "Remover contato",
     "source.contact.or": "ou",
     "noPermission": "Sem permissão",
     "renderList.isEmpty": "Nenhum item para exibir",
@@ -113,5 +112,6 @@
     "permission.create": "Configuração de filtros: Pode criar fontes de metadados e coleções de metadados",
     "permission.edit": "Configuração filtros: Pode editar fontes de metadados e coleções de metadados",
     "permission.create-edit": "Configuração de filtros: Pode criar e editar fontes de metadados e coleções de metadados",
-    "permission.delete": "Configuração de filtros: Pode excluir fontes de metadados e coleções de metadados"
+    "permission.delete": "Configuração de filtros: Pode excluir fontes de metadados e coleções de metadados",
+    "source.contact.delete": "Excluir contato #{amount}"
 }
