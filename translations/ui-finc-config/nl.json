@@ -61,7 +61,6 @@
     "source.contact.title": "Contacten",
     "source.contact.title.singular": "Contacten #{amount}",
     "source.contact.add": "Contact toevoegen",
-    "source.contact.remove": "Contact verwijderen",
     "source.contact.or": "of",
     "noPermission": "Geen toestemming",
     "renderList.isEmpty": "Geen items om te tonen",
@@ -113,5 +112,6 @@
     "permission.create": "Finc config: Kan metadatabronnen en metadatacollecties aanmaken",
     "permission.edit": "Finc config: Kan metadatabronnen en metadatacollecties bewerken",
     "permission.create-edit": "Finc config: Kan metadatabronnen en metadatacollecties aanmaken en bewerken",
-    "permission.delete": "Finc config: Kan metadatabronnen en metadatacollecties verwijderen"
+    "permission.delete": "Finc config: Kan metadatabronnen en metadatacollecties verwijderen",
+    "source.contact.delete": "Contacten verwijderen #{amount}"
 }

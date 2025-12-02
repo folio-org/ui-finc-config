@@ -61,7 +61,6 @@
     "source.contact.title": "Kontakty",
     "source.contact.title.singular": "Kontakt #{amount}",
     "source.contact.add": "Přidat kontakt",
-    "source.contact.remove": "Odstranit kontakt",
     "source.contact.or": "nebo",
     "noPermission": "Bez povolení",
     "renderList.isEmpty": "Žádné jednotky k zobrazení",
@@ -113,5 +112,6 @@
     "permission.create": "Finc config: Can create metadatasources and metadatacollections",
     "permission.edit": "Finc config: Can edit metadatasources and metadatacollections",
     "permission.create-edit": "Finc config: Can create and edit metadatasources and metadatacollections",
-    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections"
+    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections",
+    "source.contact.delete": "Odstranit kontakt #{amount}"
 }

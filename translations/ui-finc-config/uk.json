@@ -61,7 +61,6 @@
     "source.contact.title": "Контакти",
     "source.contact.title.singular": "№ контакту {amount}",
     "source.contact.add": "Додати контакт",
-    "source.contact.remove": "Вилучити контакт",
     "source.contact.or": "або",
     "noPermission": "Дозвіл відсутній",
     "renderList.isEmpty": "Примірники для відображення відсутні",
@@ -113,5 +112,6 @@
     "permission.create": "Конфігурація Finc: Створення джерел метаданих та колекцій метаданих",
     "permission.edit": "Конфігурація Finc: Редагування джерел метаданих та колекцій метаданих",
     "permission.create-edit": "Конфігурація Finc: Створення та редагування джерел метаданих та колекцій метаданих",
-    "permission.delete": "Конфігурація Finc: Видалення джерел метаданих та колекцій метаданих"
+    "permission.delete": "Конфігурація Finc: Видалення джерел метаданих та колекцій метаданих",
+    "source.contact.delete": "Delete contact #{amount}"
 }
