@@ -3,6 +3,7 @@ import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { FormattedMessage } from 'react-intl';
 
+import { RepeatableField } from '@folio/stripes-leipzig-components';
 import {
   Accordion,
   Col,
@@ -14,7 +15,6 @@ import {
 
 import BasicCss from '../../BasicStyle.css';
 import { solrShardOptions } from '../../DataOptions/dataOptions';
-import RepeatableField from '../../DisplayUtils/RepeatableField';
 import {
   IntRequired,
   ValidateUrl,
@@ -51,7 +51,6 @@ const SourceTechnicalForm = ({
             <FieldArray
               component={RepeatableField}
               fieldValidate={ValidateUrl}
-              id="display_tickets"
               name="tickets"
               placeholder=""
             />
@@ -107,7 +106,6 @@ const SourceTechnicalForm = ({
           <Col xs={12}>
             <FieldArray
               component={RepeatableField}
-              id="display_delivery_methods"
               name="deliveryMethods"
             />
           </Col>
@@ -124,7 +122,6 @@ const SourceTechnicalForm = ({
           <Col xs={12}>
             <FieldArray
               component={RepeatableField}
-              id="display_formats"
               name="formats"
             />
           </Col>
@@ -152,7 +149,6 @@ const SourceTechnicalForm = ({
           <Col xs={12}>
             <FieldArray
               component={RepeatableField}
-              id="display_inferior_to"
               name="inferiorTo"
             />
           </Col>
