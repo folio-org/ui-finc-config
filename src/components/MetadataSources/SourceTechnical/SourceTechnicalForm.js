@@ -3,7 +3,7 @@ import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { FormattedMessage } from 'react-intl';
 
-import { RepeatableField } from '@folio/stripes-leipzig-components';
+import { RepeatableTextField } from '@folio/stripes-leipzig-components';
 import {
   Accordion,
   Col,
@@ -49,7 +49,7 @@ const SourceTechnicalForm = ({
         <Row>
           <Col xs={12}>
             <FieldArray
-              component={RepeatableField}
+              component={RepeatableTextField}
               fieldValidate={ValidateUrl}
               name="tickets"
               placeholder=""
@@ -105,7 +105,7 @@ const SourceTechnicalForm = ({
         <Row>
           <Col xs={12}>
             <FieldArray
-              component={RepeatableField}
+              component={RepeatableTextField}
               name="deliveryMethods"
             />
           </Col>
@@ -121,7 +121,7 @@ const SourceTechnicalForm = ({
         <Row>
           <Col xs={12}>
             <FieldArray
-              component={RepeatableField}
+              component={RepeatableTextField}
               name="formats"
             />
           </Col>
@@ -148,7 +148,7 @@ const SourceTechnicalForm = ({
         <Row>
           <Col xs={12}>
             <FieldArray
-              component={RepeatableField}
+              component={RepeatableTextField}
               name="inferiorTo"
             />
           </Col>

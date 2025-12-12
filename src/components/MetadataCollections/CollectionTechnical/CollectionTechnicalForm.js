@@ -6,7 +6,7 @@ import {
   injectIntl,
 } from 'react-intl';
 
-import { RepeatableField } from '@folio/stripes-leipzig-components';
+import { RepeatableTextField } from '@folio/stripes-leipzig-components';
 import {
   Accordion,
   Col,
@@ -68,7 +68,7 @@ const CollectionTechnicalForm = ({
         <Row>
           <Col xs={12}>
             <FieldArray
-              component={RepeatableField}
+              component={RepeatableTextField}
               fieldValidate={ValidateUrl}
               name="tickets"
               placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.tickets' })}
@@ -86,7 +86,7 @@ const CollectionTechnicalForm = ({
         <Row>
           <Col xs={12}>
             <FieldArray
-              component={RepeatableField}
+              component={RepeatableTextField}
               fieldValidate={ValidateUrl}
               name="contentFiles"
               placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.contentFiles' })}
@@ -104,7 +104,7 @@ const CollectionTechnicalForm = ({
         <Row>
           <Col xs={12}>
             <FieldArray
-              component={RepeatableField}
+              component={RepeatableTextField}
               isFirstFieldRequired
               name="solrMegaCollections"
             />
