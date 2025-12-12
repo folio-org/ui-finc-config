@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-import { FieldArray } from 'react-final-form-arrays';
 import {
   FormattedMessage,
   injectIntl,
@@ -67,8 +66,7 @@ const CollectionTechnicalForm = ({
         </Row>
         <Row>
           <Col xs={12}>
-            <FieldArray
-              component={RepeatableTextField}
+            <RepeatableTextField
               fieldValidate={ValidateUrl}
               name="tickets"
               placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.tickets' })}
@@ -85,8 +83,7 @@ const CollectionTechnicalForm = ({
         </Row>
         <Row>
           <Col xs={12}>
-            <FieldArray
-              component={RepeatableTextField}
+            <RepeatableTextField
               fieldValidate={ValidateUrl}
               name="contentFiles"
               placeholder={intl.formatMessage({ id: 'ui-finc-config.collection.placeholder.contentFiles' })}
@@ -103,8 +100,7 @@ const CollectionTechnicalForm = ({
         </Row>
         <Row>
           <Col xs={12}>
-            <FieldArray
-              component={RepeatableTextField}
+            <RepeatableTextField
               isFirstFieldRequired
               name="solrMegaCollections"
             />

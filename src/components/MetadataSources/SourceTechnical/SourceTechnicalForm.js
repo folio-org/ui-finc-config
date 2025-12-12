@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-import { FieldArray } from 'react-final-form-arrays';
 import { FormattedMessage } from 'react-intl';
 
 import { RepeatableTextField } from '@folio/stripes-leipzig-components';
@@ -48,8 +47,7 @@ const SourceTechnicalForm = ({
         </Row>
         <Row>
           <Col xs={12}>
-            <FieldArray
-              component={RepeatableTextField}
+            <RepeatableTextField
               fieldValidate={ValidateUrl}
               name="tickets"
               placeholder=""
@@ -104,8 +102,7 @@ const SourceTechnicalForm = ({
         </Row>
         <Row>
           <Col xs={12}>
-            <FieldArray
-              component={RepeatableTextField}
+            <RepeatableTextField
               name="deliveryMethods"
             />
           </Col>
@@ -120,8 +117,7 @@ const SourceTechnicalForm = ({
         </Row>
         <Row>
           <Col xs={12}>
-            <FieldArray
-              component={RepeatableTextField}
+            <RepeatableTextField
               name="formats"
             />
           </Col>
@@ -147,8 +143,7 @@ const SourceTechnicalForm = ({
         </Row>
         <Row>
           <Col xs={12}>
-            <FieldArray
-              component={RepeatableTextField}
+            <RepeatableTextField
               name="inferiorTo"
             />
           </Col>
