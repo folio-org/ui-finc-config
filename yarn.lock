@@ -1637,7 +1637,7 @@
     prop-types "^15.5.10"
     redux-form "^8.3.0"
 
-"@folio/stripes-leipzig-components@1.0.1099000000000105":
+"@folio/stripes-leipzig-components@^1.0.0":
   version "1.0.1099000000000105"
   resolved "https://repository.folio.org/repository/npm-folioci/@folio/stripes-leipzig-components/-/stripes-leipzig-components-1.0.1099000000000105.tgz#2ef10ce05bf95d9e69c51fdaab2bad006c80494e"
   integrity sha512-zgj6jxqtSwaoFl+QXe/C9UuKs8M9q/HdHS6SVbfI978Rj5JbdkFNJsaaIl09E1ChBDuMgslylGv141/KyaTtqg==
