@@ -11,6 +11,7 @@
 * Use EditCard from stripes-leipzig-components ([UIFC-450](https://folio-org.atlassian.net/browse/UIFC-450))
 * Move generic hook to stripes-leipzig-components ([UIFC-454](https://folio-org.atlassian.net/browse/UIFC-454))
 * Include mod-settings global permissions ([UIFC-460](https://folio-org.atlassian.net/browse/UIFC-460))
+* Use RepeatableTextField from stripes-leipzig-components ([UIFC-453](https://folio-org.atlassian.net/browse/UIFC-453))
 
 ## [8.0.0](https://github.com/folio-org/ui-finc-config/tree/v8.0.0) (2025-03-13)
 * Restructure SASQ and localStorage ([UIFC-400](https://folio-org.atlassian.net/browse/UIFC-400))
