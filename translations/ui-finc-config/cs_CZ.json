@@ -109,9 +109,9 @@
     "collection.placeholder.contentFiles": "Zadat adresu URL souborového serveru",
     "permission.module.finc-config.enabled": "Konfigurace Financí: modul je povolen",
     "permission.settings.finc-config.enabled": "Nastavení (Konfigurace Financí): Zobrazit seznam stránek nastavení",
-    "permission.create": "Finc config: Can create metadatasources and metadatacollections",
-    "permission.edit": "Finc config: Can edit metadatasources and metadatacollections",
-    "permission.create-edit": "Finc config: Can create and edit metadatasources and metadatacollections",
-    "permission.delete": "Finc config: Can delete metadatasources and metadatacollections",
+    "permission.create": "Konfigurace Finc: Může vytvářet zdroje metadat a kolekce metadat",
+    "permission.edit": "Konfigurace Finc: Může upravovat metadatové zdroje a metadatové sbírky",
+    "permission.create-edit": "Konfigurace Finc: Může vytvářet a upravovat zdroje metadat a kolekce metadat.",
+    "permission.delete": "Konfigurace Finc: Může smazat zdroje metadat a kolekce metadat",
     "source.contact.delete": "Odstranit kontakt #{amount}"
 }
