@@ -1,6 +1,6 @@
 {
     "meta.title": "Finc config",
-    "source.label": "Name",
+    "source.label": "이름",
     "source.id": "ID",
     "source.status": "Implementation status",
     "source.solrShard": "Solr shard",
@@ -8,7 +8,7 @@
     "source.generalAccordion": "General",
     "source.managementAccordion": "Management",
     "source.technicalAccordion": "Technical",
-    "collection.label": "Name",
+    "collection.label": "이름",
     "collection.metadataAvailable": "Metadata available",
     "collection.usageRestricted": "Usage restricted",
     "collection.permittedFor": "Permitted for",
