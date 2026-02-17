@@ -83,8 +83,7 @@
         "permissionName": "module.finc-config.enabled",
         "displayName": "UI: finc-config module is enabled",
         "subPermissions": [
-          "mod-settings.global.read.stripes-core.prefs.manage",
-          "mod-settings.entries.collection.get"
+          "stripes-core.settings.read"
         ],
         "visible": false
       },
@@ -93,8 +92,7 @@
         "displayName": "Settings (finc-config): display list of settings pages",
         "subPermissions": [
           "settings.enabled",
-          "mod-settings.global.read.stripes-core.prefs.manage",
-          "mod-settings.entries.collection.get"
+          "stripes-core.settings.read"
         ],
         "visible": false
       },
