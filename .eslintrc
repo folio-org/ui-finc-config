@@ -90,7 +90,18 @@
     ],
     "testing-library/prefer-user-event": "warn"
   },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "parser": "@typescript-eslint/parser"
+    }
+  ],
   "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    },
     "react": {
       "version": "detect"
     }
