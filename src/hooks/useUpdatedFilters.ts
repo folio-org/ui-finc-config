@@ -1,23 +1,35 @@
 import { useEffect } from 'react';
 
+import {
+  FilterConfigEntry,
+  FilterOption,
+  FilterState,
+} from '../types';
+
 export const useUpdatedFilters = ({
   dynamicKey,
   filterConfig,
   filterData,
   filterState,
   setFilterState,
+}: {
+  dynamicKey: string;
+  filterConfig: FilterConfigEntry[];
+  filterData: Record<string, FilterOption[]>;
+  filterState: FilterState;
+  setFilterState: React.Dispatch<React.SetStateAction<FilterState>>;
 }) => {
   useEffect(() => {
-    const newState = {};
-    const arr = [];
+    const newState: FilterState = {};
+    const arr: FilterState = {};
 
     for (const filter of filterConfig) {
-      const newValues = [];
-      let values = {};
+      const newValues: Array<{ value: string; label: string }> = [];
+      let values: FilterOption[] = [];
 
-      if (filter === dynamicKey) {
+      if (filter.name === dynamicKey) {
         // get filter values from okapi
-        values = filterData[filter] || [];
+        values = filterData[dynamicKey] || [];
       } else {
         // get filte values from filterConfig
         values = filter.values;
