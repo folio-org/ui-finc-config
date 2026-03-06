@@ -1,42 +1,20 @@
 import { useEffect } from 'react';
 
 export const useUpdatedFilters = ({
-  dynamicKey,
   filterConfig,
-  filterData,
   filterState,
   setFilterState,
 }) => {
   useEffect(() => {
     const newState = {};
-    const arr = [];
 
     for (const filter of filterConfig) {
-      const newValues = [];
-      let values = {};
+      const newValues = filter.values.map(
+        ({ cql, name }) => ({ value: cql, label: name })
+      );
 
-      if (filter === dynamicKey) {
-        // get filter values from okapi
-        values = filterData[filter] || [];
-      } else {
-        // get filte values from filterConfig
-        values = filter.values;
-      }
-
-      for (const key of values) {
-        newValues.push({
-          value: key.cql,
-          label: key.name,
-        });
-      }
-
-      arr[filter.name] = newValues;
-
-      if (
-        filterState[filter.name] &&
-          arr[filter.name].length !== filterState[filter.name].length
-      ) {
-        newState[filter.name] = arr[filter.name];
+      if (filterState[filter.name]?.length !== newValues.length) {
+        newState[filter.name] = newValues;
       }
     }
 
@@ -44,5 +22,5 @@ export const useUpdatedFilters = ({
       setFilterState((prevState) => ({ ...prevState, ...newState }));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterData, filterState, dynamicKey]);
+  }, [filterState, filterConfig]);
 };

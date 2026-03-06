@@ -31,9 +31,8 @@ const CollectionFilters = ({
   });
 
   useUpdatedFilters({
-    dynamicKey: 'mdSource',
-    filterConfig,
-    filterData,
+    // skip useUpdatedFilters hook for mdSource filter as it is dynamic and handled separately
+    filterConfig: filterConfig.filter(f => f.name !== 'mdSource'),
     filterState,
     setFilterState,
   });
@@ -61,8 +60,8 @@ const CollectionFilters = ({
   };
 
   const renderMetadataSourceFilter = () => {
-    const mdSources = filterData.mdSources;
-    const dataOptions = mdSources.map(mdSource => ({
+    // use dynamic filter values from okapi
+    const dataOptions = (filterData.mdSources || []).map(mdSource => ({
       value: mdSource.id,
       label: mdSource.label,
     }));
