@@ -29,9 +29,8 @@ const SourceFilters = ({
   });
 
   useUpdatedFilters({
-    dynamicKey: 'contact',
-    filterConfig,
-    filterData,
+    // skip useUpdatedFilters hook for contact filter as it is dynamic and handled separately
+    filterConfig: filterConfig.filter(f => f.name !== 'contact'),
     filterState,
     setFilterState,
   });
@@ -59,8 +58,8 @@ const SourceFilters = ({
   };
 
   const renderContactsFilter = () => {
-    const contacts = filterData.contacts;
-    const dataOptions = contacts.map(contact => ({
+    // use dynamic filter values from okapi
+    const dataOptions = (filterData.contacts || []).map(contact => ({
       value: contact.externalId,
       label: contact.name,
     }));
