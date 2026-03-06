@@ -1,12 +1,25 @@
 import { useEffect } from 'react';
+import type {
+  Dispatch,
+  SetStateAction,
+} from 'react';
+
+import {
+  FilterConfigEntry,
+  FilterState,
+} from '../types';
 
 export const useUpdatedFilters = ({
   filterConfig,
   filterState,
   setFilterState,
+}: {
+  filterConfig: FilterConfigEntry[];
+  filterState: FilterState;
+  setFilterState: Dispatch<SetStateAction<FilterState>>;
 }) => {
   useEffect(() => {
-    const newState = {};
+    const newState: FilterState = {};
 
     for (const filter of filterConfig) {
       const newValues = filter.values.map(
