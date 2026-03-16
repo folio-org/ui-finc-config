@@ -1,17 +1,30 @@
-import PropTypes from 'prop-types';
 import { useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import {
   Accordion,
   AccordionSet,
   FilterAccordionHeader,
+  FilterAccordionHeaderProps,
   Selection,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
+import {
+  ActiveFilters,
+  Contact,
+  FilterHandlers,
+} from '../../types';
 import { buildFilterState } from '../../util/filterUtils';
 import filterConfig from './filterConfigData';
+
+interface Props {
+  activeFilters?: ActiveFilters;
+  filterData: {
+    contacts: Contact[];
+  };
+  filterHandlers: FilterHandlers;
+}
 
 const SourceFilters = ({
   activeFilters = {
@@ -21,22 +34,24 @@ const SourceFilters = ({
   },
   filterData,
   filterHandlers,
-}) => {
+}: Props) => {
+  const { formatMessage } = useIntl();
+
   const filterState = useMemo(
     // skip for contact filter as it is dynamic and handled separately
     () => buildFilterState(filterConfig.filter(f => f.name !== 'contact')),
     []
   );
 
-  const renderCheckboxFilter = (key) => {
+  const renderCheckboxFilter = (key: string) => {
     const groupFilters = activeFilters[key] || [];
 
     return (
-      <Accordion
+      <Accordion<FilterAccordionHeaderProps>
         displayClearButton={groupFilters.length > 0}
         header={FilterAccordionHeader}
         id={`filter-accordion-${key}`}
-        label={<FormattedMessage id={`ui-finc-config.source.${key}`} />}
+        label={formatMessage({ id: `ui-finc-config.source.${key}` })}
         onClearFilter={() => { filterHandlers.clearGroup(key); }}
         separator={false}
       >
@@ -60,18 +75,18 @@ const SourceFilters = ({
     const contactFilters = activeFilters.contact || [];
 
     return (
-      <Accordion
+      <Accordion<FilterAccordionHeaderProps>
         displayClearButton={contactFilters.length > 0}
         header={FilterAccordionHeader}
         id="filter-accordion-contact"
-        label={<FormattedMessage id="ui-finc-config.source.contact" />}
+        label={formatMessage({ id: 'ui-finc-config.source.contact' })}
         onClearFilter={() => { filterHandlers.clearGroup('contact'); }}
         separator={false}
       >
         <Selection
           dataOptions={dataOptions}
           id="contact-filter"
-          onChange={value => filterHandlers.state({ ...activeFilters, contact: [value] })}
+          onChange={(value: string) => filterHandlers.state({ ...activeFilters, contact: [value] })}
           placeholder=""
           value={contactFilters[0] || ''}
         />
@@ -86,12 +101,6 @@ const SourceFilters = ({
       {renderCheckboxFilter('solrShard')}
     </AccordionSet>
   );
-};
-
-SourceFilters.propTypes = {
-  activeFilters: PropTypes.object,
-  filterData: PropTypes.object,
-  filterHandlers: PropTypes.object,
 };
 
 export default SourceFilters;
