@@ -10,7 +10,7 @@ import {
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
-import { useUpdatedFilters } from '../../hooks';
+import { buildFilterState } from '../../util/filterUtils';
 import filterConfig from './filterConfigData';
 
 const SourceFilters = ({
@@ -22,18 +22,10 @@ const SourceFilters = ({
   filterData,
   filterHandlers,
 }) => {
-  const [filterState, setFilterState] = useState({
-    status: [],
-    solrShard: [],
-    contact: [],
-  });
-
-  useUpdatedFilters({
-    // skip useUpdatedFilters hook for contact filter as it is dynamic and handled separately
-    filterConfig: filterConfig.filter(f => f.name !== 'contact'),
-    filterState,
-    setFilterState,
-  });
+  const [filterState] = useState(() => buildFilterState(
+    // skip for contact filter as it is dynamic and handled separately
+    filterConfig.filter(f => f.name !== 'contact')
+  ));
 
   const renderCheckboxFilter = (key) => {
     const groupFilters = activeFilters[key] || [];

@@ -10,7 +10,7 @@ import {
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
-import { useUpdatedFilters } from '../../hooks';
+import { buildFilterState } from '../../util/filterUtils';
 import filterConfig from './filterConfigData';
 
 const CollectionFilters = ({
@@ -23,19 +23,10 @@ const CollectionFilters = ({
   filterData,
   filterHandlers,
 }) => {
-  const [filterState, setFilterState] = useState({
-    metadataAvailable: [],
-    usageRestricted: [],
-    freeContent: [],
-    mdSource: [],
-  });
-
-  useUpdatedFilters({
-    // skip useUpdatedFilters hook for mdSource filter as it is dynamic and handled separately
-    filterConfig: filterConfig.filter(f => f.name !== 'mdSource'),
-    filterState,
-    setFilterState,
-  });
+  const [filterState] = useState(() => buildFilterState(
+    // skip for mdSource filter as it is dynamic and handled separately
+    filterConfig.filter(f => f.name !== 'mdSource')
+  ));
 
   const renderCheckboxFilter = (key) => {
     const groupFilters = activeFilters[key] || [];
