@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -40,7 +40,10 @@ const CollectionFilters = ({
 
   const filterState = useMemo(
     // skip for mdSource filter as it is dynamic and handled separately
-    () => buildFilterState(filterConfig.filter(f => f.name !== 'mdSource')),
+    () => buildFilterState(
+      filterConfig.filter(f => f.name !== 'mdSource'),
+      formatMessage
+    ),
     []
   );
 

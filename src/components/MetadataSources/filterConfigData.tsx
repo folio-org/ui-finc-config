@@ -1,16 +1,14 @@
-import { FormattedMessage } from 'react-intl';
-
 const filterConfig = [
   {
     label: 'Implementation Status',
     name: 'status',
     cql: 'status',
     values: [
-      { name: <FormattedMessage id="ui-finc-config.dataOption.active" />, cql: 'active' },
-      { name: <FormattedMessage id="ui-finc-config.dataOption.request" />, cql: 'request' },
-      { name: <FormattedMessage id="ui-finc-config.dataOption.implementation" />, cql: 'implementation' },
-      { name: <FormattedMessage id="ui-finc-config.dataOption.closed" />, cql: 'closed' },
-      { name: <FormattedMessage id="ui-finc-config.dataOption.impossible" />, cql: 'impossible' },
+      { name: 'ui-finc-config.dataOption.active', cql: 'active' },
+      { name: 'ui-finc-config.dataOption.request', cql: 'request' },
+      { name: 'ui-finc-config.dataOption.implementation', cql: 'implementation' },
+      { name: 'ui-finc-config.dataOption.closed', cql: 'closed' },
+      { name: 'ui-finc-config.dataOption.impossible', cql: 'impossible' },
     ],
   },
   {
@@ -30,7 +28,7 @@ const filterConfig = [
     name: 'contact',
     cql: 'contacts=/@externalId',
     operator: ' ',
-    values: [],
+    values: [] as { name: string; cql: string }[],
   },
 ];
 

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -39,7 +39,10 @@ const SourceFilters = ({
 
   const filterState = useMemo(
     // skip for contact filter as it is dynamic and handled separately
-    () => buildFilterState(filterConfig.filter(f => f.name !== 'contact')),
+    () => buildFilterState(
+      filterConfig.filter(f => f.name !== 'contact'),
+      formatMessage
+    ),
     []
   );
 
