@@ -1,6 +1,7 @@
 interface FilterValue {
   cql: string;
   name: string;
+  translate?: boolean;
 }
 
 interface FilterConfig {
@@ -14,6 +15,8 @@ export const buildFilterState = (
 ) => Object.fromEntries(
   configs.map(filter => [
     filter.name,
-    filter.values.map(({ cql, name }) => ({ value: cql, label: formatMessage({ id: name }) })),
+    filter.values.map(({ cql, name, translate = true }) => (
+      { value: cql, label: translate ? formatMessage({ id: name }) : name }
+    )),
   ])
 );

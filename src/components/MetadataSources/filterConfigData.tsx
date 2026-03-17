@@ -16,11 +16,11 @@ const filterConfig = [
     name: 'solrShard',
     cql: 'solrShard',
     values: [
-      { name: 'UBL main', cql: 'UBL main' },
-      { name: 'UBL ai', cql: 'UBL ai' },
-      { name: 'UBL DNB', cql: 'UBL DNB' },
-      { name: 'SLUB dswarm', cql: 'SLUB dswarm' },
-      { name: 'SLUB DBoD', cql: 'SLUB DBoD' },
+      { name: 'UBL main', cql: 'UBL main', translate: false },
+      { name: 'UBL ai', cql: 'UBL ai', translate: false },
+      { name: 'UBL DNB', cql: 'UBL DNB', translate: false },
+      { name: 'SLUB dswarm', cql: 'SLUB dswarm', translate: false },
+      { name: 'SLUB DBoD', cql: 'SLUB DBoD', translate: false },
     ],
   },
   {
