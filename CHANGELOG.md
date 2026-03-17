@@ -12,7 +12,7 @@
 * Move generic hook to stripes-leipzig-components ([UIFC-454](https://folio-org.atlassian.net/browse/UIFC-454))
 * Use RepeatableTextField from stripes-leipzig-components ([UIFC-453](https://folio-org.atlassian.net/browse/UIFC-453))
 * Include mod-settings global permissions ([UIFC-460](https://folio-org.atlassian.net/browse/UIFC-460))
-* Refactor useUpdatedFilters hook ([UIFC-482](https://folio-org.atlassian.net/browse/UIFC-482))
+* Replace useUpdatedFilters hook with buildFilterState function ([UIFC-482](https://folio-org.atlassian.net/browse/UIFC-482))
 
 ## [8.0.0](https://github.com/folio-org/ui-finc-config/tree/v8.0.0) (2025-03-13)
 * Restructure SASQ and localStorage ([UIFC-400](https://folio-org.atlassian.net/browse/UIFC-400))
