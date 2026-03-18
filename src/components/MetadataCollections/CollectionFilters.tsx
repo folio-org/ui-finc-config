@@ -44,7 +44,7 @@ const CollectionFilters = ({
       filterConfig.filter(f => f.name !== 'mdSource'),
       formatMessage
     ),
-    []
+    [formatMessage]
   );
 
   const renderCheckboxFilter = (key: string) => {

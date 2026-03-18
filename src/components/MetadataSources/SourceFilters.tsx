@@ -43,7 +43,7 @@ const SourceFilters = ({
       filterConfig.filter(f => f.name !== 'contact'),
       formatMessage
     ),
-    []
+    [formatMessage]
   );
 
   const renderCheckboxFilter = (key: string) => {
