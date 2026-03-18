@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -10,7 +10,7 @@ import {
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
-import { useUpdatedFilters } from '../../hooks';
+import { buildFilterState } from '../../util/filterUtils';
 import filterConfig from './filterConfigData';
 
 const SourceFilters = ({
@@ -22,19 +22,11 @@ const SourceFilters = ({
   filterData,
   filterHandlers,
 }) => {
-  const [filterState, setFilterState] = useState({
-    status: [],
-    solrShard: [],
-    contact: [],
-  });
-
-  useUpdatedFilters({
-    dynamicKey: 'contact',
-    filterConfig,
-    filterData,
-    filterState,
-    setFilterState,
-  });
+  const filterState = useMemo(
+    // skip for contact filter as it is dynamic and handled separately
+    () => buildFilterState(filterConfig.filter(f => f.name !== 'contact')),
+    []
+  );
 
   const renderCheckboxFilter = (key) => {
     const groupFilters = activeFilters[key] || [];
@@ -59,8 +51,8 @@ const SourceFilters = ({
   };
 
   const renderContactsFilter = () => {
-    const contacts = filterData.contacts;
-    const dataOptions = contacts.map(contact => ({
+    // use dynamic filter values from okapi
+    const dataOptions = (filterData.contacts || []).map(contact => ({
       value: contact.externalId,
       label: contact.name,
     }));
