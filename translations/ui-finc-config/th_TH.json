@@ -92,7 +92,7 @@
     "collection.search.description": "Description",
     "collection.search.collectionId": "ID",
     "dataOption.active": "Active",
-    "dataOption.request": "Request",
+    "dataOption.request": "คำขอ",
     "dataOption.implementation": "Implementation",
     "dataOption.closed": "Closed",
     "dataOption.impossible": "Impossible",
