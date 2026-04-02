@@ -113,5 +113,5 @@
     "permission.edit": "Конфігурація Finc: Редагування джерел метаданих та колекцій метаданих",
     "permission.create-edit": "Конфігурація Finc: Створення та редагування джерел метаданих та колекцій метаданих",
     "permission.delete": "Конфігурація Finc: Видалення джерел метаданих та колекцій метаданих",
-    "source.contact.delete": "Delete contact #{amount}"
+    "source.contact.delete": "Видалити контакт №{amount}"
 }
