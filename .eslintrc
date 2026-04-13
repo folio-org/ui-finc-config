@@ -5,6 +5,7 @@
   },
   "extends": [
     "@folio/eslint-config-stripes",
+    "plugin:import/typescript",
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended"
   ],
@@ -93,7 +94,14 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],
-      "parser": "@typescript-eslint/parser"
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "extends": ["plugin:@typescript-eslint/recommended"]
+    },
+    {
+      "files": ["test/**/*", "src/**/*.test.ts", "src/**/*.test.tsx"],
+      "env": { "jest": true },
+      "rules": { "@typescript-eslint/no-explicit-any": "off" }
     }
   ],
   "settings": {

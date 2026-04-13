@@ -6,9 +6,11 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": ["ES2020", "DOM"],
-    "module": "ESNext",
+    "module": "ES2020",
     "moduleResolution": "node",
     "noEmit": true,
+    "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true
