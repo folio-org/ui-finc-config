@@ -10,7 +10,8 @@
     "build": "stripes build --output ./output",
     "test": "yarn run test:jest",
     "test:jest": "jest --ci --coverage",
-    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src && yarn typecheck",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "formatjs-compile": "stripes translate compile"
   },

@@ -16,7 +16,6 @@
 * Use RepeatableTextField from stripes-leipzig-components ([UIFC-453](https://folio-org.atlassian.net/browse/UIFC-453))
 * Include mod-settings global permissions ([UIFC-460](https://folio-org.atlassian.net/browse/UIFC-460))
 * Replace useUpdatedFilters hook with buildFilterState function ([UIFC-482](https://folio-org.atlassian.net/browse/UIFC-482))
-* Refactor useUpdatedFilters hook — remove dynamic filter handling ([UIFC-482](https://folio-org.atlassian.net/browse/UIFC-482))
 * Integration of typescript ([UIFC-473](https://folio-org.atlassian.net/browse/UIFC-473))
 
 ## [8.0.0](https://github.com/folio-org/ui-finc-config/tree/v8.0.0) (2025-03-13)
