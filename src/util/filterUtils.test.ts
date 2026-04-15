@@ -1,6 +1,8 @@
+import type { IntlShape } from 'react-intl';
+
 import { buildFilterState } from './filterUtils';
 
-const formatMessage = ({ id }: { id: string }) => `translated:${id}`;
+const formatMessage = (({ id }: { id: string }) => `translated:${id}`) as unknown as IntlShape['formatMessage'];
 
 describe('buildFilterState', () => {
   it('should build filter state from configs', () => {

@@ -21,7 +21,7 @@ import filterConfig from './filterConfigData';
 interface Props {
   activeFilters?: ActiveFilters;
   filterData: {
-    mdSources: MdSource[];
+    mdSources?: MdSource[];
   };
   filterHandlers: FilterHandlers;
 }
@@ -60,7 +60,7 @@ const CollectionFilters = ({
         separator={false}
       >
         <CheckboxFilter
-          dataOptions={filterState[key]}
+          dataOptions={filterState[key] ?? []}
           name={key}
           onChange={(group) => { filterHandlers.state({ ...activeFilters, [group.name]: group.values }); }}
           selectedValues={groupFilters}

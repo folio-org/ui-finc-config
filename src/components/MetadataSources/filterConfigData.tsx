@@ -1,4 +1,6 @@
-const filterConfig = [
+import { FilterConfig } from '../../util/filterUtils';
+
+const filterConfig: FilterConfig[] = [
   {
     label: 'Implementation Status',
     name: 'status',
@@ -28,7 +30,7 @@ const filterConfig = [
     name: 'contact',
     cql: 'contacts=/@externalId',
     operator: ' ',
-    values: [] as { name: string; cql: string }[],
+    values: [],
   },
 ];
 

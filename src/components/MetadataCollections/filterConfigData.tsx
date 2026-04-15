@@ -1,4 +1,6 @@
-const filterConfig = [
+import { FilterConfig } from '../../util/filterUtils';
+
+const filterConfig: FilterConfig[] = [
   {
     name: 'metadataAvailable',
     cql: 'metadataAvailable',
@@ -32,7 +34,7 @@ const filterConfig = [
     name: 'mdSource',
     cql: 'mdSource.id',
     operator: '==',
-    values: [] as { name: string; cql: string }[],
+    values: [],
   },
 ];
 

@@ -25,6 +25,7 @@
     "@folio/stripes-core": "^11.0.0",
     "@folio/stripes-final-form": "^9.0.0",
     "@folio/stripes-smart-components": "^10.0.0",
+    "@types/jest": "^29.0.0",
     "@types/react": "^18.2.0",
     "@types/react-router-dom": "^5.2.0",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
