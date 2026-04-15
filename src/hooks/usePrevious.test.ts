@@ -1,4 +1,3 @@
-// @ts-expect-error: @folio/jest-config-stripes provides no type declarations
 import { renderHook } from '@folio/jest-config-stripes/testing-library/react';
 
 import { usePrevious } from './usePrevious';

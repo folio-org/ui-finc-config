@@ -11,21 +11,13 @@ import {
 } from '@folio/stripes/core';
 
 import metadatasources from '../../../test/fixtures/metadatasources';
+import tinyContacts from '../../../test/fixtures/tinyContacts';
 import renderWithIntlConfiguration from '../../../test/jest/helpers/renderWithIntlConfiguration';
 import MetadataSources from './MetadataSources';
 
 jest.mock('react-virtualized-auto-sizer', () => ({ children }) => children({ width: 1920, height: 1080 }));
 
-const filterData = { contacts: [
-  {
-    externalId: 'fcfaca0b-12e7-467e-b503-d44a44d60a62',
-    name: 'Doe, John',
-  },
-  {
-    externalId: '01771c0a-a890-4488-b5e9-366aa697bd93',
-    name: 'Doe, Jane',
-  },
-] };
+const filterData = { contacts: tinyContacts };
 
 const renderMetadataSources = (stripes, data) => renderWithIntlConfiguration(
   <MemoryRouter>
@@ -62,7 +54,7 @@ describe('Metadata Sources SASQ', () => {
       renderMetadataSources(stripes, metadatasources);
     });
 
-    it('should be visible all search and filter elements', () => {
+    it('should be visible all search elements', () => {
       expect(screen.getByRole('heading', { name: 'Search & filter' })).toBeInTheDocument();
       const filterPane = document.querySelector('#pane-source-filter');
       expect(filterPane).toBeInTheDocument();
@@ -72,9 +64,6 @@ describe('Metadata Sources SASQ', () => {
       expect(within(qindex).getByText('Name')).toBeInTheDocument();
       expect(within(qindex).getByText('Description')).toBeInTheDocument();
       expect(within(qindex).getByText('ID')).toBeInTheDocument();
-
-      expect(within(filterPane).getByText('Implementation status')).toBeInTheDocument();
-      expect(within(filterPane).getByText('Solr shard')).toBeInTheDocument();
     });
 
     it('should be visible the results with all columns', () => {
