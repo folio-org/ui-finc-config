@@ -6,13 +6,13 @@ import {
   useState,
 } from 'react';
 
+import { NoPermissionMessage } from '@folio/stripes-leipzig-components';
 import { stripesConnect } from '@folio/stripes/core';
 import {
   makeQueryFunction,
   StripesConnectedSource,
 } from '@folio/stripes/smart-components';
 
-import NoPermissionsMessage from '../components/DisplayUtils/NoPermissionsMessage';
 import urls from '../components/DisplayUtils/urls';
 import filterConfig from '../components/MetadataSources/filterConfigData';
 import MetadataSources from '../components/MetadataSources/MetadataSources';
@@ -86,7 +86,7 @@ const SourcesRoute = ({
   };
 
   if (!hasPerms) {
-    return <NoPermissionsMessage />;
+    return <NoPermissionMessage />;
   }
 
   return (
