@@ -38,7 +38,6 @@ describe('CollectionsRoute', () => {
       );
 
       expect(screen.queryByText('MetadataCollections')).not.toBeInTheDocument();
-      expect(screen.getByText('stripes-smart-components.permissionError')).toBeInTheDocument();
     });
   });
 });

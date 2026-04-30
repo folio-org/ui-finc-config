@@ -1,8 +1,8 @@
 import { cloneDeep } from 'lodash';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 
 import {
+  NoPermissionMessage,
   useOkapiKyMutation,
   useOkapiKyQuery,
 } from '@folio/stripes-leipzig-components';
@@ -57,7 +57,7 @@ const SourceEditRoute = ({
     },
   });
 
-  if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
+  if (!hasPerms) return <NoPermissionMessage />;
 
   return (
     <MetadataSourceForm

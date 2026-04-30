@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
 
-import { useOkapiKyMutation } from '@folio/stripes-leipzig-components';
+import {
+  NoPermissionMessage,
+  useOkapiKyMutation,
+} from '@folio/stripes-leipzig-components';
 import { useStripes } from '@folio/stripes/core';
 
 import urls from '../components/DisplayUtils/urls';
@@ -44,7 +46,7 @@ const CollectionCreateRoute = ({
     return { solrMegaCollections };
   };
 
-  if (!hasPerms) return <div><FormattedMessage id="ui-finc-config.noPermission" /></div>;
+  if (!hasPerms) return <NoPermissionMessage />;
 
   return (
     <MetadataCollectionForm
