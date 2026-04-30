@@ -1431,16 +1431,17 @@
     eslint-plugin-testing-library "^5.6.0"
     webpack "^5.80.0"
 
-"@folio/jest-config-stripes@^3.0.0":
-  version "3.0.10990000000030"
-  resolved "https://repository.folio.org/repository/npm-folioci/@folio/jest-config-stripes/-/jest-config-stripes-3.0.10990000000030.tgz#450bd85c9bbbb8be8418366f339bcfb3f3e9ea14"
-  integrity sha512-IppeJNU1UPFMTwmTNCI7Odw4lDMwmrV6/rjRI4X1f6jiDr52w+DIp/k9NYFxGMF47VN4jRPD+DOjhqQTP53pwQ==
+"@folio/jest-config-stripes@^3.1.0":
+  version "3.1.0"
+  resolved "https://repository.folio.org/repository/npm-folio/@folio/jest-config-stripes/-/jest-config-stripes-3.1.0.tgz#3123e78bfb9cccd164fc1620bc18f52548979fe0"
+  integrity sha512-LkQIQpfRAxhiMYu2Mc92Uco6WW8qA4hWxhOGnAlfL5o6EXPa7Jj/Xc14C0oyE5EDQ9pzRg7i65iMahHy4RLV1Q==
   dependencies:
     "@folio/stripes-webpack" "^6.0.0"
     "@jest/globals" "^29.5.0"
     "@testing-library/dom" "^9.3.0"
     "@testing-library/jest-dom" "^5.16.5"
     "@testing-library/react" "^14.0.0"
+    "@testing-library/react-hooks" "^8.0.1"
     "@testing-library/user-event" "^14.4.3"
     babel-jest "^29.5.0"
     babel-plugin-module-resolver "^5.0.0"
@@ -2672,6 +2673,14 @@
     dom-accessibility-api "^0.5.6"
     lodash "^4.17.15"
     redent "^3.0.0"
+
+"@testing-library/react-hooks@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@testing-library/react-hooks/-/react-hooks-8.0.1.tgz#0924bbd5b55e0c0c0502d1754657ada66947ca12"
+  integrity sha512-Aqhl2IVmLt8IovEVarNDFuJDVWVvhnr9/GCU6UUnrYXwgDFF9h2L2o2P9KBni1AST5sT6riAyoukFLyjQUgD/g==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    react-error-boundary "^3.1.0"
 
 "@testing-library/react@^14.0.0":
   version "14.3.1"
@@ -10317,6 +10326,13 @@ react-dropzone@^10.0.0:
     file-selector "^0.1.12"
     prop-types "^15.7.2"
 
+react-error-boundary@^3.1.0:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-3.1.4.tgz#255db92b23197108757a888b01e5b729919abde0"
+  integrity sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+
 react-final-form-arrays@^3.1.0, react-final-form-arrays@^3.1.1:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/react-final-form-arrays/-/react-final-form-arrays-3.1.4.tgz#2744941d8fd200fc648481022e515588f60bbac3"
@@ -11987,7 +12003,7 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@5, typescript@^5.3.3:
+typescript@5, typescript@5.9.3, typescript@^5.3.3:
   version "5.9.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.9.3.tgz#5b4f59e15310ab17a216f5d6cf53ee476ede670f"
   integrity sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==

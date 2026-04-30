@@ -9,8 +9,11 @@ const esModules = [
 
 module.exports = {
   ...config,
-  // default testMatch does not include .ts. Remove next line if .ts will be added in @folio/jest-config-stripes/
-  testMatch: ['**/(lib|src)/**/?(*.)test.{js,jsx,ts,tsx}'],
+  collectCoverageFrom: [
+    '**/(lib|src)/**/*.{js,jsx,ts,tsx}',
+    '!**/node_modules/**',
+    '!**/test/jest/**',
+  ],
   setupFiles: [
     ...config.setupFiles,
     path.join(__dirname, './test/jest/setupFiles.js'),
