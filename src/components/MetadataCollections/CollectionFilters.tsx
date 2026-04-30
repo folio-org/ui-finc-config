@@ -1,17 +1,30 @@
-import PropTypes from 'prop-types';
 import { useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import {
   Accordion,
   AccordionSet,
   FilterAccordionHeader,
+  FilterAccordionHeaderProps,
   Selection,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
+import {
+  ActiveFilters,
+  FilterHandlers,
+  MdSource,
+} from '../../types';
 import { buildFilterState } from '../../util/filterUtils';
 import filterConfig from './filterConfigData';
+
+export interface CollectionFiltersProps {
+  activeFilters?: ActiveFilters;
+  filterData: {
+    mdSources?: MdSource[];
+  };
+  filterHandlers: FilterHandlers;
+}
 
 const CollectionFilters = ({
   activeFilters = {
@@ -22,27 +35,32 @@ const CollectionFilters = ({
   },
   filterData,
   filterHandlers,
-}) => {
+}: CollectionFiltersProps) => {
+  const { formatMessage } = useIntl();
+
   const filterState = useMemo(
     // skip for mdSource filter as it is dynamic and handled separately
-    () => buildFilterState(filterConfig.filter(f => f.name !== 'mdSource')),
-    []
+    () => buildFilterState(
+      filterConfig.filter(f => f.name !== 'mdSource'),
+      formatMessage
+    ),
+    [formatMessage]
   );
 
-  const renderCheckboxFilter = (key) => {
+  const renderCheckboxFilter = (key: string) => {
     const groupFilters = activeFilters[key] || [];
 
     return (
-      <Accordion
+      <Accordion<FilterAccordionHeaderProps>
         displayClearButton={groupFilters.length > 0}
         header={FilterAccordionHeader}
         id={`filter-accordion-${key}`}
-        label={<FormattedMessage id={`ui-finc-config.collection.${key}`} />}
+        label={formatMessage({ id: `ui-finc-config.collection.${key}` })}
         onClearFilter={() => { filterHandlers.clearGroup(key); }}
         separator={false}
       >
         <CheckboxFilter
-          dataOptions={filterState[key]}
+          dataOptions={filterState[key] ?? []}
           name={key}
           onChange={(group) => { filterHandlers.state({ ...activeFilters, [group.name]: group.values }); }}
           selectedValues={groupFilters}
@@ -53,7 +71,7 @@ const CollectionFilters = ({
 
   const renderMetadataSourceFilter = () => {
     // use dynamic filter values from okapi
-    const dataOptions = (filterData.mdSources || []).map(mdSource => ({
+    const dataOptions = (filterData.mdSources || []).map((mdSource: MdSource) => ({
       value: mdSource.id,
       label: mdSource.label,
     }));
@@ -61,18 +79,18 @@ const CollectionFilters = ({
     const mdSourceFilters = activeFilters.mdSource || [];
 
     return (
-      <Accordion
+      <Accordion<FilterAccordionHeaderProps>
         displayClearButton={mdSourceFilters.length > 0}
         header={FilterAccordionHeader}
         id="filter-accordion-mdSource"
-        label={<FormattedMessage id="ui-finc-config.collection.mdSource" />}
+        label={formatMessage({ id: 'ui-finc-config.collection.mdSource' })}
         onClearFilter={() => { filterHandlers.clearGroup('mdSource'); }}
         separator={false}
       >
         <Selection
           dataOptions={dataOptions}
           id="mdSource-filter"
-          onChange={value => filterHandlers.state({ ...activeFilters, mdSource: [value] })}
+          onChange={(value: string) => filterHandlers.state({ ...activeFilters, mdSource: [value] })}
           placeholder=""
           value={mdSourceFilters[0] || ''}
         />
@@ -88,12 +106,6 @@ const CollectionFilters = ({
       {renderCheckboxFilter('freeContent')}
     </AccordionSet>
   );
-};
-
-CollectionFilters.propTypes = {
-  activeFilters: PropTypes.object,
-  filterData: PropTypes.object,
-  filterHandlers: PropTypes.object,
 };
 
 export default CollectionFilters;

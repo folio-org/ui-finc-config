@@ -5,6 +5,7 @@
   },
   "extends": [
     "@folio/eslint-config-stripes",
+    "plugin:import/typescript",
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended"
   ],
@@ -90,7 +91,25 @@
     ],
     "testing-library/prefer-user-event": "warn"
   },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "extends": ["plugin:@typescript-eslint/recommended"]
+    },
+    {
+      "files": ["test/**/*", "src/**/*.test.ts", "src/**/*.test.tsx"],
+      "env": { "jest": true },
+      "rules": { "@typescript-eslint/no-explicit-any": "off" }
+    }
+  ],
   "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    },
     "react": {
       "version": "detect"
     }

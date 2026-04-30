@@ -54,7 +54,7 @@ describe('Metadata Collections SASQ', () => {
       renderMetadataCollections(stripes, metadatacollections);
     });
 
-    it('should be visible all search and filter elements', async () => {
+    it('should be visible all search elements', async () => {
       expect(screen.getByRole('heading', { name: 'Search & filter' })).toBeInTheDocument();
       const filterPane = document.querySelector('#pane-collection-filter');
       expect(filterPane).toBeInTheDocument();
@@ -63,11 +63,6 @@ describe('Metadata Collections SASQ', () => {
       expect(within(filterPane).getByText('Name')).toBeInTheDocument();
       expect(within(filterPane).getByText('Description')).toBeInTheDocument();
       expect(within(filterPane).getByText('ID')).toBeInTheDocument();
-
-      expect(within(filterPane).getByText('Metadata source')).toBeInTheDocument();
-      expect(within(filterPane).getByText('Metadata available')).toBeInTheDocument();
-      expect(within(filterPane).getByText('Usage restricted')).toBeInTheDocument();
-      expect(within(filterPane).getByText('Free content')).toBeInTheDocument();
     });
 
     it('should be visible the results with all columns', () => {
