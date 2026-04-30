@@ -38,7 +38,8 @@
     "react-dom": "^18.2.0",
     "react-intl": "^7.1.5",
     "react-query": "^3.9.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "typescript": "5.9.3"
   },
   "dependencies": {
     "@folio/stripes-leipzig-components": "^1.0.0",
