@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -18,7 +18,7 @@ import {
 import { buildFilterState } from '../../util/filterUtils';
 import filterConfig from './filterConfigData';
 
-interface Props {
+export interface SourceFiltersProps {
   activeFilters?: ActiveFilters;
   filterData: {
     contacts?: Contact[];
@@ -34,7 +34,7 @@ const SourceFilters = ({
   },
   filterData,
   filterHandlers,
-}: Props) => {
+}: SourceFiltersProps) => {
   const { formatMessage } = useIntl();
 
   const filterState = useMemo(
@@ -70,7 +70,7 @@ const SourceFilters = ({
 
   const renderContactsFilter = () => {
     // use dynamic filter values from okapi
-    const dataOptions = (filterData.contacts || []).map(contact => ({
+    const dataOptions = (filterData.contacts || []).map((contact: Contact) => ({
       value: contact.externalId,
       label: contact.name,
     }));

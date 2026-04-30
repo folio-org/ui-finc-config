@@ -18,7 +18,7 @@ import {
 import { buildFilterState } from '../../util/filterUtils';
 import filterConfig from './filterConfigData';
 
-interface Props {
+export interface CollectionFiltersProps {
   activeFilters?: ActiveFilters;
   filterData: {
     mdSources?: MdSource[];
@@ -35,7 +35,7 @@ const CollectionFilters = ({
   },
   filterData,
   filterHandlers,
-}: Props) => {
+}: CollectionFiltersProps) => {
   const { formatMessage } = useIntl();
 
   const filterState = useMemo(
@@ -71,7 +71,7 @@ const CollectionFilters = ({
 
   const renderMetadataSourceFilter = () => {
     // use dynamic filter values from okapi
-    const dataOptions = (filterData.mdSources || []).map(mdSource => ({
+    const dataOptions = (filterData.mdSources || []).map((mdSource: MdSource) => ({
       value: mdSource.id,
       label: mdSource.label,
     }));
