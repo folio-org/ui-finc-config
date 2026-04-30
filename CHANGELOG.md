@@ -1,6 +1,7 @@
 # Change history for ui-finc-config
 
 ## IN PROGRESS
+* Use NoPermissionMessage from stripes-leipzig-components ([UIFC-475](https://folio-org.atlassian.net/browse/UIFC-475))
 * Integration of typescript ([UIFC-473](https://folio-org.atlassian.net/browse/UIFC-473))
 
 ## [8.1.0](https://github.com/folio-org/ui-finc-config/tree/v8.1.0) (2026-04-20)
