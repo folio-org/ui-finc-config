@@ -62,7 +62,6 @@
     "source.contact.title.singular": "Contacten #{amount}",
     "source.contact.add": "Contact toevoegen",
     "source.contact.or": "of",
-    "noPermission": "Geen toestemming",
     "renderList.isEmpty": "Geen items om te tonen",
     "noSourceYet": "Nog geen bron",
     "form.delete.confirm.message": "Wilt u {name} echt verwijderen?",

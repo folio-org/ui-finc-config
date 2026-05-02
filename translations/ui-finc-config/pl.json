@@ -62,7 +62,6 @@
     "source.contact.title.singular": "Kontakt nr {amount}",
     "source.contact.add": "Dodaj kontakt",
     "source.contact.or": "lub",
-    "noPermission": "Brak pozwolenia",
     "renderList.isEmpty": "Brak elementów do pokazania",
     "noSourceYet": "Nie ma jeszcze źródła",
     "form.delete.confirm.message": "Czy na pewno chcesz usunąć {name} ?",

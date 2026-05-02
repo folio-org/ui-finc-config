@@ -62,7 +62,6 @@
     "source.contact.title.singular": "Contact #{amount}",
     "source.contact.add": "連絡先を追加",
     "source.contact.or": "or",
-    "noPermission": "No permission",
     "renderList.isEmpty": "No items to show",
     "noSourceYet": "No source yet",
     "form.delete.confirm.message": "{name}を本当に削除しますか?",
