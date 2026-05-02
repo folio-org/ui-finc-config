@@ -62,7 +62,6 @@
     "source.contact.title.singular": "جهة الاتصال #{amount}",
     "source.contact.add": "إضافة جهة اتصال",
     "source.contact.or": "أو",
-    "noPermission": "لا توجد صلاحية",
     "renderList.isEmpty": "لا توجد مواد للعرض",
     "noSourceYet": "لا يوجد مصدر بعد",
     "form.delete.confirm.message": "هل تريد حقاً حذف {name}؟",

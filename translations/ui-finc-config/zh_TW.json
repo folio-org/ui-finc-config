@@ -62,7 +62,6 @@
     "source.contact.title.singular": "联系人＃ {amount}",
     "source.contact.add": "添加联系人",
     "source.contact.or": "或",
-    "noPermission": "没有权限",
     "renderList.isEmpty": "没有可显示的单件",
     "noSourceYet": "尚無來源",
     "form.delete.confirm.message": "真的要删除{name}吗？",

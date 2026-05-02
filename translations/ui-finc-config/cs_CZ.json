@@ -62,7 +62,6 @@
     "source.contact.title.singular": "Kontakt #{amount}",
     "source.contact.add": "Přidat kontakt",
     "source.contact.or": "nebo",
-    "noPermission": "Bez povolení",
     "renderList.isEmpty": "Žádné jednotky k zobrazení",
     "noSourceYet": "Zatím žádný zdroj",
     "form.delete.confirm.message": "Opravdu chcete smazat {name}?",
