@@ -99,9 +99,10 @@
       "extends": ["plugin:@typescript-eslint/recommended"]
     },
     {
-      "files": ["test/**/*", "src/**/*.test.ts", "src/**/*.test.tsx"],
-      "env": { "jest": true },
-      "rules": { "@typescript-eslint/no-explicit-any": "off" }
+      "files": ["*.d.ts"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off"
+      }
     }
   ],
   "settings": {

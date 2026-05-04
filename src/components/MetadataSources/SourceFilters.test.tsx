@@ -4,6 +4,7 @@ import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import {
   StripesContext,
+  StripesType,
   useStripes,
 } from '@folio/stripes/core';
 
@@ -27,7 +28,7 @@ const filterHandlers = {
 };
 
 const renderSourceFilters = (
-  stripes: any,
+  stripes: StripesType,
   props: Partial<React.ComponentProps<typeof SourceFilters>> = {}
 ) => renderWithIntlConfiguration(
   <StripesContext.Provider value={stripes}>
@@ -41,7 +42,7 @@ const renderSourceFilters = (
 );
 
 describe('SourceFilters', () => {
-  let stripes: any;
+  let stripes: StripesType;
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -66,7 +67,7 @@ describe('SourceFilters', () => {
     it('renders contact options from filterData', async () => {
       renderSourceFilters(stripes);
 
-      await userEvent.click(document.querySelector('#contact-filter'));
+      await userEvent.click(document.querySelector('#contact-filter')!);
 
       expect(screen.getByText('Doe, John')).toBeInTheDocument();
       expect(screen.getByText('Doe, Jane')).toBeInTheDocument();

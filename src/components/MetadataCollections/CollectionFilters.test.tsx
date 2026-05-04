@@ -4,6 +4,7 @@ import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import {
   StripesContext,
+  StripesType,
   useStripes,
 } from '@folio/stripes/core';
 
@@ -28,7 +29,7 @@ const filterHandlers = {
 };
 
 const renderCollectionFilters = (
-  stripes: any,
+  stripes: StripesType,
   props: Partial<React.ComponentProps<typeof CollectionFilters>> = {}
 ) => renderWithIntlConfiguration(
   <StripesContext.Provider value={stripes}>
@@ -42,7 +43,7 @@ const renderCollectionFilters = (
 );
 
 describe('CollectionFilters', () => {
-  let stripes: any;
+  let stripes: StripesType;
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -68,7 +69,7 @@ describe('CollectionFilters', () => {
     it('renders mdSource options from filterData', async () => {
       renderCollectionFilters(stripes);
 
-      await userEvent.click(document.querySelector('#mdSource-filter'));
+      await userEvent.click(document.querySelector('#mdSource-filter')!);
 
       expect(await screen.findByText('Cambridge University Press Journals')).toBeInTheDocument();
       expect(screen.getByText('Oxford Scholarship Online')).toBeInTheDocument();
