@@ -62,7 +62,6 @@
     "source.contact.title.singular": "Contato # {amount}",
     "source.contact.add": "Adicionar contato",
     "source.contact.or": "ou",
-    "noPermission": "Sem permissão",
     "renderList.isEmpty": "Nenhum item para exibir",
     "noSourceYet": "Nenhuma fonte ainda",
     "form.delete.confirm.message": "Tem certeza de que deseja excluir {name}?",
