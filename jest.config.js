@@ -9,11 +9,6 @@ const esModules = [
 
 module.exports = {
   ...config,
-  collectCoverageFrom: [
-    '**/(lib|src)/**/*.{js,jsx,ts,tsx}',
-    '!**/node_modules/**',
-    '!**/test/jest/**',
-  ],
   setupFiles: [
     ...config.setupFiles,
     path.join(__dirname, './test/jest/setupFiles.js'),
