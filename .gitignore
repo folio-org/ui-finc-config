@@ -3,6 +3,7 @@
 *.swo
 node_modules
 artifacts
+output
 npm-debug.log
 package-lock.json
 junit.xml
