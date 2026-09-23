@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
+import { CheckboxFilterAccordion } from '@folio/stripes-leipzig-components';
 import {
   Accordion,
   AccordionSet,
@@ -8,7 +9,6 @@ import {
   FilterAccordionHeaderProps,
   Selection,
 } from '@folio/stripes/components';
-import { CheckboxFilter } from '@folio/stripes/smart-components';
 
 import {
   ActiveFilters,
@@ -46,27 +46,15 @@ const SourceFilters = ({
     [formatMessage]
   );
 
-  const renderCheckboxFilter = (key: string) => {
-    const groupFilters = activeFilters[key] || [];
-
-    return (
-      <Accordion<FilterAccordionHeaderProps>
-        displayClearButton={groupFilters.length > 0}
-        header={FilterAccordionHeader}
-        id={`filter-accordion-${key}`}
-        label={formatMessage({ id: `ui-finc-config.source.${key}` })}
-        onClearFilter={() => { filterHandlers.clearGroup(key); }}
-        separator={false}
-      >
-        <CheckboxFilter
-          dataOptions={filterState[key] ?? []}
-          name={key}
-          onChange={(group) => { filterHandlers.state({ ...activeFilters, [group.name]: group.values }); }}
-          selectedValues={groupFilters}
-        />
-      </Accordion>
-    );
-  };
+  const renderCheckboxFilter = (key: string) => (
+    <CheckboxFilterAccordion
+      activeFilters={activeFilters}
+      dataOptions={filterState[key] ?? []}
+      filterHandlers={filterHandlers}
+      filterKey={key}
+      label={formatMessage({ id: `ui-finc-config.source.${key}` })}
+    />
+  );
 
   const renderContactsFilter = () => {
     // use dynamic filter values from okapi
