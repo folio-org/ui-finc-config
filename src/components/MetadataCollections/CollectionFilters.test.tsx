@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { screen } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  screen,
+  within,
+} from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import {
   StripesContext,
@@ -45,17 +48,13 @@ const renderCollectionFilters = (
 describe('CollectionFilters', () => {
   let stripes: StripesType;
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   beforeEach(() => {
     jest.clearAllMocks();
     stripes = useStripes();
   });
 
   describe('filter accordions', () => {
-    it('renders all filter accordions', () => {
+    it('should render all filter accordions', () => {
       renderCollectionFilters(stripes);
 
       expect(screen.getByText('Metadata source')).toBeInTheDocument();
@@ -65,8 +64,42 @@ describe('CollectionFilters', () => {
     });
   });
 
+  describe('checkbox filters', () => {
+    it('should show the selected values of a filter group', () => {
+      renderCollectionFilters(stripes);
+
+      const accordion = screen.getByRole('region', { name: 'Metadata available filter list' });
+      expect(within(accordion).getByRole('checkbox', { name: 'Yes' })).toBeChecked();
+      expect(within(accordion).getByRole('checkbox', { name: 'No' })).not.toBeChecked();
+    });
+
+    it('should update the filter state when a checkbox is clicked', async () => {
+      renderCollectionFilters(stripes);
+
+      const accordion = screen.getByRole('region', { name: 'Usage restricted filter list' });
+      await userEvent.click(within(accordion).getByRole('checkbox', { name: 'No' }));
+
+      expect(filterHandlers.state).toHaveBeenCalledWith({ ...activeFilters, usageRestricted: ['no'] });
+    });
+
+    it('should clear a filter group with the clear button', async () => {
+      renderCollectionFilters(stripes);
+
+      await userEvent.click(screen.getByRole('button', { name: /Clear selected Metadata available filters/ }));
+
+      expect(filterHandlers.clearGroup).toHaveBeenCalledWith('metadataAvailable');
+    });
+
+    it('should show no clear button for a filter group without selected values', () => {
+      renderCollectionFilters(stripes);
+
+      const accordion = screen.getByRole('region', { name: 'Usage restricted filter list' });
+      expect(within(accordion).queryByRole('button', { name: /Clear selected/ })).not.toBeInTheDocument();
+    });
+  });
+
   describe('mdSource filter', () => {
-    it('renders mdSource options from filterData', async () => {
+    it('should render mdSource options from filterData', async () => {
       renderCollectionFilters(stripes);
 
       await userEvent.click(document.querySelector('#mdSource-filter')!);
