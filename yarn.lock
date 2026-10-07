@@ -1672,6 +1672,7 @@
   version "1.1.1099000000000233"
   resolved "https://repository.folio.org/repository/npm-folioci/@folio/stripes-leipzig-components/-/stripes-leipzig-components-1.1.1099000000000233.tgz#30b6b9a0c21c8d241669fbde5b5033c2fbd533fb"
   integrity sha512-vrBlxqB+tpyFWidbNGqgzx2phaeMIngNr10Ey1QSAk2UDEIx0CEY4gixLAt2/o4+t4+ANo5DjZ2xx+PchG+PaA==
+  dependencies:
     final-form-arrays "^3.0.2"
     lodash "^4.17.4"
     luxon "^3.7.2"
