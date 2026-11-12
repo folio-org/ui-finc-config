@@ -8,7 +8,7 @@ import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionView from '../components/MetadataCollections/MetadataCollectionView';
 import {
   API_COLLECTIONS,
-  QK_COLLECTIONS,
+  KEY_COLLECTIONS,
 } from '../util/constants';
 
 const CollectionViewRoute = ({
@@ -20,7 +20,7 @@ const CollectionViewRoute = ({
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const { data: collection, isLoading: isCollectionLoading } = useOkapiKyQuery({
-    queryKey: [QK_COLLECTIONS, collectionId],
+    queryKey: [KEY_COLLECTIONS, collectionId],
     id: collectionId,
     api: API_COLLECTIONS,
   });

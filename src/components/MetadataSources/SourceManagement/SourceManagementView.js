@@ -15,7 +15,7 @@ import {
 
 import {
   API_ORGANIZATIONS,
-  QK_ORGANIZATIONS,
+  KEY_ORGANIZATIONS,
 } from '../../../util/constants';
 import BasicCss from '../../BasicStyle.css';
 import urls from '../../DisplayUtils/urls';
@@ -31,7 +31,7 @@ const SourceManagementView = ({
   const sourceId = _.get(metadataSource, 'id', <NoValue />);
 
   const { data: organization, isLoading: isLoadingOrganization, isError } = useOkapiKyQuery({
-    queryKey: [QK_ORGANIZATIONS, organizationId],
+    queryKey: [KEY_ORGANIZATIONS, organizationId],
     id: organizationId,
     api: API_ORGANIZATIONS,
   });

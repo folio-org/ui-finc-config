@@ -12,7 +12,7 @@ import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
 import {
   API_COLLECTIONS,
-  QK_COLLECTIONS,
+  KEY_COLLECTIONS,
 } from '../util/constants';
 
 const CollectionCreateRoute = ({
@@ -28,7 +28,7 @@ const CollectionCreateRoute = ({
 
   const id = useMemo(() => uuidv4(), []);
   const { useCreate } = useOkapiKyMutation({
-    mutationKey: [QK_COLLECTIONS, id],
+    mutationKey: [KEY_COLLECTIONS, id],
     id,
     api: API_COLLECTIONS,
   });
