@@ -7,7 +7,7 @@ import { NoValue } from '@folio/stripes/components';
 
 import {
   API_USERS,
-  QK_USERS,
+  KEY_USERS,
 } from '../../../../util/constants';
 import urls from '../../../DisplayUtils/urls';
 
@@ -17,7 +17,7 @@ const DisplayContactLinkUser = ({
 }) => {
   let contactNameWithLink = <NoValue />;
   const { data: user, isLoading: isLoadingUser, isError } = useOkapiKyQuery({
-    queryKey: [QK_USERS, contactId],
+    queryKey: [KEY_USERS, contactId],
     id: contactId,
     api: API_USERS,
   });

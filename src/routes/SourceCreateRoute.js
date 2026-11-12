@@ -12,7 +12,7 @@ import urls from '../components/DisplayUtils/urls';
 import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm';
 import {
   API_SOURCES,
-  QK_SOURCES,
+  KEY_SOURCES,
 } from '../util/constants';
 
 const SourceCreateRoute = ({
@@ -28,7 +28,7 @@ const SourceCreateRoute = ({
 
   const id = useMemo(() => uuidv4(), []);
   const { useCreate } = useOkapiKyMutation({
-    mutationKey: [QK_SOURCES, id],
+    mutationKey: [KEY_SOURCES, id],
     id,
     api: API_SOURCES,
   });

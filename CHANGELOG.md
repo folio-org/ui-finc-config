@@ -5,6 +5,7 @@
 * Integration of typescript ([UIFC-473](https://folio-org.atlassian.net/browse/UIFC-473))
 * Adapt TS moduleResolution ([UIFC-501](https://folio-org.atlassian.net/browse/UIFC-501))
 * Use CheckboxFilterAccordion ([UIFC-495](https://folio-org.atlassian.net/browse/UIFC-495))
+* Rename constants prefix QK to KEY ([UIFC-513](https://folio-org.atlassian.net/browse/UIFC-513))
 
 ## [8.1.0](https://github.com/folio-org/ui-finc-config/tree/v8.1.0) (2026-04-20)
 * Support `finc-config-isils 2.0` interface ([UIFC-429](https://folio-org.atlassian.net/browse/UIFC-429))

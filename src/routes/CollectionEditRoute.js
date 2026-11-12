@@ -12,7 +12,7 @@ import urls from '../components/DisplayUtils/urls';
 import MetadataCollectionForm from '../components/MetadataCollections/MetadataCollectionForm';
 import {
   API_COLLECTIONS,
-  QK_COLLECTIONS,
+  KEY_COLLECTIONS,
 } from '../util/constants';
 
 const CollectionEditRoute = ({
@@ -25,13 +25,13 @@ const CollectionEditRoute = ({
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const { data: collection = {}, isLoading: isCollectionLoading } = useOkapiKyQuery({
-    queryKey: [QK_COLLECTIONS, collectionId],
+    queryKey: [KEY_COLLECTIONS, collectionId],
     id: collectionId,
     api: API_COLLECTIONS,
   });
 
   const { useUpdate, useDelete } = useOkapiKyMutation({
-    mutationKey: [QK_COLLECTIONS, collectionId],
+    mutationKey: [KEY_COLLECTIONS, collectionId],
     id: collectionId,
     api: API_COLLECTIONS,
   });

@@ -12,7 +12,7 @@ import urls from '../components/DisplayUtils/urls';
 import MetadataSourceForm from '../components/MetadataSources/MetadataSourceForm';
 import {
   API_SOURCES,
-  QK_SOURCES,
+  KEY_SOURCES,
 } from '../util/constants';
 
 const SourceEditRoute = ({
@@ -24,13 +24,13 @@ const SourceEditRoute = ({
   const hasPerms = stripes.hasPerm('ui-finc-config.edit');
 
   const { data: source = {}, isLoading: isSourceLoading } = useOkapiKyQuery({
-    queryKey: [QK_SOURCES, sourceId],
+    queryKey: [KEY_SOURCES, sourceId],
     id: sourceId,
     api: API_SOURCES,
   });
 
   const { useUpdate, useDelete } = useOkapiKyMutation({
-    mutationKey: [QK_SOURCES, sourceId],
+    mutationKey: [KEY_SOURCES, sourceId],
     id: sourceId,
     api: API_SOURCES,
   });
