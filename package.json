@@ -23,7 +23,6 @@
     "@folio/stripes-cli": "^5.0.0",
     "@folio/stripes-components": "^13.0.0",
     "@folio/stripes-core": "^11.0.0",
-    "@folio/stripes-final-form": "^9.0.0",
     "@folio/stripes-smart-components": "^10.0.0",
     "@types/jest": "^29.0.0",
     "@types/react": "^18.2.0",

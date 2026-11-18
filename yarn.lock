@@ -1661,19 +1661,6 @@
     react-final-form "^6.3.0"
     react-final-form-arrays "^3.1.0"
 
-"@folio/stripes-final-form@^9.0.0":
-  version "9.0.109900000000104"
-  resolved "https://repository.folio.org/repository/npm-folioci/@folio/stripes-final-form/-/stripes-final-form-9.0.109900000000104.tgz#ab4f5c25fcf5881daa1e32f70b88919211c42355"
-  integrity sha512-ta33XnoLO9qIs1CK67OwpmO+ruD4jPoy+1vNYxvoxJVMLkzC2sxSfQdUL87/vo5eeLALEi4Oghq+Wz0rTM5knQ==
-  dependencies:
-    final-form "^4.18.2"
-    final-form-arrays "^3.0.1"
-    final-form-focus "^1.1.2"
-    flat "^5.0.2"
-    prop-types "^15.5.10"
-    react-final-form "^6.3.0"
-    react-final-form-arrays "^3.1.0"
-
 "@folio/stripes-form@^11.0.0":
   version "11.0.1099000000000147"
   resolved "https://repository.folio.org/repository/npm-folioci/@folio/stripes-form/-/stripes-form-11.0.1099000000000147.tgz#58676f693aae9a1ad388d4c196f54cd94616676b"
