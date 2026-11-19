@@ -29,7 +29,6 @@ const FormContainer = ({
   handlers: { onClose },
   handleSubmit,
   initialValues = {},
-  invalid,
   idPrefix,
   isLoading,
   onDelete,
@@ -85,7 +84,7 @@ const FormContainer = ({
   );
 
   const getPaneFooter = () => {
-    const disabled = pristine || submitting || invalid;
+    const disabled = pristine || submitting;
     return (
       <PaneFooter
         renderEnd={
@@ -196,7 +195,6 @@ FormContainer.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   idPrefix: PropTypes.string,
   initialValues: PropTypes.object,
-  invalid: PropTypes.bool,
   isLoading: PropTypes.bool,
   onDelete: PropTypes.func,
   pristine: PropTypes.bool,
